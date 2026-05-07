@@ -405,17 +405,17 @@ export default function SalaryCalculator() {
       <div style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%)' }} className="text-white">
         <div className="max-w-5xl mx-auto px-4 py-8">
           <div className="flex items-center gap-2 mb-3">
-            <a href="/" className="text-blue-200 text-sm hover:text-white transition">← freecalcs.io</a>
+            <a href="/" className="text-blue-200 text-sm hover:text-white transition">&lt;- freecalcs.io</a>
           </div>
           <h1 className="text-3xl font-bold mb-2">Salary & Take-Home Pay Calculator</h1>
           <p className="text-blue-200 text-sm max-w-xl">
             Instantly see your real take-home pay after federal tax, state tax, FICA, and all deductions.
-            All 50 states · 2026 tax rates · No sign-up required.
+            All 50 states | 2026 tax rates | No sign-up required.
           </p>
           <div className="flex gap-3 mt-4">
-            <span className="bg-white/10 text-xs px-3 py-1 rounded-full">✓ 2026 Tax Brackets</span>
-            <span className="bg-white/10 text-xs px-3 py-1 rounded-full">✓ All 50 States</span>
-            <span className="bg-white/10 text-xs px-3 py-1 rounded-full">✓ Live Calculation</span>
+            <span className="bg-white/10 text-xs px-3 py-1 rounded-full">Yes 2026 Tax Brackets</span>
+            <span className="bg-white/10 text-xs px-3 py-1 rounded-full">Yes All 50 States</span>
+            <span className="bg-white/10 text-xs px-3 py-1 rounded-full">Yes Live Calculation</span>
           </div>
         </div>
       </div>
@@ -432,7 +432,7 @@ export default function SalaryCalculator() {
                 {(['salary', 'hourly'] as const).map(m => (
                   <button key={m} onClick={() => setInputMode(m)}
                     className={`flex-1 py-2.5 text-sm font-semibold transition ${inputMode === m ? 'bg-blue-600 text-white' : 'bg-white text-gray-500 hover:bg-gray-50'}`}>
-                    {m === 'salary' ? '💼 Salary' : '⏰ Hourly'}
+                    {m === 'salary' ? 'Salary' : 'Hourly'}
                   </button>
                 ))}
               </div>
@@ -471,7 +471,7 @@ export default function SalaryCalculator() {
                   </div>
                   {parseFloat(hourlyInput) > 0 && (
                     <div className="text-xs text-blue-600 bg-blue-50 rounded-lg px-3 py-2">
-                      ≈ {fmtDollar((parseMoney(hourlyInput) * (parseFloat(hoursInput) || 40)) * 52)}/yr base
+                      approx. {fmtDollar((parseMoney(hourlyInput) * (parseFloat(hoursInput) || 40)) * 52)}/yr base
                     </div>
                   )}
                 </div>
@@ -521,8 +521,8 @@ export default function SalaryCalculator() {
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
               <button className="w-full flex items-center justify-between p-4 text-left"
                 onClick={() => setShowDeductions(!showDeductions)}>
-                <span className="text-sm font-semibold text-gray-700">💰 Deductions & Benefits</span>
-                <span className="text-gray-400 text-lg">{showDeductions ? '−' : '+'}</span>
+                <span className="text-sm font-semibold text-gray-700">Deductions & Benefits</span>
+                <span className="text-gray-400 text-lg">{showDeductions ? '-' : '+'}</span>
               </button>
               {showDeductions && (
                 <div className="px-4 pb-4 space-y-3 border-t border-gray-100 pt-3">
@@ -595,7 +595,7 @@ export default function SalaryCalculator() {
               {(['results', 'compare', 'tips'] as const).map(t => (
                 <button key={t} onClick={() => setActiveTab(t)}
                   className={`flex-1 py-2 text-sm font-semibold rounded-lg capitalize transition ${activeTab === t ? 'bg-white text-blue-700 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
-                  {t === 'results' ? '📊 Breakdown' : t === 'compare' ? '⚖️ Compare' : '💡 Tax Tips'}
+                  {t === 'results' ? 'Breakdown' : t === 'compare' ? 'Compare' : 'Tax Tips'}
                 </button>
               ))}
             </div>
@@ -635,7 +635,7 @@ export default function SalaryCalculator() {
                     {result.additionalMedicare > 0 && <Row label="Add'l Medicare (0.9%)" annual={result.additionalMedicare} color="text-purple-500" />}
                     {result.postTaxDeductions > 0 && <Row label="Post-Tax Deductions" annual={result.postTaxDeductions} color="text-gray-500" />}
                     <div className="border-t border-gray-200 mt-2 pt-2">
-                      <Row label="🏠 Net Take-Home Pay" annual={result.netAnnual} highlight />
+                      <Row label="Net Take-Home Pay" annual={result.netAnnual} highlight />
                     </div>
                   </div>
                 </div>
@@ -734,11 +734,11 @@ export default function SalaryCalculator() {
             {/* TIPS TAB */}
             {activeTab === 'tips' && result && (
               <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 space-y-4">
-                <h3 className="font-semibold text-gray-800">💡 Personalized Tax-Saving Tips</h3>
+                <h3 className="font-semibold text-gray-800">Personalized Tax-Saving Tips</h3>
 
                 {parseMoney(k401Input) < 23500 && (
                   <div className="flex gap-3 p-3 bg-green-50 rounded-xl border border-green-200">
-                    <span className="text-2xl">📈</span>
+                    <span className="text-xl">+</span>
                     <div>
                       <p className="text-sm font-semibold text-green-800">Max out your 401(k)</p>
                       <p className="text-xs text-green-700 mt-0.5">
@@ -752,7 +752,7 @@ export default function SalaryCalculator() {
 
                 {parseMoney(hsaInput) === 0 && (
                   <div className="flex gap-3 p-3 bg-blue-50 rounded-xl border border-blue-200">
-                    <span className="text-2xl">🏥</span>
+                    <span className="text-xl">+</span>
                     <div>
                       <p className="text-sm font-semibold text-blue-800">Open an HSA</p>
                       <p className="text-xs text-blue-700 mt-0.5">
@@ -765,7 +765,7 @@ export default function SalaryCalculator() {
 
                 {NO_INCOME_TAX_STATES.includes(state) ? (
                   <div className="flex gap-3 p-3 bg-yellow-50 rounded-xl border border-yellow-200">
-                    <span className="text-2xl">🎉</span>
+                    <span className="text-xl">*</span>
                     <div>
                       <p className="text-sm font-semibold text-yellow-800">You live in a no-income-tax state!</p>
                       <p className="text-xs text-yellow-700 mt-0.5">
@@ -775,7 +775,7 @@ export default function SalaryCalculator() {
                   </div>
                 ) : (
                   <div className="flex gap-3 p-3 bg-gray-50 rounded-xl border border-gray-200">
-                    <span className="text-2xl">🗺️</span>
+                    <span className="text-xl">~</span>
                     <div>
                       <p className="text-sm font-semibold text-gray-800">State Tax Impact</p>
                       <p className="text-xs text-gray-600 mt-0.5">
@@ -787,7 +787,7 @@ export default function SalaryCalculator() {
                 )}
 
                 <div className="flex gap-3 p-3 bg-purple-50 rounded-xl border border-purple-200">
-                  <span className="text-2xl">📊</span>
+                  <span className="text-xl">%</span>
                   <div>
                     <p className="text-sm font-semibold text-purple-800">Marginal vs. Effective Rate</p>
                     <p className="text-xs text-purple-700 mt-0.5">
@@ -800,7 +800,7 @@ export default function SalaryCalculator() {
 
                 {result.grossAnnual > 200000 && (
                   <div className="flex gap-3 p-3 bg-red-50 rounded-xl border border-red-200">
-                    <span className="text-2xl">⚠️</span>
+                    <span className="text-xl">!</span>
                     <div>
                       <p className="text-sm font-semibold text-red-800">Additional Medicare Tax</p>
                       <p className="text-xs text-red-700 mt-0.5">
@@ -843,7 +843,7 @@ export default function SalaryCalculator() {
               <p><strong className="text-gray-800">3. Calculate Federal Tax</strong> - using 2026 IRS progressive brackets (10%-37%).</p>
               <p><strong className="text-gray-800">4. Calculate State Tax</strong> - varies by state (0% in TX, FL, NV to 13.3% in CA).</p>
               <p><strong className="text-gray-800">5. Subtract FICA</strong> - Social Security (6.2% up to $184,500) + Medicare (1.45%).</p>
-              <p><strong className="text-gray-800">6. Net Pay</strong> = Gross − All Taxes − All Deductions.</p>
+              <p><strong className="text-gray-800">6. Net Pay</strong> = Gross minus All Taxes minus All Deductions.</p>
             </div>
           </div>
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
