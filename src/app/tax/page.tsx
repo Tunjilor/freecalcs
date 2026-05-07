@@ -70,10 +70,10 @@ const ALL_CALCS = [
   ['/age','Age Calculator'],['/tip','Tip Calculator'],
 ];
 
-const C = { blue:'#2563eb', darkBlue:'#1e3a5f', gray:'#6b7280', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc' };
+const C = { blue:'#2563eb', darkBlue:'#1e3a5f', gray:'#6b7280', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc', text:'#1f2937', textLight:'#374151' };
 const card: React.CSSProperties = { background:C.white, borderRadius:16, padding:20, boxShadow:'0 1px 3px rgba(0,0,0,.08)', border:`1px solid ${C.border}`, marginBottom:16 };
-const inp: React.CSSProperties  = { width:'100%', border:`1px solid ${C.border}`, borderRadius:10, padding:'10px 12px', fontSize:14, outline:'none', background:C.white, boxSizing:'border-box' };
-const lbl: React.CSSProperties  = { display:'block', fontSize:11, fontWeight:600, color:C.gray, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:4 } as React.CSSProperties;
+const inp: React.CSSProperties  = { width:'100%', border:`1px solid #cbd5e1`, borderRadius:10, padding:'10px 12px', fontSize:14, outline:'none', background:C.white, boxSizing:'border-box', color:'#111827', fontWeight:500 };
+const lbl: React.CSSProperties  = { display:'block', fontSize:11, fontWeight:700, color:'#374151', textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:4 } as React.CSSProperties;
 const btnBase: React.CSSProperties = { flex:1, padding:'10px 0', fontSize:14, fontWeight:600, border:'none', cursor:'pointer', transition:'all .15s' };
 
 interface TaxResult {
@@ -364,7 +364,7 @@ export default function TaxCalculator() {
                 {tab === 'summary' && (
                   <div style={{ ...card }}>
                     {/* Income flow */}
-                    <p style={{ fontSize: 12, fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '.05em', margin: '0 0 12px' }}>Tax Calculation Flow</p>
+                    <p style={{ fontSize: 12, fontWeight: 700, color: '#111827', textTransform: 'uppercase', letterSpacing: '.05em', margin: '0 0 12px' }}>Tax Calculation Flow</p>
                     {[
                       ['Total Income', parseMoney(wages) + parseMoney(selfEmp) + parseMoney(interest) + parseMoney(dividends) + parseMoney(ltcg) + parseMoney(other), '#1f2937', false],
                       ['Above-the-Line Deductions', -(parseMoney(k401) + parseMoney(hsa) + Math.min(parseMoney(studentLoan), 2500) + (parseMoney(selfEmp) * 0.9235 * 0.153 / 2)), '#16a34a', false],
@@ -401,8 +401,8 @@ export default function TaxCalculator() {
                 {/* BRACKETS TAB */}
                 {tab === 'brackets' && (
                   <div id="brackets" style={{ ...card, scrollMarginTop: 70 }}>
-                    <p style={{ fontSize: 12, fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '.05em', margin: '0 0 12px' }}>2026 Tax Bracket Breakdown</p>
-                    <p style={{ fontSize: 12, color: C.gray, margin: '0 0 14px' }}>Only dollars within each bracket are taxed at that rate. Your {(res.marginalRate * 100).toFixed(0)}% marginal rate applies ONLY to income above {fmtDInt((BRACKETS[filing] || BRACKETS.single).find(b => b[2] === res.marginalRate)?.[0] || 0)}.</p>
+                    <p style={{ fontSize: 12, fontWeight: 700, color: '#111827', textTransform: 'uppercase', letterSpacing: '.05em', margin: '0 0 12px' }}>2026 Tax Bracket Breakdown</p>
+                    <p style={{ fontSize: 13, color: '#374151', margin: '0 0 14px' }}>Only dollars within each bracket are taxed at that rate. Your {(res.marginalRate * 100).toFixed(0)}% marginal rate applies ONLY to income above {fmtDInt((BRACKETS[filing] || BRACKETS.single).find(b => b[2] === res.marginalRate)?.[0] || 0)}.</p>
                     {(BRACKETS[filing] || BRACKETS.single).map(([lo, hi, rate], i) => {
                       const ordinary = Math.max(0, res.taxableIncome - parseMoney(ltcg));
                       const taxableInBracket = Math.max(0, Math.min(ordinary, hi === Infinity ? ordinary : hi) - lo);
@@ -412,7 +412,7 @@ export default function TaxCalculator() {
                       const barWidth = taxableInBracket > 0 ? Math.min(100, (taxableInBracket / (ordinary || 1)) * 100) : 0;
                       const colors = ['#3b82f6','#22c55e','#f59e0b','#f97316','#ef4444','#b91c1c','#7f1d1d'];
                       return (
-                        <div key={i} style={{ marginBottom: 10, opacity: isActive ? 1 : 0.4 }}>
+                        <div key={i} style={{ marginBottom: 10, opacity: isActive ? 1 : 0.55 }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 4 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                               <span style={{ width: 28, textAlign: 'center', padding: '2px 6px', borderRadius: 6, background: colors[i], color: C.white, fontSize: 11, fontWeight: 700 }}>{(rate * 100).toFixed(0)}%</span>
@@ -426,7 +426,7 @@ export default function TaxCalculator() {
                           <div style={{ height: 6, borderRadius: 3, background: '#f1f5f9', overflow: 'hidden' }}>
                             <div style={{ width: barWidth + '%', height: '100%', background: colors[i], borderRadius: 3, transition: 'width .3s' }}></div>
                           </div>
-                          {isActive && taxableInBracket > 0 && <p style={{ fontSize: 10, color: C.gray, margin: '2px 0 0' }}>{fmtDInt(taxableInBracket)} taxed at {(rate * 100).toFixed(0)}%</p>}
+                          {isActive && taxableInBracket > 0 && <p style={{ fontSize: 11, color: '#4b5563', margin: '2px 0 0' }}>{fmtDInt(taxableInBracket)} taxed at {(rate * 100).toFixed(0)}%</p>}
                         </div>
                       );
                     })}

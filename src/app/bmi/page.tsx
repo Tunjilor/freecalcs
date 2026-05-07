@@ -134,7 +134,7 @@ const ALL_CALCS = [
 const C = { blue: '#2563eb', darkBlue: '#1e3a5f', gray: '#6b7280', border: '#e5e7eb', white: '#ffffff', light: '#f8fafc' };
 const card: React.CSSProperties = { background: C.white, borderRadius: 16, padding: 20, boxShadow: '0 1px 3px rgba(0,0,0,.08)', border: `1px solid ${C.border}`, marginBottom: 16 };
 const inp: React.CSSProperties = { width: '100%', border: `1px solid ${C.border}`, borderRadius: 10, padding: '10px 12px', fontSize: 14, outline: 'none', background: C.white, boxSizing: 'border-box' };
-const lbl: React.CSSProperties = { display: 'block', fontSize: 11, fontWeight: 600, color: C.gray, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 } as React.CSSProperties;
+const lbl: React.CSSProperties = { display: 'block', fontSize: 11, fontWeight: 600, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 } as React.CSSProperties;
 const btnBase: React.CSSProperties = { flex: 1, padding: '10px 0', fontSize: 14, fontWeight: 600, border: 'none', cursor: 'pointer', transition: 'all .15s' };
 
 export default function BMICalculator() {

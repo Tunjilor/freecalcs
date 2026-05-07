@@ -60,7 +60,7 @@ const ALL_CALCS = [
 const C = { blue:'#2563eb', darkBlue:'#1e3a5f', gray:'#6b7280', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc' };
 const card: React.CSSProperties = { background:C.white, borderRadius:16, padding:20, boxShadow:'0 1px 3px rgba(0,0,0,.08)', border:`1px solid ${C.border}`, marginBottom:16 };
 const inp: React.CSSProperties  = { width:'100%', border:`1px solid ${C.border}`, borderRadius:10, padding:'10px 12px', fontSize:14, outline:'none', background:C.white, boxSizing:'border-box' };
-const lbl: React.CSSProperties  = { display:'block', fontSize:11, fontWeight:600, color:C.gray, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:4 } as React.CSSProperties;
+const lbl: React.CSSProperties  = { display:'block', fontSize:11, fontWeight:600, color:'#374151', textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:4 } as React.CSSProperties;
 const btnBase: React.CSSProperties = { flex:1, padding:'10px 0', fontSize:14, fontWeight:600, border:'none', cursor:'pointer', transition:'all .15s' };
 
 export default function TDEECalculator() {
@@ -410,7 +410,7 @@ export default function TDEECalculator() {
           <style>{`.faq-grid{} @media(max-width:600px){.faq-grid{grid-template-columns:1fr!important;}}`}</style>
           <div style={{ ...card }}>
             <h2 style={{ fontSize:16, fontWeight:700, color:'#1f2937', marginBottom:14 }}>What is TDEE?</h2>
-            <p style={{ fontSize:13, color:C.gray, lineHeight:1.6, margin:0 }}>TDEE (Total Daily Energy Expenditure) is the total number of calories your body burns in a day. It includes your Basal Metabolic Rate (calories burned at rest), the thermic effect of food (digestion), and all physical activity. Eating below your TDEE creates a deficit for fat loss. Eating above creates a surplus for muscle gain.</p>
+            <p style={{ fontSize:13, color:'#374151', lineHeight:1.6, margin:0 }}>TDEE (Total Daily Energy Expenditure) is the total number of calories your body burns in a day. It includes your Basal Metabolic Rate (calories burned at rest), the thermic effect of food (digestion), and all physical activity. Eating below your TDEE creates a deficit for fat loss. Eating above creates a surplus for muscle gain.</p>
           </div>
           <div style={{ ...card }}>
             <h2 style={{ fontSize:16, fontWeight:700, color:'#1f2937', marginBottom:14 }}>Which BMR Formula is Best?</h2>
