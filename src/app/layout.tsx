@@ -46,12 +46,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <span style={{ color: '#fff', fontWeight: 700, fontSize: 15, letterSpacing: '-0.3px' }}>calcs.io</span>
             </a>
             <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              <a href="/blog" style={{ color: '#cbd5e1', fontSize: 13, fontWeight: 500, textDecoration: 'none', padding: '6px 12px', borderRadius: 8, transition: 'all .15s' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,.1)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>Blog</a>
-              <a href="/about" style={{ color: '#cbd5e1', fontSize: 13, fontWeight: 500, textDecoration: 'none', padding: '6px 12px', borderRadius: 8, transition: 'all .15s' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,.1)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>About</a>
+              <a href="/blog" className="nav-link">Blog</a>
+              <a href="/about" className="nav-link">About</a>
               <span style={{ color: '#64748b', fontSize: 12, marginLeft: 8, background: 'rgba(255,255,255,.08)', padding: '3px 10px', borderRadius: 20 }}>100% Free</span>
             </div>
           </div>
@@ -65,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div style={{ maxWidth: 1100, margin: '0 auto', padding: '48px 16px 32px' }}>
 
             {/* Top: brand + all calculators */}
-            <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 40, marginBottom: 40 }}>
+            <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 40, marginBottom: 40 }}>
 
               {/* Brand */}
               <div>
@@ -111,9 +107,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           body{-webkit-font-smoothing:antialiased;}
           a:hover{opacity:.85;}
           input,select,textarea{font-family:inherit;}
+          .nav-link{color:#cbd5e1;font-size:13px;font-weight:500;text-decoration:none;padding:6px 12px;border-radius:8px;transition:background .15s;}
+          .nav-link:hover{background:rgba(255,255,255,.1);opacity:1;}
           @media(max-width:680px){
-            nav .nav-links{display:none;}
-            footer .footer-grid{grid-template-columns:1fr!important;}
+            .footer-grid{grid-template-columns:1fr!important;}
           }
         `}</style>
       </body>
