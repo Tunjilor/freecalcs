@@ -14,41 +14,36 @@ interface AmortRow {
   totalInterest: number;
 }
 
-// Format number as currency string with commas
-function fmtInput(val: number): string {
-  if (!val || isNaN(val)) return "";
-  return val.toLocaleString("en-US");
-}
-
-// Parse formatted string back to number
-function parseInput(val: string): number {
-  return parseFloat(val.replace(/,/g, "")) || 0;
-}
-
-// Currency input component
 function MoneyInput({ label, value, onChange, hint }: {
   label: string;
   value: number;
   onChange: (n: number) => void;
   hint?: string;
 }) {
-  const [focused, setFocused] = useState(false);
-  const [raw, setRaw] = useState("");
+  const [display, setDisplay] = useState(
+    value > 0 ? value.toLocaleString("en-US") : ""
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value.replace(/[^0-9]/g, "");
+    const num = parseInt(raw, 10) || 0;
+    const formatted = num > 0 ? num.toLocaleString("en-US") : "";
+    setDisplay(formatted);
+    onChange(num);
+  };
 
   return (
     <div style={{ marginBottom: 14 }}>
-      <label style={{ fontSize: 12, fontWeight: 600, color: "#374151", display: "block", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>{label}</label>
+      {label && <label style={{ fontSize: 12, fontWeight: 600, color: "#374151", display: "block", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>{label}</label>}
       <div style={{ position: "relative" }}>
-        <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#9ca3af", fontWeight: 700, pointerEvents: "none" }}>$</span>
+        <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#9ca3af", fontWeight: 700, pointerEvents: "none", fontSize: 15 }}>$</span>
         <input
           type="text"
           inputMode="numeric"
-          value={focused ? raw : fmtInput(value)}
-          onFocus={() => { setFocused(true); setRaw(value > 0 ? String(value) : ""); }}
-          onBlur={() => { setFocused(false); onChange(parseInput(raw)); }}
-          onChange={e => { const clean = e.target.value.replace(/[^0-9.]/g, ""); setRaw(clean); onChange(parseInput(clean)); }}
-          style={{ width: "100%", padding: "11px 14px 11px 24px", borderRadius: 9, border: "1.5px solid #e5e7eb", fontSize: 15, fontWeight: 600, color: "#111", background: "#fff", outline: "none", boxSizing: "border-box" }}
-          onFocus2={() => {}}
+          value={display}
+          onChange={handleChange}
+          placeholder="0"
+          style={{ width: "100%", padding: "11px 14px 11px 26px", borderRadius: 9, border: "1.5px solid #e5e7eb", fontSize: 15, fontWeight: 600, color: "#111", background: "#fff", outline: "none", boxSizing: "border-box" }}
         />
       </div>
       {hint && <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 4, lineHeight: 1.4 }}>{hint}</p>}
