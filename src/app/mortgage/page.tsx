@@ -289,7 +289,7 @@ export default function MortgageCalculator() {
                         {downMode==="$" && <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#9ca3af", fontWeight: 700, pointerEvents: "none" }}>$</span>}
                         <input
                           type="text" inputMode="numeric"
-                          value={downMode==="$" ? fmtInput(downAmt) : String(downPct)}
+                          value={downMode==="$" ? (downAmt > 0 ? downAmt.toLocaleString("en-US") : "") : String(downPct)}
                           onChange={e => {
                             const clean = e.target.value.replace(/[^0-9.]/g, "");
                             downMode==="$" ? setDownAmt(parseFloat(clean)||0) : setDownPct(parseFloat(clean)||0);
