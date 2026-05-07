@@ -1,12 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 export const metadata: Metadata = {
-  title: "Free TDEE Calculator — Total Daily Energy Expenditure & Calories",
-  description: "Calculate your Total Daily Energy Expenditure (TDEE) and daily calorie needs. Based on the Mifflin-St Jeor equation. Includes calorie targets for weight loss, maintenance, and muscle gain.",
-  keywords: ["TDEE calculator", "calorie calculator", "total daily energy expenditure", "how many calories should I eat", "weight loss calculator", "calorie deficit calculator"],
-  openGraph: {
-    title: "TDEE & Calorie Calculator — freecalcs.io",
-    description: "Find your daily calorie needs based on your body stats and activity level. Includes weight loss and gain targets.",
-    url: "https://www.freecalcs.io/tdee",
-  },
-  alternates: { canonical: "https://www.freecalcs.io/tdee" },
+  title: 'TDEE Calculator 2026 | Total Daily Energy Expenditure & Macros | freecalcs.io',
+  description: 'Free TDEE calculator using Mifflin-St Jeor, Harris-Benedict, and Katch-McArdle formulas. Get your maintenance calories, goal calories, and macro breakdown for cutting, bulking, or maintaining.',
+  keywords: ['TDEE calculator','calorie calculator','how many calories should I eat','BMR calculator','macro calculator','Mifflin St Jeor','calorie deficit','calorie surplus'],
+  openGraph: { title: 'TDEE & Calorie Calculator | freecalcs.io', description: 'Find your Total Daily Energy Expenditure and calorie goals. 3 BMR formulas, macro breakdown, all activity levels.', url: 'https://www.freecalcs.io/tdee', siteName: 'freecalcs.io', type: 'website' },
+  twitter: { card: 'summary_large_image', title: 'TDEE & Calorie Calculator | freecalcs.io', description: 'TDEE, BMR, macros, and calorie goals. Mifflin-St Jeor + 2 other formulas.' },
+  alternates: { canonical: 'https://www.freecalcs.io/tdee' },
 };
