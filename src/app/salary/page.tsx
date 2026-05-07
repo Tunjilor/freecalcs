@@ -411,11 +411,11 @@ export default function SalaryCalculator(){
           </div>
         </div>
 
-        {/* Related */}
+        {/* All Calculators */}
         <div style={{background:'linear-gradient(135deg,#eff6ff,#eef2ff)',borderRadius:16,padding:20,border:'1px solid #bfdbfe',marginTop:20}}>
-          <p style={{fontSize:13,fontWeight:600,color:'#374151',marginBottom:12}}>Related Calculators</p>
+          <p style={{fontSize:13,fontWeight:600,color:'#374151',marginBottom:12}}>All freecalcs.io Calculators</p>
           <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
-            {[['Income Tax','/tax'],['Mortgage','/mortgage'],['Compound Interest','/compound-interest'],['Loan Calculator','/loan'],['TDEE & Calories','/tdee'],['BMI Calculator','/bmi']].map(([name,href])=>(
+            {[['Mortgage Calculator','/mortgage'],['Mortgage Qualifier','/qualify'],['Rent vs Buy','/rent-vs-buy'],['Income Tax','/tax'],['BMI Calculator','/bmi'],['TDEE & Calories','/tdee'],['Compound Interest','/compound-interest'],['Loan Calculator','/loan'],['Age Calculator','/age'],['Percentage Calc','/percentage'],['Tip Calculator','/tip']].map(([name,href])=>(
               <a key={href} href={href} style={{background:C.white,fontSize:13,color:C.blue,fontWeight:500,padding:'8px 16px',borderRadius:10,border:`1px solid #bfdbfe`,textDecoration:'none'}}>{name}</a>
             ))}
           </div>

@@ -1,12 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 export const metadata: Metadata = {
-  title: "Free BMI Calculator — Body Mass Index for Adults",
-  description: "Calculate your Body Mass Index (BMI) instantly. Supports imperial (lbs/inches) and metric (kg/cm). See your BMI category, healthy weight range, and what your number means.",
-  keywords: ["BMI calculator", "body mass index calculator", "BMI calculator for adults", "healthy weight calculator", "BMI chart", "overweight calculator"],
-  openGraph: {
-    title: "BMI Calculator — freecalcs.io",
-    description: "Calculate your BMI instantly in imperial or metric. See your category and healthy weight range.",
-    url: "https://www.freecalcs.io/bmi",
-  },
-  alternates: { canonical: "https://www.freecalcs.io/bmi" },
+  title: 'BMI Calculator 2026 | Body Mass Index, Body Fat & Healthy Weight | freecalcs.io',
+  description: 'Free BMI calculator with visual gauge, body fat estimate, BMI prime, healthy weight range, and health risk analysis. WHO/CDC standards. Adults and children. Imperial and metric.',
+  keywords: ['BMI calculator','body mass index','healthy weight calculator','body fat calculator','BMI chart','overweight calculator','obesity calculator','BMI prime'],
+  openGraph: { title: 'BMI Calculator | freecalcs.io', description: 'Calculate BMI with health risk analysis, body fat estimate, BMI prime, and healthy weight range. Free, instant, no sign-up.', url: 'https://www.freecalcs.io/bmi', siteName: 'freecalcs.io', type: 'website' },
+  twitter: { card: 'summary_large_image', title: 'BMI Calculator | freecalcs.io', description: 'BMI with body fat estimate, BMI prime, healthy weight range, and health risks.' },
+  alternates: { canonical: 'https://www.freecalcs.io/bmi' },
 };
