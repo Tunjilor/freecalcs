@@ -54,10 +54,11 @@ function getMarginalRate(taxable: number, filing: string): number {
 
 function parseMoney(s: string): number { return parseFloat(s.replace(/[^0-9.]/g, '')) || 0; }
 function fmtInput(s: string): string {
-  const raw = s.replace(/[^0-9.]/g, '');
-  const parts = raw.split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  return parts.length > 1 ? parts[0] + '.' + parts[1] : parts[0];
+  // Strip everything except digits and first decimal point
+  const clean = s.replace(/[^0-9.]/g, '');
+  const parts = clean.split('.');
+  const intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return parts.length > 1 ? intPart + '.' + parts.slice(1).join('') : intPart;
 }
 function fmtD(n: number): string { return '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 function fmtDInt(n: number): string { return '$' + Math.round(Math.abs(n)).toLocaleString('en-US'); }
@@ -156,7 +157,6 @@ function compute(
 
 export default function TaxCalculator() {
   const [filing, setFiling]       = useState('single');
-  const [taxYear, setTaxYear]     = useState('2026');
   const [tab, setTab]             = useState<'summary'|'brackets'|'planning'>('summary');
   const [useStd, setUseStd]       = useState(true);
 
@@ -181,8 +181,8 @@ export default function TaxCalculator() {
   const [res, setRes] = useState<TaxResult | null>(null);
 
   const run = useCallback(() => {
-    setRes(compute(filing, wages, selfEmp, interest, dividends, ltcg, other, useStd, itemized, k401, hsa, studentLoan, children, withheld, taxYear));
-  }, [filing, taxYear, wages, selfEmp, interest, dividends, ltcg, other, useStd, itemized, k401, hsa, studentLoan, children, withheld]);
+    setRes(compute(filing, wages, selfEmp, interest, dividends, ltcg, other, useStd, itemized, k401, hsa, studentLoan, children, withheld, '2026'));
+  }, [filing, wages, selfEmp, interest, dividends, ltcg, other, useStd, itemized, k401, hsa, studentLoan, children, withheld]);
 
   useEffect(() => { run(); }, [run]);
 
@@ -216,16 +216,16 @@ export default function TaxCalculator() {
       <div style={{ background: `linear-gradient(135deg,${C.darkBlue},${C.blue})`, color: C.white, padding: '32px 16px 40px' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
           <a href="/" style={{ color: '#93c5fd', fontSize: 13, textDecoration: 'none' }}>&lt;- freecalcs.io</a>
-          <h1 style={{ fontSize: 28, fontWeight: 700, margin: '12px 0 8px', color: C.white }}>Federal Income Tax Calculator 2026</h1>
-          <p style={{ color: '#93c5fd', fontSize: 14, margin: '0 0 16px' }}>Estimate your 2026 federal tax bill, refund, bracket breakdown, and effective rate. Includes self-employment tax, capital gains, and credits.</p>
+          <h1 style={{ fontSize: 28, fontWeight: 700, margin: '12px 0 8px', color: C.white }}>Federal Income Tax Calculator <span style={{ background:'rgba(255,255,255,.2)', fontSize:18, padding:'2px 10px', borderRadius:8, verticalAlign:'middle' }}>2026</span></h1>
+          <p style={{ color: '#93c5fd', fontSize: 14, margin: '0 0 16px' }}>Estimate your 2026 federal tax, refund, bracket breakdown, and effective rate. Includes self-employment tax, capital gains, and credits.</p>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {[
-              ['2026 Tax Brackets','#brackets','brackets'],
-              ['Capital Gains','#capital-gains',null],
-              ['Self-Employment Tax','#self-employment',null],
-              ['Child Tax Credit','#credits',null],
-              ['Refund Estimator','#refund',null],
-              ['Bracket Visualizer','#brackets','brackets'],
+              ['Income Fields', '#income-section', null],
+              ['Capital Gains', '#capital-gains', null],
+              ['Self-Employment', '#self-employment', null],
+              ['Credits & Refund', '#credits', null],
+              ['Bracket Visualizer', '#brackets', 'brackets'],
+              ['Tax Tips', '#tax-tips', 'planning'],
             ].map(([t, href, switchTab]) => (
               <a key={t as string} href={href as string}
                 onClick={() => { if (switchTab) setTab(switchTab as 'summary'|'brackets'|'planning'); }}
@@ -244,33 +244,31 @@ export default function TaxCalculator() {
           {/* LEFT: Inputs */}
           <div>
             <div style={{ ...card }}>
-              {/* Filing + Year */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 16 }}>
-                <div>
-                  <label style={lbl}>Tax Year</label>
-                  <select style={{ ...inp, appearance: 'none' } as React.CSSProperties} value={taxYear} onChange={e => setTaxYear(e.target.value)}>
-                    <option value="2026">2026</option>
-                    <option value="2025">2025</option>
-                  </select>
+
+              {/* Filing Status as button group */}
+              <div style={{ marginBottom: 20 }}>
+                <label style={lbl}>Filing Status</label>
+                <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:6 }}>
+                  {[['single','Single'],['married','Married Jointly'],['married_sep','Married Separately'],['hoh','Head of Household']].map(([val,label]) => (
+                    <button key={val} onClick={() => setFiling(val)}
+                      style={{ padding:'9px 10px', fontSize:13, fontWeight:600, borderRadius:9, border:`1px solid ${filing===val?C.blue:C.border}`, background:filing===val?C.blue:C.white, color:filing===val?C.white:C.gray, cursor:'pointer', transition:'all .15s', textAlign:'center' }}>
+                      {label}
+                    </button>
+                  ))}
                 </div>
-                <div>
-                  <label style={lbl}>Filing Status</label>
-                  <select style={{ ...inp, appearance: 'none' } as React.CSSProperties} value={filing} onChange={e => setFiling(e.target.value)}>
-                    <option value="single">Single</option>
-                    <option value="married">Married Jointly</option>
-                    <option value="married_sep">Married Separately</option>
-                    <option value="hoh">Head of Household</option>
-                  </select>
+                <div style={{ marginTop:10, fontSize:12, color:C.gray, background:'#f0fdf4', borderRadius:8, padding:'8px 12px' }}>
+                  2026 Standard deduction: <strong style={{ color:'#166534' }}>{fmtDInt(STD_DED[filing]||16100)}</strong>
                 </div>
               </div>
 
-              <Section title="Income" id="capital-gains">
+              <div id="income-section">
+              <Section title="Income">
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   <div><label style={lbl}>W-2 Wages / Salary</label><MoneyIn value={wages} onChange={setWages} /></div>
                   <div id="self-employment"><label style={lbl}>Self-Employment Income</label><MoneyIn value={selfEmp} onChange={setSelfEmp} /></div>
                   <div><label style={lbl}>Interest Income</label><MoneyIn value={interest} onChange={setInterest} /></div>
                   <div><label style={lbl}>Ordinary Dividends</label><MoneyIn value={dividends} onChange={setDividends} /></div>
-                  <div>
+                  <div id="capital-gains">
                     <label style={lbl}>Long-Term Capital Gains <span style={{ fontWeight: 400, color: '#9ca3af', textTransform: 'none' }}>(0%, 15%, or 20%)</span></label>
                     <MoneyIn value={ltcg} onChange={setLtcg} />
                   </div>
@@ -313,6 +311,7 @@ export default function TaxCalculator() {
                   <div><label style={lbl}>Federal Tax Already Withheld</label><MoneyIn value={withheld} onChange={setWithheld} /></div>
                 </div>
               </Section>
+              </div>{/* end income-section wrapper */}
             </div>
           </div>
 
@@ -442,7 +441,7 @@ export default function TaxCalculator() {
 
                 {/* PLANNING TAB */}
                 {tab === 'planning' && (
-                  <div style={{ ...card, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <div id="tax-tips" style={{ ...card, display: 'flex', flexDirection: 'column', gap: 12 }}>
                     <p style={{ fontSize: 14, fontWeight: 700, color: '#1f2937', margin: 0 }}>Tax Planning Tips</p>
 
                     {parseMoney(k401) < 23500 && (
