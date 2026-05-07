@@ -2,215 +2,351 @@
 import { useState } from "react";
 import Link from "next/link";
 
+type CalcMode = "buy" | "refinance" | "equity";
+
 export default function MortgageCalculator() {
-  const [home, setHome] = useState(300000);
-  const [down, setDown] = useState(60000);
+  const [mode, setMode] = useState<CalcMode>("buy");
+  const [home, setHome] = useState(400000);
+  const [down, setDown] = useState(80000);
+  const [balance, setBalance] = useState(280000);
+  const [equityUse, setEquityUse] = useState(50000);
   const [rate, setRate] = useState(6.5);
   const [years, setYears] = useState(30);
   const [customYears, setCustomYears] = useState("");
   const [useCustom, setUseCustom] = useState(false);
+  const [startMonth, setStartMonth] = useState(new Date().getMonth());
+  const [startYear, setStartYear] = useState(new Date().getFullYear());
+  const [propTax, setPropTax] = useState(3000);
+  const [insurance, setInsurance] = useState(1500);
+  const [pmi, setPmi] = useState(0.5);
+  const [hoa, setHoa] = useState(0);
 
   const actualYears = useCustom ? (parseFloat(customYears) || 0) : years;
-  const principal = home - down;
+  
+  const principal = mode === "buy" ? home - down : mode === "refinance" ? balance : balance + equityUse;
   const mr = rate / 100 / 12;
   const n = actualYears * 12;
-  const payment = mr > 0 && n > 0 ? principal * (mr * Math.pow(1 + mr, n)) / (Math.pow(1 + mr, n) - 1) : 0;
-  const total = payment * n;
+  const basePmt = mr > 0 && n > 0 ? principal * (mr * Math.pow(1 + mr, n)) / (Math.pow(1 + mr, n) - 1) : 0;
+  const monthlyTax = propTax / 12;
+  const monthlyIns = insurance / 12;
+  const monthlyPMI = (mode === "buy" && down / home < 0.2) ? (principal * pmi / 100 / 12) : 0;
+  const monthlyHOA = hoa;
+  const totalMonthly = basePmt + monthlyTax + monthlyIns + monthlyPMI + monthlyHOA;
+  const biWeekly = basePmt / 2;
+  const total = basePmt * n;
   const interest = total - principal;
-  const fmt = (v: number) => isNaN(v) || !isFinite(v) ? "$0" : v.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
-  const handlePrint = () => window.print();
+  const payoffDate = new Date(startYear, startMonth + n);
+  const payoffStr = payoffDate.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  const startStr = new Date(startYear, startMonth).toLocaleDateString("en-US", { month: "long", year: "numeric" });
+
+  const fmt = (v: number) => isNaN(v) || !isFinite(v) ? "$0" : v.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+  const fmt2 = (v: number) => isNaN(v) || !isFinite(v) ? "$0.00" : v.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const termOptions = [
+    { label: "10yr", value: 10, desc: "Fastest" },
+    { label: "15yr", value: 15, desc: "Popular" },
+    { label: "20yr", value: 20, desc: "Balanced" },
+    { label: "30yr", value: 30, desc: "Lowest pmt" },
+    { label: "40yr", value: 40, desc: "Non-QM" },
+  ];
+
   const handleCSV = () => {
-    const csv = `Field,Value\nHome Price,$${home}\nDown Payment,$${down}\nLoan Amount,$${principal}\nInterest Rate,${rate}%\nLoan Term,${actualYears} years\nMonthly Payment,${fmt(payment)}\nTotal Payment,${fmt(total)}\nTotal Interest,${fmt(interest)}`;
-    const blob = new Blob([csv], { type: "text/csv" });
+    const rows = [
+      ["Calculator Mode", mode === "buy" ? "Buy a Home" : mode === "refinance" ? "Refinance" : "Use Equity"],
+      ["Principal", fmt(principal)],
+      ["Interest Rate", `${rate}%`],
+      ["Loan Term", `${actualYears} years`],
+      ["Start Date", startStr],
+      ["Payoff Date", payoffStr],
+      ["Monthly P&I", fmt2(basePmt)],
+      ["Monthly Tax", fmt2(monthlyTax)],
+      ["Monthly Insurance", fmt2(monthlyIns)],
+      ["Monthly PMI", fmt2(monthlyPMI)],
+      ["Monthly HOA", fmt2(monthlyHOA)],
+      ["Total Monthly Payment", fmt2(totalMonthly)],
+      ["Bi-weekly Payment", fmt2(biWeekly)],
+      ["Total Interest", fmt(interest)],
+      ["Total Payment", fmt(total)],
+    ];
+    const csv = rows.map(r => r.join(",")).join("\n");
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
     a.download = "mortgage.csv";
     a.click();
   };
-
-  const termOptions = [
-    { label: "10yr", value: 10, desc: "Build equity fast" },
-    { label: "15yr", value: 15, desc: "Less interest" },
-    { label: "20yr", value: 20, desc: "Middle ground" },
-    { label: "30yr", value: 30, desc: "Lowest payment" },
-    { label: "40yr", value: 40, desc: "Non-QM" },
-  ];
 
   return (
     <main style={{ minHeight: "100vh", background: "#f8f9fb", fontFamily: "system-ui,sans-serif" }}>
       <style>{`
         * { box-sizing: border-box; }
-        .input-label { font-size: 13px; font-weight: 600; color: #374151; display: block; margin-bottom: 6px; }
-        .input-field {
-          width: 100%; padding: 12px 16px; border-radius: 10px;
-          border: 1.5px solid #e5e7eb; font-size: 16px; font-weight: 600;
-          color: #111; background: #fff; outline: none; transition: border-color 0.15s;
+        .lbl { font-size: 13px; font-weight: 600; color: #374151; display: block; margin-bottom: 5px; }
+        .inp {
+          width: 100%; padding: 10px 14px; border-radius: 9px;
+          border: 1.5px solid #e5e7eb; font-size: 15px; font-weight: 600;
+          color: #111; background: #fff; outline: none;
         }
-        .input-field:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
-        .result-row {
-          display: flex; justify-content: space-between; align-items: center;
-          padding: 14px 20px; background: #fff; border: 1px solid #e5e7eb;
-          border-radius: 12px; margin-bottom: 10px;
-        }
-        .action-btn {
-          padding: 8px 16px; border-radius: 8px; border: 1.5px solid #e5e7eb;
-          background: #fff; font-size: 13px; font-weight: 600; color: #374151;
-          cursor: pointer; transition: all 0.15s;
-        }
-        .action-btn:hover { border-color: #2563eb; color: #2563eb; }
-        .term-btn {
-          flex: 1; padding: 10px 4px; border-radius: 8px;
-          border: 1.5px solid #e5e7eb; background: #fff;
-          cursor: pointer; transition: all 0.15s; text-align: center;
-        }
+        .inp:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+        .inp-wrap { position: relative; }
+        .inp-pre { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af; font-weight: 700; font-size: 15px; }
+        .inp-suf { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #9ca3af; font-weight: 700; font-size: 13px; }
+        .row-result { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; margin-bottom: 8px; }
+        .mode-btn { flex: 1; padding: 10px 8px; border-radius: 8px; border: 1.5px solid #e5e7eb; background: #fff; font-size: 13px; font-weight: 600; color: #6b7280; cursor: pointer; transition: all 0.15s; }
+        .mode-btn.active { border-color: #2563eb; background: #eff6ff; color: #2563eb; }
+        .term-btn { flex: 1; padding: 8px 2px; border-radius: 7px; border: 1.5px solid #e5e7eb; background: #fff; cursor: pointer; text-align: center; transition: all 0.15s; }
         .term-btn.active { border-color: #2563eb; background: #eff6ff; }
-        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
-        @media (max-width: 700px) {
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+        .card { background: #fff; border-radius: 14px; border: 1px solid #e5e7eb; padding: 22px; }
+        .section-title { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 16px; }
+        .field { margin-bottom: 14px; }
+        .hint { font-size: 11px; color: #9ca3af; margin-top: 3px; }
+        .divider { border: none; border-top: 1px solid #f3f4f6; margin: 14px 0; }
+        select.inp { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+        @media (max-width: 720px) {
           .two-col { grid-template-columns: 1fr; }
-          .results-panel { order: -1; }
-          .action-btns { display: none !important; }
+          .results-col { order: -1; }
         }
-        @media print { nav, .action-btns { display: none; } }
+        @media print { nav, .no-print { display: none; } }
       `}</style>
 
-      <nav style={{ background: "#fff", borderBottom: "1px solid #eee", padding: "0 24px" }}>
-        <div style={{ maxWidth: 960, margin: "0 auto", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <nav style={{ background: "#fff", borderBottom: "1px solid #eee", padding: "0 20px" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto", height: 54, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link href="/" style={{ textDecoration: "none" }}>
-            <b style={{ color: "#111", fontSize: 20 }}>freecalcs</b>
-            <b style={{ color: "#2563eb", fontSize: 20 }}>.io</b>
+            <b style={{ color: "#111", fontSize: 20 }}>freecalcs</b><b style={{ color: "#2563eb", fontSize: 20 }}>.io</b>
           </Link>
           <Link href="/" style={{ color: "#6b7280", textDecoration: "none", fontSize: 14 }}>← All calculators</Link>
         </div>
       </nav>
 
-      <section style={{ maxWidth: 900, margin: "0 auto", padding: "40px 24px 80px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: 32 }}>
+      <section style={{ maxWidth: 980, margin: "0 auto", padding: "32px 20px 80px" }}>
+        {/* Header */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 10, marginBottom: 24 }}>
           <div>
-            <h1 style={{ fontSize: 30, fontWeight: 800, color: "#111", marginBottom: 4 }}>Mortgage Calculator</h1>
-            <p style={{ color: "#6b7280", fontSize: 15 }}>Enter your loan details to see your monthly payment instantly.</p>
+            <h1 style={{ fontSize: 28, fontWeight: 800, color: "#111", marginBottom: 3 }}>Mortgage Calculator</h1>
+            <p style={{ color: "#6b7280", fontSize: 14 }}>Calculate payments for buying, refinancing, or using home equity.</p>
           </div>
-          <div className="action-btns" style={{ display: "flex", gap: 8 }}>
-            <button className="action-btn" onClick={handlePrint}>🖨️ Print</button>
-            <button className="action-btn" onClick={handleCSV}>📥 CSV</button>
+          <div className="no-print" style={{ display: "flex", gap: 8 }}>
+            <button onClick={() => window.print()} style={{ padding: "8px 14px", borderRadius: 8, border: "1.5px solid #e5e7eb", background: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>🖨️ Print</button>
+            <button onClick={handleCSV} style={{ padding: "8px 14px", borderRadius: 8, border: "1.5px solid #e5e7eb", background: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>📥 CSV</button>
           </div>
         </div>
 
+        {/* Mode selector */}
+        <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
+          {([["buy","🏠 Buy a Home"],["refinance","🔄 Refinance"],["equity","💰 Use Equity"]] as [CalcMode,string][]).map(([m,l]) => (
+            <button key={m} className={`mode-btn${mode===m?" active":""}`} onClick={() => setMode(m)}>{l}</button>
+          ))}
+        </div>
+
         <div className="two-col">
-          {/* Inputs */}
-          <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e5e7eb", padding: 28, display: "flex", flexDirection: "column", gap: 20 }}>
-            <p style={{ fontSize: 12, fontWeight: 700, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.07em", margin: 0 }}>Loan details</p>
+          {/* LEFT — inputs */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
-            <div>
-              <label className="input-label">Home price</label>
-              <div style={{ position: "relative" }}>
-                <span style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "#9ca3af", fontWeight: 700 }}>$</span>
-                <input className="input-field" style={{ paddingLeft: 26 }} type="number" value={home}
-                  onChange={e => setHome(Number(e.target.value))} />
-              </div>
-            </div>
+            {/* Loan details */}
+            <div className="card">
+              <p className="section-title">Loan details</p>
 
-            <div>
-              <label className="input-label">Down payment</label>
-              <div style={{ position: "relative" }}>
-                <span style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "#9ca3af", fontWeight: 700 }}>$</span>
-                <input className="input-field" style={{ paddingLeft: 26 }} type="number" value={down}
-                  onChange={e => setDown(Number(e.target.value))} />
-              </div>
-              {home > 0 && (
-                <p style={{ fontSize: 12, color: "#6b7280", marginTop: 4 }}>
-                  {((down / home) * 100).toFixed(1)}% of home price · Loan: {fmt(principal)}
-                </p>
+              {mode === "buy" && (
+                <>
+                  <div className="field">
+                    <label className="lbl">Home price</label>
+                    <div className="inp-wrap"><span className="inp-pre">$</span>
+                      <input className="inp" style={{ paddingLeft: 24 }} type="number" value={home} onChange={e => setHome(Number(e.target.value))} />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <label className="lbl">Down payment</label>
+                    <div className="inp-wrap"><span className="inp-pre">$</span>
+                      <input className="inp" style={{ paddingLeft: 24 }} type="number" value={down} onChange={e => setDown(Number(e.target.value))} />
+                    </div>
+                    <p className="hint">{home > 0 ? `${((down/home)*100).toFixed(1)}% · Loan: ${fmt(home-down)}` : ""}{down/home < 0.2 ? " · PMI applies" : " · No PMI"}</p>
+                  </div>
+                </>
               )}
-            </div>
 
-            <div>
-              <label className="input-label">Interest rate (annual)</label>
-              <div style={{ position: "relative" }}>
-                <input className="input-field" style={{ paddingRight: 30 }} type="number" step={0.1} value={rate}
-                  onChange={e => setRate(Number(e.target.value))} />
-                <span style={{ position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", color: "#9ca3af", fontWeight: 700 }}>%</span>
-              </div>
-            </div>
-
-            <div>
-              <label className="input-label">Loan term</label>
-              {/* Quick select buttons */}
-              <div style={{ display: "flex", gap: 6, marginBottom: 10 }}>
-                {termOptions.map(t => (
-                  <button key={t.value} className={`term-btn${!useCustom && years === t.value ? " active" : ""}`}
-                    onClick={() => { setYears(t.value); setUseCustom(false); }}>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: !useCustom && years === t.value ? "#2563eb" : "#111" }}>{t.label}</div>
-                    <div style={{ fontSize: 10, color: !useCustom && years === t.value ? "#3b82f6" : "#9ca3af", marginTop: 2 }}>{t.desc}</div>
-                  </button>
-                ))}
-              </div>
-              {/* Custom input */}
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <div style={{ position: "relative", flex: 1 }}>
-                  <input className="input-field"
-                    style={{ paddingRight: 50, borderColor: useCustom ? "#2563eb" : "#e5e7eb" }}
-                    type="number" placeholder="Custom"
-                    value={customYears}
-                    onFocus={() => setUseCustom(true)}
-                    onChange={e => { setCustomYears(e.target.value); setUseCustom(true); }} />
-                  <span style={{ position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", color: "#9ca3af", fontSize: 13, fontWeight: 600 }}>years</span>
+              {mode === "refinance" && (
+                <div className="field">
+                  <label className="lbl">Current loan balance</label>
+                  <div className="inp-wrap"><span className="inp-pre">$</span>
+                    <input className="inp" style={{ paddingLeft: 24 }} type="number" value={balance} onChange={e => setBalance(Number(e.target.value))} />
+                  </div>
                 </div>
-                {useCustom && (
-                  <button onClick={() => { setUseCustom(false); setCustomYears(""); }}
-                    style={{ padding: "8px 12px", borderRadius: 8, border: "1px solid #e5e7eb", background: "#fff", fontSize: 12, color: "#6b7280", cursor: "pointer" }}>
-                    Clear
-                  </button>
-                )}
+              )}
+
+              {mode === "equity" && (
+                <>
+                  <div className="field">
+                    <label className="lbl">Current loan balance</label>
+                    <div className="inp-wrap"><span className="inp-pre">$</span>
+                      <input className="inp" style={{ paddingLeft: 24 }} type="number" value={balance} onChange={e => setBalance(Number(e.target.value))} />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <label className="lbl">Equity amount to use</label>
+                    <div className="inp-wrap"><span className="inp-pre">$</span>
+                      <input className="inp" style={{ paddingLeft: 24 }} type="number" value={equityUse} onChange={e => setEquityUse(Number(e.target.value))} />
+                    </div>
+                    <p className="hint">New loan total: {fmt(balance + equityUse)}</p>
+                  </div>
+                </>
+              )}
+
+              <div className="field">
+                <label className="lbl">Interest rate</label>
+                <div className="inp-wrap">
+                  <input className="inp" style={{ paddingRight: 28 }} type="number" step={0.1} value={rate} onChange={e => setRate(Number(e.target.value))} />
+                  <span className="inp-suf">%</span>
+                </div>
               </div>
-              {/* Term info */}
-              <div style={{ marginTop: 12, padding: "10px 14px", background: "#f8f9fb", borderRadius: 8, fontSize: 12, color: "#6b7280", lineHeight: 1.6 }}>
-                {actualYears === 30 && "30-year fixed: Most popular — lowest monthly payment, highest total interest."}
-                {actualYears === 15 && "15-year fixed: Higher monthly payment but saves significantly on interest."}
-                {actualYears === 10 && "10-year fixed: Fastest equity build, highest monthly payment."}
-                {actualYears === 20 && "20-year fixed: Good middle ground between payment and interest savings."}
-                {actualYears === 40 && "40-year loan: Lowest possible payment but non-qualified — higher rates apply."}
-                {![10,15,20,30,40].includes(actualYears) && actualYears > 0 && `Custom ${actualYears}-year term selected.`}
-                {actualYears === 5 && " Note: 5/1 ARM — fixed for 5 years, then adjusts annually."}
-                {actualYears === 7 && " Note: 7/1 ARM — fixed for 7 years, then adjusts annually."}
+
+              <div className="field" style={{ marginBottom: 0 }}>
+                <label className="lbl">Loan term</label>
+                <div style={{ display: "flex", gap: 5, marginBottom: 8 }}>
+                  {termOptions.map(t => (
+                    <button key={t.value} className={`term-btn${!useCustom && years===t.value?" active":""}`}
+                      onClick={() => { setYears(t.value); setUseCustom(false); }}>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: !useCustom && years===t.value ? "#2563eb" : "#111" }}>{t.label}</div>
+                      <div style={{ fontSize: 10, color: "#9ca3af" }}>{t.desc}</div>
+                    </button>
+                  ))}
+                </div>
+                <div className="inp-wrap">
+                  <input className="inp" style={{ paddingRight: 50 }} type="number" placeholder="Custom years"
+                    value={customYears} onFocus={() => setUseCustom(true)}
+                    onChange={e => { setCustomYears(e.target.value); setUseCustom(true); }} />
+                  <span className="inp-suf">yrs</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Start date */}
+            <div className="card">
+              <p className="section-title">Start date</p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <div>
+                  <label className="lbl">Month</label>
+                  <select className="inp" value={startMonth} onChange={e => setStartMonth(Number(e.target.value))}>
+                    {months.map((m, i) => <option key={i} value={i}>{m}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="lbl">Year</label>
+                  <select className="inp" value={startYear} onChange={e => setStartYear(Number(e.target.value))}>
+                    {Array.from({length: 10}, (_, i) => new Date().getFullYear() + i).map(y => (
+                      <option key={y} value={y}>{y}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* Additional costs */}
+            <div className="card">
+              <p className="section-title">Monthly costs (optional)</p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <div>
+                  <label className="lbl">Property tax/yr</label>
+                  <div className="inp-wrap"><span className="inp-pre">$</span>
+                    <input className="inp" style={{ paddingLeft: 24 }} type="number" value={propTax} onChange={e => setPropTax(Number(e.target.value))} />
+                  </div>
+                </div>
+                <div>
+                  <label className="lbl">Home insurance/yr</label>
+                  <div className="inp-wrap"><span className="inp-pre">$</span>
+                    <input className="inp" style={{ paddingLeft: 24 }} type="number" value={insurance} onChange={e => setInsurance(Number(e.target.value))} />
+                  </div>
+                </div>
+                {mode === "buy" && down/home < 0.2 && (
+                  <div>
+                    <label className="lbl">PMI rate</label>
+                    <div className="inp-wrap">
+                      <input className="inp" style={{ paddingRight: 28 }} type="number" step={0.1} value={pmi} onChange={e => setPmi(Number(e.target.value))} />
+                      <span className="inp-suf">%</span>
+                    </div>
+                  </div>
+                )}
+                <div>
+                  <label className="lbl">Monthly HOA</label>
+                  <div className="inp-wrap"><span className="inp-pre">$</span>
+                    <input className="inp" style={{ paddingLeft: 24 }} type="number" value={hoa} onChange={e => setHoa(Number(e.target.value))} />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Results */}
-          <div className="results-panel">
-            <div style={{ background: "#2563eb", borderRadius: 16, padding: "28px 24px", textAlign: "center", marginBottom: 12 }}>
-              <p style={{ fontSize: 11, color: "rgba(255,255,255,0.65)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>Monthly payment</p>
-              <p style={{ fontSize: 56, fontWeight: 800, color: "#fff", lineHeight: 1, marginBottom: 6 }}>{fmt(payment)}</p>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.65)" }}>{rate}% · {actualYears} year{actualYears !== 1 ? "s" : ""}</p>
+          {/* RIGHT — results */}
+          <div className="results-col" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+
+            {/* Main result */}
+            <div style={{ background: "#2563eb", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
+              <p style={{ fontSize: 11, color: "rgba(255,255,255,0.65)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>Total monthly payment</p>
+              <p style={{ fontSize: 52, fontWeight: 800, color: "#fff", lineHeight: 1, marginBottom: 4 }}>{fmt2(totalMonthly)}</p>
+              <p style={{ fontSize: 12, color: "rgba(255,255,255,0.6)" }}>{rate}% · {actualYears} years · starts {startStr}</p>
             </div>
 
-            <div className="result-row">
-              <span style={{ fontSize: 14, color: "#6b7280" }}>Loan amount</span>
-              <span style={{ fontSize: 17, fontWeight: 700, color: "#111" }}>{fmt(principal)}</span>
-            </div>
-            <div className="result-row">
-              <span style={{ fontSize: 14, color: "#6b7280" }}>Total payment</span>
-              <span style={{ fontSize: 17, fontWeight: 700, color: "#111" }}>{fmt(total)}</span>
-            </div>
-            <div className="result-row">
-              <span style={{ fontSize: 14, color: "#6b7280" }}>Total interest</span>
-              <span style={{ fontSize: 17, fontWeight: 700, color: "#dc2626" }}>{fmt(interest)}</span>
-            </div>
-            <div className="result-row" style={{ marginBottom: 12 }}>
-              <span style={{ fontSize: 14, color: "#6b7280" }}>Down payment</span>
-              <span style={{ fontSize: 17, fontWeight: 700, color: "#111" }}>{fmt(down)}</span>
+            {/* Payment breakdown */}
+            <div className="card">
+              <p className="section-title">Payment breakdown</p>
+              {[
+                ["Principal & interest", fmt2(basePmt), "#2563eb"],
+                ["Property tax", fmt2(monthlyTax), "#374151"],
+                ["Home insurance", fmt2(monthlyIns), "#374151"],
+                ...(monthlyPMI > 0 ? [["PMI", fmt2(monthlyPMI), "#f59e0b"]] : []),
+                ...(monthlyHOA > 0 ? [["HOA", fmt2(monthlyHOA), "#374151"]] : []),
+              ].map(([l, v, c]) => (
+                <div key={String(l)} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid #f3f4f6", fontSize: 14 }}>
+                  <span style={{ color: "#6b7280" }}>{l}</span>
+                  <span style={{ fontWeight: 700, color: String(c) }}>{v}</span>
+                </div>
+              ))}
             </div>
 
-            <div style={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 12, padding: "16px 20px" }}>
-              <p style={{ fontSize: 13, fontWeight: 600, color: "#374151", marginBottom: 10 }}>Principal vs interest</p>
-              <div style={{ height: 10, borderRadius: 6, background: "#e5e7eb", overflow: "hidden", marginBottom: 8 }}>
-                <div style={{ height: "100%", width: total > 0 ? `${(principal / total * 100).toFixed(0)}%` : "0%", background: "#2563eb", borderRadius: 6 }} />
+            {/* Loan summary */}
+            <div className="card">
+              <p className="section-title">Loan summary</p>
+              {[
+                ["Loan amount", fmt(principal)],
+                ["Total interest", fmt(interest)],
+                ["Total cost", fmt(total)],
+              ].map(([l, v]) => (
+                <div key={String(l)} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid #f3f4f6", fontSize: 14 }}>
+                  <span style={{ color: "#6b7280" }}>{l}</span>
+                  <span style={{ fontWeight: 700, color: "#111" }}>{v}</span>
+                </div>
+              ))}
+              {/* Progress bar */}
+              <div style={{ marginTop: 12 }}>
+                <div style={{ height: 8, borderRadius: 4, background: "#e5e7eb", overflow: "hidden", marginBottom: 6 }}>
+                  <div style={{ height: "100%", width: total > 0 ? `${(principal/total*100).toFixed(0)}%` : "0%", background: "#2563eb", borderRadius: 4 }} />
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11 }}>
+                  <span style={{ color: "#2563eb", fontWeight: 600 }}>Principal {total > 0 ? `${(principal/total*100).toFixed(0)}%` : ""}</span>
+                  <span style={{ color: "#dc2626", fontWeight: 600 }}>Interest {total > 0 ? `${(interest/total*100).toFixed(0)}%` : ""}</span>
+                </div>
               </div>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "#6b7280" }}>
-                <span style={{ color: "#2563eb", fontWeight: 600 }}>Principal {total > 0 ? `${(principal / total * 100).toFixed(0)}%` : ""}</span>
-                <span style={{ color: "#dc2626", fontWeight: 600 }}>Interest {total > 0 ? `${(interest / total * 100).toFixed(0)}%` : ""}</span>
+            </div>
+
+            {/* Key dates & payments */}
+            <div className="card">
+              <p className="section-title">Key dates & payment options</p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                {[
+                  ["Start date", startStr],
+                  ["Payoff date", payoffStr],
+                  ["Bi-weekly payment", fmt2(biWeekly)],
+                  ["Annual payment", fmt(basePmt * 12)],
+                ].map(([l, v]) => (
+                  <div key={String(l)} style={{ background: "#f8f9fb", borderRadius: 8, padding: "12px 14px" }}>
+                    <p style={{ fontSize: 11, color: "#9ca3af", fontWeight: 600, marginBottom: 3 }}>{l}</p>
+                    <p style={{ fontSize: 14, fontWeight: 700, color: "#111" }}>{v}</p>
+                  </div>
+                ))}
               </div>
+              <p style={{ fontSize: 11, color: "#9ca3af", marginTop: 10, lineHeight: 1.5 }}>
+                💡 Bi-weekly payments can pay off your loan 4-6 years early and save thousands in interest.
+              </p>
             </div>
           </div>
         </div>
