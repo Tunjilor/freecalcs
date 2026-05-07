@@ -194,8 +194,8 @@ export default function TaxCalculator() {
     </div>
   );
 
-  const Section = ({ title, children: ch }: { title: string; children: React.ReactNode }) => (
-    <div style={{ marginBottom: 16 }}>
+  const Section = ({ title, id, children: ch }: { title: string; id?: string; children: React.ReactNode }) => (
+    <div id={id} style={{ marginBottom: 16 }}>
       <p style={{ fontSize: 11, fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '.08em', margin: '0 0 10px', paddingBottom: 6, borderBottom: `1px solid ${C.border}` }}>{title}</p>
       {ch}
     </div>
@@ -209,7 +209,8 @@ export default function TaxCalculator() {
   }).filter(b => b.lo < Math.max(0, res.taxableIncome - parseMoney(ltcg))) : [];
 
   return (
-    <div style={{ fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif', background: C.light, minHeight: '100vh' }}>
+    <div style={{ fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif', background: C.light, minHeight: '100vh', scrollBehavior: 'smooth' }}>
+      <style>{`html{scroll-behavior:smooth;} [id]{scroll-margin-top:70px;}`}</style>
 
       {/* Header */}
       <div style={{ background: `linear-gradient(135deg,${C.darkBlue},${C.blue})`, color: C.white, padding: '32px 16px 40px' }}>
@@ -218,8 +219,19 @@ export default function TaxCalculator() {
           <h1 style={{ fontSize: 28, fontWeight: 700, margin: '12px 0 8px', color: C.white }}>Federal Income Tax Calculator 2026</h1>
           <p style={{ color: '#93c5fd', fontSize: 14, margin: '0 0 16px' }}>Estimate your 2026 federal tax bill, refund, bracket breakdown, and effective rate. Includes self-employment tax, capital gains, and credits.</p>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            {['2026 Tax Brackets','Capital Gains','Self-Employment Tax','Child Tax Credit','Refund Estimator','Bracket Visualizer'].map(t => (
-              <span key={t} style={{ background: 'rgba(255,255,255,.15)', fontSize: 12, padding: '4px 12px', borderRadius: 20, color: C.white }}>{t}</span>
+            {[
+              ['2026 Tax Brackets','#brackets','brackets'],
+              ['Capital Gains','#capital-gains',null],
+              ['Self-Employment Tax','#self-employment',null],
+              ['Child Tax Credit','#credits',null],
+              ['Refund Estimator','#refund',null],
+              ['Bracket Visualizer','#brackets','brackets'],
+            ].map(([t, href, switchTab]) => (
+              <a key={t as string} href={href as string}
+                onClick={() => { if (switchTab) setTab(switchTab as 'summary'|'brackets'|'planning'); }}
+                style={{ background:'rgba(255,255,255,.15)', fontSize:12, padding:'4px 12px', borderRadius:20, color:C.white, textDecoration:'none', cursor:'pointer', transition:'background .15s' }}
+                onMouseEnter={e => (e.currentTarget.style.background='rgba(255,255,255,.28)')}
+                onMouseLeave={e => (e.currentTarget.style.background='rgba(255,255,255,.15)')}>{t}</a>
             ))}
           </div>
         </div>
@@ -252,10 +264,10 @@ export default function TaxCalculator() {
                 </div>
               </div>
 
-              <Section title="Income">
+              <Section title="Income" id="capital-gains">
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   <div><label style={lbl}>W-2 Wages / Salary</label><MoneyIn value={wages} onChange={setWages} /></div>
-                  <div><label style={lbl}>Self-Employment Income</label><MoneyIn value={selfEmp} onChange={setSelfEmp} /></div>
+                  <div id="self-employment"><label style={lbl}>Self-Employment Income</label><MoneyIn value={selfEmp} onChange={setSelfEmp} /></div>
                   <div><label style={lbl}>Interest Income</label><MoneyIn value={interest} onChange={setInterest} /></div>
                   <div><label style={lbl}>Ordinary Dividends</label><MoneyIn value={dividends} onChange={setDividends} /></div>
                   <div>
@@ -292,7 +304,7 @@ export default function TaxCalculator() {
                 )}
               </Section>
 
-              <Section title="Credits &amp; Withholding">
+              <Section title="Credits &amp; Withholding" id="credits">
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   <div>
                     <label style={lbl}>Qualifying Children under 17 <span style={{ fontWeight: 400, color: '#9ca3af', textTransform: 'none' }}>($2,200/child credit)</span></label>
@@ -374,7 +386,7 @@ export default function TaxCalculator() {
                       </div>
                     ))}
                     {res.withheld > 0 && (
-                      <div style={{ marginTop: 12, padding: '12px 14px', borderRadius: 10, background: res.refundOrOwed >= 0 ? '#f0fdf4' : '#fef2f2', border: `1px solid ${res.refundOrOwed >= 0 ? '#86efac' : '#fca5a5'}` }}>
+                      <div id="refund" style={{ marginTop: 12, padding: '12px 14px', borderRadius: 10, background: res.refundOrOwed >= 0 ? '#f0fdf4' : '#fef2f2', border: `1px solid ${res.refundOrOwed >= 0 ? '#86efac' : '#fca5a5'}` }}>
                         <p style={{ fontSize: 13, fontWeight: 700, color: res.refundOrOwed >= 0 ? '#166534' : '#991b1b', margin: '0 0 4px' }}>
                           {res.refundOrOwed >= 0 ? 'Estimated Refund' : 'Estimated Amount Owed'}
                         </p>
@@ -389,7 +401,7 @@ export default function TaxCalculator() {
 
                 {/* BRACKETS TAB */}
                 {tab === 'brackets' && (
-                  <div style={{ ...card }}>
+                  <div id="brackets" style={{ ...card, scrollMarginTop: 70 }}>
                     <p style={{ fontSize: 12, fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '.05em', margin: '0 0 12px' }}>2026 Tax Bracket Breakdown</p>
                     <p style={{ fontSize: 12, color: C.gray, margin: '0 0 14px' }}>Only dollars within each bracket are taxed at that rate. Your {(res.marginalRate * 100).toFixed(0)}% marginal rate applies ONLY to income above {fmtDInt((BRACKETS[filing] || BRACKETS.single).find(b => b[2] === res.marginalRate)?.[0] || 0)}.</p>
                     {(BRACKETS[filing] || BRACKETS.single).map(([lo, hi, rate], i) => {
