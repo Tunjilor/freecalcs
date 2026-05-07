@@ -1,4 +1,4 @@
-  'use client';
+'use client';
 import { useState, useEffect, useCallback } from 'react';
 
 const C = { blue:'#2563eb', darkBlue:'#1e3a5f', gray:'#6b7280', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc', text:'#111827' };
