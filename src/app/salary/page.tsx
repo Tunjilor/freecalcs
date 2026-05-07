@@ -423,7 +423,7 @@ export default function SalaryCalculator() {
       <div className="max-w-5xl mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
 
-          {/* ── LEFT: Inputs ──────────────────────────────────────────────── */}
+          {/* LEFT: Inputs */}
           <div className="lg:col-span-2 space-y-4">
 
             {/* Mode toggle */}
@@ -503,7 +503,7 @@ export default function SalaryCalculator() {
                 <label className={label}>Pay Frequency</label>
                 <select className={inp} value={payFreq} onChange={e => setPayFreq(e.target.value)}>
                   {Object.entries(PAY_FREQ).map(([k, v]) => (
-                    <option key={k} value={k}>{v.label} ({v.periods}×/yr)</option>
+                    <option key={k} value={k}>{v.label} ({v.periods}x/yr)</option>
                   ))}
                 </select>
               </div>
@@ -562,7 +562,7 @@ export default function SalaryCalculator() {
 
           </div>
 
-          {/* ── RIGHT: Results ─────────────────────────────────────────────── */}
+          {/* RIGHT: Results */}
           <div className="lg:col-span-3 space-y-4">
 
             {/* Big take-home card */}
@@ -600,7 +600,7 @@ export default function SalaryCalculator() {
               ))}
             </div>
 
-            {/* ── RESULTS TAB ── */}
+            {/* RESULTS TAB */}
             {activeTab === 'results' && result && (
               <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
                 <div className="flex flex-col sm:flex-row gap-4 items-start">
@@ -656,7 +656,7 @@ export default function SalaryCalculator() {
               </div>
             )}
 
-            {/* ── COMPARE TAB ── */}
+            {/* COMPARE TAB */}
             {activeTab === 'compare' && (
               <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 space-y-4">
                 <p className="text-sm text-gray-500">Compare two job offers or scenarios side-by-side.</p>
@@ -731,7 +731,7 @@ export default function SalaryCalculator() {
               </div>
             )}
 
-            {/* ── TIPS TAB ── */}
+            {/* TIPS TAB */}
             {activeTab === 'tips' && result && (
               <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 space-y-4">
                 <h3 className="font-semibold text-gray-800">💡 Personalized Tax-Saving Tips</h3>
@@ -769,7 +769,7 @@ export default function SalaryCalculator() {
                     <div>
                       <p className="text-sm font-semibold text-yellow-800">You live in a no-income-tax state!</p>
                       <p className="text-xs text-yellow-700 mt-0.5">
-                        {STATE_TAXES[state]?.name} has no state income tax — that's a significant advantage vs. high-tax states like CA or NY.
+                        {STATE_TAXES[state]?.name} has no state income tax. That is a significant advantage vs. high-tax states like CA or NY.
                       </p>
                     </div>
                   </div>
@@ -792,8 +792,8 @@ export default function SalaryCalculator() {
                     <p className="text-sm font-semibold text-purple-800">Marginal vs. Effective Rate</p>
                     <p className="text-xs text-purple-700 mt-0.5">
                       Your marginal (highest) rate is {(result.marginalRate * 100).toFixed(0)}%, but your effective rate is only {(result.effectiveRate * 100).toFixed(1)}%.
-                      This means your average dollar is taxed at {(result.effectiveRate * 100).toFixed(1)}% — not {(result.marginalRate * 100).toFixed(0)}%.
-                      The US uses a progressive system — only dollars above each threshold are taxed at the higher rate.
+                      This means your average dollar is taxed at {(result.effectiveRate * 100).toFixed(1)}%, not {(result.marginalRate * 100).toFixed(0)}%.
+                      The US uses a progressive system. Only dollars above each threshold are taxed at the higher rate.
                     </p>
                   </div>
                 )}
@@ -828,21 +828,21 @@ export default function SalaryCalculator() {
             {/* Disclaimer */}
             <p className="text-xs text-gray-400 px-1">
               Estimates based on 2026 IRS tax rates. Actual withholding may vary based on W-4 elections, 
-              local taxes, and employer-specific factors. Not tax advice — consult a tax professional.
+              local taxes, and employer-specific factors. Not tax advice. Consult a tax professional.
             </p>
           </div>
         </div>
 
-        {/* ── FAQ / SEO Section ─────────────────────────────────────────── */}
+        {/* FAQ / SEO Section */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
             <h2 className="text-lg font-bold text-gray-800 mb-4">How is Take-Home Pay Calculated?</h2>
             <div className="space-y-3 text-sm text-gray-600">
-              <p><strong className="text-gray-800">1. Start with Gross Pay</strong> — your salary or hourly rate × hours worked.</p>
-              <p><strong className="text-gray-800">2. Subtract Pre-Tax Deductions</strong> — 401(k), HSA, and health insurance reduce your taxable income.</p>
-              <p><strong className="text-gray-800">3. Calculate Federal Tax</strong> — using 2026 IRS progressive brackets (10%–37%).</p>
-              <p><strong className="text-gray-800">4. Calculate State Tax</strong> — varies by state (0% in TX, FL, NV to 13.3% in CA).</p>
-              <p><strong className="text-gray-800">5. Subtract FICA</strong> — Social Security (6.2% up to $184,500) + Medicare (1.45%).</p>
+              <p><strong className="text-gray-800">1. Start with Gross Pay</strong> - your salary or hourly rate x hours worked.</p>
+              <p><strong className="text-gray-800">2. Subtract Pre-Tax Deductions</strong> - 401(k), HSA, and health insurance reduce your taxable income.</p>
+              <p><strong className="text-gray-800">3. Calculate Federal Tax</strong> - using 2026 IRS progressive brackets (10%-37%).</p>
+              <p><strong className="text-gray-800">4. Calculate State Tax</strong> - varies by state (0% in TX, FL, NV to 13.3% in CA).</p>
+              <p><strong className="text-gray-800">5. Subtract FICA</strong> - Social Security (6.2% up to $184,500) + Medicare (1.45%).</p>
               <p><strong className="text-gray-800">6. Net Pay</strong> = Gross − All Taxes − All Deductions.</p>
             </div>
           </div>
