@@ -138,7 +138,14 @@ export default function SalaryCalculator(){
   const MoneyIn=({value,onChange}:{value:string;onChange:(v:string)=>void})=>(
     <div style={inputWrapStyle}>
       <span style={prefixStyle}>$</span>
-      <input style={{...inputStyle,paddingLeft:28}} type="text" inputMode="numeric" value={value} onChange={e=>onChange(fmtInput(e.target.value))}/>
+      <input style={{...inputStyle,paddingLeft:28}} type="text" inputMode="numeric" value={value} onChange={e => {
+          const raw = e.target.value.replace(/[^0-9.]/g, '');
+          onChange(raw);
+        }}
+        onBlur={e => {
+          const raw = e.target.value.replace(/[^0-9.]/g, '');
+          if (raw) onChange(fmtInput(raw));
+        }}/>
     </div>
   );
 
