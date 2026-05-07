@@ -88,7 +88,6 @@ interface TaxResult {
   afterTax: number;
   withheld: number;
   refundOrOwed: number;
-  brackets: { rate: number; min: number; max: number; taxable: number; tax: number }[];
 }
 
 function compute(
