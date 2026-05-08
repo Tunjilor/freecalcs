@@ -55,9 +55,14 @@ function calcAge(dob:Date, ref:Date): AgeResult {
 
   // Zodiac
   const m=dob.getMonth()+1, d=dob.getDate();
-  const zodiacMap = [[1,20,'Aquarius'],[2,19,'Pisces'],[3,21,'Aries'],[4,20,'Taurus'],[5,21,'Gemini'],[6,21,'Cancer'],[7,23,'Leo'],[8,23,'Virgo'],[9,23,'Libra'],[10,23,'Scorpio'],[11,22,'Sagittarius'],[12,22,'Capricorn']];
+  const zodiacRanges:[number,number,string][] = [[1,20,'Aquarius'],[2,19,'Pisces'],[3,21,'Aries'],[4,20,'Taurus'],[5,21,'Gemini'],[6,21,'Cancer'],[7,23,'Leo'],[8,23,'Virgo'],[9,23,'Libra'],[10,23,'Scorpio'],[11,22,'Sagittarius'],[12,22,'Capricorn']];
   let zodiac='Capricorn';
-  for(const [mo,dy,sign] of zodiacMap){ if(m===mo&&d>=dy){ zodiac=sign as string; break; } if(m<mo){ zodiac=zodiacMap[zodiacMap.indexOf([mo,dy,sign])-1]?.[2] as string||'Capricorn'; break; } }
+  for(let zi=0;zi<zodiacRanges.length;zi++){
+    const [zmo,zdy,zsign]=zodiacRanges[zi];
+    if(m<zmo){ zodiac=zi>0?zodiacRanges[zi-1][2]:'Capricorn'; break; }
+    if(m===zmo&&d>=zdy){ zodiac=zsign; break; }
+    if(zi===zodiacRanges.length-1){ zodiac=zsign; }
+  }
 
   // Chinese zodiac
   const animals=['Rat','Ox','Tiger','Rabbit','Dragon','Snake','Horse','Goat','Monkey','Rooster','Dog','Pig'];
