@@ -120,7 +120,7 @@ export default function SalaryCalculator(){
   const [roth,setRoth]=useState<number|string>('0');
   const [other,setOther]=useState<number|string>('0');
   const [showDed,setShowDed]=useState(false);
-  const [sal2,setSal2]=useState('90,000');
+  const [sal2,setSal2]=useState<number|string>('90,000');
   const [state2,setState2]=useState('CA');
   const [res,setRes]=useState<Res|null>(null);
   const [res2,setRes2]=useState<Res|null>(null);
