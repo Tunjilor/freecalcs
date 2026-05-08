@@ -50,7 +50,7 @@ function compute(mode:string,sal:string,hrly:string,hrs:string,ot:string,bonus:s
   let base=0;
   if(mode==='salary'){base=parseFloat(sal)||0;}
   else{const h=parseFloat(hrly)||0;const w=parseFloat(hrs)||40;const o=parseFloat(ot)||0;base=(h*w+o*h*1.5)*52;}
-  const gross=base+bonus;
+  const gross=base+(parseFloat(bonus)||0);
   const k=parseMoney(k401),hs=parseMoney(hsa),he=parseMoney(health),fs=parseMoney(fsa);
   const preTax=k+hs+he+fs;
   const ficaBase=Math.max(0,gross-hs-he);
