@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import CompoundInterestCalculator from './calculator';
 
 export const metadata: Metadata = {
