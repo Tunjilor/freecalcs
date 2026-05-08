@@ -219,7 +219,7 @@ export default function SalaryCalculator(){
                     </div>
                     {hrly>0&&(
                       <div style={{fontSize:12,color:C.blue,background:'#eff6ff',borderRadius:8,padding:'6px 10px'}}>
-                        approx. {fmtD((hrly*(parseFloat(hrs)||40))*52)}/yr base
+                        approx. {fmtD((hrly*(parseFloat(String(hrs))||40))*52)}/yr base
                       </div>
                     )}
                   </div>
