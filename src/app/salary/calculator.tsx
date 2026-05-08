@@ -108,8 +108,8 @@ export default function SalaryCalculator(){
   const [sal,setSal]=useState(75000);
   const [hrly,setHrly]=useState(25);
   const [hrs,setHrs]=useState(40);
-  const [otHrs,setOtHrs]=useState('0');
-  const [bonus,setBonus]=useState('0');
+  const [otHrs,setOtHrs]=useState<number|string>('0');
+  const [bonus,setBonus]=useState<number|string>('0');
   const [filing,setFiling]=useState('single');
   const [stateVal,setStateVal]=useState('TX');
   const [freq,setFreq]=useState('biweekly');
@@ -117,8 +117,8 @@ export default function SalaryCalculator(){
   const [hsa,setHsa]=useState('0');
   const [health,setHealth]=useState('0');
   const [fsa,setFsa]=useState('0');
-  const [roth,setRoth]=useState('0');
-  const [other,setOther]=useState('0');
+  const [roth,setRoth]=useState<number|string>('0');
+  const [other,setOther]=useState<number|string>('0');
   const [showDed,setShowDed]=useState(false);
   const [sal2,setSal2]=useState('90,000');
   const [state2,setState2]=useState('CA');
