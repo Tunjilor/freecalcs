@@ -139,7 +139,7 @@ export default function SalaryCalculator(){
     <div style={{position:'relative'}}>
       <span style={{position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'#9ca3af',fontSize:14,pointerEvents:'none'}}>$</span>
       <input
-        style={{...inp,paddingLeft:28}}
+        style={{...inputStyle,paddingLeft:28,color:'#111827',fontWeight:500}}
         type="number"
         inputMode="numeric"
         min="0"
