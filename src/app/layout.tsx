@@ -3,15 +3,15 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.freecalcs.io'),
-  title: { default: 'Free Calculators -- freecalcs.io', template: '%s | freecalcs.io' },
+  title: { default: 'Free Calculators -- freecalcs.io', template: '%s' },
   description: 'Free online calculators for mortgage, salary, BMI, taxes, compound interest and more. Fast, accurate, no sign-up required.',
   keywords: ['free calculator','mortgage calculator','salary calculator','BMI calculator','tax calculator','compound interest calculator','TDEE calculator','loan calculator'],
   authors: [{ name: 'freecalcs.io' }],
   creator: 'freecalcs.io',
   publisher: 'freecalcs.io',
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
-  openGraph: { type: 'website', locale: 'en_US', url: 'https://www.freecalcs.io', siteName: 'freecalcs.io', title: 'Free Calculators -- freecalcs.io', description: 'Free online calculators for mortgage, salary, BMI, taxes, compound interest and more.' },
-  twitter: { card: 'summary_large_image', site: '@freecalcsio', title: 'Free Calculators -- freecalcs.io', description: 'Free online calculators for mortgage, salary, BMI, taxes, compound interest and more.' },
+  openGraph: { type: 'website', locale: 'en_US', url: 'https://www.freecalcs.io', siteName: 'freecalcs.io' },
+  twitter: { card: 'summary_large_image', site: '@freecalcsio' },
 };
 
 const CALCS = [
