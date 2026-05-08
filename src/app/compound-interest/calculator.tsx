@@ -1,6 +1,7 @@
 // @ts-nocheck
 'use client';
 import { useState, useEffect, useCallback } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 const C = { blue:'#2563eb', darkBlue:'#1e3a5f', gray:'#6b7280', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc', text:'#111827' };
 const card: React.CSSProperties = { background:C.white, borderRadius:16, padding:20, boxShadow:'0 1px 3px rgba(0,0,0,.08)', border:`1px solid ${C.border}`, marginBottom:16 };
@@ -93,6 +94,35 @@ export default function CompoundInterestCalculator(){
   interface Result { finalBalance:number; totalPrincipal:number; totalContributions:number; totalInterest:number; rows:YearRow[]; rule72:number; }
   const [res, setRes] = useState<Result|null>(null);
   const [res2, setRes2] = useState<Result|null>(null);
+  const [copied, setCopied] = useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Load from URL params on mount
+  useEffect(() => {
+    const p = searchParams.get('principal'); if (p) setPrincipal(p);
+    const r = searchParams.get('rate'); if (r) setRate(r);
+    const y = searchParams.get('years'); if (y) setYears(y);
+    const f = searchParams.get('freq'); if (f) setCompFreq(f);
+    const c = searchParams.get('contrib'); if (c) setContrib(c);
+    const cf = searchParams.get('contribFreq'); if (cf) setContribFreq(cf);
+    const inf = searchParams.get('inflation'); if (inf === 'true') setInflation(true);
+    const ir = searchParams.get('inflationRate'); if (ir) setInflRate(ir);
+  }, []);
+
+  // Share function
+  const shareCalc = () => {
+    const params = new URLSearchParams({
+      principal, rate, years, freq: compoundFreq, contrib, contribFreq,
+      ...(inflation ? { inflation: 'true', inflationRate } : {})
+    });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
 
   const run = useCallback(()=>{
     const p=parseFloat(principal.replace(/,/g,''))||0;
