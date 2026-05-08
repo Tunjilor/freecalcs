@@ -152,7 +152,7 @@ export default function LoanCalculator(){
                 <label style={lbl}>Extra Monthly Payment</label>
                 <div style={{position:'relative'}}>
                   <span style={{position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'#9ca3af',fontSize:14,pointerEvents:'none'}}>$</span>
-                  <input style={{...inp,paddingLeft:28}} type="number" min="0" value={extra} onChange={e=>setExtra(e.target.value)}/>
+                  <input style={{...inp,paddingLeft:28}} type="number" min="0" value={extra||''} onChange={e=>setExtra(e.target.value)}/>
                 </div>
               </div>
 
@@ -160,7 +160,7 @@ export default function LoanCalculator(){
                 <label style={lbl}>Origination Fee</label>
                 <div style={{position:'relative'}}>
                   <span style={{position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'#9ca3af',fontSize:14,pointerEvents:'none'}}>$</span>
-                  <input style={{...inp,paddingLeft:28}} type="number" min="0" value={origFee} onChange={e=>setOrigFee(e.target.value)}/>
+                  <input style={{...inp,paddingLeft:28}} type="number" min="0" value={origFee||''} onChange={e=>setOrigFee(e.target.value)}/>
                 </div>
               </div>
             </div>

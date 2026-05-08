@@ -81,7 +81,7 @@ export default function RentVsBuy(){
         <input
           style={{...inp, paddingLeft:prefix?28:12, paddingRight:suffix?36:12}}
           type="number" min={min} max={max} step={step||1}
-          value={value}
+          value={value||''}
           onChange={e=>onChange(parseFloat(e.target.value)||0)}
         />
         {suffix&&<span style={{position:'absolute',right:12,top:'50%',transform:'translateY(-50%)',color:'#9ca3af',fontSize:14,pointerEvents:'none'}}>{suffix}</span>}

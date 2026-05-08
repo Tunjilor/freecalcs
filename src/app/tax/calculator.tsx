@@ -161,7 +161,7 @@ export default function TaxCalculator() {
   const [useStd, setUseStd]       = useState(true);
 
   // Income
-  const [wages, setWages]         = useState('75,000');
+  const [wages, setWages]         = useState(75000);
   const [selfEmp, setSelfEmp]     = useState('0');
   const [interest, setInterest]   = useState('0');
   const [dividends, setDividends] = useState('0');
@@ -186,7 +186,7 @@ export default function TaxCalculator() {
 
   useEffect(() => { run(); }, [run]);
 
-  const MoneyIn = ({ value, onChange, placeholder = '0' }: { value: string; onChange: (v: string) => void; placeholder?: string }) => (
+  const MoneyIn = ({ value, onChange, placeholder = '0' }: { value: string|number; onChange: (v: string) => void; placeholder?: string }) => (
     <div style={{ position: 'relative' }}>
       <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', fontSize: 14, pointerEvents: 'none' }}>$</span>
       <input
@@ -195,7 +195,7 @@ export default function TaxCalculator() {
         inputMode="numeric"
         min="0"
         placeholder={placeholder}
-        value={value.replace(/,/g,'')||''}
+        value={value||''}
         onChange={e => {
           const raw = e.target.value.replace(/[^0-9.]/g, '');
           onChange(raw);

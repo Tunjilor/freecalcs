@@ -48,9 +48,9 @@ function calcFed(income:number,filing:string):number{
 }
 function compute(mode:string,sal:string,hrly:string,hrs:string,ot:string,bonus:string,filing:string,state:string,k401:string,hsa:string,health:string,fsa:string,roth:string,other:string):Res{
   let base=0;
-  if(mode==='salary'){base=parseMoney(sal);}
-  else{const h=parseMoney(hrly);const w=parseFloat(hrs)||40;const o=parseFloat(ot)||0;base=(h*w+o*h*1.5)*52;}
-  const gross=base+parseMoney(bonus);
+  if(mode==='salary'){base=sal;}
+  else{const h=hrly;const w=parseFloat(hrs)||40;const o=parseFloat(ot)||0;base=(h*w+o*h*1.5)*52;}
+  const gross=base+bonus;
   const k=parseMoney(k401),hs=parseMoney(hsa),he=parseMoney(health),fs=parseMoney(fsa);
   const preTax=k+hs+he+fs;
   const ficaBase=Math.max(0,gross-hs-he);
@@ -105,9 +105,9 @@ const btnBase:React.CSSProperties={flex:1,padding:'10px 0',fontSize:14,fontWeigh
 export default function SalaryCalculator(){
   const [mode,setMode]=useState<'salary'|'hourly'>('salary');
   const [tab,setTab]=useState<'results'|'compare'|'tips'>('results');
-  const [sal,setSal]=useState('75,000');
-  const [hrly,setHrly]=useState('25.00');
-  const [hrs,setHrs]=useState('40');
+  const [sal,setSal]=useState(75000);
+  const [hrly,setHrly]=useState(25);
+  const [hrs,setHrs]=useState(40);
   const [otHrs,setOtHrs]=useState('0');
   const [bonus,setBonus]=useState('0');
   const [filing,setFiling]=useState('single');
@@ -135,7 +135,7 @@ export default function SalaryCalculator(){
   const pp=(n:number)=>n/periods;
   const stateSorted=Object.entries(STATES).sort((a,b)=>a[1].name.localeCompare(b[1].name));
 
-  const MoneyIn=({value,onChange,placeholder='0'}:{value:string;onChange:(v:string)=>void;placeholder?:string})=>(
+  const MoneyIn=({value,onChange,placeholder='e.g. 75000'}:{value:number|string;onChange:(v:number)=>void;placeholder?:string})=>(
     <div style={{position:'relative'}}>
       <span style={{position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'#9ca3af',fontSize:14,pointerEvents:'none'}}>$</span>
       <input
@@ -144,11 +144,8 @@ export default function SalaryCalculator(){
         inputMode="numeric"
         min="0"
         placeholder={placeholder}
-        value={value.replace(/,/g,'')||''}
-        onChange={e=>{
-          const raw=e.target.value.replace(/[^0-9.]/g,'');
-          onChange(raw);
-        }}
+        value={value||''}
+        onChange={e=>onChange(parseFloat(e.target.value)||0)}
       />
     </div>
   );
@@ -220,9 +217,9 @@ export default function SalaryCalculator(){
                       <div><label style={labelStyle}>Hrs/Week</label><input style={inputStyle} type="number" min="0" max="80" value={hrs} onChange={e=>setHrs(e.target.value)}/></div>
                       <div><label style={labelStyle}>OT Hrs/Wk</label><input style={inputStyle} type="number" min="0" max="40" value={otHrs} onChange={e=>setOtHrs(e.target.value)}/></div>
                     </div>
-                    {parseMoney(hrly)>0&&(
+                    {hrly>0&&(
                       <div style={{fontSize:12,color:C.blue,background:'#eff6ff',borderRadius:8,padding:'6px 10px'}}>
-                        approx. {fmtD((parseMoney(hrly)*(parseFloat(hrs)||40))*52)}/yr base
+                        approx. {fmtD((hrly*(parseFloat(hrs)||40))*52)}/yr base
                       </div>
                     )}
                   </div>
