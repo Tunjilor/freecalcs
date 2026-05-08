@@ -1,7 +1,7 @@
 import Script from 'next/script';
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
-import CompoundInterestCalculator from './calculator';
+import dynamic from 'next/dynamic';
+const CompoundInterestCalculator = dynamic(() => import('./calculator'), { ssr: false });
 
 export const metadata: Metadata = {
   title: 'Compound Interest Calculator | Growth Chart & Year-by-Year Table | freecalcs.io',
