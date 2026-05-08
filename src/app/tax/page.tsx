@@ -191,19 +191,14 @@ export default function TaxCalculator() {
       <span style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', fontSize: 14, pointerEvents: 'none' }}>$</span>
       <input
         style={{ ...inp, paddingLeft: 28 }}
-        type="text"
+        type="number"
         inputMode="numeric"
+        min="0"
         placeholder={placeholder}
-        value={value}
+        value={value.replace(/,/g,'')||''}
         onChange={e => {
-          // Allow free typing — only strip non-numeric except decimal
           const raw = e.target.value.replace(/[^0-9.]/g, '');
           onChange(raw);
-        }}
-        onBlur={e => {
-          // Format with commas only when user leaves the field
-          const raw = e.target.value.replace(/[^0-9.]/g, '');
-          if (raw) onChange(fmtInput(raw));
         }}
       />
     </div>

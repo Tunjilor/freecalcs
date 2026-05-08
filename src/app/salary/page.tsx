@@ -135,11 +135,23 @@ export default function SalaryCalculator(){
   const pp=(n:number)=>n/periods;
   const stateSorted=Object.entries(STATES).sort((a,b)=>a[1].name.localeCompare(b[1].name));
 
-  const MoneyIn=({value,onChange}:{value:string;onChange:(v:string)=>void})=>(
-    <div style={inputWrapStyle}>
-      <span style={prefixStyle}>$</span>
-      <input style={{...inputStyle,paddingLeft:28}} type="text" inputMode="numeric" value={value} onChange={e => {
-          const raw = e.target.value.replace(/[^0-9.]/g, '');
+  const MoneyIn=({value,onChange,placeholder='0'}:{value:string;onChange:(v:string)=>void;placeholder?:string})=>(
+    <div style={{position:'relative'}}>
+      <span style={{position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',color:'#9ca3af',fontSize:14,pointerEvents:'none'}}>$</span>
+      <input
+        style={{...inp,paddingLeft:28}}
+        type="number"
+        inputMode="numeric"
+        min="0"
+        placeholder={placeholder}
+        value={value.replace(/,/g,'')||''}
+        onChange={e=>{
+          const raw=e.target.value.replace(/[^0-9.]/g,'');
+          onChange(raw);
+        }}
+      />
+    </div>
+  );
           onChange(raw);
         }}
         onBlur={e => {
