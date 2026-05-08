@@ -92,10 +92,10 @@ interface TaxResult {
 }
 
 function compute(
-  filing: string, wages: string, selfEmp: string, interest: string,
-  dividends: string, ltcg: string, other: string,
-  useStd: boolean, itemized: string, k401: string, hsa: string, studentLoan: string,
-  children: string, withheld: string, taxYear: string
+  filing: string, wages: any, selfEmp: any, interest: any,
+  dividends: any, ltcg: any, other: any,
+  useStd: boolean, itemized: any, k401: any, hsa: any, studentLoan: any,
+  children: any, withheld: any, taxYear: string
 ): TaxResult {
   const wagesAmt    = parseMoney(wages);
   const selfEmpAmt  = parseMoney(selfEmp);
