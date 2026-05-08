@@ -207,7 +207,7 @@ export default function TipCalculator(){
                   <span style={{fontSize:13,fontWeight:700,color}}>{range}</span>
                 </div>
               ))}
-              {parseFloat(taxRate)>0&&tipOnPreTax&&(<p style={{fontSize:12,color:'#2563eb',background:'#eff6ff',borderRadius:8,padding:'8px 10px',margin:'0 0 10px'}}>Tipping on pre-tax amount: {fmt2(billAmt-taxAmt)('$','')} instead of full {fmt2(billAmt)} bill</p>)}
+              {parseFloat(taxRate)>0&&tipOnPreTax&&(<p style={{fontSize:12,color:'#2563eb',background:'#eff6ff',borderRadius:8,padding:'8px 10px',margin:'0 0 10px'}}>Tipping on pre-tax amount: {fmt2(billAmt-taxAmt)} instead of full {fmt2(billAmt)} bill</p>)}
               <p style={{fontSize:11,color:'#9ca3af',margin:'10px 0 0',lineHeight:1.5}}>Tip culture varies by country. In the US, 18-20% is standard for sit-down restaurants. Tipping is discretionary in all cases.</p>
             </div>
           </div>
