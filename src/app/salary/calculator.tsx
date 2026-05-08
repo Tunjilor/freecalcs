@@ -46,7 +46,7 @@ function calcFed(income:number,filing:string):number{
   for(const [lo,hi,rate] of b){if(income<=lo)break;t+=(Math.min(income,hi)-lo)*rate;}
   return Math.max(0,t);
 }
-function compute(mode:string,sal:string,hrly:string,hrs:string,ot:string,bonus:string,filing:string,state:string,k401:string,hsa:string,health:string,fsa:string,roth:string,other:string):Res{
+function compute(mode:string,sal:number|string,hrly:number|string,hrs:number|string,ot:string,bonus:string,filing:string,state:string,k401:string,hsa:string,health:string,fsa:string,roth:string,other:string):Res{
   let base=0;
   if(mode==='salary'){base=parseFloat(sal)||0;}
   else{const h=parseFloat(hrly)||0;const w=parseFloat(hrs)||40;const o=parseFloat(ot)||0;base=(h*w+o*h*1.5)*52;}
