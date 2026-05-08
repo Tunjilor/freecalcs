@@ -13,114 +13,127 @@ const ALL_CALCS = [
   ['/bmi','BMI Calculator'],['/tdee','TDEE & Calories'],['/tip','Tip Calculator'],
 ];
 
-const DAYS_IN_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];
+const MONTH_DAYS = [31,28,31,30,31,30,31,31,30,31,30,31];
 function isLeap(y:number){return (y%4===0&&y%100!==0)||(y%400===0);}
 
-function calcAge(dob:Date, ref:Date) {
-  let years = ref.getFullYear() - dob.getFullYear();
-  let months = ref.getMonth() - dob.getMonth();
-  let days = ref.getDate() - dob.getDate();
-  if(days<0){ months--; const prevMonth=(ref.getMonth()-1+12)%12; days+=DAYS_IN_MONTH[prevMonth]+(prevMonth===1&&isLeap(ref.getFullYear())?1:0); }
+interface AgeResult {
+  years:number; months:number; days:number;
+  totalDays:number; totalWeeks:number; totalMonths:number;
+  totalHours:number; totalMinutes:number; totalSeconds:number;
+  nextBirthdayDays:number; nextBirthdayDate:string;
+  dayOfWeek:string; zodiac:string; chineseZodiac:string; generation:string;
+  daysToRetire:number; heartbeats:number;
+  onMars:string; onJupiter:string; onSaturn:string;
+  billionSecondsDate:string; billionSecondsReached:boolean;
+  tenThousandDaysDate:string; tenThousandDaysReached:boolean;
+}
+
+function calcAge(dob:Date, ref:Date): AgeResult {
+  let years = ref.getFullYear()-dob.getFullYear();
+  let months = ref.getMonth()-dob.getMonth();
+  let days = ref.getDate()-dob.getDate();
+  if(days<0){ months--; const pm=(ref.getMonth()-1+12)%12; days+=MONTH_DAYS[pm]+(pm===1&&isLeap(ref.getFullYear())?1:0); }
   if(months<0){ years--; months+=12; }
-  const totalDays = Math.floor((ref.getTime()-dob.getTime())/(1000*60*60*24));
+
+  const ms = ref.getTime()-dob.getTime();
+  const totalDays = Math.floor(ms/86400000);
   const totalWeeks = Math.floor(totalDays/7);
+  const totalMonths = years*12+months;
   const totalHours = totalDays*24;
   const totalMinutes = totalHours*60;
-  const totalMonths = years*12+months;
-  return {years,months,days,totalDays,totalWeeks,totalHours,totalMonths};
-}
+  const totalSeconds = totalMinutes*60;
+  const heartbeats = Math.round(totalMinutes*70);
 
-function getZodiac(month:number,day:number):string {
-  const signs=[['Capricorn',1,19],['Aquarius',2,18],['Pisces',3,20],['Aries',4,19],['Taurus',5,20],['Gemini',6,20],['Cancer',7,22],['Leo',8,22],['Virgo',9,22],['Libra',10,22],['Scorpio',11,21],['Sagittarius',12,21],['Capricorn',12,31]] as [string,number,number][];
-  for(let i=0;i<signs.length-1;i++){
-    const [sign,endMo,endDay]=signs[i];
-    if((month===endMo&&day<=endDay)||(i>0&&month===signs[i-1][1]&&day>signs[i-1][2])){
-      if(month===signs[i][1]&&day<=signs[i][2]) return sign;
-    }
-  }
-  const [sign,endMo,endDay]=signs[0];
-  return sign;
-}
+  // Next birthday
+  const nextBD = new Date(ref.getFullYear(), dob.getMonth(), dob.getDate());
+  if(nextBD<=ref) nextBD.setFullYear(nextBD.getFullYear()+1);
+  const nextBirthdayDays = Math.ceil((nextBD.getTime()-ref.getTime())/86400000);
+  const nextBirthdayDate = nextBD.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
 
-function getChineseZodiac(year:number):string {
+  // Day of week born
+  const dayOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][dob.getDay()];
+
+  // Zodiac
+  const m=dob.getMonth()+1, d=dob.getDate();
+  const zodiacMap = [[1,20,'Aquarius'],[2,19,'Pisces'],[3,21,'Aries'],[4,20,'Taurus'],[5,21,'Gemini'],[6,21,'Cancer'],[7,23,'Leo'],[8,23,'Virgo'],[9,23,'Libra'],[10,23,'Scorpio'],[11,22,'Sagittarius'],[12,22,'Capricorn']];
+  let zodiac='Capricorn';
+  for(const [mo,dy,sign] of zodiacMap){ if(m===mo&&d>=dy){ zodiac=sign as string; break; } if(m<mo){ zodiac=zodiacMap[zodiacMap.indexOf([mo,dy,sign])-1]?.[2] as string||'Capricorn'; break; } }
+
+  // Chinese zodiac
   const animals=['Rat','Ox','Tiger','Rabbit','Dragon','Snake','Horse','Goat','Monkey','Rooster','Dog','Pig'];
-  return animals[(year-1900)%12];
-}
+  const chineseZodiac = animals[(dob.getFullYear()-1900)%12];
 
-function getGeneration(year:number):string {
-  if(year<1928) return 'Greatest Generation';
-  if(year<1946) return 'Silent Generation';
-  if(year<1965) return 'Baby Boomer';
-  if(year<1981) return 'Generation X';
-  if(year<1997) return 'Millennial';
-  if(year<2013) return 'Generation Z';
-  return 'Generation Alpha';
-}
+  // Generation
+  const yr = dob.getFullYear();
+  const generation = yr<1928?'Greatest Generation':yr<1946?'Silent Generation':yr<1965?'Baby Boomer':yr<1981?'Gen X':yr<1997?'Millennial':yr<2013?'Gen Z':'Gen Alpha';
 
-function getDayOfWeek(date:Date):string {
-  return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()];
+  // Retirement (age 65)
+  const retire = new Date(dob.getFullYear()+65, dob.getMonth(), dob.getDate());
+  const daysToRetire = Math.max(0, Math.ceil((retire.getTime()-ref.getTime())/86400000));
+
+  // Age on other planets (Earth days per year: Mars 687, Jupiter 4333, Saturn 10759)
+  const onMars = (totalDays/687).toFixed(1)+' Mars years';
+  const onJupiter = (totalDays/4333).toFixed(1)+' Jupiter years';
+  const onSaturn = (totalDays/10759).toFixed(1)+' Saturn years';
+
+  // 1 billion seconds milestone
+  const billionSecondsDate = new Date(dob.getTime()+1000000000*1000).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  const billionSecondsReached = totalSeconds >= 1000000000;
+
+  // 10,000 days milestone
+  const tenThousandDaysDate = new Date(dob.getTime()+10000*86400000).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  const tenThousandDaysReached = totalDays >= 10000;
+
+  return {years,months,days,totalDays,totalWeeks,totalMonths,totalHours,totalMinutes,totalSeconds,
+    nextBirthdayDays,nextBirthdayDate,dayOfWeek,zodiac,chineseZodiac,generation,daysToRetire,
+    heartbeats,onMars,onJupiter,onSaturn,billionSecondsDate,billionSecondsReached,
+    tenThousandDaysDate,tenThousandDaysReached};
 }
 
 export default function AgeCalculator(){
-  const today = new Date();
-  const todayStr = today.toISOString().split('T')[0];
-  const [dob, setDob] = useState('1990-06-15');
-  const [refDate, setRefDate] = useState(todayStr);
-  const [futureDate, setFutureDate] = useState('');
-  const [res, setRes] = useState<ReturnType<typeof calcAge>|null>(null);
+  const todayStr = new Date().toISOString().split('T')[0];
+  const [dob, setDob]       = useState('1990-06-15');
+  const [refDate, setRef]   = useState(todayStr);
+  const [sex, setSex]       = useState('male');
+  const [res, setRes]       = useState<AgeResult|null>(null);
 
   useEffect(()=>{
-    const d=new Date(dob);
-    const r=new Date(refDate||todayStr);
-    if(!isNaN(d.getTime())&&!isNaN(r.getTime())&&d<r){
-      setRes(calcAge(d,r));
-    }
+    const d = new Date(dob); const r = new Date(refDate||todayStr);
+    if(!isNaN(d.getTime())&&!isNaN(r.getTime())&&d<r) setRes(calcAge(d,r));
+    else setRes(null);
   },[dob,refDate,todayStr]);
 
-  const dobDate = new Date(dob);
-  const dobValid = !isNaN(dobDate.getTime());
-  const zodiac = dobValid ? getZodiac(dobDate.getMonth()+1,dobDate.getDate()) : '';
-  const chinese = dobValid ? getChineseZodiac(dobDate.getFullYear()) : '';
-  const generation = dobValid ? getGeneration(dobDate.getFullYear()) : '';
-  const dayBorn = dobValid ? getDayOfWeek(dobDate) : '';
+  const StatBox = ({label,value,sub,color='#111827'}:{label:string;value:string;sub?:string;color?:string})=>(
+    <div style={{background:'#f8fafc',borderRadius:12,padding:'12px 14px',border:`1px solid ${C.border}`}}>
+      <p style={{fontSize:10,fontWeight:700,color:'#6b7280',textTransform:'uppercase',letterSpacing:'.05em',margin:'0 0 3px'}}>{label}</p>
+      <p style={{fontSize:18,fontWeight:700,color,margin:0,lineHeight:1.2}}>{value}</p>
+      {sub&&<p style={{fontSize:10,color:'#9ca3af',margin:'2px 0 0'}}>{sub}</p>}
+    </div>
+  );
 
-  const nextBirthday = ()=>{
-    if(!dobValid) return null;
-    const now = new Date();
-    const next = new Date(now.getFullYear(),dobDate.getMonth(),dobDate.getDate());
-    if(next<=now) next.setFullYear(now.getFullYear()+1);
-    const diff = Math.ceil((next.getTime()-now.getTime())/(1000*60*60*24));
-    return {date:next,daysAway:diff};
-  };
-  const bday = nextBirthday();
-
-  const ageOnFuture = ()=>{
-    if(!futureDate||!dobValid) return null;
-    const fd=new Date(futureDate);
-    if(isNaN(fd.getTime())||fd<=dobDate) return null;
-    return calcAge(dobDate,fd);
-  };
-  const futureAge = ageOnFuture();
-
-  const StatCard = ({label,value,sub}:{label:string;value:string|number;sub?:string})=>(
-    <div style={{background:'#f8fafc',borderRadius:12,padding:'12px 14px',border:`1px solid ${C.border}`,textAlign:'center'}}>
-      <p style={{fontSize:11,color:C.gray,fontWeight:600,textTransform:'uppercase',letterSpacing:'.04em',margin:'0 0 4px'}}>{label}</p>
-      <p style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 2px'}}>{value.toLocaleString()}</p>
-      {sub&&<p style={{fontSize:11,color:'#9ca3af',margin:0}}>{sub}</p>}
+  const MilestoneRow = ({label,date,reached,daysLeft}:{label:string;date:string;reached:boolean;daysLeft?:number})=>(
+    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'9px 12px',borderRadius:9,marginBottom:6,border:`1px solid ${reached?'#86efac':C.border}`,background:reached?'#f0fdf4':C.white}}>
+      <div>
+        <p style={{fontSize:13,fontWeight:600,color:reached?'#166534':'#374151',margin:0}}>{label}</p>
+        <p style={{fontSize:11,color:'#9ca3af',margin:'1px 0 0'}}>{date}</p>
+      </div>
+      <span style={{fontSize:12,fontWeight:700,color:reached?'#16a34a':C.blue,background:reached?'#dcfce7':'#eff6ff',padding:'3px 10px',borderRadius:20,whiteSpace:'nowrap'}}>
+        {reached?'Reached!':daysLeft?daysLeft.toLocaleString()+' days':'Future'}
+      </span>
     </div>
   );
 
   return(
     <div style={{fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',background:C.light,minHeight:'100vh'}}>
-      <style>{`@media(max-width:640px){.age-grid{grid-template-columns:1fr!important;}.age-stats{grid-template-columns:1fr 1fr!important;}}`}</style>
+      <style>{`@media(max-width:700px){.age-grid{grid-template-columns:1fr!important;}}`}</style>
 
       <div style={{background:`linear-gradient(135deg,${C.darkBlue},${C.blue})`,color:C.white,padding:'32px 16px 40px'}}>
         <div style={{maxWidth:960,margin:'0 auto'}}>
           <a href="/" style={{color:'#93c5fd',fontSize:13,textDecoration:'none'}}>&lt;- freecalcs.io</a>
           <h1 style={{fontSize:28,fontWeight:700,margin:'12px 0 8px',color:C.white}}>Age Calculator</h1>
-          <p style={{color:'#93c5fd',fontSize:14,margin:'0 0 16px'}}>Calculate your exact age in years, months, weeks, days, and hours. Find your next birthday countdown, zodiac sign, generation, and more.</p>
+          <p style={{color:'#93c5fd',fontSize:14,margin:'0 0 16px'}}>Your exact age in years, months, days, hours, minutes and seconds. Plus zodiac, generation, birthday countdown, planetary age, and milestone tracker.</p>
           <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
-            {['Exact Age','Birthday Countdown','Zodiac Sign','Chinese Zodiac','Generation','Future Age'].map(t=>(
+            {['Exact Age','Birthday Countdown','Zodiac Sign','Planetary Age','1 Billion Seconds','Heartbeats'].map(t=>(
               <span key={t} style={{background:'rgba(255,255,255,.15)',fontSize:12,padding:'4px 12px',borderRadius:20,color:C.white}}>{t}</span>
             ))}
           </div>
@@ -135,125 +148,135 @@ export default function AgeCalculator(){
             <div style={{...card}}>
               <div style={{marginBottom:14}}>
                 <label style={lbl}>Date of Birth</label>
-                <input style={inp} type="date" value={dob} max={todayStr} onChange={e=>setDob(e.target.value)}/>
+                <input style={inp} type="date" value={dob} onChange={e=>setDob(e.target.value)} max={todayStr}/>
               </div>
               <div style={{marginBottom:14}}>
-                <label style={lbl}>Calculate Age As Of</label>
-                <input style={inp} type="date" value={refDate} max={new Date(Date.now()+365*5*24*3600*1000).toISOString().split('T')[0]} onChange={e=>setRefDate(e.target.value)}/>
-                <button onClick={()=>setRefDate(todayStr)} style={{marginTop:6,fontSize:12,color:C.blue,background:'none',border:'none',cursor:'pointer',padding:0,textDecoration:'underline'}}>Reset to today</button>
+                <label style={lbl}>Calculate age on</label>
+                <input style={inp} type="date" value={refDate} onChange={e=>setRef(e.target.value)}/>
+                <p style={{fontSize:11,color:'#9ca3af',margin:'4px 0 0'}}>Default is today. Change to find age on any date.</p>
               </div>
-
-              {/* Quick ages */}
-              <div style={{marginBottom:16}}>
-                <p style={{fontSize:11,fontWeight:700,color:'#374151',textTransform:'uppercase',letterSpacing:'.05em',margin:'0 0 8px'}}>Quick Select DOB</p>
-                <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                  {[['Baby (1yr)','2024'],['Child (10yr)','2015'],['Teen (16yr)','2009'],['Millennial (30yr)','1995'],['GenX (50yr)','1975'],['Boomer (65yr)','1960']].map(([label,year])=>{
-                    const d=new Date(parseInt(year),5,15);
-                    const dStr=d.toISOString().split('T')[0];
-                    return(
-                      <button key={label} onClick={()=>setDob(dStr)} style={{padding:'4px 10px',fontSize:11,fontWeight:600,borderRadius:6,border:`1px solid ${C.border}`,background:C.white,color:'#374151',cursor:'pointer'}}>{label}</button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Fun facts */}
-              {dobValid&&(
-                <div style={{display:'flex',flexDirection:'column',gap:8}}>
-                  {[
-                    {label:'Day You Were Born',value:dayBorn},
-                    {label:'Zodiac Sign',value:zodiac},
-                    {label:'Chinese Zodiac',value:`Year of the ${chinese}`},
-                    {label:'Generation',value:generation},
-                  ].map(({label,value})=>(
-                    <div key={label} style={{display:'flex',justifyContent:'space-between',padding:'8px 12px',borderRadius:9,background:'#f8fafc',border:`1px solid ${C.border}`}}>
-                      <span style={{fontSize:13,color:C.gray}}>{label}</span>
-                      <span style={{fontSize:13,fontWeight:700,color:'#111827'}}>{value}</span>
-                    </div>
+              <div>
+                <label style={lbl}>Sex (for life expectancy)</label>
+                <div style={{display:'flex',borderRadius:10,overflow:'hidden',border:`1px solid ${C.border}`}}>
+                  {[['male','Male'],['female','Female']].map(([v,l])=>(
+                    <button key={v} onClick={()=>setSex(v)} style={{flex:1,padding:'10px 0',fontSize:14,fontWeight:600,border:'none',cursor:'pointer',background:sex===v?C.blue:C.white,color:sex===v?C.white:'#374151'}}>
+                      {l}
+                    </button>
                   ))}
                 </div>
-              )}
+              </div>
             </div>
 
-            {/* Future age */}
-            <div style={{...card}}>
-              <p style={{fontSize:12,fontWeight:700,color:'#374151',textTransform:'uppercase',letterSpacing:'.05em',margin:'0 0 10px'}}>How Old Will I Be On...</p>
-              <input style={inp} type="date" value={futureDate} onChange={e=>setFutureDate(e.target.value)}/>
-              {futureAge&&(
-                <div style={{marginTop:12,padding:'12px 14px',background:'#eff6ff',borderRadius:10,border:'1px solid #bfdbfe'}}>
-                  <p style={{fontSize:16,fontWeight:700,color:C.blue,margin:'0 0 4px'}}>{futureAge.years} years, {futureAge.months} months, {futureAge.days} days</p>
-                  <p style={{fontSize:12,color:'#374151',margin:0}}>on {new Date(futureDate).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* RIGHT */}
-          <div>
             {res&&(
               <>
-                {/* Hero */}
-                <div style={{background:`linear-gradient(135deg,${C.darkBlue},${C.blue})`,borderRadius:16,padding:20,color:C.white,marginBottom:16,boxShadow:'0 4px 20px rgba(37,99,235,.3)'}}>
-                  <p style={{fontSize:11,fontWeight:600,letterSpacing:'.1em',color:'#93c5fd',margin:'0 0 8px',textTransform:'uppercase'}}>Your Exact Age</p>
-                  <div style={{display:'flex',alignItems:'baseline',gap:8,flexWrap:'wrap',marginBottom:8}}>
-                    <span style={{fontSize:52,fontWeight:700,lineHeight:1}}>{res.years}</span>
-                    <span style={{fontSize:18,color:'#93c5fd'}}>years</span>
-                    <span style={{fontSize:32,fontWeight:600}}>{res.months}</span>
-                    <span style={{fontSize:16,color:'#93c5fd'}}>months</span>
-                    <span style={{fontSize:24,fontWeight:600}}>{res.days}</span>
-                    <span style={{fontSize:14,color:'#93c5fd'}}>days</span>
-                  </div>
-                  {bday&&(
-                    <div style={{background:'rgba(255,255,255,.12)',borderRadius:10,padding:'10px 14px',marginTop:8}}>
-                      <p style={{fontSize:12,color:'#93c5fd',margin:'0 0 2px'}}>Next Birthday</p>
-                      <p style={{fontSize:15,fontWeight:700,margin:0}}>{bday.date.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})} - in {bday.daysAway} days</p>
+                {/* Fun facts */}
+                <div style={{...card,background:'linear-gradient(135deg,#eff6ff,#eef2ff)',border:'1px solid #bfdbfe'}}>
+                  <p style={{fontSize:11,fontWeight:700,color:'#1e40af',textTransform:'uppercase',letterSpacing:'.05em',margin:'0 0 12px'}}>Fun Facts About You</p>
+                  {[
+                    ['Born on a', res.dayOfWeek],
+                    ['Zodiac Sign', res.zodiac],
+                    ['Chinese Zodiac', res.chineseZodiac],
+                    ['Generation', res.generation],
+                    ['Age on Mars', res.onMars],
+                    ['Age on Jupiter', res.onJupiter],
+                    ['Age on Saturn', res.onSaturn],
+                  ].map(([l,v])=>(
+                    <div key={l} style={{display:'flex',justifyContent:'space-between',padding:'7px 0',borderBottom:'1px solid rgba(37,99,235,.1)'}}>
+                      <span style={{fontSize:13,color:'#374151'}}>{l}</span>
+                      <span style={{fontSize:13,fontWeight:700,color:C.blue}}>{v}</span>
                     </div>
-                  )}
-                </div>
-
-                {/* Stats grid */}
-                <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10,marginBottom:16}} className="age-stats">
-                  <StatCard label="Total Months" value={res.totalMonths}/>
-                  <StatCard label="Total Weeks" value={res.totalWeeks}/>
-                  <StatCard label="Total Days" value={res.totalDays}/>
-                  <StatCard label="Total Hours" value={res.totalHours} sub="approx."/>
-                  <StatCard label="Total Minutes" value={res.totalMinutes} sub="approx."/>
-                  <StatCard label="Heartbeats" value={Math.round(res.totalMinutes*70)} sub="avg 70 bpm"/>
+                  ))}
                 </div>
 
                 {/* Life milestones */}
                 <div style={{...card}}>
-                  <p style={{fontSize:12,fontWeight:700,color:'#111827',textTransform:'uppercase',letterSpacing:'.05em',margin:'0 0 14px'}}>Life Milestones</p>
-                  {dobValid&&[
-                    {label:'Sweet 16',age:16},{label:'Legal adult (18)',age:18},{label:'Legal drinking (21)',age:21},
-                    {label:'Quarter century',age:25},{label:'Thirty',age:30},{label:'Forty',age:40},
-                    {label:'Half century',age:50},{label:'Retirement (67)',age:67},{label:'Century',age:100},
-                  ].map(({label,age})=>{
-                    const milestoneDate=new Date(dobDate.getFullYear()+age,dobDate.getMonth(),dobDate.getDate());
-                    const isPast=milestoneDate<=new Date();
-                    const daysAway=Math.ceil((milestoneDate.getTime()-new Date().getTime())/(1000*60*60*24));
-                    return(
-                      <div key={label} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'8px 10px',borderRadius:8,marginBottom:4,background:isPast?'#f8fafc':res.years<age?'#fffbeb':'#f0fdf4',border:`1px solid ${isPast?C.border:res.years<age?'#fde047':'#86efac'}`}}>
-                        <div style={{display:'flex',alignItems:'center',gap:8}}>
-                          <span style={{fontSize:13,color:isPast?C.gray:'#111827',fontWeight:isPast?400:500,textDecoration:isPast?'line-through':'none'}}>{label}</span>
-                        </div>
-                        <div style={{textAlign:'right'}}>
-                          <p style={{fontSize:12,fontWeight:600,color:isPast?C.gray:C.blue,margin:0}}>{milestoneDate.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})}</p>
-                          {!isPast&&<p style={{fontSize:10,color:'#9ca3af',margin:0}}>in {daysAway} days</p>}
-                        </div>
-                      </div>
-                    );
-                  })}
+                  <p style={{fontSize:12,fontWeight:700,color:'#111827',textTransform:'uppercase',letterSpacing:'.05em',margin:'0 0 12px'}}>Life Milestones</p>
+                  <MilestoneRow label="10,000 Days Old" date={res.tenThousandDaysDate} reached={res.tenThousandDaysReached} daysLeft={Math.max(0,10000-res.totalDays)}/>
+                  <MilestoneRow label="1 Billion Seconds Old" date={res.billionSecondsDate} reached={res.billionSecondsReached} daysLeft={Math.max(0,Math.round((1000000000-res.totalSeconds)/86400))}/>
+                  <MilestoneRow label="Retirement Age (65)" date={new Date(new Date(dob).getTime()+(65*365.25*86400000)).toLocaleDateString('en-US',{month:'long',year:'numeric'})} reached={res.daysToRetire===0} daysLeft={res.daysToRetire}/>
+                  <MilestoneRow label="100 Years Old" date={new Date(new Date(dob).getTime()+(100*365.25*86400000)).toLocaleDateString('en-US',{month:'long',year:'numeric'})} reached={res.years>=100} daysLeft={Math.max(0,(100-res.years)*365-res.days)}/>
                 </div>
               </>
             )}
           </div>
+
+          {/* RIGHT */}
+          <div>
+            {res?(
+              <>
+                {/* Hero */}
+                <div style={{background:`linear-gradient(135deg,${C.darkBlue},${C.blue})`,borderRadius:16,padding:20,color:C.white,marginBottom:16,boxShadow:'0 4px 20px rgba(37,99,235,.3)'}}>
+                  <p style={{fontSize:11,fontWeight:600,letterSpacing:'.1em',color:'#93c5fd',margin:'0 0 6px',textTransform:'uppercase'}}>Your Exact Age</p>
+                  <div style={{fontSize:38,fontWeight:800,lineHeight:1.1,margin:'0 0 14px'}}>
+                    {res.years}<span style={{fontSize:18,fontWeight:400,marginLeft:3}}>yrs</span>{' '}
+                    {res.months}<span style={{fontSize:18,fontWeight:400,marginLeft:3}}>mo</span>{' '}
+                    {res.days}<span style={{fontSize:18,fontWeight:400,marginLeft:3}}>days</span>
+                  </div>
+                  <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+                    {[
+                      ['Total Days',res.totalDays.toLocaleString()],
+                      ['Total Weeks',res.totalWeeks.toLocaleString()],
+                      ['Total Hours',res.totalHours.toLocaleString()],
+                      ['Total Seconds',res.totalSeconds.toLocaleString()],
+                    ].map(([l,v])=>(
+                      <div key={l} style={{background:'rgba(255,255,255,.12)',borderRadius:10,padding:'10px 12px'}}>
+                        <p style={{fontSize:11,color:'#93c5fd',margin:'0 0 2px'}}>{l}</p>
+                        <p style={{fontSize:14,fontWeight:700,margin:0}}>{v}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Stats grid */}
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:16}}>
+                  <StatBox label="Next Birthday" value={res.nextBirthdayDays+' days'} sub={res.nextBirthdayDate} color={C.blue}/>
+                  <StatBox label="Total Months" value={res.totalMonths.toLocaleString()} sub="since birth"/>
+                  <StatBox label="Heartbeats (est.)" value={(res.heartbeats/1000000).toFixed(1)+'M'} sub="avg 70 bpm" color='#ef4444'/>
+                  <StatBox label="Total Minutes" value={res.totalMinutes.toLocaleString()} sub="since birth"/>
+                  <StatBox label="Retirement" value={res.daysToRetire>0?res.daysToRetire.toLocaleString()+' days':'Congratulations!'} sub="at age 65" color={res.daysToRetire===0?'#16a34a':C.blue}/>
+                  <StatBox label="Life Expectancy Left" value={(sex==='male'?Math.max(0,76-res.years):Math.max(0,81-res.years))+' yrs'} sub={sex==='male'?'Avg US male: 76':'Avg US female: 81'}/>
+                </div>
+
+                {/* Educational */}
+                <div style={{...card,background:'#f8fafc'}}>
+                  <p style={{fontSize:13,fontWeight:700,color:'#111827',margin:'0 0 10px'}}>Did You Know?</p>
+                  <div style={{display:'flex',flexDirection:'column',gap:8,fontSize:13,color:'#374151',lineHeight:1.6}}>
+                    <p style={{margin:0}}>The average human heart beats about <strong>2.5 billion times</strong> in a lifetime. You have had approximately <strong>{(res.heartbeats/1000000).toFixed(1)} million heartbeats</strong> so far.</p>
+                    <p style={{margin:0}}>You will reach <strong>1 billion seconds</strong> old on <strong>{res.billionSecondsDate}</strong> - about age 31.7. Most people celebrate this without knowing it!</p>
+                    <p style={{margin:0}}>On Mars (687 Earth days per year), you are only <strong>{res.onMars}</strong>. On Saturn (10,759 Earth days per year), you are just <strong>{res.onSaturn}</strong>.</p>
+                  </div>
+                </div>
+              </>
+            ):(
+              <div style={{...card,textAlign:'center',padding:48}}>
+                <p style={{fontSize:20,color:C.blue,fontWeight:700,margin:'0 0 8px'}}>Enter your date of birth</p>
+                <p style={{fontSize:14,color:'#9ca3af',margin:0}}>We will calculate your exact age plus zodiac, planetary age, heartbeats, and milestone countdowns.</p>
+              </div>
+            )}
+          </div>
         </div>
 
-        <div style={{background:'linear-gradient(135deg,#eff6ff,#eef2ff)',borderRadius:16,padding:20,border:'1px solid #bfdbfe',marginTop:20}}>
+        {/* FAQ / SEO */}
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,marginTop:32}} className="age-faq">
+          <style>{`.age-faq{} @media(max-width:600px){.age-faq{grid-template-columns:1fr!important;}}`}</style>
+          <div style={{...card}}>
+            <h2 style={{fontSize:16,fontWeight:700,color:'#111827',marginBottom:12}}>How is Age Calculated?</h2>
+            <p style={{fontSize:13,color:'#374151',lineHeight:1.7,margin:'0 0 10px'}}>Age is calculated by finding the difference between your date of birth and today (or any target date). The calculation accounts for varying month lengths, leap years, and the exact number of days in each month.</p>
+            <p style={{fontSize:13,color:'#374151',lineHeight:1.7,margin:0}}>For example, if you were born on June 15, 1990 and today is May 8, 2026, you are 35 years, 10 months, and 23 days old.</p>
+          </div>
+          <div style={{...card}}>
+            <h2 style={{fontSize:16,fontWeight:700,color:'#111827',marginBottom:12}}>What is the 1 Billion Seconds Milestone?</h2>
+            <p style={{fontSize:13,color:'#374151',lineHeight:1.7,margin:'0 0 10px'}}>One billion seconds is approximately 31 years, 259 days. It is a fun milestone that most people pass without realizing it. You can find your exact 1-billion-second birthday above.</p>
+            <p style={{fontSize:13,color:'#374151',lineHeight:1.7,margin:0}}>Similarly, 10,000 days is about 27 years and 4-5 months. These are popular milestones to celebrate on social media.</p>
+          </div>
+        </div>
+
+        <div style={{background:'linear-gradient(135deg,#eff6ff,#eef2ff)',borderRadius:16,padding:20,border:'1px solid #bfdbfe',marginTop:8}}>
           <p style={{fontSize:13,fontWeight:600,color:'#374151',marginBottom:12}}>All freecalcs.io Calculators</p>
           <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
-            {ALL_CALCS.map(([href,name])=>(<a key={href} href={href} style={{background:C.white,fontSize:13,color:C.blue,fontWeight:500,padding:'8px 16px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>{name}</a>))}
+            {ALL_CALCS.map(([href,name])=>(
+              <a key={href} href={href} style={{background:C.white,fontSize:13,color:C.blue,fontWeight:500,padding:'8px 16px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>{name}</a>
+            ))}
           </div>
         </div>
       </div>
