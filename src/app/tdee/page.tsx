@@ -63,4 +63,4 @@ const faqSchema = {
   ]
 };
 
-export default function Page() { return (<><Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} /><TDEECalculator />; }
+export default function Page() { return (<><Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} /><TDEECalculator /></>); }
