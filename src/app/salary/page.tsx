@@ -152,14 +152,6 @@ export default function SalaryCalculator(){
       />
     </div>
   );
-          onChange(raw);
-        }}
-        onBlur={e => {
-          const raw = e.target.value.replace(/[^0-9.]/g, '');
-          if (raw) onChange(fmtInput(raw));
-        }}/>
-    </div>
-  );
 
   const ResultRow=({label,annual,color,highlight=false}:{label:string;annual:number;color?:string;highlight?:boolean})=>(
     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'8px 12px',borderRadius:8,background:highlight?'#eff6ff':'transparent',border:highlight?`1px solid #bfdbfe`:'1px solid transparent'}}>
