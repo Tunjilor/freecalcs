@@ -214,7 +214,7 @@ export default function SalaryCalculator(){
                   <div style={{display:'flex',flexDirection:'column',gap:12}}>
                     <div><label style={labelStyle}>Hourly Rate</label><MoneyIn value={hrly} onChange={setHrly}/></div>
                     <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
-                      <div><label style={labelStyle}>Hrs/Week</label><input style={inputStyle} type="number" min="0" max="80" value={hrs} onChange={e=>setHrs(e.target.value)}/></div>
+                      <div><label style={labelStyle}>Hrs/Week</label><input style={inputStyle} type="number" min="0" max="80" value={hrs} onChange={e=>setHrs(Number(e.target.value)||0)}/></div>
                       <div><label style={labelStyle}>OT Hrs/Wk</label><input style={inputStyle} type="number" min="0" max="40" value={otHrs} onChange={e=>setOtHrs(e.target.value)}/></div>
                     </div>
                     {hrly>0&&(
