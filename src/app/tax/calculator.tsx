@@ -1,8 +1,10 @@
+
 import type { Metadata } from 'next';
 import TaxCalculator from './calculator';
 
 export const metadata: Metadata = {
   title: 'Federal Income Tax Calculator 2026 | Refund Estimator | freecalcs.io',
+
   description: 'Estimate your 2026 federal tax bill or refund. Includes bracket breakdown, capital gains tax, self-employment tax, child tax credit, and tax planning tips.',
   keywords: ['tax calculator', 'free tax calculator', 'freecalcs.io'],
   alternates: { canonical: 'https://www.freecalcs.io/tax' },
