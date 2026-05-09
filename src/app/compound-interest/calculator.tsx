@@ -3,10 +3,10 @@
 import { useState, useEffect, useCallback } from 'react';
 
 
-const C = { blue:'#2563eb', darkBlue:'#1e3a5f', gray:'#6b7280', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc', text:'#111827' };
-const card: React.CSSProperties = { background:C.white, borderRadius:16, padding:20, boxShadow:'0 1px 3px rgba(0,0,0,.08)', border:`1px solid ${C.border}`, marginBottom:16 };
-const inp: React.CSSProperties  = { width:'100%', border:`1px solid #cbd5e1`, borderRadius:10, padding:'10px 12px', fontSize:14, outline:'none', background:C.white, boxSizing:'border-box', color:'#111827', fontWeight:500 };
-const lbl: React.CSSProperties  = { display:'block', fontSize:11, fontWeight:700, color:'#374151', textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:4 } as React.CSSProperties;
+const C = { blue:'#2563eb', darkBlue:'#0f172a', gray:'#6b7280', border:'#e2e8f0', white:'#ffffff', light:'#f8fafc', text:'#111827', accent:'#7c3aed', emerald:'#059669' };
+const card: React.CSSProperties = { background:'rgba(255,255,255,0.85)', backdropFilter:'blur(12px)', WebkitBackdropFilter:'blur(12px)', borderRadius:20, padding:24, boxShadow:'0 4px 24px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04)', border:'1px solid rgba(226,232,240,0.8)', marginBottom:20, transition:'all 0.3s ease' };
+const inp: React.CSSProperties  = { width:'100%', border:'1.5px solid #e2e8f0', borderRadius:12, padding:'12px 14px', fontSize:15, outline:'none', background:'#f8fafc', boxSizing:'border-box', color:'#111827', fontWeight:600, transition:'all 0.2s ease', letterSpacing:'-0.01em' };
+const lbl: React.CSSProperties  = { display:'block', fontSize:12, fontWeight:700, color:'#475569', textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:6 } as React.CSSProperties;
 const btnBase: React.CSSProperties = { flex:1, padding:'10px 0', fontSize:14, fontWeight:600, border:'none', cursor:'pointer', transition:'all .15s' };
 
 const FREQ_OPTIONS = [
@@ -178,11 +178,11 @@ export default function CompoundInterestCalculator(){
   };
 
   return(
-    <div style={{fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',background:C.light,minHeight:'100vh'}}>
+    <div style={{fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif',background:'linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)',minHeight:'100vh'}}>
       <style>{`html{scroll-behavior:smooth;} @media(max-width:680px){.ci-grid{grid-template-columns:1fr!important;}} input[type=range]{width:100%;accent-color:#2563eb;}`}</style>
 
       {/* Header */}
-      <div style={{background:`linear-gradient(135deg,${C.darkBlue},${C.blue})`,color:C.white,padding:'32px 16px 40px'}}>
+      <div style={{background:'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)',color:C.white,padding:'32px 16px 40px'}}>
         <div style={{maxWidth:960,margin:'0 auto'}}>
           <a href="/" style={{color:'#93c5fd',fontSize:13,textDecoration:'none'}}>&lt;- freecalcs.io</a>
           <h1 style={{fontSize:28,fontWeight:700,margin:'12px 0 8px',color:C.white}}>Compound Interest Calculator</h1>
@@ -273,7 +273,7 @@ export default function CompoundInterestCalculator(){
 
             {/* Rule of 72 */}
             {res&&res.rule72>0&&(
-              <div style={{...card,background:'linear-gradient(135deg,#eff6ff,#eef2ff)',border:'1px solid #bfdbfe'}}>
+              <div style={{...card,background:'linear-gradient(135deg,#eff6ff,#eef2ff,#f0fdf4)',border:'1px solid #bfdbfe',boxShadow:'0 2px 12px rgba(37,99,235,.08)'}}>
                 <p style={{fontSize:12,fontWeight:700,color:'#1e40af',textTransform:'uppercase',letterSpacing:'.05em',margin:'0 0 6px'}}>Rule of 72</p>
                 <p style={{fontSize:22,fontWeight:700,color:C.blue,margin:'0 0 4px'}}>{res.rule72.toFixed(1)} years</p>
                 <p style={{fontSize:12,color:'#374151',margin:0}}>to double your money at {rate}% annual return (72 / {rate} = {res.rule72.toFixed(1)})</p>
@@ -286,9 +286,9 @@ export default function CompoundInterestCalculator(){
             {res&&(
               <>
                 {/* Hero */}
-                <div style={{background:`linear-gradient(135deg,${C.darkBlue},${C.blue})`,borderRadius:16,padding:20,color:C.white,marginBottom:16,boxShadow:'0 4px 20px rgba(37,99,235,.3)'}}>
+                <div style={{background:'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)',borderRadius:16,padding:20,color:C.white,marginBottom:16,boxShadow:'0 4px 20px rgba(37,99,235,.3)'}}>
                   <p style={{fontSize:11,fontWeight:600,letterSpacing:'.1em',color:'#93c5fd',margin:'0 0 4px',textTransform:'uppercase'}}>Future Value after {years} Years</p>
-                  <div style={{fontSize:44,fontWeight:700,lineHeight:1,margin:'0 0 4px'}}>{fmtD(res.finalBalance)}</div>
+                  <div style={{fontSize:48,fontWeight:800,lineHeight:1,letterSpacing:'-0.02em',margin:'0 0 4px'}}>{fmtD(res.finalBalance)}</div>
                   {inflation&&<p style={{color:'#93c5fd',fontSize:12,margin:'0 0 12px'}}>Inflation-adjusted value</p>}
                   <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:8,marginTop:12}}>
                     {[
@@ -296,7 +296,7 @@ export default function CompoundInterestCalculator(){
                       ['Contributions',fmtD(res.totalContributions),'#93c5fd'],
                       ['Interest Earned',fmtD(res.totalInterest),'#86efac'],
                     ].map(([l,v,c])=>(
-                      <div key={l} style={{background:'rgba(255,255,255,.12)',borderRadius:10,padding:'10px 12px'}}>
+                      <div key={l} style={{background:'rgba(255,255,255,.15)',backdropFilter:'blur(8px)',borderRadius:14,padding:'14px 16px',border:'1px solid rgba(255,255,255,.1)'}}>
                         <p style={{fontSize:11,color:c,margin:'0 0 2px'}}>{l}</p>
                         <p style={{fontSize:14,fontWeight:700,margin:0}}>{v}</p>
                       </div>
@@ -331,7 +331,7 @@ export default function CompoundInterestCalculator(){
                 </div>
 
                 {/* Tabs */}
-                <div style={{display:'flex',gap:4,background:'#f1f5f9',borderRadius:12,padding:4,marginBottom:16}}>
+                <div style={{display:'flex',gap:4,background:'#f1f5f9',borderRadius:14,padding:5,boxShadow:'inset 0 1px 2px rgba(0,0,0,.06)',marginBottom:16}}>
                   {(['chart','table','compare'] as const).map(t=>(
                     <button key={t} onClick={()=>setTab(t)} style={{...btnBase,borderRadius:9,background:tab===t?C.white:'transparent',color:tab===t?C.blue:C.gray,boxShadow:tab===t?'0 1px 3px rgba(0,0,0,.1)':'none',fontSize:13}}>
                       {t==='chart'?'Growth Chart':t==='table'?'Year-by-Year':'With vs Without'}
