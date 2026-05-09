@@ -19,6 +19,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/percentage`, priority: 0.7, changeFreq: 'monthly' },
     { url: `${base}/tip`, priority: 0.7, changeFreq: 'monthly' },
     { url: `${base}/blog`, priority: 0.8, changeFreq: 'weekly' },
+    { url: `${base}/blog/compound-interest-explained`, priority: 0.7, changeFreq: 'monthly' },
+    { url: `${base}/blog/2026-tax-brackets-guide`, priority: 0.7, changeFreq: 'monthly' },
+    { url: `${base}/blog/how-to-calculate-mortgage-payment`, priority: 0.7, changeFreq: 'monthly' },
+    { url: `${base}/blog/what-is-tdee`, priority: 0.7, changeFreq: 'monthly' },
+    { url: `${base}/blog/bmi-what-your-number-means`, priority: 0.7, changeFreq: 'monthly' },
+    { url: `${base}/blog/fha-vs-conventional-vs-va-vs-usda`, priority: 0.7, changeFreq: 'monthly' },
+    { url: `${base}/blog/28-36-rule-mortgage`, priority: 0.7, changeFreq: 'monthly' },
+    { url: `${base}/blog/pay-off-mortgage-early`, priority: 0.7, changeFreq: 'monthly' },
+    { url: `${base}/scientific`, priority: 0.7, changeFreq: 'monthly' },
+    { url: `${base}/privacy`, priority: 0.3, changeFreq: 'yearly' },
     { url: `${base}/about`, priority: 0.5, changeFreq: 'yearly' },
   ];
 
