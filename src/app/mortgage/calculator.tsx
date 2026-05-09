@@ -1,6 +1,6 @@
 // @ts-nocheck
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 
 type Mode = "buy" | "refinance" | "equity" | "afford";
