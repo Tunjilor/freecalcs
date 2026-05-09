@@ -79,6 +79,33 @@ function compute(
 function fmtD(n:number){return '$'+Math.round(n).toLocaleString('en-US');}
 function fmtDec(n:number){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
 
+
+function getInsights(res: any, principal: string, contrib: string, rate: string, years: string) {
+  const ins: string[] = [];
+  const p = parseFloat(principal)||0, c = parseFloat(contrib)||0, y = parseInt(years)||0;
+  const totalInvested = res.totalPrincipal + res.totalContributions;
+  if (totalInvested > 0 && res.finalBalance > 0) {
+    const growthPct = ((res.finalBalance - totalInvested) / totalInvested * 100);
+    if (growthPct > 50) ins.push('💰 Your money could grow by ' + Math.round(growthPct) + '% beyond what you put in');
+  }
+  if (res.totalInterest > totalInvested && totalInvested > 0) {
+    for (let i = 0; i < res.rows.length; i++) {
+      const cumInt = res.rows[i].balance - res.totalPrincipal - (res.rows[i].contributions || res.totalContributions * (i+1) / res.rows.length);
+      const cumInv = res.totalPrincipal + res.totalContributions * (i+1) / res.rows.length;
+      if (cumInt > cumInv) { ins.push('📈 Interest earned exceeds your contributions after year ' + (i+1)); break; }
+    }
+  }
+  if (res.finalBalance >= 100000 && totalInvested < 100000) ins.push('🎯 You could reach $100K with this plan');
+  if (res.finalBalance >= 1000000) ins.push('🏆 You could become a millionaire with this strategy');
+  if (res.rule72 > 0 && res.rule72 < 15) ins.push('⚡ Your money doubles every ' + res.rule72.toFixed(1) + ' years at ' + rate + '%');
+  if (c > 0 && y > 0) {
+    const withoutContrib = p * Math.pow(1 + parseFloat(rate)/100, y);
+    const contribBoost = res.finalBalance - withoutContrib;
+    if (contribBoost > 10000) ins.push('🚀 Your monthly contributions add ' + '$' + Math.round(contribBoost).toLocaleString('en-US') + ' to your final balance');
+  }
+  return ins.slice(0, 3);
+}
+
 export default function CompoundInterestCalculator(){
   const [principal, setPrincipal]     = useState('10000');
   const [rate, setRate]               = useState('7');
