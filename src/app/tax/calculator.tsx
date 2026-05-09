@@ -393,6 +393,13 @@ export default function TaxCalculator() {
                 {tab === 'summary' && (
                   <div style={{ ...card }}>
                     {/* Income flow */}
+                {(()=>{const ins=getTaxInsights(res);return ins.length>0?(
+                  <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16}}>
+                    {ins.map((t,i)=>(
+                      <div key={i} style={{padding:'12px 16px',background:'linear-gradient(135deg,#f0fdf4,#eff6ff)',borderRadius:14,border:'1px solid #bbf7d0',fontSize:14,color:'#15803d',fontWeight:500}}>{t}</div>
+                    ))}
+                  </div>
+                ):null})()}
                     <p style={{ fontSize: 12, fontWeight: 700, color: '#111827', textTransform: 'uppercase', letterSpacing: '.05em', margin: '0 0 12px' }}>Tax Calculation Flow</p>
                     {[
                       ['Total Income', parseMoney(wages) + parseMoney(selfEmp) + parseMoney(interest) + parseMoney(dividends) + parseMoney(ltcg) + parseMoney(other), '#1f2937', false],
