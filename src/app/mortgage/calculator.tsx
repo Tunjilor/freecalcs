@@ -226,7 +226,7 @@ export default function MortgageCalculator() {
   const displayedRows = showFullAmort ? amortSchedule : amortSchedule.slice(0, 24);
 
   return (
-    <main style={{ minHeight: "100vh", background: "#f8f9fb", fontFamily: "system-ui,sans-serif" }}>
+    <main style={{ minHeight: "100vh", background: "linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)", fontFamily: "system-ui,sans-serif" }}>
       <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         input[type=number]::-webkit-inner-spin-button,
@@ -419,7 +419,7 @@ export default function MortgageCalculator() {
 
           {/* RIGHT — results */}
           <div className="results-col">
-            <div style={{ background: "linear-gradient(135deg,#1d4ed8 0%,#2563eb 100%)", borderRadius: 16, padding: "28px 24px", marginBottom: 14, color: "#fff" }}>
+            <div style={{ background: "linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)", borderRadius: 20, padding: "28px 24px", boxShadow: "0 8px 32px rgba(37,99,235,.25)", marginBottom: 14, color: "#fff" }}>
               <p style={{ fontSize: 11, color: "rgba(255,255,255,0.65)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>Total monthly payment</p>
               <p style={{ fontSize: 56, fontWeight: 800, lineHeight: 1, marginBottom: 6 }}>{fmt2(totalMonthlyWithExtra)}</p>
               <p style={{ fontSize: 12, color: "rgba(255,255,255,0.65)", marginBottom: 20 }}>{fmtPct(rate)} interest · {actualYears} years · starts {startDateStr}</p>

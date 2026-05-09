@@ -181,7 +181,7 @@ export default function MortgageQualifier() {
   const scoreBorder = overallQualifies ? "#86efac" : "#fca5a5";
 
   return (
-    <main style={{ minHeight: "100vh", background: "#f8f9fb", fontFamily: "system-ui,sans-serif" }}>
+    <main style={{ minHeight: "100vh", background: "linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)", fontFamily: "system-ui,sans-serif" }}>
       <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         .lbl { font-size: 12px; font-weight: 600; color: #374151; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.04em; }

@@ -238,7 +238,7 @@ export default function TaxCalculator() {
   }).filter(b => b.lo < Math.max(0, res.taxableIncome - parseMoney(ltcg))) : [];
 
   return (
-    <div style={{ fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif', background: C.light, minHeight: '100vh', scrollBehavior: 'smooth' }}>
+    <div style={{ fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif', background: 'linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)', minHeight: '100vh', scrollBehavior: 'smooth' }}>
       <style>{`html{scroll-behavior:smooth;} [id]{scroll-margin-top:70px;}`}</style>
 
       {/* Header */}

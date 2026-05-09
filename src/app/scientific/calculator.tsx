@@ -52,7 +52,7 @@ export default function ScientificCalculator() {
   };
 
   return (
-    <main style={{minHeight:"100vh",background:"#f8f9fb",fontFamily:"system-ui,sans-serif"}}>
+    <main style={{minHeight:"100vh",background:"linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)",fontFamily:"system-ui,sans-serif"}}>
       <nav style={{background:"#fff",borderBottom:"1px solid #eee",padding:"0 24px"}}>
         <div style={{maxWidth:1100,margin:"0 auto",height:56,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
           <Link href="/" style={{textDecoration:"none"}}><b style={{color:"#111"}}>freecalcs</b><b style={{color:"#2563eb"}}>.io</b></Link>
