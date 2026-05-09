@@ -240,9 +240,30 @@ export default function RentVsBuy(){
         </div>
 
         <div style={{background:'linear-gradient(135deg,#eff6ff,#eef2ff)',borderRadius:16,padding:20,border:'1px solid #bfdbfe',marginTop:20}}>
-          <p style={{fontSize:13,fontWeight:600,color:'#374151',marginBottom:12}}>Related Calculators</p>
+          <p style={{fontSize:18,fontWeight:700,color:'#111827',marginBottom:4}}>Related Calculators</p>
           <p style={{fontSize:13,color:'#64748b',marginBottom:16}}>Tools that work great alongside this one</p>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(250px,1fr))',gap:10}}>\n            {[['/mortgage','Mortgage Calculator','Get a detailed mortgage payment breakdown'], ['/qualify','Mortgage Qualifier','Check which loan programs you qualify for'], ['/salary','Salary Calculator','Calculate take-home pay to plan housing costs'], ['/compound-interest','Compound Interest','Compare investing your down payment instead']].map(([href,name,desc])=>(\n              <a key={href} href={href} style={{textDecoration:'none',display:'block',padding:'14px 18px',background:'rgba(255,255,255,0.9)',borderRadius:14,border:'1px solid #e2e8f0'}}><span style={{fontSize:14,fontWeight:600,color:'#2563eb'}}>{name} →</span><span style={{display:'block',fontSize:13,color:'#64748b',marginTop:2}}>{desc}</span></a>\n            ))}</div>\n        </div>\n        <div style={{marginTop:20}}>\n          <p style={{fontSize:13,fontWeight:600,color:'#374151',marginBottom:12}}>All freecalcs.io Calculators</p>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(250px,1fr))',gap:10}}>
+
+              <a key="/mortgage" href="/mortgage" style={{textDecoration:'none',display:'block',padding:'14px 18px',background:'rgba(255,255,255,0.9)',borderRadius:14,border:'1px solid #e2e8f0'}}>
+                <span style={{fontSize:14,fontWeight:600,color:'#2563eb'}}>Mortgage Calculator →</span>
+                <span style={{display:'block',fontSize:13,color:'#64748b',marginTop:2}}>Detailed mortgage payment breakdown</span>
+              </a>
+              <a key="/qualify" href="/qualify" style={{textDecoration:'none',display:'block',padding:'14px 18px',background:'rgba(255,255,255,0.9)',borderRadius:14,border:'1px solid #e2e8f0'}}>
+                <span style={{fontSize:14,fontWeight:600,color:'#2563eb'}}>Mortgage Qualifier →</span>
+                <span style={{display:'block',fontSize:13,color:'#64748b',marginTop:2}}>Check loan program eligibility</span>
+              </a>
+              <a key="/salary" href="/salary" style={{textDecoration:'none',display:'block',padding:'14px 18px',background:'rgba(255,255,255,0.9)',borderRadius:14,border:'1px solid #e2e8f0'}}>
+                <span style={{fontSize:14,fontWeight:600,color:'#2563eb'}}>Salary Calculator →</span>
+                <span style={{display:'block',fontSize:13,color:'#64748b',marginTop:2}}>Plan housing costs around income</span>
+              </a>
+              <a key="/compound-interest" href="/compound-interest" style={{textDecoration:'none',display:'block',padding:'14px 18px',background:'rgba(255,255,255,0.9)',borderRadius:14,border:'1px solid #e2e8f0'}}>
+                <span style={{fontSize:14,fontWeight:600,color:'#2563eb'}}>Compound Interest →</span>
+                <span style={{display:'block',fontSize:13,color:'#64748b',marginTop:2}}>Invest your down payment instead?</span>
+              </a>
+          </div>
+        </div>
+        <div style={{marginTop:20}}>
+          <p style={{fontSize:13,fontWeight:600,color:'#374151',marginBottom:12}}>All freecalcs.io Calculators</p>
           <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
             {ALL_CALCS.map(([href,name])=>(
               <a key={href} href={href} style={{background:C.white,fontSize:13,color:C.blue,fontWeight:500,padding:'8px 16px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>{name}</a>
