@@ -66,15 +66,6 @@ export default function ScientificCalculator() {
         </div>
       </div>
       <main style={{maxWidth:960,margin:'0 auto',padding:'24px 16px'}}>
-      <nav style={{background:"#fff",borderBottom:"1px solid #eee",padding:"0 24px"}}>
-        <div style={{maxWidth:1100,margin:"0 auto",height:56,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-          <Link href="/" style={{textDecoration:"none"}}><b style={{color:"#111"}}>freecalcs</b><b style={{color:"#2563eb"}}>.io</b></Link>
-          <Link href="/" style={{color:"#6b7280",textDecoration:"none",fontSize:14}}>← All calculators</Link>
-        </div>
-      </nav>
-      <section style={{maxWidth:480,margin:"0 auto",padding:"48px 24px 80px"}}>
-        <h1 style={{fontSize:34,fontWeight:800,color:"#111",marginBottom:6}}>Scientific Calculator</h1>
-        <p style={{color:"#6b7280",marginBottom:24,fontSize:16}}>Full scientific functions including trig, logs, and more.</p>
         <div style={{background:"#fff",borderRadius:16,border:"1px solid #e5e7eb",padding:20}}>
           <div style={{background:"#f8f9fb",borderRadius:10,padding:"16px 20px",marginBottom:16,minHeight:80}}>
             <div style={{fontSize:12,color:"#9ca3af",minHeight:18}}>{expr}</div>
