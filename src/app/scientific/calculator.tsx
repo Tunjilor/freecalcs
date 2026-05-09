@@ -52,7 +52,20 @@ export default function ScientificCalculator() {
   };
 
   return (
-    <main style={{minHeight:"100vh",background:"linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)",fontFamily:"system-ui,sans-serif"}}>
+    <div style={{fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif',background:'linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)',minHeight:'100vh'}}>
+      <div style={{background:'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)',color:'#fff',padding:'32px 16px 40px'}}>
+        <div style={{maxWidth:960,margin:'0 auto'}}>
+          <a href="/" style={{color:'#93c5fd',fontSize:13,textDecoration:'none'}}>&lt;- freecalcs.io</a>
+          <h1 style={{fontSize:28,fontWeight:700,margin:'12px 0 8px',color:'#fff'}}>Scientific Calculator</h1>
+          <p style={{color:'#93c5fd',fontSize:14,margin:'0 0 16px'}}>Full scientific functions including trig, logarithms, exponents, constants, and memory. Free and instant.</p>
+          <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+            {['Trig Functions','Logarithms','Exponents','Constants','Memory'].map(t=>(
+              <span key={t} style={{background:'rgba(255,255,255,.15)',fontSize:12,padding:'4px 12px',borderRadius:20,color:'#fff'}}>{t}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <main style={{maxWidth:960,margin:'0 auto',padding:'24px 16px'}}>
       <nav style={{background:"#fff",borderBottom:"1px solid #eee",padding:"0 24px"}}>
         <div style={{maxWidth:1100,margin:"0 auto",height:56,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
           <Link href="/" style={{textDecoration:"none"}}><b style={{color:"#111"}}>freecalcs</b><b style={{color:"#2563eb"}}>.io</b></Link>
@@ -78,5 +91,19 @@ export default function ScientificCalculator() {
         </div>
       </section>
     </main>
+      {/* Related Calculators */}
+      <div style={{maxWidth:960,margin:"0 auto",padding:"0 16px 40px"}}>
+        <p style={{fontSize:18,fontWeight:700,color:"#111827",marginBottom:4}}>Related Calculators</p>
+        <p style={{fontSize:13,color:"#64748b",marginBottom:16}}>Tools that work great alongside this one</p>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",gap:10}}>
+          {[["/percentage","Percentage Calculator","Quick percentage math"],["/compound-interest","Compound Interest","Growth and investment math"],["/tip","Tip Calculator","Bill splitting calculations"]].map(([href,name,desc])=>(
+            <a key={href} href={href} style={{textDecoration:"none",display:"block",padding:"14px 18px",background:"rgba(255,255,255,0.9)",borderRadius:14,border:"1px solid #e2e8f0"}}>
+              <span style={{fontSize:14,fontWeight:600,color:"#2563eb"}}>{name} →</span>
+              <span style={{display:"block",fontSize:13,color:"#64748b",marginTop:2}}>{desc}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
