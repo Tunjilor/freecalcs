@@ -198,7 +198,7 @@ export default function SalaryCalculator(){
     <div style={{fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',background:C.lightGray,minHeight:'100vh'}}>
 
       {/* Header */}
-      <div style={{background:`linear-gradient(135deg,${C.darkBlue},${C.blue})`,color:C.white,padding:'32px 16px 40px'}}>
+      <div style={{background:'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)',color:C.white,padding:'32px 16px 40px'}}>
         <div style={{maxWidth:960,margin:'0 auto'}}>
           <a href="/" style={{color:'#93c5fd',fontSize:13,textDecoration:'none'}}>&lt;- freecalcs.io</a>
           <h1 style={{fontSize:28,fontWeight:700,margin:'12px 0 8px',color:C.white}}>Salary &amp; Take-Home Pay Calculator</h1>
@@ -282,7 +282,7 @@ export default function SalaryCalculator(){
             <div>
               {/* Big result card */}
               {res&&(
-                <div style={{background:`linear-gradient(135deg,${C.darkBlue},${C.blue})`,borderRadius:16,padding:20,color:C.white,marginBottom:16,boxShadow:'0 4px 20px rgba(37,99,235,.3)'}}>
+                <div style={{background:'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)',borderRadius:16,padding:20,color:C.white,marginBottom:16,boxShadow:'0 8px 32px rgba(37,99,235,.25), 0 2px 8px rgba(0,0,0,.1)'}}>
                   <p style={{fontSize:11,fontWeight:600,letterSpacing:'0.1em',color:'#93c5fd',margin:'0 0 4px',textTransform:'uppercase'}}>{FREQS[freq]?.label} Take-Home Pay</p>
                   <div style={{fontSize:40,fontWeight:700,margin:'0 0 4px'}}>{fmtD(pp(res.net))}</div>
                   <p style={{color:'#93c5fd',fontSize:13,margin:'0 0 16px'}}>{fmtD(res.net)} per year</p>

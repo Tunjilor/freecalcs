@@ -58,8 +58,8 @@ const ALL_CALCS = [
   ['/bmi','BMI Calculator'],['/age','Age Calculator'],['/tip','Tip Calculator'],
 ];
 
-const C = { blue:'#2563eb', darkBlue:'#1e3a5f', gray:'#6b7280', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc' };
-const card: React.CSSProperties = { background:C.white, borderRadius:16, padding:20, boxShadow:'0 1px 3px rgba(0,0,0,.08)', border:`1px solid ${C.border}`, marginBottom:16 };
+const C = { blue:'#2563eb', darkBlue:'#0f172a', gray:'#6b7280', border:'#e2e8f0', white:'#ffffff', light:'#f8fafc', text:'#111827', accent:'#7c3aed', emerald:'#059669' };
+const card: React.CSSProperties = { background:'rgba(255,255,255,0.85)', backdropFilter:'blur(12px)', WebkitBackdropFilter:'blur(12px)', borderRadius:20, padding:24, boxShadow:'0 4px 24px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04)', border:'1px solid rgba(226,232,240,0.8)', marginBottom:20, transition:'all 0.3s ease' };
 const inp: React.CSSProperties  = { width:'100%', border:`1px solid ${C.border}`, borderRadius:10, padding:'10px 12px', fontSize:14, outline:'none', background:C.white, boxSizing:'border-box' };
 const lbl: React.CSSProperties  = { display:'block', fontSize:11, fontWeight:600, color:'#374151', textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:4 } as React.CSSProperties;
 const btnBase: React.CSSProperties = { flex:1, padding:'10px 0', fontSize:14, fontWeight:600, border:'none', cursor:'pointer', transition:'all .15s' };
@@ -169,7 +169,7 @@ export default function TDEECalculator() {
     <div style={{ fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif', background:C.light, minHeight:'100vh' }}>
 
       {/* Header */}
-      <div style={{ background:`linear-gradient(135deg,${C.darkBlue},${C.blue})`, color:C.white, padding:'32px 16px 40px' }}>
+      <div style={{ background:'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)', color:C.white, padding:'32px 16px 40px' }}>
         <div style={{ maxWidth:960, margin:'0 auto' }}>
           <a href="/" style={{ color:'#93c5fd', fontSize:13, textDecoration:'none' }}>&lt;- freecalcs.io</a>
           <h1 style={{ fontSize:28, fontWeight:700, margin:'12px 0 8px', color:C.white }}>TDEE &amp; Calorie Calculator</h1>
@@ -283,7 +283,7 @@ export default function TDEECalculator() {
             {res && (
               <>
                 {/* Big result */}
-                <div style={{ background:`linear-gradient(135deg,${C.darkBlue},${C.blue})`, borderRadius:16, padding:20, color:C.white, marginBottom:16, boxShadow:'0 4px 20px rgba(37,99,235,.3)' }}>
+                <div style={{ background:'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)', borderRadius:16, padding:20, color:C.white, marginBottom:16, boxShadow:'0 8px 32px rgba(37,99,235,.25), 0 2px 8px rgba(0,0,0,.1)' }}>
                   <p style={{ fontSize:11, fontWeight:600, letterSpacing:'0.1em', color:'#93c5fd', margin:'0 0 4px', textTransform:'uppercase' }}>Your TDEE (Maintenance Calories)</p>
                   <div style={{ fontSize:48, fontWeight:700, lineHeight:1, margin:'0 0 4px' }}>{res.tdee.toLocaleString()}</div>
                   <p style={{ color:'#93c5fd', fontSize:14, margin:'0 0 16px' }}>calories per day to maintain your current weight</p>

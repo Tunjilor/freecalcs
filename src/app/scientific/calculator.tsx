@@ -65,7 +65,7 @@ export default function ScientificCalculator() {
         <div style={{background:"#fff",borderRadius:16,border:"1px solid #e5e7eb",padding:20}}>
           <div style={{background:"#f8f9fb",borderRadius:10,padding:"16px 20px",marginBottom:16,minHeight:80}}>
             <div style={{fontSize:12,color:"#9ca3af",minHeight:18}}>{expr}</div>
-            <div style={{fontSize:36,fontWeight:700,color:"#111",textAlign:"right",wordBreak:"break-all"}}>{display}</div>
+            <div style={{fontSize:40,fontWeight:800,letterSpacing:'-0.02em',color:"#111",textAlign:"right",wordBreak:"break-all"}}>{display}</div>
           </div>
           <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:8}}>
             {btn("sin(","fn")}{btn("cos(","fn")}{btn("tan(","fn")}{btn("log(","fn")}{btn("ln(","fn")}
