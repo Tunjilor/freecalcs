@@ -35,7 +35,7 @@ const FREQS: Record<string,{label:string;periods:number}> = {
 
 function fmt(n:number,d=0){return n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});}
 function fmtD(n:number){return '$'+fmt(Math.abs(n),2);}
-function parseMoney(s:string){return parseFloat(s.replace(/[^0-9.]/g,''))||0;}
+function parseMoney(s:any){const str=String(s);return parseFloat(str.replace(/[^0-9.]/g,''))||0;}
 function fmtInput(s:string){
   const raw=s.replace(/[^0-9.]/g,'');const parts=raw.split('.');
   parts[0]=parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');

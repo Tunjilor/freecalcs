@@ -53,7 +53,7 @@ function getMarginalRate(taxable: number, filing: string): number {
   return 0.37;
 }
 
-function parseMoney(s: string): number { return parseFloat(s.replace(/[^0-9.]/g, '')) || 0; }
+function parseMoney(s: any): number { const str = String(s); return parseFloat(str.replace(/[^0-9.]/g, '')) || 0; }
 function fmtInput(s: string): string {
   // Strip everything except digits and first decimal point
   const clean = s.replace(/[^0-9.]/g, '');
