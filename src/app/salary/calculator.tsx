@@ -316,6 +316,13 @@ export default function SalaryCalculator(){
                 </div>
               )}
 
+              {res&&(()=>{const ins=getSalaryInsights(res,mode);return ins.length>0?(
+                <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16}}>
+                  {ins.map((t,i)=>(
+                    <div key={i} style={{padding:'12px 16px',background:'linear-gradient(135deg,#f0fdf4,#eff6ff)',borderRadius:14,border:'1px solid #bbf7d0',fontSize:14,color:'#15803d',fontWeight:500}}>{t}</div>
+                  ))}
+                </div>
+              ):null})()}
               {/* Tabs */}
               <div style={{display:'flex',gap:4,background:'#f1f5f9',borderRadius:12,padding:4,marginBottom:16}}>
                 {(['results','compare','tips'] as const).map(t=>(
