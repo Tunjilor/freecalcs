@@ -156,6 +156,20 @@ function compute(
   return { agi, deduction, taxableIncome, federalTax, ltcgTax, selfEmployTax, totalTax, effectiveRate, marginalRate, afterTax, withheld: withheldAmt, refundOrOwed };
 }
 
+function getTaxInsights(res: any) {
+  const ins: string[] = [];
+  if (!res) return ins;
+  if (res.effectiveRate > 0) ins.push('📊 Your effective federal tax rate is ' + (res.effectiveRate * 100).toFixed(1) + '% — you keep ' + (100 - res.effectiveRate * 100).toFixed(1) + '¢ of every dollar');
+  if (res.refundOrOwed > 0) ins.push('💰 You could get a $' + Math.round(res.refundOrOwed).toLocaleString('en-US') + ' refund — consider adjusting withholding');
+  if (res.refundOrOwed < 0) ins.push('⚠️ You may owe $' + Math.round(Math.abs(res.refundOrOwed)).toLocaleString('en-US') + ' — consider increasing withholding');
+  if (res.marginalRate > 0) ins.push('📈 Your next dollar earned is taxed at ' + (res.marginalRate * 100).toFixed(0) + '% (marginal rate)');
+  if (res.totalTax > 0) {
+    const monthlyTax = res.totalTax / 12;
+    ins.push('🗓️ That works out to about $' + Math.round(monthlyTax).toLocaleString('en-US') + '/month in federal taxes');
+  }
+  return ins.slice(0, 3);
+}
+
 export default function TaxCalculator() {
   const [filing, setFiling]       = useState('single');
   const [tab, setTab]             = useState<'summary'|'brackets'|'planning'>('summary');
