@@ -109,19 +109,7 @@ export default function Home() {
 
       {/* Hero */}
       <div style={{ background: "linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)", padding: "0 0 56px" }}>
-        <nav style={{ padding: "0 24px" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div style={{ display: "flex", alignItems: "baseline" }}>
-              <span style={{ background: "#2563eb", color: "#fff", fontSize: 14, fontWeight: 800, padding: "3px 8px", borderRadius: 6, marginRight: 4 }}>free</span>
-              <span style={{ fontSize: 22, fontWeight: 800, color: "#fff" }}>calcs.io</span>
-            </div>
-            <div style={{ display: "flex", gap: 28 }}>
-              <Link href="/blog" style={{ color: "#93c5fd", textDecoration: "none", fontSize: 14, fontWeight: 500 }}>Blog</Link>
-              <Link href="/about" style={{ color: "#93c5fd", textDecoration: "none", fontSize: 14, fontWeight: 500 }}>About</Link>
-              <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 12, fontWeight: 600, padding: "4px 12px", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 20 }}>100% Free</span>
-            </div>
-          </div>
-        </nav>
+
         <section className="hero-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "48px 24px 0" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.1)", padding: "6px 16px", borderRadius: 24, marginBottom: 24 }}>
             <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#22c55e", animation: "pulse 2s infinite", flexShrink: 0 }}></span>
