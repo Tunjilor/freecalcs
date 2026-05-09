@@ -186,17 +186,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer style={{ borderTop: "1px solid #e2e8f0", padding: "28px 24px", textAlign: "center" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <span style={{ fontSize: 13, color: "#9ca3af" }}>© 2026 freecalcs.io — Free tools, always.</span>
-          <div style={{ display: "flex", gap: 20 }}>
-            <Link href="/blog" style={{ fontSize: 13, color: "#64748b", textDecoration: "none" }}>Blog</Link>
-            <Link href="/about" style={{ fontSize: 13, color: "#64748b", textDecoration: "none" }}>About</Link>
-            <Link href="/privacy" style={{ fontSize: 13, color: "#64748b", textDecoration: "none" }}>Privacy</Link>
-          </div>
-        </div>
-      </footer>
+
     </main>
   );
 }
