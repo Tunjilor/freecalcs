@@ -80,7 +80,6 @@ export default function ScientificCalculator() {
             {btn("0")}{btn(".")}{btn("00")}{btn("+","op")}{btn("=","eq")}
           </div>
         </div>
-      </section>
       {/* Related Calculators */}
       <div style={{maxWidth:960,margin:"0 auto",padding:"0 16px 40px"}}>
         <p style={{fontSize:18,fontWeight:700,color:"#111827",marginBottom:4}}>Related Calculators</p>
