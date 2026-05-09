@@ -331,6 +331,20 @@ export default function CompoundInterestCalculator(){
                   </div>
                 </div>
 
+                {(()=>{const insights=getInsights(res,principal,contrib,rate,years);return insights.length>0?(
+                  <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16}}>
+                    {insights.map((text,i)=>(
+                      <div key={i} style={{padding:'12px 16px',background:'linear-gradient(135deg,#f0fdf4,#eff6ff)',borderRadius:14,border:'1px solid #bbf7d0',fontSize:14,color:'#15803d',fontWeight:500}}>
+                        {text}
+                      </div>
+                    ))}
+                  </div>
+                ):null})()}
+                <div style={{display:'flex',gap:8,marginBottom:16}}>
+                  <button onClick={shareCalc} style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',gap:8,padding:'12px 16px',background:copied?'linear-gradient(135deg,#059669,#10b981)':'linear-gradient(135deg,#eff6ff,#f0f9ff)',border:copied?'1px solid #059669':'1px solid #bfdbfe',borderRadius:14,cursor:'pointer',fontSize:14,fontWeight:600,color:copied?'#fff':'#2563eb',transition:'all 0.3s ease'}}>
+                    {copied?'\u2713 Link Copied!':'\ud83d\udccb Copy Result Link'}
+                  </button>
+                </div>
                 {/* Donut-style breakdown */}
                 <div style={{...card,marginBottom:16}}>
                   <p style={{fontSize:12,fontWeight:700,color:'#111827',textTransform:'uppercase',letterSpacing:'.05em',margin:'0 0 12px'}}>Breakdown</p>
