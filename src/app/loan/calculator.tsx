@@ -65,6 +65,22 @@ export default function LoanCalculator(){
   const [tab, setTab]           = useState<'summary'|'amortization'|'compare'>('summary');
   const [res, setRes]           = useState<ReturnType<typeof compute>>(null);
 
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _amount = sp.get('amount'); if (_amount) setAmount(_amount as any);
+    const _rate = sp.get('rate'); if (_rate) setRate(_rate as any);
+    const _term = sp.get('term'); if (_term) setTerm(_term as any);
+    const _extra = sp.get('extra'); if (_extra) setExtra(_extra as any);
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'amount': String(amount), 'rate': String(rate), 'term': String(term), 'extra': String(extra) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
+
   const run = useCallback(()=>{
     setRes(compute(
       parseFloat(amount.replace(/,/g,''))||0,

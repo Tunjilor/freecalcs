@@ -88,6 +88,24 @@ export default function TDEECalculator() {
   }
   const [res, setRes] = useState<TDEEResult | null>(null);
 
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _unit = sp.get('unit'); if (_unit) setUnit(_unit as any);
+    const _sex = sp.get('sex'); if (_sex) setSex(_sex as any);
+    const _age = sp.get('age'); if (_age) setAge(_age as any);
+    const _weightLbs = sp.get('weightLbs'); if (_weightLbs) setWLbs(_weightLbs as any);
+    const _heightFt = sp.get('heightFt'); if (_heightFt) setHFt(_heightFt as any);
+    const _heightIn = sp.get('heightIn'); if (_heightIn) setHIn(_heightIn as any);
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'unit': String(unit), 'sex': String(sex), 'age': String(age), 'weightLbs': String(weightLbs), 'heightFt': String(heightFt), 'heightIn': String(heightIn) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
+
   const compute = useCallback(() => {
     let wKg = 0, hCm = 0;
     if (unit === 'imperial') {

@@ -181,6 +181,24 @@ export default function TaxCalculator() {
 
   const [res, setRes] = useState<TaxResult | null>(null);
 
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _filing = sp.get('filing'); if (_filing) setFiling(_filing as any);
+    const _wages = sp.get('wages'); if (_wages) setWages(Number(_wages));
+    const _selfEmp = sp.get('selfEmp'); if (_selfEmp) setSelfEmp(_selfEmp as any);
+    const _interest = sp.get('interest'); if (_interest) setInterest(_interest as any);
+    const _dividends = sp.get('dividends'); if (_dividends) setDividends(_dividends as any);
+    const _ltcg = sp.get('ltcg'); if (_ltcg) setLtcg(_ltcg as any);
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'filing': String(filing), 'wages': String(wages), 'selfEmp': String(selfEmp), 'interest': String(interest), 'dividends': String(dividends), 'ltcg': String(ltcg) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
+
   const run = useCallback(() => {
     setRes(compute(filing, wages, selfEmp, interest, dividends, ltcg, other, useStd, itemized, k401, hsa, studentLoan, children, withheld, '2026'));
   }, [filing, wages, selfEmp, interest, dividends, ltcg, other, useStd, itemized, k401, hsa, studentLoan, children, withheld]);

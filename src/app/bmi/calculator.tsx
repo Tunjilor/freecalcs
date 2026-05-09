@@ -150,6 +150,25 @@ export default function BMICalculator() {
   const [childMode, setChildMode] = useState(false);
   const [info, setInfo] = useState<BMIInfo | null>(null);
 
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _unit = sp.get('unit'); if (_unit) setUnit(_unit as any);
+    const _weightLbs = sp.get('weightLbs'); if (_weightLbs) setWeightLbs(_weightLbs as any);
+    const _heightFt = sp.get('heightFt'); if (_heightFt) setHeightFt(_heightFt as any);
+    const _heightIn = sp.get('heightIn'); if (_heightIn) setHeightIn2(_heightIn as any);
+    const _weightKg = sp.get('weightKg'); if (_weightKg) setWeightKg(_weightKg as any);
+    const _heightCm = sp.get('heightCm'); if (_heightCm) setHeightCm(_heightCm as any);
+    const _age = sp.get('age'); if (_age) setAge(_age as any);
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'unit': String(unit), 'weightLbs': String(weightLbs), 'heightFt': String(heightFt), 'heightIn': String(heightIn2), 'weightKg': String(weightKg), 'heightCm': String(heightCm), 'age': String(age) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
+
   const compute = useCallback(() => {
     let bmi = 0;
     let heightInTotal = 0;

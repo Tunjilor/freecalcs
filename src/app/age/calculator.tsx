@@ -103,6 +103,20 @@ export default function AgeCalculator(){
   const [sex, setSex]       = useState('male');
   const [res, setRes]       = useState<AgeResult|null>(null);
 
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _dob = sp.get('dob'); if (_dob) setDob(_dob as any);
+    const _sex = sp.get('sex'); if (_sex) setSex(_sex as any);
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'dob': String(dob), 'sex': String(sex) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
+
   useEffect(()=>{
     const d = new Date(dob); const r = new Date(refDate||todayStr);
     if(!isNaN(d.getTime())&&!isNaN(r.getTime())&&d<r) setRes(calcAge(d,r));

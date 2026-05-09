@@ -70,6 +70,23 @@ export default function RentVsBuy(){
   const [maintenance, setMaintenance] = useState(1);
   const [res,         setRes]         = useState<Result|null>(null);
 
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _homePrice = sp.get('homePrice'); if (_homePrice) setHomePrice(Number(_homePrice));
+    const _downPct = sp.get('downPct'); if (_downPct) setDownPct(Number(_downPct));
+    const _rate = sp.get('rate'); if (_rate) setRate(Number(_rate));
+    const _rent = sp.get('rent'); if (_rent) setRent(Number(_rent));
+    const _years = sp.get('years'); if (_years) setYears(Number(_years));
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'homePrice': String(homePrice), 'downPct': String(downPct), 'rate': String(rate), 'rent': String(rent), 'years': String(years) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
+
   useEffect(()=>{
     setRes(compute(homePrice,downPct,rate,rent,years,appreciation,rentIncrease,propTax,maintenance));
   },[homePrice,downPct,rate,rent,years,appreciation,rentIncrease,propTax,maintenance]);

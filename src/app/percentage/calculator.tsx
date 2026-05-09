@@ -1,6 +1,6 @@
 // @ts-nocheck
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const C = { blue:'#2563eb', darkBlue:'#1e3a5f', gray:'#6b7280', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc' };
 const card: React.CSSProperties = { background:C.white, borderRadius:16, padding:20, boxShadow:'0 1px 3px rgba(0,0,0,.08)', border:`1px solid ${C.border}`, marginBottom:16 };
@@ -39,6 +39,22 @@ export default function PercentageCalculator(){
   const [price,setPrice]=useState('120'); const [disc,setDisc]=useState('25');
   // 8. Sales tax
   const [preTax,setPreTax]=useState('100'); const [taxRate,setTaxRate]=useState('8.5');
+
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _p1 = sp.get('p1'); if (_p1) setP1(_p1 as any);
+    const _v1 = sp.get('v1'); if (_v1) setV1(_v1 as any);
+    const _v2a = sp.get('v2a'); if (_v2a) setV2a(_v2a as any);
+    const _v2b = sp.get('v2b'); if (_v2b) setV2b(_v2b as any);
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'p1': String(p1), 'v1': String(v1), 'v2a': String(v2a), 'v2b': String(v2b) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
 
   const r1 = (parseFloat(p1)||0)/100*(parseFloat(v1)||0);
   const r2 = (parseFloat(v2b)||0)>0?(parseFloat(v2a)||0)/(parseFloat(v2b)||0)*100:0;

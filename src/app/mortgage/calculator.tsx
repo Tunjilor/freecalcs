@@ -105,6 +105,22 @@ export default function MortgageCalculator() {
   const [compareRate, setCompareRate] = useState(5.5);
   const [compareYears, setCompareYears] = useState(15);
 
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _homePrice = sp.get('homePrice'); if (_homePrice) setHomePrice(Number(_homePrice));
+    const _downAmt = sp.get('downAmt'); if (_downAmt) setDownAmt(Number(_downAmt));
+    const _rate = sp.get('rate'); if (_rate) setRate(_rate as any);
+    const _term = sp.get('term'); if (_term) setTerm(_term as any);
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'homePrice': String(homePrice), 'downAmt': String(downAmt), 'rate': String(rate), 'term': String(term) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
+
   const actualYears = useCustom ? (parseFloat(customYears) || 30) : years;
 
   const principal = useMemo(() => {

@@ -126,6 +126,24 @@ export default function SalaryCalculator(){
   const [res,setRes]=useState<Res|null>(null);
   const [res2,setRes2]=useState<Res|null>(null);
 
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _mode = sp.get('mode'); if (_mode) setMode(_mode as any);
+    const _sal = sp.get('sal'); if (_sal) setSal(Number(_sal));
+    const _hrly = sp.get('hrly'); if (_hrly) setHrly(Number(_hrly));
+    const _hrs = sp.get('hrs'); if (_hrs) setHrs(Number(_hrs));
+    const _filing = sp.get('filing'); if (_filing) setFiling(_filing as any);
+    const _stateVal = sp.get('stateVal'); if (_stateVal) setStateVal(_stateVal as any);
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'mode': String(mode), 'sal': String(sal), 'hrly': String(hrly), 'hrs': String(hrs), 'filing': String(filing), 'stateVal': String(stateVal) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
+
   const run=useCallback(()=>{
     setRes(compute(mode,sal,hrly,hrs,otHrs,bonus,filing,stateVal,k401,hsa,health,fsa,roth,other));
     setRes2(compute(mode,sal2,hrly,hrs,otHrs,bonus,filing,state2,k401,hsa,health,fsa,roth,other));

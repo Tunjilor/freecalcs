@@ -1,6 +1,6 @@
 // @ts-nocheck
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const C = { blue:'#2563eb', darkBlue:'#1e3a5f', gray:'#6b7280', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc' };
 const card: React.CSSProperties = { background:C.white, borderRadius:16, padding:20, boxShadow:'0 1px 3px rgba(0,0,0,.08)', border:`1px solid ${C.border}`, marginBottom:16 };
@@ -38,6 +38,21 @@ export default function TipCalculator(){
   const [roundUp, setRoundUp]   = useState(false);
   const [taxRate, setTaxRate]     = useState('0');
   const [tipOnPreTax, setPreTax]  = useState(false);
+
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _bill = sp.get('bill'); if (_bill) setBill(_bill as any);
+    const _tipPct = sp.get('tipPct'); if (_tipPct) setTipPct(Number(_tipPct));
+    const _people = sp.get('people'); if (_people) setPeople(Number(_people));
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'bill': String(bill), 'tipPct': String(tipPct), 'people': String(people) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
 
   const billAmt    = parseFloat(bill.replace(/[^0-9.]/g,''))||0;
   const taxAmt     = billAmt * (parseFloat(taxRate)||0) / 100;

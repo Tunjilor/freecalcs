@@ -42,6 +42,23 @@ export default function MortgageQualifier() {
   const [savings, setSavings] = useState(50000);
   const [retirement, setRetirement] = useState(0);
 
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const _annualIncome = sp.get('annualIncome'); if (_annualIncome) setAnnualIncome(Number(_annualIncome));
+    const _coIncome = sp.get('coIncome'); if (_coIncome) setCoIncome(Number(_coIncome));
+    const _carPayment = sp.get('carPayment'); if (_carPayment) setCarPayment(Number(_carPayment));
+    const _studentLoan = sp.get('studentLoan'); if (_studentLoan) setStudentLoan(Number(_studentLoan));
+    const _creditCards = sp.get('creditCards'); if (_creditCards) setCreditCards(Number(_creditCards));
+  }, []);
+  const shareCalc = () => {
+    const params = new URLSearchParams({ 'annualIncome': String(annualIncome), 'coIncome': String(coIncome), 'carPayment': String(carPayment), 'studentLoan': String(studentLoan), 'creditCards': String(creditCards) });
+    const url = window.location.origin + window.location.pathname + '?' + params.toString();
+    navigator.clipboard.writeText(url).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
+    window.history.replaceState({}, '', '?' + params.toString());
+  };
+
   const totalIncome = annualIncome + (hasCoBorrower ? coIncome : 0);
   const grossMonthly = totalIncome / 12;
   const totalMonthlyDebts = carPayment + studentLoan + creditCards + otherDebts + childSupport;
