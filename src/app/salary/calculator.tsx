@@ -103,6 +103,25 @@ const labelStyle:React.CSSProperties={display:'block',fontSize:11,fontWeight:600
 const selectStyle:React.CSSProperties={...inputStyle,appearance:'none',cursor:'pointer'};
 const btnBase:React.CSSProperties={flex:1,padding:'10px 0',fontSize:14,fontWeight:600,border:'none',cursor:'pointer',transition:'all .15s'};
 
+
+function getSalaryInsights(res: any, mode: string) {
+  const ins: string[] = [];
+  if (!res) return ins;
+  const effRate = res.effRate;
+  if (effRate > 0) ins.push('📊 Your effective tax rate is ' + (effRate*100).toFixed(1) + '% — you keep ' + (100-effRate*100).toFixed(1) + '¢ of every dollar');
+  if (res.net > 0 && res.gross > 0) {
+    const daily = res.net / 365;
+    ins.push('💵 You earn approximately $' + Math.round(daily).toLocaleString('en-US') + ' per day after taxes');
+  }
+  if (res.ss > 0 && res.medicare > 0) {
+    ins.push('🏛️ You contribute $' + Math.round(res.ss + res.medicare).toLocaleString('en-US') + '/yr to Social Security & Medicare');
+  }
+  if (res.preTax > 0) {
+    ins.push('🎯 Your pre-tax deductions save you approximately $' + Math.round(res.preTax * 0.22).toLocaleString('en-US') + ' in taxes');
+  }
+  return ins.slice(0, 3);
+}
+
 export default function SalaryCalculator(){
   const [mode,setMode]=useState<'salary'|'hourly'>('salary');
   const [tab,setTab]=useState<'results'|'compare'|'tips'>('results');

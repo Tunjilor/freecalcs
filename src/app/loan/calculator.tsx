@@ -56,6 +56,26 @@ function compute(principal:number, annualRate:number, termMonths:number, extraPa
   return { payment, totalPayment, totalInterest, totalCost, rows, actualMonths, monthsSaved, apr, originationFee };
 }
 
+
+function getLoanInsights(res: any, amount: string, rate: string, extra: string) {
+  const ins: string[] = [];
+  if (!res) return ins;
+  const a = parseFloat(amount)||0;
+  if (res.totalInterest > 0 && a > 0) {
+    const pct = (res.totalInterest / a * 100).toFixed(0);
+    ins.push('💸 You will pay ' + pct + '% of your loan amount in interest ($' + Math.round(res.totalInterest).toLocaleString('en-US') + ')');
+  }
+  if (res.monthly > 0) {
+    ins.push('📅 Your monthly payment is $' + Math.round(res.monthly).toLocaleString('en-US'));
+  }
+  if (parseFloat(extra) > 0 && res.savedInterest > 0) {
+    ins.push('🎯 Extra payments save you $' + Math.round(res.savedInterest).toLocaleString('en-US') + ' in interest');
+  } else if (parseFloat(extra) === 0 && res.totalInterest > 1000) {
+    ins.push('💡 Even $50/mo extra could save you thousands in interest — try it!');
+  }
+  return ins.slice(0, 3);
+}
+
 export default function LoanCalculator(){
   const [amount, setAmount]     = useState('25000');
   const [rate, setRate]         = useState('7.5');
@@ -223,6 +243,16 @@ export default function LoanCalculator(){
 
                 {/* Payment breakdown bar */}
                 <div style={{...card}}>
+
+                {(()=>{const insights=getLoanInsights(res,amount,rate,extra);return insights.length>0?(
+                  <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16}}>
+                    {insights.map((text,i)=>(
+                      <div key={i} style={{padding:'12px 16px',background:'linear-gradient(135deg,#f0fdf4,#eff6ff)',borderRadius:14,border:'1px solid #bbf7d0',fontSize:14,color:'#15803d',fontWeight:500}}>
+                        {text}
+                      </div>
+                    ))}
+                  </div>
+                ):null})()}
                   <p style={{fontSize:12,fontWeight:700,color:'#111827',textTransform:'uppercase',letterSpacing:'.05em',margin:'0 0 12px'}}>Payment Breakdown</p>
                   {[
                     {label:'Loan Principal',amount:parseFloat(amount.replace(/,/g,''))||0,color:'#2563eb'},
