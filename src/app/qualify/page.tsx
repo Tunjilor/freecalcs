@@ -56,6 +56,27 @@ export default function Page() {
           </details>
         ))}
       </section>
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>What Mortgage Lenders Actually Look At</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Mortgage qualification is not a single yes/no decision — it is a multi-factor evaluation that lenders run simultaneously. The five main factors are credit score, debt-to-income ratio (DTI), down payment, employment history, and cash reserves. A weakness in one area can sometimes be offset by strength in another. A lower credit score might be acceptable with a larger down payment; a higher DTI might be overlooked with excellent credit.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>This calculator replicates the five major loan programs — Conventional, FHA, VA, USDA, and Jumbo — and checks your inputs against each program's actual requirements. You get a full qualification analysis, not just a payment estimate.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Understanding Debt-to-Income Ratio</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>DTI is the single most important number lenders calculate. Your front-end DTI is your proposed housing payment divided by your gross monthly income — lenders want this at 28% or below for conventional loans. Your back-end DTI is all monthly debt obligations (housing + car + student loans + credit cards) divided by gross monthly income — conventional lenders want this at or below 43%, though some allow up to 50% with compensating factors like excellent credit or large reserves.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Important: lenders use gross income (before taxes), not take-home pay. And they use minimum required payments on revolving debt, not your actual payments. If you pay $500/month toward a credit card but the minimum is $50, the lender uses $50. This means paying down revolving balances can dramatically improve your DTI even if the minimum payment stays the same.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Choosing the Right Loan Program</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Conventional loans are the most flexible but require the strongest credit. FHA loans accept lower credit scores (580+) and smaller down payments (3.5%) but charge mandatory mortgage insurance for the life of the loan. VA loans are the best deal available — zero down payment, no PMI, competitive rates — but require military service. USDA loans offer zero-down purchasing in rural and some suburban areas with income limits. Jumbo loans finance properties above the conforming loan limit ($766,550 in 2026) and require stronger credit and larger reserves.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>Getting pre-approved (not just pre-qualified) before house-hunting is essential in today's market. Pre-approval requires a hard credit pull and full document review, but results in a commitment letter that sellers treat as near-certain financing. Most competitive offers now include a pre-approval letter.</p>
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/mortgage" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Mortgage payment calculator →</a>
+            <a href="/blog/fha-vs-conventional-vs-va-vs-usda" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>FHA vs Conventional vs VA vs USDA →</a>
+          </div>
+        </div>
+      </article>
     </>
   );
 }

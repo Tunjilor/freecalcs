@@ -60,6 +60,47 @@ export default function Page() {
           </details>
         ))}
       </section>
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>US Tipping Guide: How Much to Tip in Every Situation</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Tipping in the United States is not optional for most service workers — it is the primary source of their income. Many servers earn a federal tipped minimum wage of $2.13/hour (with states required to make up the difference if tips don't reach regular minimum wage, though enforcement varies widely). In practice, US servers rely on tips for 60–70% of their total income. This is why tipping norms exist and why they carry real financial consequences.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Norms have shifted in recent years. A 2026 survey found that 20% is now considered the standard baseline for good restaurant service, up from 15% a decade ago. Rising food costs and stagnant wage floors have driven this shift. Many diners now tip 22–25% for excellent service and reserve 15% for below-average experiences.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Complete 2026 Tipping Reference</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 24px', marginBottom: 24 }}>
+            {[
+              ['Sit-down restaurant', '18–22%'],
+              ['Bar / cocktails', '$1–2/drink or 15–20%'],
+              ['Food delivery', '15–20%, min $4–5'],
+              ['Counter / fast casual', '10–15% (optional)'],
+              ['Coffee shop', '$0–$2 per drink'],
+              ['Rideshare (Uber/Lyft)', '15–20%'],
+              ['Taxi', '15–20%'],
+              ['Hotel housekeeping', '$2–5/night'],
+              ['Valet parking', '$2–5 on pickup'],
+              ['Hair stylist / barber', '15–25%'],
+              ['Nail salon', '15–20%'],
+              ['Spa / massage', '15–20%'],
+              ['Movers', '$20–50/person'],
+              ['Pizza delivery', '$3–5 minimum'],
+            ].map(([service, amount]) => (
+              <div key={service} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #f3f4f6', fontSize: 14 }}>
+                <span style={{ color: '#374151' }}>{service}</span>
+                <span style={{ fontWeight: 700, color: '#111' }}>{amount}</span>
+              </div>
+            ))}
+          </div>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Mental Math Shortcuts for Tipping</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>For 20%: move the decimal one place left (10%), then double it. On a $67 bill: $6.70 × 2 = $13.40. For 15%: find 10% ($6.70), then add half ($3.35) = $10.05. For 18%: find 20% ($13.40), then subtract 10% of that ($1.34) = $12.06. For an exact percentage on a round number, multiply the bill by the decimal: $80 × 0.20 = $16.00.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>When splitting a bill, always calculate the tip on the full pre-split total first, then divide. Calculating per-person first and rounding down can shortchange the server significantly on large groups.</p>
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/percentage" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Percentage calculator →</a>
+          </div>
+        </div>
+      </article>
     </>
   );
 }

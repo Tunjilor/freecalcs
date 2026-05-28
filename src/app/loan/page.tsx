@@ -60,6 +60,27 @@ export default function Page() {
           </details>
         ))}
       </section>
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>How Loan Amortization Actually Works</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Every loan payment you make has two parts: interest and principal. In the early months of a loan, almost all of your payment goes toward interest — the cost of borrowing — and almost nothing reduces the actual balance you owe. As the balance falls over time, the interest portion shrinks and the principal portion grows. By the final payment, nearly everything is principal. This is amortization.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>On a $20,000 car loan at 7% for 60 months, your first payment of $396 includes $117 in interest and only $279 toward your balance. Your last payment is mostly principal. This front-loaded interest structure is why extra payments made early in a loan save dramatically more money than extra payments made late.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Choosing the Right Loan Term</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Shorter terms mean higher monthly payments but far less total interest. A $25,000 personal loan at 8% over 3 years costs $783/month and $3,188 in total interest. The same loan over 5 years costs $507/month — but $5,425 in total interest, nearly double. If your budget allows the higher payment, the shorter term is almost always the better financial decision.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The one exception: if you have high-interest debt elsewhere. Taking a longer loan term at 8% to free up cash for paying off 22% credit card debt is mathematically sound. Always compare your loan rate against the rates of all your other debts before deciding on a term.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Personal, Auto, Student, and Mortgage Loans Compared</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>All loans use the same amortization math, but differ significantly in rates and terms. Mortgages (secured by real estate) carry the lowest rates, currently 6–7%, and run 10–30 years. Auto loans (secured by the vehicle) run 5–8% for 3–7 years. Student loans run 5–8% federal, higher private. Personal loans (unsecured) are the most expensive at 10–30% and 1–7 years — but fastest to obtain and most flexible in use.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>This calculator works for all loan types. Simply enter the loan amount, annual interest rate, and term in months or years. Use it to compare different rate or term scenarios side by side before committing to a loan offer.</p>
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/mortgage" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Mortgage calculator →</a>
+            <a href="/compound-interest" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Compound interest calculator →</a>
+          </div>
+        </div>
+      </article>
     </>
   );
 }

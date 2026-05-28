@@ -60,6 +60,28 @@ export default function Page() {
           </details>
         ))}
       </section>
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>Why Rent vs Buy Is More Than a Simple Math Problem</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The rent vs buy decision is the largest financial choice most people make — and it is frequently made with incomplete information. The common assumption that "buying is always better because you build equity" ignores the true costs of homeownership: closing costs (2–5% of purchase price), property taxes (0.5–2.5%/year), homeowners insurance, maintenance (budget 1–2% of value/year), and the opportunity cost of the down payment money.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Renting is not "throwing money away." Renters keep their down payment invested, avoid maintenance costs and repair surprises, and maintain the flexibility to move for better job opportunities. Whether renting or buying is smarter depends entirely on your local market, how long you plan to stay, and what you do with the money you would otherwise put toward a down payment and ownership costs.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>The Break-Even Point: The Number That Matters Most</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The break-even point is how many years you need to stay in a home before buying becomes cheaper than renting. Before that point, renting is the better financial decision. After it, buying pulls ahead. In most US markets, break-even runs between 3 and 8 years. In expensive coastal cities like San Francisco or New York, it can be 10–15 years. In affordable Midwest markets, it may be under 3 years.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>At today's 6.5–7% mortgage rates, the break-even point has stretched significantly compared to the 2020–2021 low-rate environment. A home that made sense to buy at 3% may take 8 years to break even at 7%. Use the years slider in this calculator to find your personal break-even and compare it to how long you realistically plan to stay.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Price-to-Rent Ratio: How to Read Your Local Market</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Divide a home's purchase price by its annual rent to get the price-to-rent ratio. A ratio below 15 generally favors buying; 15–20 is neutral; above 20 favors renting. In Austin, the ratio is around 18. In San Francisco, it is over 30 — meaning you'd pay 30 years of rent to buy an equivalent property. This is a quick market-level sanity check before running the full calculation.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>Home appreciation assumptions matter enormously. At 3% annual appreciation, a $400,000 home is worth $537,000 in 10 years — that $137,000 gain changes the calculation significantly. This calculator lets you adjust the appreciation rate for your market. Conservative estimate: use 2–3%. Optimistic: 4–5%. Never assume appreciation, however — some markets have seen home values stagnate or decline for a decade.</p>
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/mortgage" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Mortgage payment calculator →</a>
+            <a href="/qualify" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Do I qualify? →</a>
+            <a href="/blog/28-36-rule-mortgage" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>The 28/36 affordability rule →</a>
+          </div>
+        </div>
+      </article>
     </>
   );
 }
