@@ -94,6 +94,27 @@ export default function Page() {
           </details>
         ))}
       </section>
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>How Your Paycheck Is Actually Calculated</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Your gross salary is not what lands in your bank account. Between your employer paying you and you receiving it, the government takes several bites. Federal income tax is the largest deduction for most earners, calculated on a progressive bracket system — you don't pay the same rate on every dollar, only on the dollars that fall within each bracket.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>On top of federal income tax, you pay FICA taxes: 6.2% of wages up to $184,500 for Social Security, and 1.45% on all wages for Medicare (plus an extra 0.9% if you earn above $200,000). These are fixed-rate taxes — they don't have brackets. State income tax adds another layer if you live in one of the 41 states that tax income.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>The Biggest Lever: Pre-Tax Contributions</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Traditional 401(k) contributions reduce your taxable income before taxes are calculated. If you earn $85,000 and contribute $10,000 to your 401(k), you're only taxed on $75,000. In the 22% federal bracket, that's a $2,200 savings. HSA contributions (up to $4,300 for self-only in 2026) are even better — they reduce federal income tax, state income tax, and FICA taxes simultaneously, a rare triple tax advantage.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Your W-4 withholding form tells your employer how much to take out. Getting this right matters: too little and you owe at tax time; too much and you're giving the government an interest-free loan. Use the IRS Tax Withholding Estimator after running your numbers here to dial it in.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Salary vs Hourly: Converting Between the Two</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The standard conversion is to divide annual salary by 2,080 (52 weeks × 40 hours). A $75,000 salary equals $36.06/hour. A $100,000 salary equals $48.08/hour. Going the other way: multiply hourly rate × 2,080. A $25/hour job pays $52,000 annually before taxes. This calculator handles both salary and hourly inputs — select your payment type to switch modes.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>Keep in mind that salaried employees often work more than 40 hours without overtime pay, while hourly workers receive 1.5× their rate for hours over 40 in a week. Factor this into your actual hourly equivalent when comparing job offers.</p>
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/tax" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Federal tax calculator →</a>
+            <a href="/blog/2026-tax-brackets-guide" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>2026 tax brackets guide →</a>
+          </div>
+        </div>
+      </article>
     </>
   );
 }

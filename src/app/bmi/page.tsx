@@ -111,6 +111,27 @@ export default function Page() {
           </details>
         ))}
       </section>
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>What Is BMI and Why Does It Matter?</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Body Mass Index (BMI) is a number calculated from your height and weight that serves as a quick screening tool for weight-related health risk. It was developed by Belgian mathematician Adolphe Quetelet in the 1830s and adopted by the medical community as a low-cost, easily calculated proxy for body fat. Despite its age and limitations, it remains the most widely used health screening metric globally.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The formula is simple: weight in kilograms divided by height in meters squared. In imperial units: (weight in pounds × 703) ÷ height in inches². The result places you in one of five WHO-defined categories: underweight (below 18.5), normal weight (18.5–24.9), overweight (25–29.9), obese class I (30–34.9), obese class II (35–39.9), or obese class III (40+).</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>BMI Categories and Health Risk</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Research consistently shows that BMI correlates with health outcomes at the population level. Adults with a BMI in the obese range face significantly higher risks of type 2 diabetes, hypertension, heart disease, sleep apnea, and certain cancers. Conversely, very low BMI is associated with malnutrition, osteoporosis, and immune deficiency.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>However, BMI is a screening tool, not a diagnosis. The metric cannot distinguish between muscle and fat, and people of different ethnicities may face different health risks at the same BMI. Asian populations, for example, face elevated metabolic risk at BMI thresholds about 2–3 points lower than the WHO standards. Some health authorities now recommend a BMI cutoff of 23 for "overweight" in Asian adults.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>What to Do With Your BMI Result</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>A BMI outside the normal range is a prompt to look deeper — not a verdict. If your BMI is elevated, measure your waist circumference (high risk: above 35 inches for women, 40 inches for men) and ask your doctor about fasting blood glucose, blood pressure, and cholesterol. If your BMI is high because you're muscular, these other markers will likely be normal.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>If weight loss is the goal, knowing your Total Daily Energy Expenditure (TDEE) — how many calories you burn per day — is the next step. A consistent 500 calorie/day deficit below your TDEE produces roughly 1 pound of fat loss per week.</p>
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/tdee" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Calculate your TDEE →</a>
+            <a href="/blog/bmi-what-your-number-means" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>What your BMI really means →</a>
+          </div>
+        </div>
+      </article>
     </>
   );
 }

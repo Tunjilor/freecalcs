@@ -94,6 +94,27 @@ export default function Page() {
           </details>
         ))}
       </section>
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>How the US Federal Income Tax System Works</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The United States uses a progressive marginal tax system, meaning different portions of your income are taxed at different rates. The most common misconception is that earning more money can put you in a higher bracket and make you "worse off." That is not how it works. If you move from the 22% bracket into the 24% bracket, only the dollars above the 24% threshold are taxed at 24% — not your entire income.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>For 2026, the seven federal brackets for single filers run from 10% on the first $11,925 of taxable income up to 37% on income above $626,350. Your taxable income is your gross income minus your standard deduction ($16,100 for single filers in 2026) and any other above-the-line deductions like 401(k) contributions, student loan interest, and HSA contributions.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Refund vs Owing: What It Actually Means</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Getting a refund does not mean you paid less tax — it means your employer withheld more than your actual tax liability throughout the year and you're getting the overpayment back. Owing money means your withholding was insufficient. Neither situation changes your total tax bill. The goal should be to get as close to $0 as possible — a big refund means you gave the IRS an interest-free loan all year.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The most accurate way to calculate your expected tax bill is to estimate your total income, subtract your standard deduction (or itemized deductions), apply the brackets to the result, then subtract any tax credits (Child Tax Credit, education credits, etc.). This calculator does all of that automatically.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>The Most Effective Legal Tax Reductions in 2026</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Contributing the maximum to a traditional 401(k) ($23,500 in 2026) reduces taxable income by $23,500. At a 22% marginal rate, that's $5,170 in immediate federal tax savings, plus deferred state taxes. HSA contributions ($4,300 individual / $8,550 family) avoid federal income tax, state income tax, and FICA taxes — a triple benefit no other account offers.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>Tax credits beat deductions dollar-for-dollar. The Child Tax Credit ($2,000 per qualifying child under 17, up to $1,700 refundable) directly reduces your tax bill — not just your taxable income. The Earned Income Tax Credit, education credits, and retirement savings credits can be worth thousands more. Run your numbers in this calculator to see the full picture.</p>
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/salary" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Salary take-home calculator →</a>
+            <a href="/blog/2026-tax-brackets-guide" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>2026 tax brackets explained →</a>
+          </div>
+        </div>
+      </article>
     </>
   );
 }

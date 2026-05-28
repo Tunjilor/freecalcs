@@ -103,6 +103,26 @@ export default function Page() {
           </details>
         ))}
       </section>
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>What TDEE Actually Tells You</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Your Total Daily Energy Expenditure is the total number of calories your body burns in 24 hours. It combines four components: Basal Metabolic Rate (BMR — calories burned at rest just keeping you alive, roughly 60–70% of total), the Thermic Effect of Food (digesting food burns 8–10% of calories consumed), Non-Exercise Activity Thermogenesis or NEAT (unconscious movement like fidgeting, standing, walking — highly variable between individuals), and Exercise Activity Thermogenesis (deliberate workouts — often overestimated).</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The reason NEAT matters so much: two people of identical height, weight, and workout frequency can have TDEEs 300–500 calories apart based solely on how much they move during their non-exercise hours. Someone who walks throughout the day at a standing desk burns dramatically more than someone who sits 10 hours straight, even if both "go to the gym."</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Which TDEE Formula Is Most Accurate?</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>This calculator uses three formulas. <strong>Mifflin-St Jeor</strong> (1990) is the gold standard for most people, validated by the Academy of Nutrition and Dietetics with an average error of about 10%. <strong>Harris-Benedict</strong> (revised 1984) tends to overestimate by 5% but is widely used in clinical settings. <strong>Katch-McArdle</strong> is the most accurate formula if you know your body fat percentage, because it calculates from lean body mass rather than total weight — making it the best choice for athletes and muscular individuals whose BMR is often underestimated by weight-only formulas.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>How to Use TDEE to Actually Reach Your Goal</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Losing 1 pound of fat requires a cumulative deficit of approximately 3,500 calories. A 500 calorie/day deficit below your TDEE produces roughly 1 pound of weekly fat loss. A 1,000 calorie/day deficit produces 2 pounds. Most experts recommend not exceeding 1 pound/week for sustained results — larger deficits increase muscle loss, hunger, and the risk of metabolic adaptation (your body reduces TDEE in response to undereating).</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>The most common mistake: using your TDEE as a "permission slip" to eat exactly that amount. Your TDEE is an estimate with a ±10% error margin. Weigh yourself daily, take the 7-day average, and track it weekly. If your weight isn't moving in the right direction after 2 weeks at your target calories, adjust by 100–150 calories and repeat. Real data beats any formula.</p>
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/bmi" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>BMI calculator →</a>
+            <a href="/blog/what-is-tdee" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Complete TDEE guide →</a>
+          </div>
+        </div>
+      </article>
     </>
   );
 }

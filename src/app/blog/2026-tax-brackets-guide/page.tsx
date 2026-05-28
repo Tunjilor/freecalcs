@@ -25,7 +25,7 @@ export default function Article() {
           <div style={{marginBottom:32}}>
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>2026 Tax Brackets Overview</h2>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>The 2026 federal income tax brackets reflect the extended TCJA provisions. There are seven brackets from 10% to 37%.</p>
-            <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>For single filers: 10% up to $12,400. 12% from $12,401 to $50,000. 22% from $50,001 to $100,525. 24% from $100,526 to $197,300. 32% from $197,301 to $250,525. 35% from $250,526 to $626,350. 37% above $626,350.</p>
+            <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>For single filers: 10% up to $11,925. 12% from $11,926 to $48,475. 22% from $48,476 to $103,350. 24% from $103,351 to $197,300. 32% from $197,301 to $250,525. 35% from $250,526 to $626,350. 37% above $626,350. Married filing jointly thresholds are roughly double for most brackets.</p>
           </div>
           <div style={{marginBottom:32}}>
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>Marginal vs Effective Tax Rate</h2>
@@ -35,11 +35,11 @@ export default function Article() {
           <div style={{marginBottom:32}}>
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>Standard Deduction in 2026</h2>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>The 2026 standard deductions: $16,100 for single, $32,200 for married filing jointly, $16,100 for married separately, $24,150 for head of household.</p>
-            <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>About 90% of taxpayers use the standard deduction. Only itemize if your mortgage interest, state taxes (capped at $40,400), charitable donations, and medical expenses exceed these amounts.</p>
+            <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>About 90% of taxpayers use the standard deduction. Only itemize if your mortgage interest, state and local taxes (SALT, capped at $10,000), charitable donations, and medical expenses exceed these amounts.</p>
           </div>
           <div style={{marginBottom:32}}>
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>5 Ways to Lower Your Tax Bill</h2>
-            <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>First, max your 401(k) at $23,500 to reduce taxable income. At 22% marginal rate, that saves $5,170. Second, use your HSA as a triple tax advantage with a $4,300 limit. Third, harvest capital losses to offset gains plus $3,000 of ordinary income. Fourth, time your income and deductions around expected bracket changes. Fifth, claim all credits including $2,200 child tax credit per qualifying child.</p>
+            <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>First, max your 401(k) at $23,500 to reduce taxable income. At 22% marginal rate, that saves $5,170. Second, use your HSA as a triple tax advantage with a $4,300 limit. Third, harvest capital losses to offset gains plus $3,000 of ordinary income. Fourth, time your income and deductions around expected bracket changes. Fifth, claim all credits including $2,000 child tax credit per qualifying child under 17 (up to $1,700 refundable).</p>
           </div>
           <div style={{marginBottom:32}}>
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>Capital Gains Tax Rates</h2>

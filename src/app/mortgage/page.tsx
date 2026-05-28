@@ -118,6 +118,31 @@ export default function Page() {
           </details>
         ))}
       </section>
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>How This Mortgage Calculator Works</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>This free mortgage calculator computes your monthly payment using the standard amortization formula, then breaks down how much of every payment goes toward principal versus interest. Enter your home price, down payment, interest rate, and loan term to instantly see your payment, total interest, and full amortization schedule.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The calculator handles four modes: buying a home, refinancing, accessing home equity, and affordability checking. Switch between them using the mode buttons at the top of the calculator.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Understanding Mortgage Amortization</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Amortization means paying off a loan through fixed monthly payments over time. The math behind it means your early payments are almost entirely interest — on a $400,000 mortgage at 6.5% for 30 years, your first payment of $2,528 contains $2,167 in interest and only $361 in principal. By year 15, those numbers flip. By the final payment, nearly everything goes to principal.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>This is why making extra payments early in the loan is so powerful. An extra $200/month in year one reduces your principal by $200 — which then avoids 30 years of compounding interest on that $200. Use the <strong>Extra monthly payment</strong> field to see exactly how much you save.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>The True Cost of a Mortgage</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Most people focus on the monthly payment, but the total interest paid is the number that deserves attention. On a 30-year $400,000 mortgage at 6.5%, you pay $910,080 total — more than double the amount you borrowed. A 15-year mortgage at 5.75% on the same loan costs $573,000 total, saving $337,000. The Amortization tab shows your exact payoff date and cumulative interest month by month.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Don't forget closing costs (2–5% of purchase price) and ongoing costs: property taxes, homeowners insurance, HOA fees, and maintenance (budget 1–2% of home value per year). A $400,000 home can easily cost $500–$700 more per month in these costs beyond the mortgage payment itself.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>How to Get the Lowest Mortgage Rate</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>Your credit score is the single biggest lever. Moving from 680 to 740 can reduce your rate by 0.5%, which saves $65,000 in interest on a $400,000 loan over 30 years. Beyond that: put 20% down to eliminate PMI, compare at least 3 lenders (rates vary by 0.5%+ between lenders), consider a shorter loan term for a lower rate, and lock your rate quickly once you find a home since rates move daily.</p>
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/qualify" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Do I qualify for a mortgage? →</a>
+            <a href="/rent-vs-buy" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Rent vs Buy calculator →</a>
+            <a href="/blog/pay-off-mortgage-early" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>How to pay off early →</a>
+          </div>
+        </div>
+      </article>
     </>
   );
 }

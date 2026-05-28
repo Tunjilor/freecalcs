@@ -123,6 +123,27 @@ export default function Page() {
           </details>
         ))}
       </section>
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>Why Compound Interest Is the Most Powerful Force in Personal Finance</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The phrase often attributed to Einstein — "compound interest is the eighth wonder of the world" — captures something mathematically true: compounding turns time into money. Unlike simple interest which earns only on the original principal, compound interest earns on principal plus all previously accumulated interest. This creates exponential growth that accelerates as the years pass.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>At 7% annual return, $10,000 grows to $38,697 in 20 years and $76,123 in 30 years. The extra 10 years nearly doubles the outcome — not because you added any money, but because compounding had more time to work. This is why financial advisors repeat "start early" so insistently. Waiting a decade to begin investing can cost more than the total amount you eventually invest.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>The Three Variables That Control Your Growth</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}><strong>Rate of return</strong> is important but often over-focused. The difference between 6% and 8% on $10,000 over 30 years is $43,000 — significant, but not controllable. What you can control: reducing investment fees (each 1% fee costs you roughly 28% of your final balance over 30 years), choosing diversified low-cost index funds, and avoiding panic-selling during market downturns.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}><strong>Regular contributions</strong> are the most underappreciated lever. Contributing $500/month at 7% for 30 years produces $567,000 — far more than a one-time $50,000 investment ($380,000 at the same rate). The contributions themselves total only $180,000; the other $387,000 is pure compounding.</p>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}><strong>Compounding frequency</strong> matters less than people think. Daily compounding versus monthly compounding on $10,000 at 6% for 10 years produces a difference of only $29. Focus your energy on rate and contributions, not finding accounts that compound more frequently.</p>
+
+          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Compound Interest Works Against You Too</h2>
+          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>Credit card debt compounds at 20–30% annually. A $5,000 balance at 24% APR grows to $25,795 in 10 years if you make no payments. The same math that makes investing powerful makes high-interest debt catastrophic. Paying off 20%+ interest debt before investing (except for employer 401k matches) is almost always the mathematically correct decision.</p>
+
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/loan" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Loan & interest calculator →</a>
+            <a href="/blog/compound-interest-explained" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Deep dive: compound interest →</a>
+          </div>
+        </div>
+      </article>
     </>
   );
 }
