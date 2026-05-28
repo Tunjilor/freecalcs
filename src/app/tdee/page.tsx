@@ -45,6 +45,14 @@ const faqSchema = {
             "@type": "Answer",
             "text": "Activity level can increase your calorie needs by 20% to 90% above your BMR. A sedentary person might burn 1,800 calories daily while a very active person of the same size could burn 3,000 or more."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I choose the right activity level for an accurate TDEE estimate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Be honest and conservative: Sedentary (desk job, little exercise); Lightly active (1–3 light workouts per week); Moderately active (3–5 workouts per week); Very active (6–7 hard workouts per week); Extra active (physical job plus daily training). Most people overestimate — start conservative and adjust based on real weight changes over 2–4 weeks."
+          }
         }
       ]
     },
@@ -63,4 +71,28 @@ const faqSchema = {
   ]
 };
 
-export default function Page() { return (<><Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} /><TDEECalculator /></>); }
+const faqUi = [
+  { q: 'What is TDEE and why does it matter for weight management?', a: "TDEE (Total Daily Energy Expenditure) is the total calories your body burns per day — BMR plus all physical activity. It's the key number for weight management: eat below TDEE to lose weight, above to gain, equal to maintain." },
+  { q: 'What is the difference between BMR and TDEE?', a: "BMR is the calories your body burns at complete rest to stay alive (breathing, circulation, organ function). TDEE multiplies BMR by an activity factor. A sedentary person's TDEE is ~1.2× their BMR; a very active person's TDEE can be ~1.9× their BMR." },
+  { q: 'Which TDEE formula is most accurate?', a: 'Mifflin-St Jeor (1990) is the most accurate for most people, with ~±10% error. Harris-Benedict is slightly less accurate but widely used. Katch-McArdle is most accurate if you know your body fat percentage, making it best for athletic or muscular individuals.' },
+  { q: 'How many calories should I eat to lose 1 pound per week?', a: 'One pound of fat ≈ 3,500 calories. To lose 1 lb/week, eat 500 calories below your TDEE daily. To lose 2 lbs/week, eat 1,000 below. Most experts advise not going below 1,200 cal/day for women or 1,500 for men to avoid muscle loss.' },
+  { q: 'How do I choose the right activity level for an accurate TDEE estimate?', a: "Be honest and conservative: Sedentary (desk job, minimal exercise); Lightly active (1–3 light workouts/week); Moderately active (3–5 workouts/week); Very active (6–7 hard workouts/week); Extra active (physical job + daily training). Most people overestimate — start conservative and adjust based on real weight changes over 2–4 weeks." },
+];
+
+export default function Page() {
+  return (
+    <>
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} />
+      <TDEECalculator />
+      <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>
+        {faqUi.map(({ q, a }) => (
+          <details key={q} style={{ borderBottom: '1px solid #e5e7eb', padding: '14px 0' }}>
+            <summary style={{ fontWeight: 700, fontSize: 15, color: '#111', cursor: 'pointer', listStyle: 'none' }}>{q}</summary>
+            <p style={{ marginTop: 10, fontSize: 14, color: '#6b7280', lineHeight: 1.7 }}>{a}</p>
+          </details>
+        ))}
+      </section>
+    </>
+  );
+}

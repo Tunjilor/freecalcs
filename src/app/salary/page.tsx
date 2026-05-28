@@ -71,4 +71,28 @@ const faqSchema = {
   ]
 };
 
-export default function Page() { return (<><Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} /><SalaryCalculator /></>); }
+const faqUi = [
+  { q: 'What is the difference between gross pay and net pay?', a: "Gross pay is your total earnings before deductions. Net pay (take-home) is what you receive after federal tax, state tax, FICA (Social Security + Medicare), and voluntary deductions like 401(k) and health insurance." },
+  { q: 'What are FICA taxes and how much do I pay?', a: 'FICA includes Social Security (6.2% up to $176,100 in 2026) and Medicare (1.45% on all wages, plus 0.9% on wages above $200,000 for single filers). Your employer matches these — self-employed individuals pay both halves (15.3%).' },
+  { q: 'How do 401(k) contributions reduce my taxes?', a: 'Traditional 401(k) contributions reduce your taxable income dollar-for-dollar. Contributing $10,000 in the 22% bracket saves approximately $2,200 in federal taxes that year. The money grows tax-deferred until withdrawal.' },
+  { q: 'What is the difference between marginal and effective tax rate?', a: "Your marginal rate is what you pay on your last dollar of income (your top bracket). Your effective rate is total tax ÷ total income — the actual average. Someone in the 22% bracket doesn't pay 22% on all income, only on the portion above the threshold." },
+  { q: 'Which states have no income tax in 2026?', a: 'Nine states have no income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. This can save thousands per year compared to high-tax states like California (up to 13.3%) or New Jersey (up to 10.75%).' },
+];
+
+export default function Page() {
+  return (
+    <>
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} />
+      <SalaryCalculator />
+      <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>
+        {faqUi.map(({ q, a }) => (
+          <details key={q} style={{ borderBottom: '1px solid #e5e7eb', padding: '14px 0' }}>
+            <summary style={{ fontWeight: 700, fontSize: 15, color: '#111', cursor: 'pointer', listStyle: 'none' }}>{q}</summary>
+            <p style={{ marginTop: 10, fontSize: 14, color: '#6b7280', lineHeight: 1.7 }}>{a}</p>
+          </details>
+        ))}
+      </section>
+    </>
+  );
+}

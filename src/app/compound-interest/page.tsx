@@ -91,6 +91,28 @@ const faqSchema = {
   ]
 };
 
+const faqUi = [
+  { q: 'What is the difference between simple and compound interest?', a: 'Simple interest is calculated only on the principal. Compound interest is calculated on principal plus accumulated interest, creating exponential growth. At 7%, $10,000 grows to $31,000 over 30 years with simple interest but $76,123 with annual compounding.' },
+  { q: 'How does compounding frequency affect growth?', a: '$10,000 at 6% APR over 10 years: annual compounding → $18,061; monthly compounding → $18,167; daily compounding → $18,196. The jump from annual to monthly compounding is the most meaningful difference.' },
+  { q: 'What is the Rule of 72?', a: "Divide 72 by your annual interest rate to estimate how long it takes to double your money. At 6%, money doubles in ~12 years; at 8%, ~9 years; at 10%, ~7.2 years. It's accurate within a year or two for most rates." },
+  { q: 'Why does starting to invest early matter so much?', a: '$5,000 invested at age 25 at 7% grows to ~$71,000 by age 65. The same $5,000 invested at 35 only grows to ~$37,000. Starting 10 years earlier nearly doubles the outcome — without investing any more money.' },
+  { q: 'What is the difference between APR and APY?', a: 'APR is the stated interest rate without compounding effects. APY includes compounding within the year. At 6% APR compounded monthly, the APY is 6.168%. APY is what you actually earn on deposits; APR is what lenders advertise for loans.' },
+];
+
 export default function Page() {
-  return (<><Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} /><CompoundInterestCalculator /></>);
+  return (
+    <>
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} />
+      <CompoundInterestCalculator />
+      <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>
+        {faqUi.map(({ q, a }) => (
+          <details key={q} style={{ borderBottom: '1px solid #e5e7eb', padding: '14px 0' }}>
+            <summary style={{ fontWeight: 700, fontSize: 15, color: '#111', cursor: 'pointer', listStyle: 'none' }}>{q}</summary>
+            <p style={{ marginTop: 10, fontSize: 14, color: '#6b7280', lineHeight: 1.7 }}>{a}</p>
+          </details>
+        ))}
+      </section>
+    </>
+  );
 }

@@ -46,6 +46,14 @@ const faqSchema = {
             "text": "BMI Prime is your BMI divided by 25 (the upper limit of normal weight). A BMI Prime of 1.0 means you are exactly at the upper threshold. Below 1.0 is normal weight, above 1.0 is overweight."
           }
         }
+        {
+          "@type": "Question",
+          "name": "Does BMI differ for men and women?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The standard BMI formula and categories are the same for men and women. However, at the same BMI, women typically have higher body fat percentages than men due to physiological differences. Some practitioners use separate body fat benchmarks by sex, but official WHO and CDC BMI categories are gender-neutral."
+          }
+        }
       ]
     },
     {
@@ -63,4 +71,28 @@ const faqSchema = {
   ]
 };
 
-export default function Page() { return (<><Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} /><BMICalculator /></>); }
+const faqUi = [
+  { q: 'What is a healthy BMI range for adults?', a: "A healthy BMI is generally between 18.5 and 24.9. Below 18.5 is underweight; 25–29.9 is overweight; 30+ is obese. BMI is a screening tool and doesn't directly measure body fat." },
+  { q: 'Is BMI an accurate measure of health?', a: "BMI is a useful population-level screening tool but has limitations. It doesn't distinguish between muscle and fat — athletes may have a high BMI despite being very healthy. Use it alongside waist circumference, body fat percentage, and other health markers." },
+  { q: 'How is BMI calculated?', a: "BMI = weight (kg) ÷ height² (m²). In imperial: (weight in lbs × 703) ÷ height² (inches). For a 170 lb person at 5'9\" (69 in): (170 × 703) ÷ 69² = 25.1." },
+  { q: 'What is BMI prime?', a: "BMI prime is your BMI divided by 25 (the upper normal limit). A BMI prime of 1.0 means exactly at the normal/overweight boundary. Below 1.0 is normal; above 1.0 is overweight. A BMI prime of 0.9 means 10% below the overweight threshold." },
+  { q: 'Does BMI differ for men and women?', a: "The BMI formula and categories are the same for men and women. However, at the same BMI, women typically have higher body fat percentages due to physiological differences. Some practitioners use sex-specific body fat benchmarks, but official WHO/CDC categories are gender-neutral." },
+];
+
+export default function Page() {
+  return (
+    <>
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} />
+      <BMICalculator />
+      <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
+        <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>
+        {faqUi.map(({ q, a }) => (
+          <details key={q} style={{ borderBottom: '1px solid #e5e7eb', padding: '14px 0' }}>
+            <summary style={{ fontWeight: 700, fontSize: 15, color: '#111', cursor: 'pointer', listStyle: 'none' }}>{q}</summary>
+            <p style={{ marginTop: 10, fontSize: 14, color: '#6b7280', lineHeight: 1.7 }}>{a}</p>
+          </details>
+        ))}
+      </section>
+    </>
+  );
+}
