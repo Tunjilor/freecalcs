@@ -27,7 +27,7 @@ const faqSchema = {
           "name": "Should I take the standard deduction or itemize?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Take whichever is larger. The 2026 standard deduction is $15,000 for single filers and $30,000 for married filing jointly. Itemize only if your mortgage interest, state taxes, charitable donations, and other deductions exceed these amounts."
+            "text": "Take whichever is larger. The 2026 standard deduction is $16,100 for single filers and $32,200 for married filing jointly. Itemize only if your mortgage interest, SALT (capped at $10,000), charitable donations, and other deductions exceed these amounts."
           }
         },
         {
@@ -73,10 +73,11 @@ const faqSchema = {
 
 const faqUi = [
   { q: 'What are the 2026 federal income tax brackets?', a: 'For single filers in 2026: 10% up to $11,925; 12% $11,925–$48,475; 22% $48,475–$103,350; 24% $103,350–$197,300; 32% $197,300–$250,525; 35% $250,525–$626,350; 37% above $626,350. Married filing jointly thresholds are roughly double.' },
-  { q: 'Should I take the standard deduction or itemize?', a: 'Take whichever is larger. The 2026 standard deduction is $15,000 for single filers and $30,000 for married filing jointly. Itemize only if your mortgage interest, state taxes, charitable donations, and other deductions exceed these amounts.' },
-  { q: 'What is the difference between a tax deduction and a tax credit?', a: 'A deduction reduces taxable income — a $1,000 deduction in the 22% bracket saves $220. A credit reduces your tax bill dollar-for-dollar — a $1,000 credit saves $1,000. Credits are generally more valuable than equivalent deductions.' },
-  { q: 'How are capital gains taxed differently from regular income?', a: 'Long-term capital gains (assets held over 1 year) are taxed at 0%, 15%, or 20% — much lower than ordinary income tax rates. Short-term gains (held ≤ 1 year) are taxed as ordinary income. Most middle-income earners pay 15% on long-term gains.' },
-  { q: 'What is self-employment tax?', a: 'Self-employed individuals pay both employer and employee portions of Social Security and Medicare, totaling 15.3% on net earnings. You can deduct half of this amount from gross income on your tax return, which reduces your taxable income.' },
+  { q: 'Should I take the standard deduction or itemize?', a: 'Take whichever is larger. The 2026 standard deduction is $16,100 for single filers and $32,200 for married filing jointly (increased from 2025 under TCJA). Itemize only if your combined mortgage interest, state and local taxes (SALT, capped at $10,000), charitable donations, and other deductions exceed these amounts.' },
+  { q: 'What is the Child Tax Credit for 2026?', a: 'The Child Tax Credit provides up to $2,000 per qualifying child under age 17. Up to $1,700 is refundable — meaning you can receive it even if you owe no federal tax. The credit phases out starting at $200,000 of income for single filers and $400,000 for married filing jointly.' },
+  { q: 'What is the difference between a tax deduction and a tax credit?', a: 'A deduction reduces taxable income — a $1,000 deduction in the 22% bracket saves $220. A credit reduces your tax bill dollar-for-dollar — a $1,000 credit saves $1,000. Credits are generally far more valuable than equivalent deductions.' },
+  { q: 'How are capital gains taxed differently from regular income?', a: 'Long-term capital gains (assets held over 1 year) are taxed at 0%, 15%, or 20% — much lower than ordinary income rates. Short-term gains (held ≤ 1 year) are taxed as ordinary income. Most middle-income earners pay 15% on long-term gains.' },
+  { q: 'What is self-employment tax?', a: 'Self-employed individuals pay both employer and employee portions of Social Security and Medicare, totaling 15.3% on net earnings. You can deduct half of this on your return. Additionally, self-employed people can deduct health insurance premiums and contribute to a Solo 401(k) or SEP-IRA to reduce taxable income.' },
 ];
 
 export default function Page() {

@@ -51,7 +51,15 @@ const faqSchema = {
           "name": "How do I choose the right activity level for an accurate TDEE estimate?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Be honest and conservative: Sedentary (desk job, little exercise); Lightly active (1–3 light workouts per week); Moderately active (3–5 workouts per week); Very active (6–7 hard workouts per week); Extra active (physical job plus daily training). Most people overestimate — start conservative and adjust based on real weight changes over 2–4 weeks."
+            "text": "Be honest and conservative: Sedentary (desk job, little exercise); Lightly active (1-3 light workouts per week); Moderately active (3-5 workouts per week); Very active (6-7 hard workouts per week); Extra active (physical job plus daily training). Most people overestimate — start conservative and adjust based on real weight changes over 2-4 weeks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do most people overestimate their activity level?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Research shows people overestimate how active they are by 30-50%. A one-hour gym session counts as lightly active if the other 23 hours involve sitting. NEAT (Non-Exercise Activity Thermogenesis — fidgeting, walking, standing) varies enormously between people and accounts for 15-30% of total daily energy expenditure. If eating at your calculated TDEE but not losing weight, drop to the activity level below and reassess."
           }
         }
       ]
@@ -77,6 +85,8 @@ const faqUi = [
   { q: 'Which TDEE formula is most accurate?', a: 'Mifflin-St Jeor (1990) is the most accurate for most people, with ~±10% error. Harris-Benedict is slightly less accurate but widely used. Katch-McArdle is most accurate if you know your body fat percentage, making it best for athletic or muscular individuals.' },
   { q: 'How many calories should I eat to lose 1 pound per week?', a: 'One pound of fat ≈ 3,500 calories. To lose 1 lb/week, eat 500 calories below your TDEE daily. To lose 2 lbs/week, eat 1,000 below. Most experts advise not going below 1,200 cal/day for women or 1,500 for men to avoid muscle loss.' },
   { q: 'How do I choose the right activity level for an accurate TDEE estimate?', a: "Be honest and conservative: Sedentary (desk job, minimal exercise); Lightly active (1–3 light workouts/week); Moderately active (3–5 workouts/week); Very active (6–7 hard workouts/week); Extra active (physical job + daily training). Most people overestimate — start conservative and adjust based on real weight changes over 2–4 weeks." },
+  { q: 'Why do most people overestimate their activity level?', a: "Research consistently shows people overestimate how active they are by 30–50%. A one-hour gym session counts as 'lightly active' if the other 23 hours involve sitting. NEAT (Non-Exercise Activity Thermogenesis — fidgeting, walking, standing) accounts for 15–30% of total daily energy expenditure and varies enormously between people. If you're eating at your 'calculated' TDEE but not losing weight, drop to the activity level below and reassess." },
+  { q: 'How many calories do I burn in a day without exercising?', a: "For a sedentary adult, TDEE is roughly: BMR × 1.2. For a 5'9\", 170 lb, 35-year-old man, BMR is ~1,800 calories, making TDEE ~2,160 calories without any planned exercise. For a 5'5\", 140 lb, 35-year-old woman, BMR is ~1,440, making TDEE ~1,728. These are estimates — track your actual weight changes over 2 weeks to calibrate." },
 ];
 
 export default function Page() {

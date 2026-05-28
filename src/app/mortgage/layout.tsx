@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Mortgage Calculator 2026 | Payment, Amortization & Affordability | freecalcs.io',
-  description: 'Free mortgage calculator with full amortization schedule, extra payment analysis, refinance comparison, and affordability check. Updated for 2026 rates.',
+  description: 'Free mortgage calculator with monthly payment breakdown, closing costs estimate, amortization schedule, extra payment savings, and affordability check. Updated for 2026 rates.',
   alternates: { canonical: 'https://www.freecalcs.io/mortgage' },
   openGraph: {
     title: 'Mortgage Calculator 2026 | freecalcs.io',

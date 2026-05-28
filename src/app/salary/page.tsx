@@ -73,10 +73,11 @@ const faqSchema = {
 
 const faqUi = [
   { q: 'What is the difference between gross pay and net pay?', a: "Gross pay is your total earnings before deductions. Net pay (take-home) is what you receive after federal tax, state tax, FICA (Social Security + Medicare), and voluntary deductions like 401(k) and health insurance." },
-  { q: 'What are FICA taxes and how much do I pay?', a: 'FICA includes Social Security (6.2% up to $176,100 in 2026) and Medicare (1.45% on all wages, plus 0.9% on wages above $200,000 for single filers). Your employer matches these — self-employed individuals pay both halves (15.3%).' },
+  { q: 'What are FICA taxes and how much do I pay?', a: 'FICA includes Social Security (6.2% on wages up to $184,500 in 2026) and Medicare (1.45% on all wages, plus an extra 0.9% on wages above $200,000 for single filers). Your employer matches these — self-employed individuals pay both halves (15.3% total).' },
   { q: 'How do 401(k) contributions reduce my taxes?', a: 'Traditional 401(k) contributions reduce your taxable income dollar-for-dollar. Contributing $10,000 in the 22% bracket saves approximately $2,200 in federal taxes that year. The money grows tax-deferred until withdrawal.' },
   { q: 'What is the difference between marginal and effective tax rate?', a: "Your marginal rate is what you pay on your last dollar of income (your top bracket). Your effective rate is total tax ÷ total income — the actual average. Someone in the 22% bracket doesn't pay 22% on all income, only on the portion above the threshold." },
-  { q: 'Which states have no income tax in 2026?', a: 'Nine states have no income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. This can save thousands per year compared to high-tax states like California (up to 13.3%) or New Jersey (up to 10.75%).' },
+  { q: 'Which states have no income tax in 2026?', a: 'Nine states have no state income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. This can save thousands per year compared to high-tax states like California (up to 13.3%) or New Jersey (up to 10.75%).' },
+  { q: 'How do I convert my annual salary to an hourly rate?', a: 'Divide your annual salary by 2,080 — that\'s 52 weeks × 40 hours. A $60,000 salary = ~$28.85/hour. A $80,000 salary = ~$38.46/hour. A $100,000 salary = ~$48.08/hour. This is your pre-tax hourly equivalent; your take-home hourly rate will be lower after deductions.' },
 ];
 
 export default function Page() {

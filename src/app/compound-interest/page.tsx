@@ -73,6 +73,14 @@ const faqSchema = {
             "@type": "Answer",
             "text": "At 7% compounded annually, $10,000 grows to approximately $38,697 in 20 years. At 10%, it grows to about $67,275. Adding monthly contributions dramatically increases the final amount."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "How do regular monthly contributions affect compound interest growth?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "$10,000 invested at 7% with no contributions grows to about $76,000 in 30 years. Add $200 per month and it grows to about $318,000. Add $500 per month and it reaches about $620,000. The contributions themselves are only $72,000 and $180,000 respectively — the rest is compounding. Consistent monthly investing is the most powerful wealth-building habit."
+          }
         }
       ]
     },
@@ -97,6 +105,8 @@ const faqUi = [
   { q: 'What is the Rule of 72?', a: "Divide 72 by your annual interest rate to estimate how long it takes to double your money. At 6%, money doubles in ~12 years; at 8%, ~9 years; at 10%, ~7.2 years. It's accurate within a year or two for most rates." },
   { q: 'Why does starting to invest early matter so much?', a: '$5,000 invested at age 25 at 7% grows to ~$71,000 by age 65. The same $5,000 invested at 35 only grows to ~$37,000. Starting 10 years earlier nearly doubles the outcome — without investing any more money.' },
   { q: 'What is the difference between APR and APY?', a: 'APR is the stated interest rate without compounding effects. APY includes compounding within the year. At 6% APR compounded monthly, the APY is 6.168%. APY is what you actually earn on deposits; APR is what lenders advertise for loans.' },
+  { q: 'How do regular monthly contributions affect compound interest growth?', a: "Monthly contributions dramatically accelerate growth. $10,000 invested at 7% with no contributions grows to ~$76,000 in 30 years. Add just $200/month and it grows to ~$318,000. Add $500/month and it reaches ~$620,000. The contributions themselves are only $72,000 and $180,000 respectively — the rest is compounding. This is why consistent, automatic investing every month is the single most powerful wealth-building habit." },
+  { q: 'What will $10,000 grow to in 20 years?', a: "At 6% compounded annually: ~$32,071. At 7%: ~$38,697. At 8%: ~$46,610. At 10%: ~$67,275. At 12%: ~$96,463. The difference between 6% and 10% is enormous — $10,000 becomes either $32K or $67K, more than double. This illustrates why investment fees and return rates matter so much over long time horizons." },
 ];
 
 export default function Page() {
