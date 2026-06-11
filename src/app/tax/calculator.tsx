@@ -579,11 +579,31 @@ export default function TaxCalculator() {
                           ['Child tax credit', '$2,200/child'],
                           ['HSA (self-only)', taxYear === '2026' ? '$4,400' : '$4,300'],
                           ['Student loan interest', 'up to $2,500'],
+                          ['SALT deduction cap', taxYear === '2026' ? '$40,400' : '$40,000'],
                         ].map(([k, v]) => (
                           <div key={k} style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <span>{k}</span><strong style={{ color: '#1f2937' }}>{v}</strong>
                           </div>
                         ))}
+                      </div>
+                      <p style={{ fontSize: 10, color: '#9ca3af', margin: '6px 0 0', lineHeight: 1.5 }}>
+                        {taxYear === '2025' ? 'SALT cap is $20,000 if married filing separately. ' : ''}Applies only if you itemize. Phases down for income over $500,000 ($505,000 in 2026), reduced by 30% of the excess, but never below $10,000. Reverts to $10,000 in 2030.
+                      </p>
+
+                      {/* EITC — reference only, not used in the tax calculation */}
+                      <div style={{ marginTop: 10, paddingTop: 10, borderTop: `1px solid ${C.border}` }}>
+                        <p style={{ fontSize: 12, fontWeight: 600, color: '#374151', margin: '0 0 6px' }}>Earned Income Tax Credit — max credit ({taxYear})</p>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px 16px', fontSize: 12, color: C.gray }}>
+                          {(taxYear === '2026'
+                            ? [['No children', '$664'], ['1 child', '$4,427'], ['2 children', '$7,316'], ['3+ children', '$8,231']]
+                            : [['No children', '$649'], ['1 child', '$4,328'], ['2 children', '$7,152'], ['3+ children', '$8,046']]
+                          ).map(([k, v]) => (
+                            <div key={k} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                              <span>{k}</span><strong style={{ color: '#1f2937' }}>{v}</strong>
+                            </div>
+                          ))}
+                        </div>
+                        <p style={{ fontSize: 10, color: '#9ca3af', margin: '6px 0 0', lineHeight: 1.5 }}>Maximum credit; the actual amount phases in and out based on your income and filing status.</p>
                       </div>
                     </div>
 
