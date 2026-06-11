@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'va-loan-eligibility',
+    title:'VA Loan Eligibility in 2026: Do You Qualify?',
+    excerpt:'The VA loan offers zero down and no PMI - if you meet the service requirements. Here is how eligibility, the Certificate of Eligibility, and the funding fee actually work.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'7 min',
+    date:'Jun 10, 2026',
+    related:'/qualify',
+    relatedLabel:'Mortgage Qualifier',
+  },
+  {
     slug:'mortgage-refinance-requirements',
     title:'Mortgage Refinance Requirements: Do You Qualify in 2026?',
     excerpt:'What you need to refinance in 2026 - credit, equity, and DTI - plus the FHA, VA, and USDA streamline shortcuts that can skip the appraisal entirely.',
