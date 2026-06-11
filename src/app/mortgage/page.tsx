@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import MortgageCalculator from './calculator';
 
 export const metadata: Metadata = {
-  title: 'Mortgage Calculator 2026 | Payment, Amortization & Comparison | freecalcs.io',
+  title: 'Mortgage Calculator 2026 | Payment & Amortization',
   description: 'Calculate monthly mortgage payments with full amortization schedule, extra payment impact, and loan comparison. Includes PMI, taxes, and insurance.',
   alternates: { canonical: 'https://www.freecalcs.io/mortgage' },
   openGraph: {
@@ -12,6 +12,11 @@ export const metadata: Metadata = {
     url: 'https://www.freecalcs.io/mortgage',
     siteName: 'freecalcs.io',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mortgage Calculator 2026 | freecalcs.io',
+    description: 'Full amortization, extra payments, refinance, and affordability analysis.',
   },
 };
 

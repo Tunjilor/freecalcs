@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LoanCalculator from './calculator';
 
 export const metadata: Metadata = {
-  title: 'Loan & EMI Calculator 2026 | Monthly Payments & Amortization | freecalcs.io',
+  title: 'Loan & EMI Calculator 2026 | Payments & Amortization',
   description: 'Calculate monthly loan payments, total interest, and full amortization for personal, auto, student, or mortgage loans. Free, instant, no sign-up.',
   alternates: { canonical: 'https://www.freecalcs.io/loan' },
   openGraph: { title: 'Loan & EMI Calculator 2026 | freecalcs.io', description: 'Monthly payments, total interest, and amortization for any loan type.', url: 'https://www.freecalcs.io/loan', siteName: 'freecalcs.io', type: 'website' },
