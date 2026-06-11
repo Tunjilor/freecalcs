@@ -2,29 +2,55 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 
-// 2026 Federal Tax Brackets (One Big Beautiful Bill / TCJA extended)
-const BRACKETS: Record<string, [number, number, number][]> = {
-  single:      [[0,12400,.10],[12400,50000,.12],[50000,100525,.22],[100525,197300,.24],[197300,250525,.32],[250525,626350,.35],[626350,Infinity,.37]],
-  married:     [[0,24800,.10],[24800,100000,.12],[100000,201050,.22],[201050,394600,.24],[394600,501050,.32],[501050,751600,.35],[751600,Infinity,.37]],
-  married_sep: [[0,12400,.10],[12400,50000,.12],[50000,100525,.22],[100525,197300,.24],[197300,250525,.32],[250525,375800,.35],[375800,Infinity,.37]],
-  hoh:         [[0,18750,.10],[18750,63100,.12],[63100,100500,.22],[100500,197300,.24],[197300,250500,.32],[250500,626350,.35],[626350,Infinity,.37]],
-};
+// Federal tax data by year. Standard deductions are the exact verified figures.
+// Ordinary-income and long-term capital-gains thresholds are the official IRS
+// numbers (2025: Rev. Proc. 2024-40; 2026: Rev. Proc. 2025-32). The seven rates
+// (10/12/22/24/32/35/37%) apply to BOTH years. Married-filing-separately
+// thresholds are MFJ ÷ 2, per the IRS method.
+type Bracket = [number, number, number];
+type FilingTable = Record<string, Bracket[]>;
+interface YearData {
+  brackets: FilingTable;
+  stdDed: Record<string, number>;
+  ltcg: FilingTable;
+}
 
-// 2026 Standard Deductions
-const STD_DED: Record<string, number> = {
-  single:16100, married:32200, married_sep:16100, hoh:24150
+const TAX_DATA: Record<string, YearData> = {
+  '2025': {
+    brackets: {
+      single:      [[0,11925,.10],[11925,48475,.12],[48475,103350,.22],[103350,197300,.24],[197300,250525,.32],[250525,626350,.35],[626350,Infinity,.37]],
+      married:     [[0,23850,.10],[23850,96950,.12],[96950,206700,.22],[206700,394600,.24],[394600,501050,.32],[501050,751600,.35],[751600,Infinity,.37]],
+      married_sep: [[0,11925,.10],[11925,48475,.12],[48475,103350,.22],[103350,197300,.24],[197300,250525,.32],[250525,375800,.35],[375800,Infinity,.37]],
+      hoh:         [[0,17000,.10],[17000,64850,.12],[64850,103350,.22],[103350,197300,.24],[197300,250500,.32],[250500,626350,.35],[626350,Infinity,.37]],
+    },
+    stdDed: { single:15750, married:31500, married_sep:15750, hoh:23625 },
+    ltcg: {
+      single:      [[0,48350,0],[48350,533400,.15],[533400,Infinity,.20]],
+      married:     [[0,96700,0],[96700,600050,.15],[600050,Infinity,.20]],
+      married_sep: [[0,48350,0],[48350,300000,.15],[300000,Infinity,.20]],
+      hoh:         [[0,64750,0],[64750,566700,.15],[566700,Infinity,.20]],
+    },
+  },
+  '2026': {
+    brackets: {
+      single:      [[0,12400,.10],[12400,50400,.12],[50400,105700,.22],[105700,201775,.24],[201775,256225,.32],[256225,640600,.35],[640600,Infinity,.37]],
+      married:     [[0,24800,.10],[24800,100800,.12],[100800,211400,.22],[211400,403550,.24],[403550,512450,.32],[512450,768700,.35],[768700,Infinity,.37]],
+      married_sep: [[0,12400,.10],[12400,50400,.12],[50400,105700,.22],[105700,201775,.24],[201775,256225,.32],[256225,384350,.35],[384350,Infinity,.37]],
+      hoh:         [[0,17700,.10],[17700,67450,.12],[67450,105700,.22],[105700,201775,.24],[201775,256200,.32],[256200,640600,.35],[640600,Infinity,.37]],
+    },
+    stdDed: { single:16100, married:32200, married_sep:16100, hoh:24150 },
+    ltcg: {
+      single:      [[0,49450,0],[49450,545500,.15],[545500,Infinity,.20]],
+      married:     [[0,98900,0],[98900,613700,.15],[613700,Infinity,.20]],
+      married_sep: [[0,49450,0],[49450,306850,.15],[306850,Infinity,.20]],
+      hoh:         [[0,66200,0],[66200,579600,.15],[579600,Infinity,.20]],
+    },
+  },
 };
+const DEFAULT_YEAR = '2026';
 
-// 2026 Long-term capital gains brackets (single)
-const LTCG_BRACKETS: Record<string, [number, number, number][]> = {
-  single:      [[0,48350,0],[48350,533400,.15],[533400,Infinity,.20]],
-  married:     [[0,96700,0],[96700,600050,.15],[600050,Infinity,.20]],
-  married_sep: [[0,48350,0],[48350,300000,.15],[300000,Infinity,.20]],
-  hoh:         [[0,64750,0],[64750,566700,.15],[566700,Infinity,.20]],
-};
-
-function calcFed(taxable: number, filing: string): number {
-  const b = BRACKETS[filing] || BRACKETS.single;
+function calcFed(taxable: number, filing: string, brackets: FilingTable): number {
+  const b = brackets[filing] || brackets.single;
   let tax = 0;
   for (const [lo, hi, rate] of b) {
     if (taxable <= lo) break;
@@ -33,8 +59,8 @@ function calcFed(taxable: number, filing: string): number {
   return Math.max(0, tax);
 }
 
-function calcLTCG(ltcgAmt: number, ordinaryIncome: number, filing: string): number {
-  const b = LTCG_BRACKETS[filing] || LTCG_BRACKETS.single;
+function calcLTCG(ltcgAmt: number, ordinaryIncome: number, filing: string, ltcgBrackets: FilingTable): number {
+  const b = ltcgBrackets[filing] || ltcgBrackets.single;
   let tax = 0;
   let stackBase = ordinaryIncome;
   for (const [lo, hi, rate] of b) {
@@ -45,8 +71,8 @@ function calcLTCG(ltcgAmt: number, ordinaryIncome: number, filing: string): numb
   return Math.max(0, tax);
 }
 
-function getMarginalRate(taxable: number, filing: string): number {
-  const b = BRACKETS[filing] || BRACKETS.single;
+function getMarginalRate(taxable: number, filing: string, brackets: FilingTable): number {
+  const b = brackets[filing] || brackets.single;
   for (const [lo, hi, rate] of b) {
     if (taxable <= hi) return rate;
   }
@@ -98,6 +124,10 @@ function compute(
   useStd: boolean, itemized: any, k401: any, hsa: any, studentLoan: any,
   children: any, withheld: any, taxYear: string
 ): TaxResult {
+  // Resolve the year-specific tables. Locals are named to match the prior
+  // module constants so the calculation body below is unchanged.
+  const yd = TAX_DATA[taxYear] || TAX_DATA[DEFAULT_YEAR];
+  const BRACKETS = yd.brackets, STD_DED = yd.stdDed, LTCG_BRACKETS = yd.ltcg;
   const wagesAmt    = parseMoney(wages);
   const selfEmpAmt  = parseMoney(selfEmp);
   const interestAmt = parseMoney(interest);
@@ -130,10 +160,10 @@ function compute(
   const taxableIncome  = Math.max(0, agi - deduction);
 
   // Federal tax on ordinary income only
-  const federalTax = calcFed(ordinaryIncome, filing);
+  const federalTax = calcFed(ordinaryIncome, filing, BRACKETS);
 
   // LTCG tax (stacked on top of ordinary)
-  const ltcgTax = calcLTCG(ltcgAmt, ordinaryIncome, filing);
+  const ltcgTax = calcLTCG(ltcgAmt, ordinaryIncome, filing, LTCG_BRACKETS);
 
   // Child tax credit ($2,200 per qualifying child, up to tax liability)
   const childCredit = Math.min(childrenN * 2200, federalTax + ltcgTax);
@@ -142,7 +172,7 @@ function compute(
   const totalTax    = totalFedTax + selfEmployTax;
 
   const effectiveRate = totalIncome > 0 ? totalFedTax / totalIncome : 0;
-  const marginalRate  = getMarginalRate(ordinaryIncome, filing);
+  const marginalRate  = getMarginalRate(ordinaryIncome, filing, BRACKETS);
   const afterTax      = Math.max(0, totalIncome - totalTax);
   const refundOrOwed  = withheldAmt - totalFedTax;
 
@@ -174,6 +204,14 @@ export default function TaxCalculator() {
   const [filing, setFiling]       = useState('single');
   const [tab, setTab]             = useState<'summary'|'brackets'|'planning'>('summary');
   const [useStd, setUseStd]       = useState(true);
+  const [taxYear, setTaxYear]     = useState(DEFAULT_YEAR);
+
+  // Tables for the selected year. Named to match the former module constants so
+  // every render reference below (bracket visualizer, std-deduction labels,
+  // planning tips) reflects the chosen year automatically.
+  const yearData = TAX_DATA[taxYear] || TAX_DATA[DEFAULT_YEAR];
+  const BRACKETS = yearData.brackets;
+  const STD_DED = yearData.stdDed;
 
   // Income
   const [wages, setWages]         = useState(75000);
@@ -214,8 +252,8 @@ export default function TaxCalculator() {
   };
 
   const run = useCallback(() => {
-    setRes(compute(filing, wages, selfEmp, interest, dividends, ltcg, other, useStd, itemized, k401, hsa, studentLoan, children, withheld, '2026'));
-  }, [filing, wages, selfEmp, interest, dividends, ltcg, other, useStd, itemized, k401, hsa, studentLoan, children, withheld]);
+    setRes(compute(filing, wages, selfEmp, interest, dividends, ltcg, other, useStd, itemized, k401, hsa, studentLoan, children, withheld, taxYear));
+  }, [filing, wages, selfEmp, interest, dividends, ltcg, other, useStd, itemized, k401, hsa, studentLoan, children, withheld, taxYear]);
 
   useEffect(() => { run(); }, [run]);
 
@@ -259,8 +297,8 @@ export default function TaxCalculator() {
       <div style={{ background: `linear-gradient(135deg,${C.darkBlue},${C.blue})`, color: C.white, padding: '32px 16px 40px' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
           <a href="/" style={{ color: '#93c5fd', fontSize: 13, textDecoration: 'none' }}>&lt;- freecalcs.io</a>
-          <h1 style={{ fontSize: 28, fontWeight: 700, margin: '12px 0 8px', color: C.white }}>Federal Income Tax Calculator <span style={{ background:'rgba(255,255,255,.2)', fontSize:18, padding:'2px 10px', borderRadius:8, verticalAlign:'middle' }}>2026</span></h1>
-          <p style={{ color: '#93c5fd', fontSize: 14, margin: '0 0 16px' }}>Estimate your 2026 federal tax, refund, bracket breakdown, and effective rate. Includes self-employment tax, capital gains, and credits.</p>
+          <h1 style={{ fontSize: 28, fontWeight: 700, margin: '12px 0 8px', color: C.white }}>Federal Income Tax Calculator <span style={{ background:'rgba(255,255,255,.2)', fontSize:18, padding:'2px 10px', borderRadius:8, verticalAlign:'middle' }}>{taxYear}</span></h1>
+          <p style={{ color: '#93c5fd', fontSize: 14, margin: '0 0 16px' }}>Estimate your {taxYear} federal tax, refund, bracket breakdown, and effective rate. Includes self-employment tax, capital gains, and credits.</p>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {[
               ['Income Fields', '#income-section', null],
@@ -288,6 +326,15 @@ export default function TaxCalculator() {
           <div>
             <div style={{ ...card }}>
 
+              {/* Tax Year selector */}
+              <div style={{ marginBottom: 20 }}>
+                <label style={lbl} htmlFor="tax-year">Tax Year</label>
+                <select id="tax-year" value={taxYear} onChange={e => setTaxYear(e.target.value)} aria-label="Tax year">
+                  <option value="2026">2026 — plan for the year ahead (file in 2027)</option>
+                  <option value="2025">2025 — check a return you file in early 2026</option>
+                </select>
+              </div>
+
               {/* Filing Status as button group */}
               <div style={{ marginBottom: 20 }}>
                 <label style={lbl}>Filing Status</label>
@@ -300,7 +347,7 @@ export default function TaxCalculator() {
                   ))}
                 </div>
                 <div style={{ marginTop:10, fontSize:12, color:C.gray, background:'#f0fdf4', borderRadius:8, padding:'8px 12px' }}>
-                  2026 Standard deduction: <strong style={{ color:'#166534' }}>{fmtDInt(STD_DED[filing]||16100)}</strong>
+                  {taxYear} Standard deduction: <strong style={{ color:'#166534' }}>{fmtDInt(STD_DED[filing]||16100)}</strong>
                 </div>
               </div>
 
@@ -334,7 +381,7 @@ export default function TaxCalculator() {
                 </div>
                 {useStd ? (
                   <div style={{ background: '#f0fdf4', borderRadius: 10, padding: '10px 14px', fontSize: 13, color: '#166534' }}>
-                    Standard deduction: <strong>{fmtDInt(STD_DED[filing] || 16100)}</strong> for {filing === 'married' ? 'married filing jointly' : filing === 'hoh' ? 'head of household' : 'single/MFS'} (2026)
+                    Standard deduction: <strong>{fmtDInt(STD_DED[filing] || 16100)}</strong> for {filing === 'married' ? 'married filing jointly' : filing === 'hoh' ? 'head of household' : 'single/MFS'} ({taxYear})
                   </div>
                 ) : (
                   <div>
@@ -451,7 +498,7 @@ export default function TaxCalculator() {
                 {/* BRACKETS TAB */}
                 {tab === 'brackets' && (
                   <div id="brackets" style={{ ...card, scrollMarginTop: 70 }}>
-                    <p style={{ fontSize: 12, fontWeight: 700, color: '#111827', textTransform: 'uppercase', letterSpacing: '.05em', margin: '0 0 12px' }}>2026 Tax Bracket Breakdown</p>
+                    <p style={{ fontSize: 12, fontWeight: 700, color: '#111827', textTransform: 'uppercase', letterSpacing: '.05em', margin: '0 0 12px' }}>{taxYear} Tax Bracket Breakdown</p>
                     <p style={{ fontSize: 13, color: '#374151', margin: '0 0 14px' }}>Only dollars within each bracket are taxed at that rate. Your {(res.marginalRate * 100).toFixed(0)}% marginal rate applies ONLY to income above {fmtDInt((BRACKETS[filing] || BRACKETS.single).find(b => b[2] === res.marginalRate)?.[0] || 0)}.</p>
                     {(BRACKETS[filing] || BRACKETS.single).map(([lo, hi, rate], i) => {
                       const ordinary = Math.max(0, res.taxableIncome - parseMoney(ltcg));
@@ -518,21 +565,19 @@ export default function TaxCalculator() {
                     {parseInt(children) === 0 && (
                       <div style={{ padding: 12, background: '#faf5ff', borderRadius: 10, border: '1px solid #c4b5fd' }}>
                         <p style={{ fontSize: 13, fontWeight: 600, color: '#6b21a8', margin: '0 0 4px' }}>Child Tax Credit</p>
-                        <p style={{ fontSize: 12, color: '#7c3aed', margin: 0 }}>If you have qualifying children under 17, enter them above. Each child reduces your tax bill by up to $2,200 in 2026.</p>
+                        <p style={{ fontSize: 12, color: '#7c3aed', margin: 0 }}>If you have qualifying children under 17, enter them above. Each child reduces your tax bill by up to $2,200 in {taxYear}.</p>
                       </div>
                     )}
 
                     <div style={{ padding: 12, background: '#f8fafc', borderRadius: 10, border: `1px solid ${C.border}` }}>
-                      <p style={{ fontSize: 12, fontWeight: 600, color: '#374151', margin: '0 0 8px' }}>2026 Key Numbers</p>
+                      <p style={{ fontSize: 12, fontWeight: 600, color: '#374151', margin: '0 0 8px' }}>{taxYear} Key Numbers</p>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px 16px', fontSize: 12, color: C.gray }}>
                         {[
-                          ['Standard ded. (single)', '$16,100'],
-                          ['Standard ded. (MFJ)', '$32,200'],
-                          ['401(k) limit', '$23,500'],
-                          ['SALT deduction cap', '$40,400'],
+                          ['Standard ded. (single)', fmtDInt(STD_DED.single)],
+                          ['Standard ded. (MFJ)', fmtDInt(STD_DED.married)],
+                          ['401(k) limit', taxYear === '2026' ? '$24,500' : '$23,500'],
                           ['Child tax credit', '$2,200/child'],
-                          ['EITC (3+ children)', 'up to $8,231'],
-                          ['HSA (self-only)', '$4,300'],
+                          ['HSA (self-only)', taxYear === '2026' ? '$4,400' : '$4,300'],
                           ['Student loan interest', 'up to $2,500'],
                         ].map(([k, v]) => (
                           <div key={k} style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -563,16 +608,20 @@ export default function TaxCalculator() {
             </div>
           </div>
           <div style={{ ...card }}>
-            <h2 style={{ fontSize: 16, fontWeight: 700, color: '#1f2937', marginBottom: 12 }}>2026 Federal Tax Brackets (Single)</h2>
+            <h2 style={{ fontSize: 16, fontWeight: 700, color: '#1f2937', marginBottom: 12 }}>{taxYear} Federal Tax Brackets (Single)</h2>
             <div style={{ fontSize: 13 }}>
-              {[['10%','$0 - $12,400','#3b82f6'],['12%','$12,401 - $50,000','#22c55e'],['22%','$50,001 - $100,525','#f59e0b'],['24%','$100,526 - $197,300','#f97316'],['32%','$197,301 - $250,525','#ef4444'],['35%','$250,526 - $626,350','#b91c1c'],['37%','Over $626,350','#7f1d1d']].map(([rate, range, color]) => (
-                <div key={rate} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0', borderBottom: `1px solid #f3f4f6` }}>
+              {BRACKETS.single.map(([lo, hi, rate], i) => {
+                const colors = ['#3b82f6','#22c55e','#f59e0b','#f97316','#ef4444','#b91c1c','#7f1d1d'];
+                const range = hi === Infinity ? `Over ${fmtDInt(lo)}` : `${fmtDInt(lo)} - ${fmtDInt(hi)}`;
+                return (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0', borderBottom: `1px solid #f3f4f6` }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span style={{ width: 36, textAlign: 'center', padding: '2px 4px', borderRadius: 5, background: color, color: C.white, fontSize: 11, fontWeight: 700 }}>{rate}</span>
+                    <span style={{ width: 36, textAlign: 'center', padding: '2px 4px', borderRadius: 5, background: colors[i], color: C.white, fontSize: 11, fontWeight: 700 }}>{(rate * 100).toFixed(0)}%</span>
                     <span style={{ color: C.gray }}>{range}</span>
                   </div>
                 </div>
-              ))}
+              );
+            })}
             </div>
           </div>
         </div>

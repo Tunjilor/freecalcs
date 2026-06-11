@@ -1,93 +1,112 @@
 import Script from 'next/script';
 import type { Metadata } from 'next';
 import TaxCalculator from './calculator';
+
 export const metadata: Metadata = {
-  title: 'Federal Income Tax Calculator 2026 | Refund Estimator',
-  description: 'Estimate your 2026 federal tax bill or refund. Bracket breakdown, capital gains tax, self-employment tax, child tax credit, and tax planning tips.',
+  title: 'Federal Income Tax Calculator 2025 & 2026 | Refund Estimator',
+  description: 'Estimate your 2025 or 2026 federal income tax, refund, and effective rate. Pick your tax year for the right IRS standard deduction and brackets, plus capital gains and self-employment tax.',
   alternates: { canonical: 'https://www.freecalcs.io/tax' },
-  openGraph: { title: 'Federal Income Tax Calculator 2026 | freecalcs.io', description: 'Estimate your 2026 federal tax bill or refund.', url: 'https://www.freecalcs.io/tax', siteName: 'freecalcs.io', type: 'website' },
-  twitter: { card: 'summary_large_image', title: 'Federal Income Tax Calculator 2026 | freecalcs.io', description: 'Estimate your 2026 federal tax bill or refund with full bracket breakdown.' },
-};
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How do federal tax brackets work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Tax brackets are marginal, meaning only the income within each bracket is taxed at that rate. For example, if you earn $50,000, you do not pay 22% on all of it. The first $11,600 is taxed at 10%, the next portion at 12%, and so on."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Should I take the standard deduction or itemize?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Take whichever is larger. The 2026 standard deduction is $16,100 for single filers and $32,200 for married filing jointly. Itemize only if your mortgage interest, SALT (capped at $10,000), charitable donations, and other deductions exceed these amounts."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the capital gains tax rate?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Long-term capital gains (assets held over one year) are taxed at 0%, 15%, or 20% depending on your income. Short-term gains are taxed as ordinary income. Most people pay the 15% long-term rate."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does the child tax credit work?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The child tax credit provides up to $2,000 per qualifying child under age 17. Up to $1,700 is refundable, meaning you can receive it even if you owe no tax. Income phase-outs begin at $200,000 for single filers."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is self-employment tax?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Self-employed individuals pay both the employer and employee portions of Social Security and Medicare, totaling 15.3% on net earnings. You can deduct half of this amount from your gross income on your tax return."
-          }
-        }
-      ]
-    },
-    {
-      "@type": "WebApplication",
-      "name": "Income Tax Calculator",
-      "url": "https://www.freecalcs.io/tax",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Any",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-  ]
+  openGraph: { title: 'Federal Income Tax Calculator 2025 & 2026 | freecalcs.io', description: 'Estimate your 2025 or 2026 federal tax bill or refund. Switch tax year for updated standard deductions and IRS brackets.', url: 'https://www.freecalcs.io/tax', siteName: 'freecalcs.io', type: 'website' },
+  twitter: { card: 'summary_large_image', title: 'Federal Income Tax Calculator 2025 & 2026 | freecalcs.io', description: 'Estimate your 2025 or 2026 federal tax bill or refund with full bracket breakdown.' },
 };
 
-const faqUi = [
-  { q: 'What are the 2026 federal income tax brackets?', a: 'For single filers in 2026: 10% up to $11,925; 12% $11,925–$48,475; 22% $48,475–$103,350; 24% $103,350–$197,300; 32% $197,300–$250,525; 35% $250,525–$626,350; 37% above $626,350. Married filing jointly thresholds are roughly double.' },
-  { q: 'Should I take the standard deduction or itemize?', a: 'Take whichever is larger. The 2026 standard deduction is $16,100 for single filers and $32,200 for married filing jointly (increased from 2025 under TCJA). Itemize only if your combined mortgage interest, state and local taxes (SALT, capped at $10,000), charitable donations, and other deductions exceed these amounts.' },
-  { q: 'What is the Child Tax Credit for 2026?', a: 'The Child Tax Credit provides up to $2,000 per qualifying child under age 17. Up to $1,700 is refundable — meaning you can receive it even if you owe no federal tax. The credit phases out starting at $200,000 of income for single filers and $400,000 for married filing jointly.' },
-  { q: 'What is the difference between a tax deduction and a tax credit?', a: 'A deduction reduces taxable income — a $1,000 deduction in the 22% bracket saves $220. A credit reduces your tax bill dollar-for-dollar — a $1,000 credit saves $1,000. Credits are generally far more valuable than equivalent deductions.' },
-  { q: 'How are capital gains taxed differently from regular income?', a: 'Long-term capital gains (assets held over 1 year) are taxed at 0%, 15%, or 20% — much lower than ordinary income rates. Short-term gains (held ≤ 1 year) are taxed as ordinary income. Most middle-income earners pay 15% on long-term gains.' },
-  { q: 'What is self-employment tax?', a: 'Self-employed individuals pay both employer and employee portions of Social Security and Medicare, totaling 15.3% on net earnings. You can deduct half of this on your return. Additionally, self-employed people can deduct health insurance premiums and contribute to a Solo 401(k) or SEP-IRA to reduce taxable income.' },
+const faqs = [
+  {
+    q: "What's the difference between the 2025 and 2026 tax year?",
+    a: "The 2025 tax year is what you file a return for in early 2026; the 2026 tax year is what you'll file in early 2027 and what you plan for during 2026. The brackets and standard deduction are slightly higher for 2026 due to inflation adjustments.",
+  },
+  {
+    q: 'What is the standard deduction for 2026?',
+    a: '$16,100 for single filers and those married filing separately, $24,150 for heads of household, and $32,200 for married couples filing jointly.',
+  },
+  {
+    q: 'Does a higher tax bracket mean all my income is taxed at that rate?',
+    a: 'No. Only the portion of your income above each threshold is taxed at the higher rate. The rest is taxed at the lower rates beneath it, so your overall effective rate is lower than your top bracket.',
+  },
+  {
+    q: "What's the difference between marginal and effective tax rate?",
+    a: 'Your marginal rate is the rate on your last dollar of income (your bracket). Your effective rate is your total tax divided by your total income — always lower, because of the layered system.',
+  },
+  {
+    q: 'Is this calculator the same as my actual tax bill?',
+    a: "It's a close estimate of federal income tax based on your income, filing status, and the standard deduction. It doesn't include every credit, state tax, or special situation, so treat it as a planning tool, not a filed return.",
+  },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+    {
+      '@type': 'WebApplication',
+      name: 'Federal Income Tax Calculator',
+      url: 'https://www.freecalcs.io/tax',
+      applicationCategory: 'FinanceApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+  ],
+};
+
+const h2Main: React.CSSProperties = { fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 };
+const h2Sub: React.CSSProperties = { fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 };
+const para: React.CSSProperties = { fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 };
 
 export default function Page() {
   return (
     <>
-      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} />
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <TaxCalculator />
-      <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
-        <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>
-        {faqUi.map(({ q, a }) => (
+
+      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
+          {/* Intro */}
+          <p style={{ fontSize: 17, color: '#334155', lineHeight: 1.75, marginBottom: 36 }}>
+            This calculator estimates your U.S. federal income tax. Pick your tax year and filing status, enter your
+            income, and it applies the current standard deduction and the seven federal tax brackets to estimate what
+            you owe. Use 2025 to check a return you&apos;ve already filed, or 2026 to plan for the year ahead.
+          </p>
+
+          <h2 style={h2Main}>2025 vs 2026 — what changed</h2>
+          <p style={para}>
+            Each year the IRS adjusts the standard deduction and bracket thresholds for inflation, so the same income
+            can owe slightly different tax depending on the year. For 2026, the standard deduction rises to $16,100 for
+            single filers and $32,200 for married couples filing jointly, up from $15,750 and $31,500 in 2025. The seven
+            tax rates themselves (10% through 37%) are unchanged. A major law, the One Big Beautiful Bill Act passed in
+            2025, made the current rate structure permanent and added some new deductions — so the days of the brackets
+            expiring are, for now, behind us.
+          </p>
+
+          <h2 style={h2Sub}>How federal income tax actually works</h2>
+          <p style={para}>
+            The U.S. uses a progressive system, which is widely misunderstood. Your &ldquo;tax bracket&rdquo; is not the
+            rate you pay on all your income — it&apos;s the rate on your top dollar. Income is taxed in layers: the first
+            chunk at 10%, the next at 12%, and so on. So someone &ldquo;in the 22% bracket&rdquo; pays 10% and 12% on the
+            lower portions of their income and only 22% on the part above that threshold. That&apos;s why your effective
+            rate (total tax ÷ total income) is always lower than your bracket. The calculator above does this layered
+            math for you.
+          </p>
+
+          <h2 style={h2Sub}>Standard deduction vs itemizing</h2>
+          <p style={para}>
+            Before brackets apply, you subtract either the standard deduction or your itemized deductions — whichever is
+            larger. Most filers take the standard deduction because it now exceeds what they could itemize. You&apos;d
+            itemize only if deductible expenses (like mortgage interest, state and local taxes, and charitable gifts) add
+            up to more than your standard deduction.
+          </p>
+        </div>
+      </article>
+
+      <section style={{ maxWidth: 720, margin: '0 auto', padding: '40px 20px 24px' }}>
+        <h2 style={h2Main}>Frequently Asked Questions</h2>
+        {faqs.map(({ q, a }) => (
           <details key={q} style={{ borderBottom: '1px solid #e5e7eb', padding: '14px 0' }}>
             <summary style={{ fontWeight: 700, fontSize: 15, color: '#111', cursor: 'pointer', listStyle: 'none' }}>{q}</summary>
             <p style={{ marginTop: 10, fontSize: 14, color: '#6b7280', lineHeight: 1.7 }}>{a}</p>
@@ -95,26 +114,17 @@ export default function Page() {
         ))}
       </section>
 
-      <article style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
-        <div style={{ maxWidth: 720, margin: '0 auto', padding: '48px 20px 80px' }}>
-          <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 16 }}>How the US Federal Income Tax System Works</h2>
-          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The United States uses a progressive marginal tax system, meaning different portions of your income are taxed at different rates. The most common misconception is that earning more money can put you in a higher bracket and make you "worse off." That is not how it works. If you move from the 22% bracket into the 24% bracket, only the dollars above the 24% threshold are taxed at 24% — not your entire income.</p>
-          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>For 2026, the seven federal brackets for single filers run from 10% on the first $11,925 of taxable income up to 37% on income above $626,350. Your taxable income is your gross income minus your standard deduction ($16,100 for single filers in 2026) and any other above-the-line deductions like 401(k) contributions, student loan interest, and HSA contributions.</p>
-
-          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>Refund vs Owing: What It Actually Means</h2>
-          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Getting a refund does not mean you paid less tax — it means your employer withheld more than your actual tax liability throughout the year and you're getting the overpayment back. Owing money means your withholding was insufficient. Neither situation changes your total tax bill. The goal should be to get as close to $0 as possible — a big refund means you gave the IRS an interest-free loan all year.</p>
-          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>The most accurate way to calculate your expected tax bill is to estimate your total income, subtract your standard deduction (or itemized deductions), apply the brackets to the result, then subtract any tax credits (Child Tax Credit, education credits, etc.). This calculator does all of that automatically.</p>
-
-          <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>The Most Effective Legal Tax Reductions in 2026</h2>
-          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Contributing the maximum to a traditional 401(k) ($23,500 in 2026) reduces taxable income by $23,500. At a 22% marginal rate, that's $5,170 in immediate federal tax savings, plus deferred state taxes. HSA contributions ($4,300 individual / $8,550 family) avoid federal income tax, state income tax, and FICA taxes — a triple benefit no other account offers.</p>
-          <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>Tax credits beat deductions dollar-for-dollar. The Child Tax Credit ($2,000 per qualifying child under 17, up to $1,700 refundable) directly reduces your tax bill — not just your taxable income. The Earned Income Tax Credit, education credits, and retirement savings credits can be worth thousands more. Run your numbers in this calculator to see the full picture.</p>
-
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <a href="/salary" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Salary take-home calculator →</a>
-            <a href="/blog/2026-tax-brackets-guide" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>2026 tax brackets explained →</a>
-          </div>
+      <div style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 64px' }}>
+        <p style={{ fontSize: 12, color: '#94a3b8', lineHeight: 1.6, fontStyle: 'italic', borderTop: '1px solid #e5e7eb', paddingTop: 20, marginBottom: 28 }}>
+          This calculator provides estimates for general informational purposes only and is not tax advice. It covers
+          federal income tax using the standard deduction and does not account for all credits, state taxes, or
+          individual circumstances. Consult a qualified tax professional or the IRS for your specific situation.
+        </p>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          <a href="/salary" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Salary take-home calculator →</a>
+          <a href="/blog/2026-tax-brackets-guide" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>2026 tax brackets explained →</a>
         </div>
-      </article>
+      </div>
     </>
   );
 }
