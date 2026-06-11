@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'fha-vs-conventional-which-is-cheaper',
+    title:'FHA vs Conventional: Which Loan Is Actually Cheaper?',
+    excerpt:'FHA or conventional - which costs less? It comes down to mortgage insurance and your credit score. Here is the side-by-side, plus when to switch from one to the other.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'7 min',
+    date:'Jun 10, 2026',
+    related:'/mortgage',
+    relatedLabel:'Mortgage Calculator',
+  },
+  {
     slug:'usda-loan-eligibility',
     title:'USDA Loan Eligibility in 2026: Do You Qualify?',
     excerpt:'The USDA loan lets you buy with zero down in rural and many suburban areas. Here is how the income limits, eligible areas, credit, and borrower rules actually work.',
