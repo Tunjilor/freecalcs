@@ -79,7 +79,10 @@ function NumberInput({ label, value, onChange, suffix, step, hint }: {
   );
 }
 
-export default function MortgageCalculator() {
+export default function MortgageCalculator({ embedded = false }: { embedded?: boolean } = {}) {
+  // When embedded in another page (e.g. a blog post), demote the title to <h2>
+  // so the host page keeps a single <h1>, and hide the calculator's own nav.
+  const Heading = embedded ? "h2" : "h1";
   const [mode, setMode] = useState<Mode>("buy");
   const [homePrice, setHomePrice] = useState(400000);
   const [downAmt, setDownAmt] = useState(80000);
@@ -261,6 +264,7 @@ export default function MortgageCalculator() {
         @media print { nav, .no-print { display: none !important; } }
       `}</style>
 
+      {!embedded && (
       <nav style={{ background: "#fff", borderBottom: "1px solid #eee", padding: "0 20px", position: "sticky", top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", height: 54, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link href="/" style={{ textDecoration: "none" }}>
@@ -272,11 +276,12 @@ export default function MortgageCalculator() {
           </div>
         </div>
       </nav>
+      )}
 
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "28px 20px 80px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
           <div>
-            <h1 style={{ fontSize: 28, fontWeight: 800, color: "#111", marginBottom: 4 }}>Mortgage Calculator</h1>
+            <Heading style={{ fontSize: 28, fontWeight: 800, color: "#111", marginBottom: 4 }}>Mortgage Calculator</Heading>
             <p style={{ color: "#6b7280", fontSize: 14 }}>Full payment breakdown with amortization, extra payments, and loan comparison.</p>
           </div>
           <div className="no-print" style={{ display: "flex", gap: 8 }}>
