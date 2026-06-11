@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'fha-loan-requirements',
+    title:'FHA Loan Requirements in 2026: Do You Qualify?',
+    excerpt:'FHA loans are built for lower credit, smaller down payments, and bumpier histories. Here are the full 2026 requirements - credit, down payment, DTI, and mortgage insurance.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'7 min',
+    date:'Jun 10, 2026',
+    related:'/qualify',
+    relatedLabel:'Mortgage Qualifier',
+  },
+  {
     slug:'va-loan-eligibility',
     title:'VA Loan Eligibility in 2026: Do You Qualify?',
     excerpt:'The VA loan offers zero down and no PMI - if you meet the service requirements. Here is how eligibility, the Certificate of Eligibility, and the funding fee actually work.',
