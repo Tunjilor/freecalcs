@@ -9,7 +9,9 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title: 'Tip Calculator | freecalcs.io', description: 'Calculate tips and split bills. Service presets for restaurants, bars, and salons.' },
 };
 
-const jsonLd = {
+// FAQ structured data is generated from the visible faqs array so the JSON-LD
+// always matches what users see on the page, per Google's requirements.
+const jsonLd = () => ({
   '@context': 'https://schema.org',
   '@graph': [
     {
@@ -23,18 +25,10 @@ const jsonLd = {
     },
     {
       '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'What is the standard tip percentage at a restaurant?', acceptedAnswer: { '@type': 'Answer', text: 'The standard restaurant tip in the US is 15–20% for satisfactory service, 20–25% for excellent service, and 10–15% for poor service. Fast casual counter service does not require a tip, though it is appreciated.' } },
-        { '@type': 'Question', name: 'Should you calculate the tip before or after tax?', acceptedAnswer: { '@type': 'Answer', text: 'Tipping on the pre-tax total is perfectly acceptable and slightly more common, though tipping on the post-tax total is also fine. The difference on a typical bill is only $1–3. This calculator lets you choose either approach.' } },
-        { '@type': 'Question', name: 'How do you split a bill evenly among multiple people?', acceptedAnswer: { '@type': 'Answer', text: 'Add the full bill total including tax and tip, then divide by the number of people. For a $120 bill with 20% tip: $120 × 1.20 = $144, divided by 4 people = $36 each. This calculator handles any number of diners in real time.' } },
-        { '@type': 'Question', name: 'What is the appropriate tip for different services?', acceptedAnswer: { '@type': 'Answer', text: 'US guidelines: Restaurant servers 18–22%; Bartenders $1–2 per drink or 15–20%; Hair stylists/barbers 15–25%; Food delivery 15–20% (minimum $3–5); Taxi/rideshare 15–20%; Hotel housekeeping $2–5 per night; Valet $2–5.' } },
-        { '@type': 'Question', name: 'How do you calculate a 20% tip quickly in your head?', acceptedAnswer: { '@type': 'Answer', text: 'Move the decimal one place left for 10%, then double for 20%. For a $67.50 bill: 10% = $6.75, doubled = $13.50. For 15%: find 10% ($6.75) and add half ($3.38) = $10.13. For 18%: find 20% ($13.50) and subtract 10% of that ($1.35) = $12.15.' } },
-        { '@type': 'Question', name: 'How much should I tip for food delivery and takeout in 2026?', acceptedAnswer: { '@type': 'Answer', text: 'For delivery: 15-20% is standard, with a minimum of $4-5 regardless of bill size, since delivery workers cover their own gas and vehicle costs. For bad weather or large orders, tip higher. For takeout counter service: 10-15% is now considered polite for complex orders.' } },
-        { '@type': 'Question', name: 'Is 20% now the standard tip, or is 15% still acceptable?', acceptedAnswer: { '@type': 'Answer', text: 'Tipping norms have shifted. In 2026, 20% of the pre-tax bill is widely considered the new baseline for good sit-down restaurant service. 15% now signals below-average service. 25% or more is appropriate for excellent service. This reflects rising costs and stagnant tipped-minimum wages.' } },
-      ],
+      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
     },
   ],
-};
+});
 
 const faqs = [
   { q: 'What is the standard tip percentage at a restaurant?', a: "The standard restaurant tip in the US is 15–20% for satisfactory service, 20–25% for excellent service, and 10–15% for poor service. Fast casual counter service doesn't require a tip, though it's appreciated." },
@@ -49,7 +43,7 @@ const faqs = [
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }} />
       <TipCalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>

@@ -9,7 +9,9 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title: 'Percentage Calculator | freecalcs.io', description: 'Seven percentage tools: percent of, change, discount, tip, difference, increase and decrease.' },
 };
 
-const jsonLd = {
+// FAQ structured data is generated from the visible faqs array so the JSON-LD
+// always matches what users see on the page, per Google's requirements.
+const jsonLd = () => ({
   '@context': 'https://schema.org',
   '@graph': [
     {
@@ -23,16 +25,10 @@ const jsonLd = {
     },
     {
       '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'How do I calculate what percentage one number is of another?', acceptedAnswer: { '@type': 'Answer', text: 'Divide the part by the whole, then multiply by 100. Example: what percent is 30 of 150? 30 ÷ 150 × 100 = 20%. This works for calculating market share, test grades, tip amounts, and many everyday situations.' } },
-        { '@type': 'Question', name: 'What is the difference between percentage change and percentage difference?', acceptedAnswer: { '@type': 'Answer', text: 'Percentage change measures how much a value changed relative to its starting point: (New − Old) ÷ Old × 100. Percentage difference measures the gap between two values without a clear starting point: |A − B| ÷ ((A + B) ÷ 2) × 100. Use change for before/after comparisons; use difference for comparing two equal alternatives.' } },
-        { '@type': 'Question', name: 'How do I calculate a discount percentage?', acceptedAnswer: { '@type': 'Answer', text: 'Sale price = Original price × (1 − Discount% ÷ 100). For 25% off an $80 item: $80 × 0.75 = $60. To find the discount percentage: (Original − Sale) ÷ Original × 100. From $80 down to $60: ($80 − $60) ÷ $80 × 100 = 25% off.' } },
-        { '@type': 'Question', name: 'How do I add a percentage to a number?', acceptedAnswer: { '@type': 'Answer', text: 'Multiply the number by (1 + percentage ÷ 100). For a 15% increase on $200: $200 × 1.15 = $230. For 7% sales tax on a $50 item: $50 × 1.07 = $53.50. To subtract a percentage: multiply by (1 − percentage ÷ 100).' } },
-        { '@type': 'Question', name: 'How do I find the original price before a percentage increase?', acceptedAnswer: { '@type': 'Answer', text: 'Divide the new value by (1 + percentage ÷ 100). If a price increased 20% to reach $120, the original was $120 ÷ 1.20 = $100. Useful for finding pre-tax prices, original prices before markup, or starting values before a raise.' } },
-      ],
+      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
     },
   ],
-};
+});
 
 const faqs = [
   { q: 'How do I calculate what percentage one number is of another?', a: 'Divide the part by the whole, then multiply by 100. Example: what percent is 30 of 150? 30 ÷ 150 × 100 = 20%. This works for market share, test grades, tip amounts, and countless everyday situations.' },
@@ -45,7 +41,7 @@ const faqs = [
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }} />
       <PercentageCalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>

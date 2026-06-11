@@ -20,69 +20,18 @@ export const metadata: Metadata = {
   },
 };
 
-const faqSchema = {
+// FAQ structured data is generated from the visible faqUi array (below) so the
+// JSON-LD always matches what users see on the page, per Google's requirements.
+const faqSchema = () => ({
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is compound interest?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Compound interest is interest earned on both your initial principal and on the interest that has already been added. This creates exponential growth over time, unlike simple interest which only earns on the original amount."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How often should interest compound?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The more frequently interest compounds, the more you earn. Daily compounding yields slightly more than monthly, which yields more than annually. Most savings accounts compound daily, while many investments compound monthly or quarterly."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the Rule of 72?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The Rule of 72 is a quick way to estimate how long it takes to double your money. Divide 72 by your annual interest rate. For example, at 8% interest, your money doubles in approximately 9 years (72 / 8 = 9)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does inflation affect compound interest?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Inflation reduces the real purchasing power of your returns. If your investment earns 8% but inflation is 3%, your real return is approximately 5%. Always consider inflation-adjusted returns when planning long-term."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the difference between APR and APY?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "APR (Annual Percentage Rate) is the stated interest rate without compounding. APY (Annual Percentage Yield) includes the effect of compounding. APY is always equal to or higher than APR and reflects what you actually earn."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How much will $10,000 grow in 20 years?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "At 7% compounded annually, $10,000 grows to approximately $38,697 in 20 years. At 10%, it grows to about $67,275. Adding monthly contributions dramatically increases the final amount."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do regular monthly contributions affect compound interest growth?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "$10,000 invested at 7% with no contributions grows to about $76,000 in 30 years. Add $200 per month and it grows to about $318,000. Add $500 per month and it reaches about $620,000. The contributions themselves are only $72,000 and $180,000 respectively — the rest is compounding. Consistent monthly investing is the most powerful wealth-building habit."
-          }
-        }
-      ]
+      "mainEntity": faqUi.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a },
+      })),
     },
     {
       "@type": "WebApplication",
@@ -97,7 +46,7 @@ const faqSchema = {
       }
     }
   ]
-};
+});
 
 const faqUi = [
   { q: 'What is the difference between simple and compound interest?', a: 'Simple interest is calculated only on the principal. Compound interest is calculated on principal plus accumulated interest, creating exponential growth. At 7%, $10,000 grows to $31,000 over 30 years with simple interest but $76,123 with annual compounding.' },
@@ -112,7 +61,7 @@ const faqUi = [
 export default function Page() {
   return (
     <>
-      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} />
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema())}} />
       <CompoundInterestCalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>

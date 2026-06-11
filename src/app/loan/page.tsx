@@ -9,7 +9,9 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title: 'Loan & EMI Calculator 2026 | freecalcs.io', description: 'Monthly payments and amortization for personal, auto, student, and mortgage loans.' },
 };
 
-const jsonLd = {
+// FAQ structured data is generated from the visible faqs array so the JSON-LD
+// always matches what users see on the page, per Google's requirements.
+const jsonLd = () => ({
   '@context': 'https://schema.org',
   '@graph': [
     {
@@ -23,18 +25,10 @@ const jsonLd = {
     },
     {
       '@type': 'FAQPage',
-      mainEntity: [
-        { '@type': 'Question', name: 'What is EMI and how is it calculated?', acceptedAnswer: { '@type': 'Answer', text: 'EMI (Equated Monthly Installment) is the fixed monthly payment on a loan. It is calculated with the formula: P × [r(1+r)^n] / [(1+r)^n - 1], where P is the principal, r is the monthly interest rate, and n is the number of months. Early payments are mostly interest; later payments are mostly principal.' } },
-        { '@type': 'Question', name: 'What factors affect my loan interest rate?', acceptedAnswer: { '@type': 'Answer', text: 'Key factors include credit score (higher score = lower rate), loan term (shorter terms often have lower rates), loan type (secured vs unsecured), debt-to-income ratio, employment history, and lender competition. Improving your credit score by 40–50 points can lower your rate by 0.5–1% or more.' } },
-        { '@type': 'Question', name: 'What is the difference between fixed and variable interest rates?', acceptedAnswer: { '@type': 'Answer', text: 'A fixed rate stays the same for the entire loan term — your payment is predictable. A variable rate starts lower but can change based on market indexes, making future payments uncertain. Fixed rates suit borrowers who want certainty; variable rates can save money if you plan to repay quickly or rates fall.' } },
-        { '@type': 'Question', name: 'How does loan amortization work?', acceptedAnswer: { '@type': 'Answer', text: 'Amortization is paying off a loan through regular payments over time. In early payments, most goes toward interest. As the balance decreases, more goes toward principal. By the final payment, almost all of it is principal. This is why making extra payments early saves disproportionately more interest.' } },
-        { '@type': 'Question', name: 'Can I pay off a loan early and save on interest?', acceptedAnswer: { '@type': 'Answer', text: 'Yes — paying off a loan early almost always saves interest. An extra $100 per month on a $25,000 car loan at 7% over 5 years saves about $800 in interest and pays it off 6 months early. Always check if your loan has prepayment penalties before making extra payments.' } },
-        { '@type': 'Question', name: 'Is a shorter or longer loan term better?', acceptedAnswer: { '@type': 'Answer', text: 'Shorter term means higher monthly payments but less total interest and faster payoff. Longer term means lower payments but significantly more total interest paid. A $25,000 loan at 7% over 3 years costs $772 per month but only $2,800 in interest. The same loan over 6 years costs $428 per month but $5,800 in total interest.' } },
-        { '@type': 'Question', name: 'What is the difference between a personal loan, auto loan, and mortgage?', acceptedAnswer: { '@type': 'Answer', text: 'All three use the same amortization math but differ in collateral and rates. Mortgages are secured by the home with the lowest rates and 10-30 year terms. Auto loans are secured by the vehicle with moderate rates and 3-7 year terms. Personal loans are unsecured with the highest rates and 1-7 year terms. This calculator works for all three.' } },
-      ],
+      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
     },
   ],
-};
+});
 
 const faqs = [
   { q: 'What is EMI and how is it calculated?', a: "EMI (Equated Monthly Installment) is the fixed monthly payment on a loan. It's calculated with: P × [r(1+r)^n] / [(1+r)^n - 1], where P is the principal, r is the monthly interest rate, and n is the number of months. Each payment covers both interest and principal, with the interest share declining over time." },
@@ -49,7 +43,7 @@ const faqs = [
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }} />
       <LoanCalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>

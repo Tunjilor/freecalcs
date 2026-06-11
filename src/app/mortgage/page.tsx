@@ -20,69 +20,18 @@ export const metadata: Metadata = {
   },
 };
 
-const faqSchema = {
+// FAQ structured data is generated from the visible faqUi array (below) so the
+// JSON-LD always matches what users see on the page, per Google's requirements.
+const faqSchema = () => ({
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How is a monthly mortgage payment calculated?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Monthly payments are calculated using the loan amount, interest rate, and loan term. The formula accounts for amortization so each payment covers both principal and interest, with early payments being mostly interest."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is PMI and when is it required?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Private Mortgage Insurance (PMI) is required when your down payment is less than 20% of the home price. PMI typically costs 0.5% to 1% of the loan amount annually and can be removed once you reach 20% equity."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Should I get a 15-year or 30-year mortgage?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A 15-year mortgage has higher monthly payments but saves roughly half the total interest compared to a 30-year. A 30-year offers lower payments and more flexibility. Choose based on your budget and financial goals."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How much do extra payments save?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Even an extra $100 per month on a $320,000 mortgage at 6.5% can save over $45,000 in interest and pay off the loan 4-5 years early. Extra payments go directly toward principal reduction."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What credit score do I need for the best mortgage rate?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A credit score of 740 or higher typically qualifies for the best conventional mortgage rates. Scores between 680-739 get good rates, while FHA loans accept scores as low as 580 with a 3.5% down payment."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What are closing costs and how much will I pay?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Closing costs are the fees to finalize your mortgage, typically 2-5% of the purchase price. On a $400,000 home that is $8,000 to $20,000. They include loan origination fees, appraisal, title insurance, escrow, recording fees, and prepaid property taxes and insurance. You can sometimes negotiate a seller credit to cover part of these costs."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the difference between a fixed-rate and adjustable-rate mortgage?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A fixed-rate mortgage keeps the same interest rate for the entire loan term, so your payment never changes. An adjustable-rate mortgage (ARM) starts with a lower fixed rate for a set period (for example, a 5/1 ARM is fixed for 5 years then adjusts annually). ARMs can save money if you plan to sell or refinance before the adjustment period begins."
-          }
-        }
-      ]
+      "mainEntity": faqUi.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a },
+      })),
     },
     {
       "@type": "WebApplication",
@@ -97,7 +46,7 @@ const faqSchema = {
       }
     }
   ]
-};
+});
 
 const faqUi = [
   { q: 'How is a monthly mortgage payment calculated?', a: "Your monthly payment uses the formula: P × [r(1+r)^n] / [(1+r)^n - 1], where P is the loan amount, r is the monthly rate (annual ÷ 12), and n is total payments. For a $400,000 loan at 6.27% for 30 years, that's ~$2,469/month in principal and interest." },
@@ -112,7 +61,7 @@ const faqUi = [
 export default function Page() {
   return (
     <>
-      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} />
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema())}} />
       <MortgageCalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>

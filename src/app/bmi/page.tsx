@@ -8,69 +8,18 @@ export const metadata: Metadata = {
   openGraph: { title: 'BMI Calculator 2026 | freecalcs.io', description: 'BMI with body fat, BMI prime, healthy weight range, health risks.', url: 'https://www.freecalcs.io/bmi', siteName: 'freecalcs.io', type: 'website' },
   twitter: { card: 'summary_large_image', title: 'BMI Calculator 2026 | freecalcs.io', description: 'BMI with body fat, BMI prime, and health risk analysis.' },
 };
-const faqSchema = {
+// FAQ structured data is generated from the visible faqUi array (below) so the
+// JSON-LD always matches what users see on the page, per Google's requirements.
+const faqSchema = () => ({
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is a healthy BMI range?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A healthy BMI is generally between 18.5 and 24.9. Below 18.5 is considered underweight, 25-29.9 is overweight, and 30 or above is classified as obese. BMI is a screening tool and does not directly measure body fat."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How accurate is BMI?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "BMI is a useful population-level screening tool but has limitations for individuals. It does not distinguish between muscle and fat mass, so athletic people may have a high BMI despite being healthy. Body fat percentage is a more precise measure."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How is BMI calculated?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "BMI equals weight in kilograms divided by height in meters squared. In imperial units: (weight in pounds times 703) divided by (height in inches squared). The formula is the same for men and women."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is BMI Prime?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "BMI Prime is your BMI divided by 25 (the upper limit of normal weight). A BMI Prime of 1.0 means you are exactly at the upper threshold. Below 1.0 is normal weight, above 1.0 is overweight."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does BMI differ for men and women?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The standard BMI formula and categories are the same for men and women. However, at the same BMI, women typically have higher body fat percentages than men due to physiological differences. Some practitioners use separate body fat benchmarks by sex, but official WHO and CDC BMI categories are gender-neutral."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is the BMI calculator different for children?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. BMI for children ages 2-19 uses age and sex in addition to height and weight. Rather than fixed categories, children's BMI is expressed as a percentile compared to peers of the same age and sex. At or above the 95th percentile is considered obese; 85th to 95th percentile is overweight. The CDC has a dedicated children's BMI calculator."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What should I track alongside BMI for a better picture of health?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "BMI is a starting point. More complete indicators include waist circumference (high risk above 35 inches for women, 40 for men), waist-to-height ratio (below 0.5 is ideal), body fat percentage via DEXA scan, blood pressure, fasting blood glucose, and cholesterol levels."
-          }
-        }
-      ]
+      "mainEntity": faqUi.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a },
+      })),
     },
     {
       "@type": "WebApplication",
@@ -85,7 +34,7 @@ const faqSchema = {
       }
     }
   ]
-};
+});
 
 const faqUi = [
   { q: 'What is a healthy BMI range for adults?', a: "A healthy BMI is generally between 18.5 and 24.9. Below 18.5 is underweight; 25–29.9 is overweight; 30+ is obese. BMI is a screening tool and doesn't directly measure body fat." },
@@ -100,7 +49,7 @@ const faqUi = [
 export default function Page() {
   return (
     <>
-      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} />
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema())}} />
       <BMICalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>

@@ -8,53 +8,18 @@ export const metadata: Metadata = {
   openGraph: { title: 'Salary & Take-Home Pay Calculator 2026 | All 50 States | freecalcs.io', description: 'Free salary calculator. All 50 states, 2026 rates.', url: 'https://www.freecalcs.io/salary', siteName: 'freecalcs.io', type: 'website' },
   twitter: { card: 'summary_large_image', title: 'Salary & Take-Home Pay Calculator 2026 | freecalcs.io', description: 'Free salary calculator. All 50 states, 2026 rates.' },
 };
-const faqSchema = {
+// FAQ structured data is generated from the visible faqUi array (below) so the
+// JSON-LD always matches what users see on the page, per Google's requirements.
+const faqSchema = () => ({
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How is take-home pay calculated?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Take-home pay starts with gross salary, then subtracts federal income tax, state income tax, Social Security (6.2%), Medicare (1.45%), and any pre-tax deductions like 401(k) contributions and health insurance premiums."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the difference between gross and net pay?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Gross pay is your total earnings before any deductions. Net pay (take-home pay) is what you actually receive after federal taxes, state taxes, FICA taxes, and voluntary deductions are subtracted."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do 401(k) contributions affect my taxes?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Traditional 401(k) contributions reduce your taxable income dollar-for-dollar. Contributing $10,000 to a 401(k) in the 22% tax bracket saves approximately $2,200 in federal taxes that year."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Which states have no income tax?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Nine states have no state income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. This can save thousands per year depending on your income level."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I convert salary to hourly rate?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Divide your annual salary by 2,080 (52 weeks times 40 hours). For example, a $75,000 salary equals approximately $36.06 per hour before taxes."
-          }
-        }
-      ]
+      "mainEntity": faqUi.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a },
+      })),
     },
     {
       "@type": "WebApplication",
@@ -69,7 +34,7 @@ const faqSchema = {
       }
     }
   ]
-};
+});
 
 const faqUi = [
   { q: 'What is the difference between gross pay and net pay?', a: "Gross pay is your total earnings before deductions. Net pay (take-home) is what you receive after federal tax, state tax, FICA (Social Security + Medicare), and voluntary deductions like 401(k) and health insurance." },
@@ -83,7 +48,7 @@ const faqUi = [
 export default function Page() {
   return (
     <>
-      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema)}} />
+      <Script id="faq-schema" type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(faqSchema())}} />
       <SalaryCalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>
