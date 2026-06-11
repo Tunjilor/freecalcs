@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'mortgage-refinance-requirements',
+    title:'Mortgage Refinance Requirements: Do You Qualify in 2026?',
+    excerpt:'What you need to refinance in 2026 - credit, equity, and DTI - plus the FHA, VA, and USDA streamline shortcuts that can skip the appraisal entirely.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'8 min',
+    date:'Jun 10, 2026',
+    related:'/mortgage',
+    relatedLabel:'Mortgage Calculator',
+  },
+  {
     slug:'fha-vs-conventional-which-is-cheaper',
     title:'FHA vs Conventional: Which Loan Is Actually Cheaper?',
     excerpt:'FHA or conventional - which costs less? It comes down to mortgage insurance and your credit score. Here is the side-by-side, plus when to switch from one to the other.',
