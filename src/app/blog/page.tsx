@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'usda-loan-eligibility',
+    title:'USDA Loan Eligibility in 2026: Do You Qualify?',
+    excerpt:'The USDA loan lets you buy with zero down in rural and many suburban areas. Here is how the income limits, eligible areas, credit, and borrower rules actually work.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'7 min',
+    date:'Jun 10, 2026',
+    related:'/qualify',
+    relatedLabel:'Mortgage Qualifier',
+  },
+  {
     slug:'how-to-calculate-mortgage-payment',
     title:'How to Calculate Your Mortgage Payment (Step by Step)',
     excerpt:'Learn exactly how lenders calculate your monthly mortgage payment - principal, interest, PMI, taxes, and insurance - and how to use our calculator to find the best deal.',

@@ -27,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/blog/what-is-tdee`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
     { url: `${base}/blog/bmi-what-your-number-means`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
     { url: `${base}/blog/fha-vs-conventional-vs-va-vs-usda`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
+    { url: `${base}/blog/usda-loan-eligibility`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
     { url: `${base}/blog/28-36-rule-mortgage`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
     { url: `${base}/blog/pay-off-mortgage-early`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
     { url: `${base}/scientific`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
