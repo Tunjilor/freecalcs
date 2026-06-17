@@ -20,7 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/age`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
     { url: `${base}/percentage`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-28' },
     { url: `${base}/tip`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/blog`, priority: 0.8, changeFreq: 'weekly', lastMod: '2026-05-07' },
+    { url: `${base}/blog`, priority: 0.8, changeFreq: 'weekly', lastMod: '2026-06-17' },
+    { url: `${base}/blog/using-your-va-loan-twice`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-17' },
     { url: `${base}/blog/compound-interest-explained`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
     { url: `${base}/blog/2026-tax-brackets-guide`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-28' },
     { url: `${base}/blog/how-to-calculate-mortgage-payment`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
@@ -37,6 +38,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/scientific`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
     { url: `${base}/privacy`, priority: 0.3, changeFreq: 'yearly', lastMod: '2026-05-08' },
     { url: `${base}/about`, priority: 0.5, changeFreq: 'yearly', lastMod: '2026-05-07' },
+    { url: `${base}/contact`, priority: 0.4, changeFreq: 'yearly', lastMod: '2026-06-17' },
+    { url: `${base}/terms`, priority: 0.3, changeFreq: 'yearly', lastMod: '2026-06-17' },
+    { url: `${base}/affiliate-disclosure`, priority: 0.3, changeFreq: 'yearly', lastMod: '2026-06-17' },
   ];
 
   return pages.map(p => ({

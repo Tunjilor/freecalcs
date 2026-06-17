@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'using-your-va-loan-twice',
+    title:'Using Your VA Loan Twice (and What My Disability Rating Changed)',
+    excerpt:'A veteran’s first-hand account of buying twice with the VA loan - restoring entitlement after a sale, $0 down both times, and how a disability rating waived the funding fee and unlocked a Georgia property-tax exemption.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'8 min',
+    date:'Jun 17, 2026',
+    related:'/qualify',
+    relatedLabel:'Mortgage Qualifier',
+  },
+  {
     slug:'fha-loan-requirements',
     title:'FHA Loan Requirements in 2026: Do You Qualify?',
     excerpt:'FHA loans are built for lower credit, smaller down payments, and bumpier histories. Here are the full 2026 requirements - credit, down payment, DTI, and mortgage insurance.',

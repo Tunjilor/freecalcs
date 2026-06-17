@@ -73,7 +73,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   <a href="/blog" style={{ color: '#94a3b8', fontSize: 12, textDecoration: 'none' }}>Blog</a>
                   <a href="/about" style={{ color: '#94a3b8', fontSize: 12, textDecoration: 'none' }}>About</a>
+                  <a href="/contact" style={{ color: '#94a3b8', fontSize: 12, textDecoration: 'none' }}>Contact</a>
                   <a href="/privacy" style={{ color: '#94a3b8', fontSize: 12, textDecoration: 'none' }}>Privacy Policy</a>
+                  <a href="/terms" style={{ color: '#94a3b8', fontSize: 12, textDecoration: 'none' }}>Terms of Service</a>
+                  <a href="/affiliate-disclosure" style={{ color: '#94a3b8', fontSize: 12, textDecoration: 'none' }}>Affiliate Disclosure</a>
                 </div>
               </div>
 
