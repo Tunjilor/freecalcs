@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Author, { AUTHORS } from '@/components/Author';
+import ArticleJsonLd from '@/components/ArticleJsonLd';
 
 export const metadata: Metadata = {
   title: 'USDA Loan Eligibility 2026: Do You Qualify? | freecalcs.io',
@@ -53,6 +55,15 @@ const linkStyle: React.CSSProperties = { color: '#2563eb', fontWeight: 600, text
 export default function Article() {
   return (
     <div style={{ fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif', background: 'linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)', minHeight: '100vh' }}>
+      <ArticleJsonLd
+        headline="USDA Loan Eligibility 2026: Do You Qualify?"
+        description="See if you qualify for a USDA loan in 2026 — income limits, eligible areas, credit score, and the zero-down requirements, explained simply."
+        url="https://www.freecalcs.io/blog/usda-loan-eligibility"
+        author={AUTHORS.jamie}
+        datePublished="2026-06-10"
+        dateModified="2026-06-10"
+        section="Mortgage"
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Hero */}
@@ -70,6 +81,9 @@ export default function Article() {
       </div>
 
       <div style={{ maxWidth: 820, margin: '0 auto', padding: '40px 16px 40px' }}>
+        {/* Author byline + bio */}
+        <Author author={AUTHORS.jamie} />
+
         {/* Intro */}
         <p style={{ fontSize: 17, color: '#334155', lineHeight: 1.75, margin: '0 0 36px' }}>
           The USDA loan is one of the most overlooked ways to buy a home with no money down. It&apos;s backed by the

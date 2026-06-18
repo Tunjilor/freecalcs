@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Author, { AUTHORS } from '@/components/Author';
+import ArticleJsonLd from '@/components/ArticleJsonLd';
 
 export const metadata: Metadata = {
   title: 'Refinance Requirements 2026: Conventional, FHA, VA, USDA | freecalcs.io',
@@ -54,6 +56,15 @@ const labelStyle: React.CSSProperties = { color: '#0f172a' };
 export default function Article() {
   return (
     <div style={{ fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif', background: 'linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)', minHeight: '100vh' }}>
+      <ArticleJsonLd
+        headline="Refinance Requirements 2026: Conventional, FHA, VA, USDA"
+        description="Mortgage refinance qualification requirements for 2026 — credit, equity, and DTI for conventional, FHA, VA, and USDA loans, plus streamline options."
+        url="https://www.freecalcs.io/blog/mortgage-refinance-requirements"
+        author={AUTHORS.jamie}
+        datePublished="2026-06-10"
+        dateModified="2026-06-10"
+        section="Mortgage"
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Hero */}
@@ -71,6 +82,9 @@ export default function Article() {
       </div>
 
       <div style={{ maxWidth: 820, margin: '0 auto', padding: '40px 16px 40px' }}>
+        {/* Author byline + bio */}
+        <Author author={AUTHORS.jamie} />
+
         {/* Intro */}
         <p style={{ fontSize: 17, color: '#334155', lineHeight: 1.75, margin: '0 0 36px' }}>
           Refinancing replaces your current mortgage with a new one — ideally at a lower rate, a shorter term, or with

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import MortgageCalculator from '../../mortgage/calculator';
 import ComparisonTable from './comparison-table';
+import Author, { AUTHORS } from '@/components/Author';
+import ArticleJsonLd from '@/components/ArticleJsonLd';
 
 export const metadata: Metadata = {
   title: 'FHA vs Conventional vs VA vs USDA: Which Loan is Right for You | freecalcs.io',
@@ -48,6 +50,15 @@ const pStyle: React.CSSProperties = { fontSize: 15, color: '#374151', lineHeight
 export default function Article() {
   return (
     <div style={{ fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif', background: 'linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)', minHeight: '100vh' }}>
+      <ArticleJsonLd
+        headline="FHA vs Conventional vs VA vs USDA: Which Loan is Right for You"
+        description="A clear comparison of the four main mortgage loan types. Find out which one you qualify for and which saves you the most money."
+        url="https://www.freecalcs.io/blog/fha-vs-conventional-vs-va-vs-usda"
+        author={AUTHORS.jamie}
+        datePublished="2026-04-22"
+        dateModified="2026-06-10"
+        section="Mortgage"
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Hero */}
@@ -66,6 +77,9 @@ export default function Article() {
 
       {/* Intro + comparison table */}
       <div style={{ maxWidth: 820, margin: '0 auto', padding: '40px 16px 8px' }}>
+        {/* Author byline + bio */}
+        <Author author={AUTHORS.jamie} />
+
         <p style={{ fontSize: 17, color: '#334155', lineHeight: 1.75, margin: '0 0 32px' }}>
           Conventional, FHA, VA, and USDA are the four main ways to finance a home in the United States. The difference
           between them comes down to a few things: how much you must put down, the credit score you need, and — the big

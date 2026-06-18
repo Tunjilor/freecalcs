@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Author, { AUTHORS } from '@/components/Author';
+import ArticleJsonLd from '@/components/ArticleJsonLd';
 
 export const metadata: Metadata = {
   title: 'VA Loan Eligibility 2026: Do You Qualify? | freecalcs.io',
@@ -53,6 +55,15 @@ const linkStyle: React.CSSProperties = { color: '#2563eb', fontWeight: 600, text
 export default function Article() {
   return (
     <div style={{ fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif', background: 'linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)', minHeight: '100vh' }}>
+      <ArticleJsonLd
+        headline="VA Loan Eligibility 2026: Do You Qualify?"
+        description="See if you qualify for a VA loan in 2026 — service requirements, credit, the funding fee, and the zero-down, no-PMI benefits explained."
+        url="https://www.freecalcs.io/blog/va-loan-eligibility"
+        author={AUTHORS.jamie}
+        datePublished="2026-06-10"
+        dateModified="2026-06-10"
+        section="Mortgage"
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Hero */}
@@ -70,6 +81,9 @@ export default function Article() {
       </div>
 
       <div style={{ maxWidth: 820, margin: '0 auto', padding: '40px 16px 40px' }}>
+        {/* Author byline + bio */}
+        <Author author={AUTHORS.jamie} />
+
         {/* Intro */}
         <p style={{ fontSize: 17, color: '#334155', lineHeight: 1.75, margin: '0 0 36px' }}>
           The VA loan is one of the most powerful homebuying benefits available — zero down payment, no monthly mortgage
