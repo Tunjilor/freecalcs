@@ -5,7 +5,7 @@ import ArticleJsonLd from '@/components/ArticleJsonLd';
 
 const URL = 'https://www.freecalcs.io/blog/using-your-va-loan-twice';
 const PUBLISHED = '2026-06-17';
-const MODIFIED = '2026-06-17';
+const MODIFIED = '2026-06-19';
 
 const TITLE = 'Using My VA Loan Twice — and What Changed After My Disability Rating';
 const DESCRIPTION = 'Buying twice with the VA benefit: entitlement, $0 down, no monthly mortgage insurance, the funding fee waiver, and the Georgia disabled-veteran property tax exemption.';
