@@ -137,7 +137,7 @@ export default function Article() {
           </p>
           <p style={pStyle}>That is what happened with me.</p>
           <p style={pStyle}>
-            When I bought my first home in Clearwater around 2014, I used my VA loan benefit. When I sold that home in 2017
+            When I bought my first home in Tampa Bay around 2014, I used my VA loan benefit. When I sold that home in 2017
             and the VA loan was paid off, I was able to use the benefit again later for my home in Georgia.
           </p>
           <p style={pStyle}>That part matters.</p>

@@ -14,7 +14,7 @@ export const AUTHORS: Record<string, AuthorInfo> = {
   jamie: {
     name: 'Jamie',
     title: 'U.S. Army veteran',
-    bio: "4½ years of service including two tours in Iraq and one in Afghanistan, and a service-connected disabled vet. I've bought two homes with the VA loan: my first in Clearwater, Florida, and the one I live in now near Palmetto, Georgia.",
+    bio: "4½ years of service including two tours in Iraq and one in Afghanistan, and a service-connected disabled vet. I've bought two homes with the VA loan: my first in Tampa Bay, Florida, and the one I live in now near Atlanta, Georgia.",
   },
 };
 
