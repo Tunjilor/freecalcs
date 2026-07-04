@@ -175,9 +175,19 @@ Every flagship calculator ships with **at least 4** insight rules.
 
 Monetization is part of the standard, not an afterthought bolted on later. Rules:
 
-- **Relevance only.** An `<AffiliateCTA>` appears only when it genuinely helps the user's next step:
-  a refinance CTA under a mortgage-payoff result, a lender-comparison CTA under an auto-loan result,
-  a tax-software CTA under an income-tax result. Never a random ad for an unrelated product.
+- **Default to a relevant internal-link CTA, not an affiliate link.** The default monetization slot
+  (`{ kind: "internal" }`, rendered by `<InternalCTA>`) is a helpful next step that links to a sibling
+  calculator or supporting page — e.g. "Compare a VA loan to a conventional loan" → the mortgage
+  calculator, or "Check if you qualify" → the mortgage qualifier. It carries **no commission language
+  and no disclosure text**, because there's no commercial relationship — it just deepens the visit and
+  strengthens the internal-link cluster. Never promise an offer or relationship you don't have.
+- **Affiliate is opt-in, and only with a real, disclosed offer.** Use `{ kind: "affiliate" }`
+  (rendered by `<AffiliateCTA>`, which adds a `sponsored nofollow` link and a disclosure line) **only
+  once an actual affiliate/lead-gen offer exists**. Swapping the default internal slot to a live offer
+  is a one-line change of the definition's `monetization` entry. Until then, ship the internal CTA.
+- **Relevance only.** Whichever variant, the CTA appears only when it genuinely helps the user's next
+  step: a refinance CTA under a mortgage-payoff result, a lender-comparison CTA under an auto-loan
+  result, a tax-software CTA under an income-tax result. Never a random ad for an unrelated product.
 - **Placement:** monetization slot A sits *after* the result + explanation (user got value first),
   never above the calculator, never interrupting input.
 - **Commercial-intent scoring drives build order.** Definitions carry `commercialIntent: 1–5`.
@@ -186,7 +196,8 @@ Monetization is part of the standard, not an afterthought bolted on later. Rules
   cluster-support only; they bring traffic but little revenue.
 - **AdSense foundation:** apply now so display ads earn whatever they can during the authority-build
   phase. Graduate to a better network (Ezoic → Mediavine/Raptive) as sessions grow.
-- One disclosure line near any affiliate link; you already have a disclosure page — link it.
+- One disclosure line near any affiliate link; you already have a disclosure page — link it. Internal
+  CTAs get **no** disclosure line (there's nothing to disclose).
 
 ---
 

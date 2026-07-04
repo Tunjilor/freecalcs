@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     { url: base, priority: 1.0, changeFreq: 'weekly', lastMod: '2026-05-09' },
     { url: `${base}/mortgage`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-06-10' },
+    { url: `${base}/va-loan`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-04' },
     { url: `${base}/qualify`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-06-10' },
     { url: `${base}/salary`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-06-10' },
     { url: `${base}/tax`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-06-10' },
