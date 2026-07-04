@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 const CALCS = [
   { name: 'Mortgage Calculator', href: '/mortgage', icon: 'H' },
   { name: 'Mortgage Qualifier', href: '/qualify', icon: 'Q' },
+  { name: 'VA Loan Calculator', href: '/va-loan', icon: 'V' },
   { name: 'Rent vs Buy', href: '/rent-vs-buy', icon: 'R' },
   { name: 'Loan & EMI', href: '/loan', icon: 'L' },
   { name: 'Salary & Take-Home', href: '/salary', icon: 'S' },

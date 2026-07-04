@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const calcs = [
   { slug: "mortgage", label: "Mortgage Calculator", icon: "🏠", desc: "Payments, amortization & loan comparison" },
   { slug: "qualify", label: "Mortgage Qualifier", icon: "✅", desc: "Check all 5 loan programs instantly" },
+  { slug: "va-loan", label: "VA Loan Calculator", icon: "🎖️", desc: "$0-down payment, funding fee & no PMI" },
   { slug: "rent-vs-buy", label: "Rent vs Buy", icon: "🏡", desc: "True cost comparison over time" },
   { slug: "loan", label: "Loan & EMI", icon: "🏦", desc: "Monthly payments for any loan type" },
   { slug: "salary", label: "Salary & Take-Home", icon: "💵", desc: "Net pay after federal & state taxes" },
@@ -25,9 +26,9 @@ const calcs = [
 ];
 
 const categories = [
-  { label: "🏠 Real estate & mortgage", start: 0, end: 4 },
-  { label: "💰 Income & finance", start: 4, end: 8 },
-  { label: "❤️ Health & everyday", start: 8, end: 13 },
+  { label: "🏠 Real estate & mortgage", start: 0, end: 5 },
+  { label: "💰 Income & finance", start: 5, end: 9 },
+  { label: "❤️ Health & everyday", start: 9, end: 14 },
 ];
 
 const blogPosts = [
