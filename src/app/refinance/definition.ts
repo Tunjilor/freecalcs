@@ -142,6 +142,7 @@ export const refinanceDef: CalculatorDefinition<RefinanceInputs, RefinanceResult
     { slug: "blog/mortgage-refinance-requirements", label: "Refinance requirements 2026" },
     { slug: "blog/pay-off-mortgage-early", label: "How to pay off your mortgage early" },
     { slug: "blog/pay-off-low-rate-mortgage-early", label: "Should I pay off my 3% mortgage early?" },
+    { slug: "blog/should-i-refinance-to-save-200-a-month", label: "Should I refinance to save $200 a month?" },
   ],
 
   faqs: [

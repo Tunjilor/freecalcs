@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'should-i-refinance-to-save-200-a-month',
+    title:'Should I Refinance to Save $200 a Month?',
+    excerpt:'A lower payment sounds like free money — but closing costs create a break-even, and a fresh 30-year term can quietly raise your total interest even at a lower rate. The two numbers that decide it.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'8 min',
+    date:'Jul 5, 2026',
+    related:'/refinance',
+    relatedLabel:'Refinance Calculator',
+  },
+  {
     slug:'can-i-buy-a-house-with-640-credit-score',
     title:'My Credit Score Is 640. Can I Buy a House?',
     excerpt:'Yes — 640 is above the FHA floor and works for many conventional loans. The real question isn’t whether you can qualify, but what a fair score costs you in rate, and whether waiting to raise it is worth it.',
