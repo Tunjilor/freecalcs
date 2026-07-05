@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import CalcCTA from '@/components/blog/CalcCTA';
+import RelatedTools from '@/components/blog/RelatedTools';
 export const metadata: Metadata = {
   title: '2026 Federal Tax Brackets: Complete Guide | freecalcs.io',
   description: 'The 2026 federal tax brackets explained clearly. Find your bracket, understand marginal vs effective rates, and learn strategies to lower your tax bill.',
@@ -31,6 +33,7 @@ export default function Article() {
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>Marginal vs Effective Tax Rate</h2>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>This is the most misunderstood concept in personal taxes. Your marginal rate is the rate on your next dollar earned. Your effective rate is the average rate across all your income.</p>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>A single filer earning $75,000 has a 22% marginal rate but only about 10.3% effective rate. The first $12,400 is taxed at 10%, the next portion at 12%, and only income above $50,000 hits 22%. Moving into a higher bracket never makes your overall situation worse.</p>
+            <CalcCTA href="/tax" label="See your own marginal and effective rate" blurb="Enter your income, filing status, and deductions to get your 2026 tax owed, a bracket-by-bracket breakdown, and both rates side by side." cta="Open the income tax calculator" />
           </div>
           <div style={{marginBottom:32}}>
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>Standard Deduction in 2026</h2>
@@ -71,7 +74,8 @@ export default function Article() {
 
           </div>
         </div>
-        <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
+        <RelatedTools tools={[{href:'/tax',label:'Income Tax Calculator'},{href:'/tax-refund',label:'Tax Refund Estimator'},{href:'/paycheck',label:'Paycheck Calculator'}]} />
+        <div style={{display:'flex',gap:12,flexWrap:'wrap',marginTop:20}}>
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
           <a href="/tax" style={{background:'#2563eb',color:'#fff',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,textDecoration:'none'}}>Income Tax Calculator</a>
         </div>

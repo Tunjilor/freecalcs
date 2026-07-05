@@ -138,6 +138,10 @@ export const refinanceDef: CalculatorDefinition<RefinanceInputs, RefinanceResult
     relatedLink("loan-payoff"),
     relatedLink("qualify"),
   ],
+  relatedArticles: [
+    { slug: "blog/mortgage-refinance-requirements", label: "Refinance requirements 2026" },
+    { slug: "blog/pay-off-mortgage-early", label: "How to pay off your mortgage early" },
+  ],
 
   faqs: [
     { q: "What is the break-even point on a refinance?", a: "It's how long it takes for your monthly savings to add up to the closing costs you paid. If refinancing costs $6,000 and saves $250 a month, you break even in 24 months. Stay past that and the refinance is net positive; leave before and you lost money on the costs." },

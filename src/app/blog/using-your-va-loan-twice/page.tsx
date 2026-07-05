@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Author, { AUTHORS } from '@/components/Author';
 import ArticleJsonLd from '@/components/ArticleJsonLd';
+import CalcCTA from '@/components/blog/CalcCTA';
+import RelatedTools from '@/components/blog/RelatedTools';
 
 const URL = 'https://www.freecalcs.io/blog/using-your-va-loan-twice';
 const PUBLISHED = '2026-06-17';
@@ -373,6 +375,7 @@ export default function Article() {
         </section>
 
         {/* Related links */}
+        <CalcCTA href="/va-loan" label="Run your second-use VA loan numbers" blurb="Estimate your payment with the first-use vs subsequent-use funding fee, the disability exemption, and $0 down — the exact scenarios this article walks through." cta="Open the VA loan calculator" />
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '0 0 36px' }}>
           <a href="/mortgage" style={{ background: '#2563eb', color: '#fff', fontSize: 14, fontWeight: 700, padding: '12px 22px', borderRadius: 12, textDecoration: 'none' }}>Estimate your payment →</a>
           <a href="/qualify" style={{ background: '#fff', color: '#2563eb', fontSize: 14, fontWeight: 700, padding: '12px 22px', borderRadius: 12, border: '1.5px solid #bfdbfe', textDecoration: 'none' }}>Check if you qualify →</a>
@@ -398,7 +401,8 @@ export default function Article() {
           a VA-approved lender, and your county tax assessor before making decisions.
         </p>
 
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+        <RelatedTools tools={[{href:'/va-loan',label:'VA Loan Calculator'},{href:'/refinance',label:'Refinance Calculator'},{href:'/qualify',label:'Mortgage Qualifier'}]} />
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 20 }}>
           <a href="/blog" style={{ background: '#fff', color: '#2563eb', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, border: '1px solid #bfdbfe', textDecoration: 'none' }}>← All Articles</a>
           <a href="/qualify" style={{ background: '#2563eb', color: '#fff', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, textDecoration: 'none' }}>Mortgage Qualifier</a>
         </div>

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Author, { AUTHORS } from '@/components/Author';
 import ArticleJsonLd from '@/components/ArticleJsonLd';
+import CalcCTA from '@/components/blog/CalcCTA';
+import RelatedTools from '@/components/blog/RelatedTools';
 
 export const metadata: Metadata = {
   title: 'VA Loan Eligibility 2026: Do You Qualify? | freecalcs.io',
@@ -187,6 +189,7 @@ export default function Article() {
         </section>
 
         {/* Related links */}
+        <CalcCTA href="/va-loan" label="Estimate your VA loan payment" blurb="See your $0-down monthly payment, the VA funding fee for your exact scenario, and how it compares to a conventional loan with PMI." cta="Open the VA loan calculator" />
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '0 0 36px' }}>
           <a href="/mortgage" style={{ background: '#2563eb', color: '#fff', fontSize: 14, fontWeight: 700, padding: '12px 22px', borderRadius: 12, textDecoration: 'none' }}>Estimate your payment →</a>
           <a href="/qualify" style={{ background: '#fff', color: '#2563eb', fontSize: 14, fontWeight: 700, padding: '12px 22px', borderRadius: 12, border: '1.5px solid #bfdbfe', textDecoration: 'none' }}>Check if you qualify →</a>
@@ -212,7 +215,8 @@ export default function Article() {
           VA and a VA-approved lender before making decisions.
         </p>
 
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+        <RelatedTools tools={[{href:'/va-loan',label:'VA Loan Calculator'},{href:'/home-affordability',label:'Home Affordability Calculator'},{href:'/qualify',label:'Mortgage Qualifier'}]} />
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 20 }}>
           <a href="/blog" style={{ background: '#fff', color: '#2563eb', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, border: '1px solid #bfdbfe', textDecoration: 'none' }}>← All Articles</a>
           <a href="/qualify" style={{ background: '#2563eb', color: '#fff', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, textDecoration: 'none' }}>Mortgage Qualifier</a>
         </div>

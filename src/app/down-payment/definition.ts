@@ -122,6 +122,10 @@ export const downPaymentDef: CalculatorDefinition<DownPaymentInputs, DownPayment
     relatedLink("rent-vs-buy"),
     relatedLink("va-loan"),
   ],
+  relatedArticles: [
+    { slug: "blog/fha-loan-requirements", label: "FHA loan requirements 2026" },
+    { slug: "blog/fha-vs-conventional-which-is-cheaper", label: "FHA vs conventional: which is cheaper?" },
+  ],
 
   faqs: [
     { q: "How much down payment do I need to buy a house?", a: "It depends on the loan. Conventional loans can go as low as 3% down, FHA 3.5%, and VA and USDA loans allow 0% for eligible buyers. But putting down less than 20% on a conventional loan means paying PMI. There's no single required number — it's a trade-off between cash upfront and monthly cost." },

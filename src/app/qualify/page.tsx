@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import MortgageQualifier from './calculator';
+import RelatedTools from '@/components/blog/RelatedTools';
 
 export const metadata: Metadata = {
   title: 'Mortgage Qualifier Calculator 2026 | Do I Qualify?',
@@ -67,7 +68,8 @@ export default function Page() {
           <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 16 }}>Conventional loans are the most flexible but require the strongest credit. FHA loans accept lower credit scores (580+) and smaller down payments (3.5%) but charge mandatory mortgage insurance for the life of the loan. VA loans are the best deal available — zero down payment, no PMI, competitive rates — but require military service. USDA loans offer zero-down purchasing in rural and some suburban areas with income limits. Jumbo loans finance properties above the conforming loan limit ($766,550 in 2026) and require stronger credit and larger reserves.</p>
           <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>Getting pre-approved (not just pre-qualified) before house-hunting is essential in today's market. Pre-approval requires a hard credit pull and full document review, but results in a commitment letter that sellers treat as near-certain financing. Most competitive offers now include a pre-approval letter.</p>
 
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          <RelatedTools heading="Keep reading" tools={[{href:'/blog/28-36-rule-mortgage',label:'The 28/36 rule explained'},{href:'/blog/fha-loan-requirements',label:'FHA loan requirements 2026'},{href:'/blog/va-loan-eligibility',label:'VA loan eligibility 2026'}]} />
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 16 }}>
             <a href="/mortgage" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Mortgage payment calculator →</a>
             <a href="/blog/fha-vs-conventional-vs-va-vs-usda" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>FHA vs Conventional vs VA vs USDA →</a>
           </div>

@@ -125,6 +125,9 @@ export const loanPayoffDef: CalculatorDefinition<LoanPayoffInputs, LoanPayoffRes
     relatedLink("auto-loan"),
     relatedLink("personal-loan"),
   ],
+  relatedArticles: [
+    { slug: "blog/pay-off-mortgage-early", label: "How to pay off your mortgage 10 years early" },
+  ],
 
   faqs: [
     { q: "How do extra payments save me money?", a: "Interest is charged on your remaining balance, so any extra you pay toward principal permanently removes all the future interest that balance would have generated. Because loans are front-loaded with interest, extra payments made earlier save far more than the same payments made near the end." },

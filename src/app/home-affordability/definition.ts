@@ -130,6 +130,10 @@ export const affordabilityDef: CalculatorDefinition<AffordabilityInputs, Afforda
     relatedLink("rent-vs-buy"),
     relatedLink("va-loan"),
   ],
+  relatedArticles: [
+    { slug: "blog/28-36-rule-mortgage", label: "The 28/36 rule: how much house you can afford" },
+    { slug: "blog/how-to-calculate-mortgage-payment", label: "How to calculate your mortgage payment" },
+  ],
 
   faqs: [
     { q: "How much house can I afford on my income?", a: "A common guideline is that total housing costs stay under 28% of gross income (the 'front-end' ratio) and all debt payments under 36–43% (the 'back-end' ratio). This calculator works backward from those limits, given your income, debts, and down payment, to show a maximum price at three comfort levels." },

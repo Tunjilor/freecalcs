@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Author, { AUTHORS } from '@/components/Author';
 import ArticleJsonLd from '@/components/ArticleJsonLd';
+import RelatedTools from '@/components/blog/RelatedTools';
 
 export const metadata: Metadata = {
   title: 'FHA Loan Requirements 2026: Do You Qualify? | freecalcs.io',
@@ -223,7 +224,8 @@ export default function Article() {
           FHA-approved lender before making decisions.
         </p>
 
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+        <RelatedTools tools={[{href:'/qualify',label:'Mortgage Qualifier'},{href:'/down-payment',label:'Down Payment Calculator'},{href:'/home-affordability',label:'Home Affordability Calculator'}]} />
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 20 }}>
           <a href="/blog" style={{ background: '#fff', color: '#2563eb', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, border: '1px solid #bfdbfe', textDecoration: 'none' }}>← All Articles</a>
           <a href="/qualify" style={{ background: '#2563eb', color: '#fff', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, textDecoration: 'none' }}>Mortgage Qualifier</a>
         </div>
