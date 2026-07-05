@@ -115,6 +115,9 @@ export const creditCardDef: CalculatorDefinition<CreditCardInputs, CreditCardRes
     relatedLink("loan-payoff"),
     relatedLink("personal-loan"),
   ],
+  relatedArticles: [
+    { slug: "blog/heloc-to-pay-off-credit-card-debt", label: "Should I use a HELOC to pay off credit card debt?" },
+  ],
 
   faqs: [
     { q: "Why does paying only the minimum take so long?", a: "Because the minimum payment is a percentage of your balance (plus interest), it shrinks as the balance falls. Early on, most of it just covers interest, so the principal barely moves. On a typical card, minimum-only payments can take 15–25+ years and cost more in interest than the original balance. A fixed payment avoids this by attacking the principal steadily." },

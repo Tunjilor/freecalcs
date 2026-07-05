@@ -120,6 +120,9 @@ export const helocDef: CalculatorDefinition<HelocInputs, HelocResults> = {
     relatedLink("va-loan"),
     relatedLink("loan-payoff"),
   ],
+  relatedArticles: [
+    { slug: "blog/heloc-to-pay-off-credit-card-debt", label: "Should I use a HELOC to pay off credit card debt?" },
+  ],
 
   faqs: [
     { q: "How much can I borrow with a HELOC?", a: "Lenders cap your combined loan-to-value (CLTV) — your mortgage plus the HELOC — usually at 80–90% of your home's value. Your available line is that CLTV limit times the home value, minus your current mortgage balance. On a $500,000 home with a $300,000 mortgage and an 85% limit, that's up to $125,000." },

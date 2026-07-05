@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'heloc-to-pay-off-credit-card-debt',
+    title:'Should I Use a HELOC to Pay Off Credit Card Debt?',
+    excerpt:'Trading 22% card debt for a 9% HELOC can save thousands — or leave you owing on both. The math, the risks, and how to tell which it will be for you.',
+    category:'Loans & Debt',
+    categoryColor:'#dc2626',
+    readTime:'8 min',
+    date:'Jul 5, 2026',
+    related:'/credit-card-payoff',
+    relatedLabel:'Credit Card Payoff',
+  },
+  {
     slug:'using-your-va-loan-twice',
     title:'Using My VA Loan Twice — and What Changed After My Disability Rating',
     excerpt:'A veteran’s first-hand account of buying twice with the VA loan - restoring entitlement after a sale, $0 down both times, and how a disability rating waived the funding fee and unlocked a Georgia property-tax exemption.',
