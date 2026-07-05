@@ -140,7 +140,7 @@ export default function Home() {
         <section className="hero-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "48px 24px 0" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.1)", padding: "6px 16px", borderRadius: 24, marginBottom: 24 }}>
             <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#22c55e", animation: "pulse 2s infinite", flexShrink: 0 }}></span>
-            <span style={{ fontSize: 13, color: "#93c5fd", fontWeight: 500 }}>13 free calculators — no sign-up, no ads</span>
+            <span style={{ fontSize: 13, color: "#93c5fd", fontWeight: 500 }}>35 free calculators — no sign-up</span>
           </div>
           <h1 style={{ fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 800, lineHeight: 1.08, color: "#fff", marginBottom: 16, letterSpacing: "-0.02em" }}>
             The calculators<br />
