@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import HomeSearch from "@/components/home/HomeSearch";
 
 export const metadata: Metadata = {
   title: "Free Online Calculators | Mortgage, Tax, Salary, BMI & More | freecalcs.io",
@@ -158,12 +159,18 @@ export default function Home() {
 
       {/* Calculator grid */}
       <section className="grid-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 24px 48px" }}>
+        <HomeSearch />
         {categories.map((cat) => (
-          <div key={cat.label}>
+          <div key={cat.label} data-cat-block>
             <p className="category-label">{cat.label}</p>
             <div className="calc-grid">
               {calcs.slice(cat.start, cat.end).map((c) => (
-                <Link key={c.slug} href={"/" + c.slug} className="calc-card">
+                <Link
+                  key={c.slug}
+                  href={"/" + c.slug}
+                  className="calc-card"
+                  data-search={(c.label + " " + c.desc + " " + cat.label).toLowerCase()}
+                >
                   <span className="calc-icon">{c.icon}</span>
                   <span className="calc-label">{c.label}</span>
                   <span className="calc-desc">{c.desc}</span>
