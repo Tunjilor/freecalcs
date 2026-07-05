@@ -127,6 +127,7 @@ export const loanPayoffDef: CalculatorDefinition<LoanPayoffInputs, LoanPayoffRes
   ],
   relatedArticles: [
     { slug: "blog/pay-off-mortgage-early", label: "How to pay off your mortgage 10 years early" },
+    { slug: "blog/pay-off-low-rate-mortgage-early", label: "Should I pay off my 3% mortgage early?" },
   ],
 
   faqs: [

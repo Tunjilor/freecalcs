@@ -141,6 +141,7 @@ export const refinanceDef: CalculatorDefinition<RefinanceInputs, RefinanceResult
   relatedArticles: [
     { slug: "blog/mortgage-refinance-requirements", label: "Refinance requirements 2026" },
     { slug: "blog/pay-off-mortgage-early", label: "How to pay off your mortgage early" },
+    { slug: "blog/pay-off-low-rate-mortgage-early", label: "Should I pay off my 3% mortgage early?" },
   ],
 
   faqs: [

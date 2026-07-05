@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'pay-off-low-rate-mortgage-early',
+    title:'Should I Pay Off My 3% Mortgage Early?',
+    excerpt:'A low-rate mortgage is often worth keeping, not rushing to kill. The real trade-off is a guaranteed ~3% and peace of mind vs a higher-but-uncertain return — with real numbers.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'8 min',
+    date:'Jul 5, 2026',
+    related:'/loan-payoff',
+    relatedLabel:'Loan Payoff Calculator',
+  },
+  {
     slug:'roth-vs-traditional-95k-income',
     title:'I Make $95,000 a Year. Should I Choose Roth or Traditional?',
     excerpt:'At $95k you’re in the 22% bracket, so the choice comes down to one question: will your tax rate in retirement be higher or lower than today? Real 2026 numbers, plainly explained.',
