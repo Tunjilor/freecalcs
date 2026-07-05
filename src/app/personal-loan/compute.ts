@@ -4,20 +4,21 @@
 // the fee is deducted from what you actually receive but you still repay the
 // full principal).
 
+import {
+  monthlyPayment,
+  amortizeSchedule,
+  round2,
+  type AmortRow,
+} from "../../lib/calculator/finance.ts";
+
+export { monthlyPayment }; // re-exported so the test suite's import is unchanged
+
 export type PersonalLoanInputs = {
   principal: number;
   apr: number; // % nominal
   termMonths: number;
   originationFeePct: number; // % of principal, deducted from proceeds
   extraPayment: number;
-};
-
-export type AmortRow = {
-  month: number;
-  interest: number;
-  principal: number;
-  balance: number;
-  cumulativeInterest: number;
 };
 
 export type PersonalLoanResults = {
@@ -37,15 +38,6 @@ export type PersonalLoanResults = {
   leverInterestSaved: number;
   schedule: AmortRow[];
 };
-
-const round2 = (n: number) => Math.round(n * 100) / 100;
-
-export function monthlyPayment(principal: number, monthlyRate: number, n: number): number {
-  if (n <= 0) return 0;
-  if (monthlyRate <= 0) return principal / n;
-  const f = Math.pow(1 + monthlyRate, n);
-  return (principal * (monthlyRate * f)) / (f - 1);
-}
 
 /** Present value of a level payment stream at a monthly rate. */
 function pv(payment: number, monthlyRate: number, n: number): number {
@@ -72,36 +64,6 @@ export function solveTrueApr(amountReceived: number, payment: number, n: number)
   return ((lo + hi) / 2) * 12 * 100;
 }
 
-function amortize(
-  principal: number,
-  monthlyRate: number,
-  scheduledN: number,
-  basePayment: number,
-  extra: number,
-): { schedule: AmortRow[]; totalInterest: number; payoffMonths: number } {
-  const schedule: AmortRow[] = [];
-  let balance = principal;
-  let cumulativeInterest = 0;
-  const pay = basePayment + Math.max(0, extra);
-  for (let m = 1; m <= scheduledN && balance > 0.005; m++) {
-    const interest = balance * monthlyRate;
-    let principalPaid = pay - interest;
-    if (principalPaid > balance) principalPaid = balance;
-    if (principalPaid < 0) principalPaid = 0;
-    balance -= principalPaid;
-    cumulativeInterest += interest;
-    schedule.push({
-      month: m,
-      interest: round2(interest),
-      principal: round2(principalPaid),
-      balance: round2(Math.max(0, balance)),
-      cumulativeInterest: round2(cumulativeInterest),
-    });
-    if (principalPaid === 0) break;
-  }
-  return { schedule, totalInterest: cumulativeInterest, payoffMonths: schedule.length };
-}
-
 export function computePersonalLoan(v: PersonalLoanInputs): PersonalLoanResults {
   const principal = Math.max(0, v.principal);
   const feePct = Math.min(Math.max(0, v.originationFeePct), 99);
@@ -112,13 +74,13 @@ export function computePersonalLoan(v: PersonalLoanInputs): PersonalLoanResults 
   const scheduledN = Math.max(1, Math.round(v.termMonths));
   const pmt = monthlyPayment(principal, monthlyRate, scheduledN);
 
-  const withExtra = amortize(principal, monthlyRate, scheduledN, pmt, v.extraPayment);
+  const withExtra = amortizeSchedule(principal, monthlyRate, scheduledN, pmt, v.extraPayment);
   const noExtra =
-    v.extraPayment > 0 ? amortize(principal, monthlyRate, scheduledN, pmt, 0) : withExtra;
+    v.extraPayment > 0 ? amortizeSchedule(principal, monthlyRate, scheduledN, pmt, 0) : withExtra;
 
   const LEVER = 100;
-  const lever = amortize(principal, monthlyRate, scheduledN, pmt, LEVER);
-  const leverBaseInterest = amortize(principal, monthlyRate, scheduledN, pmt, 0).totalInterest;
+  const lever = amortizeSchedule(principal, monthlyRate, scheduledN, pmt, LEVER);
+  const leverBaseInterest = amortizeSchedule(principal, monthlyRate, scheduledN, pmt, 0).totalInterest;
 
   const trueApr = solveTrueApr(amountReceived, pmt, scheduledN);
   const totalInterest = withExtra.totalInterest;

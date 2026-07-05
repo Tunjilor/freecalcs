@@ -12,6 +12,10 @@ const calcs = [
   { slug: "mortgage", label: "Mortgage Calculator", icon: "🏠", desc: "Payments, amortization & loan comparison" },
   { slug: "qualify", label: "Mortgage Qualifier", icon: "✅", desc: "Check all 5 loan programs instantly" },
   { slug: "va-loan", label: "VA Loan Calculator", icon: "🎖️", desc: "$0-down payment, funding fee & no PMI" },
+  { slug: "refinance", label: "Refinance Calculator", icon: "🔄", desc: "Savings, break-even & lifetime cost" },
+  { slug: "heloc", label: "HELOC Calculator", icon: "🏧", desc: "Home equity line & CLTV headroom" },
+  { slug: "home-affordability", label: "Home Affordability", icon: "📐", desc: "How much house you can afford" },
+  { slug: "down-payment", label: "Down Payment", icon: "🪙", desc: "Down payment goal & PMI at 20%" },
   { slug: "rent-vs-buy", label: "Rent vs Buy", icon: "🏡", desc: "True cost comparison over time" },
   { slug: "loan", label: "Loan & EMI", icon: "🏦", desc: "Monthly payments for any loan type" },
   { slug: "auto-loan", label: "Auto Loan Calculator", icon: "🚗", desc: "Car payment with tax, trade-in & fees" },
@@ -34,11 +38,11 @@ const calcs = [
 ];
 
 const categories = [
-  { label: "🏠 Real estate & mortgage", start: 0, end: 4 },
-  { label: "🏦 Loans & debt", start: 4, end: 9 },
-  { label: "🧾 Taxes", start: 9, end: 14 },
-  { label: "💰 Income & finance", start: 14, end: 17 },
-  { label: "❤️ Health & everyday", start: 17, end: 22 },
+  { label: "🏠 Real estate & mortgage", start: 0, end: 8 },
+  { label: "🏦 Loans & debt", start: 8, end: 13 },
+  { label: "🧾 Taxes", start: 13, end: 18 },
+  { label: "💰 Income & finance", start: 18, end: 21 },
+  { label: "❤️ Health & everyday", start: 21, end: 26 },
 ];
 
 const blogPosts = [
