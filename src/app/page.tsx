@@ -22,6 +22,8 @@ const calcs = [
   { slug: "personal-loan", label: "Personal Loan Calculator", icon: "💳", desc: "Payment & true APR after fees" },
   { slug: "debt-payoff", label: "Debt Payoff Calculator", icon: "❄️", desc: "Snowball vs avalanche across debts" },
   { slug: "loan-payoff", label: "Loan Payoff Calculator", icon: "⏩", desc: "Extra-payment savings & payoff date" },
+  { slug: "credit-card-payoff", label: "Credit Card Payoff", icon: "💳", desc: "Minimum trap vs fixed payment" },
+  { slug: "debt-consolidation", label: "Debt Consolidation", icon: "🧮", desc: "Consolidate vs current debts" },
   { slug: "tax", label: "Income Tax 2026", icon: "🧾", desc: "Federal tax, deductions & bracket breakdown" },
   { slug: "tax-refund", label: "Tax Refund Estimator", icon: "💸", desc: "Refund or amount you'll owe" },
   { slug: "paycheck", label: "Paycheck Calculator", icon: "💰", desc: "Take-home pay per check" },
@@ -34,6 +36,9 @@ const calcs = [
   { slug: "401k", label: "401(k) Calculator", icon: "🏢", desc: "Employer match & contribution limit" },
   { slug: "roth-vs-traditional", label: "Roth vs Traditional", icon: "⚖️", desc: "After-tax winner by tax rate" },
   { slug: "savings-goal", label: "Savings Goal", icon: "🎯", desc: "Monthly amount to hit a target" },
+  { slug: "life-insurance", label: "Life Insurance", icon: "🛡️", desc: "Coverage-need estimate (DIME method)" },
+  { slug: "term-life", label: "Term Life Insurance", icon: "📆", desc: "Coverage amount & term length" },
+  { slug: "auto-insurance-estimator", label: "Auto Insurance Estimator", icon: "🚘", desc: "Rough premium range (not a quote)" },
   { slug: "bmi", label: "BMI Calculator", icon: "⚖️", desc: "BMI, body fat & health analysis" },
   { slug: "tdee", label: "TDEE & Calories", icon: "🔥", desc: "Daily calories, BMR & macro split" },
   { slug: "age", label: "Age Calculator", icon: "🎂", desc: "Exact age, zodiac & milestones" },
@@ -43,11 +48,12 @@ const calcs = [
 
 const categories = [
   { label: "🏠 Real estate & mortgage", start: 0, end: 8 },
-  { label: "🏦 Loans & debt", start: 8, end: 13 },
-  { label: "🧾 Taxes", start: 13, end: 18 },
-  { label: "💰 Income & finance", start: 18, end: 20 },
-  { label: "📈 Investing & retirement", start: 20, end: 25 },
-  { label: "❤️ Health & everyday", start: 25, end: 30 },
+  { label: "🏦 Loans & debt", start: 8, end: 15 },
+  { label: "🧾 Taxes", start: 15, end: 20 },
+  { label: "💰 Income & finance", start: 20, end: 22 },
+  { label: "📈 Investing & retirement", start: 22, end: 27 },
+  { label: "🛡️ Insurance", start: 27, end: 30 },
+  { label: "❤️ Health & everyday", start: 30, end: 35 },
 ];
 
 const blogPosts = [
