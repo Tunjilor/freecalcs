@@ -14,6 +14,10 @@ const calcs = [
   { slug: "va-loan", label: "VA Loan Calculator", icon: "🎖️", desc: "$0-down payment, funding fee & no PMI" },
   { slug: "rent-vs-buy", label: "Rent vs Buy", icon: "🏡", desc: "True cost comparison over time" },
   { slug: "loan", label: "Loan & EMI", icon: "🏦", desc: "Monthly payments for any loan type" },
+  { slug: "auto-loan", label: "Auto Loan Calculator", icon: "🚗", desc: "Car payment with tax, trade-in & fees" },
+  { slug: "personal-loan", label: "Personal Loan Calculator", icon: "💳", desc: "Payment & true APR after fees" },
+  { slug: "debt-payoff", label: "Debt Payoff Calculator", icon: "❄️", desc: "Snowball vs avalanche across debts" },
+  { slug: "loan-payoff", label: "Loan Payoff Calculator", icon: "⏩", desc: "Extra-payment savings & payoff date" },
   { slug: "salary", label: "Salary & Take-Home", icon: "💵", desc: "Net pay after federal & state taxes" },
   { slug: "tax", label: "Income Tax 2026", icon: "🧾", desc: "Federal tax, refund & bracket breakdown" },
   { slug: "compound-interest", label: "Compound Interest", icon: "📈", desc: "Growth chart & contribution impact" },
@@ -26,9 +30,10 @@ const calcs = [
 ];
 
 const categories = [
-  { label: "🏠 Real estate & mortgage", start: 0, end: 5 },
-  { label: "💰 Income & finance", start: 5, end: 9 },
-  { label: "❤️ Health & everyday", start: 9, end: 14 },
+  { label: "🏠 Real estate & mortgage", start: 0, end: 4 },
+  { label: "🏦 Loans & debt", start: 4, end: 9 },
+  { label: "💰 Income & finance", start: 9, end: 13 },
+  { label: "❤️ Health & everyday", start: 13, end: 18 },
 ];
 
 const blogPosts = [
