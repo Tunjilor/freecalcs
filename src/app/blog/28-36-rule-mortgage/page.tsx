@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import CalcCTA from '@/components/blog/CalcCTA';
+import RelatedTools from '@/components/blog/RelatedTools';
 export const metadata: Metadata = {
   title: 'The 28/36 Rule: How Much House Can You Actually Afford | freecalcs.io',
   description: 'Banks use the 28/36 rule to decide your mortgage qualification. Learn how to apply it to your income and debt, and when it makes sense to bend the rules.',
@@ -40,6 +42,7 @@ export default function Article() {
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>Using the example above with a $1,650 maximum housing payment at current rates: At 6.5% interest with 20% down on a 30-year mortgage, a $1,650 total payment (including taxes and insurance) supports roughly a $230,000 to $250,000 home price.</p>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>On a $95,000 salary with no other debts, the front-end ratio allows up to $2,217 per month for housing, which supports a home price around $320,000 to $340,000.</p>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>These are guidelines, not hard limits. Your actual qualification depends on your credit score, down payment, loan type, and the specific lender.</p>
+            <CalcCTA href="/home-affordability" label="Find your own max home price" blurb="Enter your income, debts, and down payment to see the maximum home price the 28/36 rule supports — at conservative, moderate, and aggressive DTI." cta="Open the home affordability calculator" />
           </div>
           <div style={{marginBottom:32}}>
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>When Lenders Bend the Rules</h2>
@@ -78,7 +81,8 @@ export default function Article() {
 
           </div>
         </div>
-        <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
+        <RelatedTools tools={[{href:'/home-affordability',label:'Home Affordability Calculator'},{href:'/qualify',label:'Mortgage Qualifier'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
+        <div style={{display:'flex',gap:12,flexWrap:'wrap',marginTop:20}}>
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
           <a href="/qualify" style={{background:'#2563eb',color:'#fff',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,textDecoration:'none'}}>Mortgage Qualifier</a>
         </div>

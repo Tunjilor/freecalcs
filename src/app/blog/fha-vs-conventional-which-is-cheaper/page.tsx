@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import RelatedTools from '@/components/blog/RelatedTools';
 
 export const metadata: Metadata = {
   title: 'FHA vs Conventional 2026: Which Is Cheaper? | freecalcs.io',
@@ -206,7 +207,8 @@ export default function Article() {
           licensed lender before making decisions.
         </p>
 
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+        <RelatedTools tools={[{href:'/down-payment',label:'Down Payment Calculator'},{href:'/home-affordability',label:'Home Affordability Calculator'},{href:'/refinance',label:'Refinance Calculator'}]} />
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 20 }}>
           <a href="/blog" style={{ background: '#fff', color: '#2563eb', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, border: '1px solid #bfdbfe', textDecoration: 'none' }}>← All Articles</a>
           <a href="/qualify" style={{ background: '#2563eb', color: '#fff', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, textDecoration: 'none' }}>Mortgage Qualifier</a>
         </div>

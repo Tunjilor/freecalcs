@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Author, { AUTHORS } from '@/components/Author';
 import ArticleJsonLd from '@/components/ArticleJsonLd';
+import CalcCTA from '@/components/blog/CalcCTA';
+import RelatedTools from '@/components/blog/RelatedTools';
 
 export const metadata: Metadata = {
   title: 'Refinance Requirements 2026: Conventional, FHA, VA, USDA | freecalcs.io',
@@ -179,6 +181,7 @@ export default function Article() {
         </section>
 
         {/* Related links */}
+        <CalcCTA href="/refinance" label="Should you refinance? See your break-even" blurb="Compare your current loan to a new rate and term — monthly savings, the break-even point in months, and whether it actually cuts your lifetime interest." cta="Open the refinance calculator" />
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '0 0 36px' }}>
           <a href="/mortgage" style={{ background: '#2563eb', color: '#fff', fontSize: 14, fontWeight: 700, padding: '12px 22px', borderRadius: 12, textDecoration: 'none' }}>Estimate your payment →</a>
           <a href="/qualify" style={{ background: '#fff', color: '#2563eb', fontSize: 14, fontWeight: 700, padding: '12px 22px', borderRadius: 12, border: '1.5px solid #bfdbfe', textDecoration: 'none' }}>Check if you qualify →</a>
@@ -204,7 +207,8 @@ export default function Article() {
           eligibility with a licensed lender before making decisions.
         </p>
 
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+        <RelatedTools tools={[{href:'/refinance',label:'Refinance Calculator'},{href:'/heloc',label:'HELOC Calculator'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 20 }}>
           <a href="/blog" style={{ background: '#fff', color: '#2563eb', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, border: '1px solid #bfdbfe', textDecoration: 'none' }}>← All Articles</a>
           <a href="/qualify" style={{ background: '#2563eb', color: '#fff', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, textDecoration: 'none' }}>Mortgage Qualifier</a>
         </div>

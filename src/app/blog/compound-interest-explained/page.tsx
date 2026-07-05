@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import CalcCTA from '@/components/blog/CalcCTA';
+import RelatedTools from '@/components/blog/RelatedTools';
 export const metadata: Metadata = {
   title: 'Compound Interest Explained: Why Einstein Called It the 8th Wonder | freecalcs.io',
   description: 'Learn how compound interest works, why starting early matters, the Rule of 72, and how to calculate your future wealth.',
@@ -26,6 +28,7 @@ export default function Article() {
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>What Is Compound Interest?</h2>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>Compound interest is interest earned on both your original deposit and on the interest that has already accumulated. Unlike simple interest which only earns on your initial principal, compound interest creates a snowball effect where your money grows faster over time.</p>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>Here is a simple example: if you invest $10,000 at 7% simple interest, you earn $700 every year. After 20 years, you have $24,000. But with compound interest at the same rate, your money grows to $38,697 because each years interest earns interest in future years.</p>
+            <CalcCTA href="/compound-interest" label="Watch your own money compound" blurb="Enter a starting amount, monthly contribution, rate, and time horizon to see the growth curve — with the Rule of 72 and inflation adjustment built in." cta="Open the compound interest calculator" />
           </div>
           <div style={{marginBottom:32}}>
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>Why Starting Early Matters</h2>
@@ -73,7 +76,8 @@ export default function Article() {
 
           </div>
         </div>
-        <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
+        <RelatedTools tools={[{href:'/retirement',label:'Retirement Calculator'},{href:'/savings-goal',label:'Savings Goal Calculator'},{href:'/compound-interest',label:'Compound Interest Calculator'}]} />
+        <div style={{display:'flex',gap:12,flexWrap:'wrap',marginTop:20}}>
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
           <a href="/compound-interest" style={{background:'#2563eb',color:'#fff',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,textDecoration:'none'}}>Compound Interest Calculator</a>
         </div>

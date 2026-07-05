@@ -117,6 +117,9 @@ export const paycheckDef: CalculatorDefinition<PaycheckInputs, PaycheckResults> 
     relatedLink("salary"),
     relatedLink("self-employment-tax"),
   ],
+  relatedArticles: [
+    { slug: "blog/2026-tax-brackets-guide", label: "2026 federal tax brackets guide" },
+  ],
 
   faqs: [
     { q: "How is take-home pay calculated?", a: "Start with gross pay, subtract pre-tax deductions (like 401(k) and HSA), then subtract federal income tax withholding, Social Security (6.2%), and Medicare (1.45%). What's left is your net, or take-home, pay. State and local taxes, where they apply, come out too — this calculator estimates the federal portion." },

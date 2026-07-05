@@ -124,6 +124,9 @@ export const retirementDef: CalculatorDefinition<RetirementInputs, RetirementRes
     relatedLink("savings-goal"),
     relatedLink("compound-interest"),
   ],
+  relatedArticles: [
+    { slug: "blog/compound-interest-explained", label: "Compound interest explained" },
+  ],
 
   faqs: [
     { q: "How much do I need to retire?", a: "A common rule of thumb is 25× your annual expenses (the flip side of the 4% withdrawal rule), so $60,000/year of spending suggests a $1.5 million target. Your real number depends on your lifestyle, other income like Social Security or a pension, and how long you expect retirement to last. Use the target field to test different goals." },

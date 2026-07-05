@@ -118,6 +118,9 @@ export const taxRefundDef: CalculatorDefinition<TaxRefundInputs, TaxRefundResult
     relatedLink("self-employment-tax"),
     relatedLink("salary"),
   ],
+  relatedArticles: [
+    { slug: "blog/2026-tax-brackets-guide", label: "2026 federal tax brackets guide" },
+  ],
 
   faqs: [
     { q: "How is my tax refund calculated?", a: "A refund is simply the tax you had withheld minus the tax you actually owe. This estimator figures your taxable income (income minus pre-tax and standard deductions), applies the brackets, subtracts credits like the Child Tax Credit, then compares that final tax to what you've had withheld. Withheld more than you owe = refund; less = balance due." },

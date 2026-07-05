@@ -116,6 +116,9 @@ export const savingsGoalDef: CalculatorDefinition<SavingsGoalInputs, SavingsGoal
     relatedLink("down-payment"),
     relatedLink("401k"),
   ],
+  relatedArticles: [
+    { slug: "blog/compound-interest-explained", label: "Compound interest explained" },
+  ],
 
   faqs: [
     { q: "How much should I save each month to reach my goal?", a: "It depends on your target, your deadline, what you've already saved, and the return your money earns. This calculator solves for the exact monthly amount: it grows your current savings, subtracts that from the goal, and divides the rest by the future value of a monthly contribution. Automating that figure is the key to actually hitting the goal." },

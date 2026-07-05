@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import CalcCTA from '@/components/blog/CalcCTA';
+import RelatedTools from '@/components/blog/RelatedTools';
 export const metadata: Metadata = {
   title: 'How to Calculate Your Mortgage Payment Step by Step | freecalcs.io',
   description: 'Learn exactly how mortgage payments are calculated including principal, interest, PMI, taxes, and insurance with real examples.',
@@ -26,6 +28,7 @@ export default function Article() {
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>The Mortgage Payment Formula</h2>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>Your monthly payment uses three inputs: loan amount, interest rate, and loan term. For example, a $320,000 loan at 6.5% for 30 years works out to $2,023 per month for principal and interest.</p>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>But this is only part of your total payment. Most borrowers also pay property taxes, homeowners insurance, and possibly PMI collected together in escrow.</p>
+            <CalcCTA href="/mortgage" label="Calculate your own payment" blurb="Enter your loan amount, rate, and term to get your exact monthly payment with a full amortization breakdown — taxes, insurance, and PMI included." cta="Open the mortgage calculator" />
           </div>
           <div style={{marginBottom:32}}>
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>What Makes Up Your Total Payment</h2>
@@ -72,7 +75,8 @@ export default function Article() {
 
           </div>
         </div>
-        <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
+        <RelatedTools tools={[{href:'/home-affordability',label:'Home Affordability Calculator'},{href:'/loan-payoff',label:'Loan Payoff Calculator'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
+        <div style={{display:'flex',gap:12,flexWrap:'wrap',marginTop:20}}>
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
           <a href="/mortgage" style={{background:'#2563eb',color:'#fff',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,textDecoration:'none'}}>Mortgage Calculator</a>
         </div>
