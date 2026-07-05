@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'how-big-should-emergency-fund-be',
+    title:'How Big Should My Emergency Fund Actually Be?',
+    excerpt:'“Three to six months” is a $12k-vs-$24k spread. The right size depends on your income stability and dependents — and it covers essential expenses, not your whole lifestyle.',
+    category:'Savings',
+    categoryColor:'#059669',
+    readTime:'8 min',
+    date:'Jul 5, 2026',
+    related:'/savings-goal',
+    relatedLabel:'Savings Goal Calculator',
+  },
+  {
     slug:'should-i-refinance-to-save-200-a-month',
     title:'Should I Refinance to Save $200 a Month?',
     excerpt:'A lower payment sounds like free money — but closing costs create a break-even, and a fresh 30-year term can quietly raise your total interest even at a lower rate. The two numbers that decide it.',

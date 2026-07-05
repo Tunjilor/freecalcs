@@ -118,6 +118,7 @@ export const savingsGoalDef: CalculatorDefinition<SavingsGoalInputs, SavingsGoal
   ],
   relatedArticles: [
     { slug: "blog/compound-interest-explained", label: "Compound interest explained" },
+    { slug: "blog/how-big-should-emergency-fund-be", label: "How big should my emergency fund be?" },
   ],
 
   faqs: [
