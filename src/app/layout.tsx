@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import './globals.css';
 
 // Google AdSense publisher ID. This is ONLY the loader / site-verification
@@ -57,17 +56,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        {/* Google AdSense loader (site-wide, in <head>) — verification/review only,
+            no ad units. Rendered as a plain <script> so the literal tag is present
+            in the RAW HTML head for AdSense's no-JS site review. (next/script in the
+            App Router only emits a preload link + client injection, which a no-JS
+            scan can miss.) */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+          crossOrigin="anonymous"
+        />
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif', background: '#f8fafc' }}>
-
-        {/* Google AdSense loader (site-wide) — verification/review only, no ad units */}
-        <Script
-          id="google-adsense"
-          async
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-        />
 
         {/* Global Nav */}
         <nav style={{ background: '#1e3a5f', borderBottom: '1px solid rgba(255,255,255,.1)', position: 'sticky', top: 0, zIndex: 100 }}>
