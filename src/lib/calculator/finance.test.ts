@@ -6,6 +6,9 @@ import {
   amortizeByPayment,
   remainingBalance,
   totalInterest,
+  futureValue,
+  futureValueOfSeries,
+  realReturn,
 } from "./finance.ts";
 
 const approx = (a: number, b: number, eps = 1, msg?: string) =>
@@ -74,4 +77,31 @@ test("totalInterest matches the schedule's cumulative interest", () => {
   const ti = totalInterest(300000, 0.065 / 12, 360, pmt);
   const sched = amortizeSchedule(300000, 0.065 / 12, 360, pmt);
   approx(ti, sched.totalInterest, 0.02);
+});
+
+test("futureValue compounds a lump sum", () => {
+  approx(futureValue(10000, 0.07, 10), 19671.51, 0.5); // 10000 × 1.07^10
+  assert.equal(futureValue(5000, 0.05, 0), 5000); // no periods = unchanged
+});
+
+test("futureValueOfSeries: $100/mo at 0.5%/mo for 12 mo (ordinary annuity)", () => {
+  // FV = 100 × ((1.005^12 − 1)/0.005) ≈ 1233.56
+  approx(futureValueOfSeries(100, 0.005, 12), 1233.56, 0.5);
+});
+
+test("futureValueOfSeries: due (beginning-of-period) exceeds ordinary by (1+r)", () => {
+  const ordinary = futureValueOfSeries(100, 0.005, 12, false);
+  const due = futureValueOfSeries(100, 0.005, 12, true);
+  approx(due, ordinary * 1.005, 0.01);
+});
+
+test("futureValueOfSeries: zero rate is payment × periods", () => {
+  assert.equal(futureValueOfSeries(200, 0, 24), 4800);
+  assert.equal(futureValueOfSeries(200, 0, 0), 0);
+});
+
+test("realReturn applies the Fisher relation", () => {
+  // 7% nominal, 3% inflation -> ~3.88% real
+  approx(realReturn(0.07, 0.03), 0.038835, 0.0005);
+  approx(realReturn(0.05, 0.05), 0, 0.0001); // equal -> zero real return
 });

@@ -125,3 +125,40 @@ export function totalInterest(
 ): number {
   return round2(amortizeSchedule(principal, monthlyRate, months, payment).totalInterest);
 }
+
+// ---- Investment / time-value-of-money helpers ------------------------------
+// Additive: these don't touch the amortization helpers above. Rates are per
+// period as a fraction (e.g. 0.005 monthly), consistent with the loan helpers.
+
+/** Future value of a lump sum: pv × (1 + r)^n. */
+export function futureValue(presentValue: number, ratePerPeriod: number, periods: number): number {
+  if (periods <= 0) return presentValue;
+  return presentValue * Math.pow(1 + ratePerPeriod, periods);
+}
+
+/**
+ * Future value of a level series of payments (an annuity). Ordinary (end-of-
+ * period) by default; pass `due = true` for beginning-of-period contributions.
+ * Handles a zero rate as pmt × periods.
+ */
+export function futureValueOfSeries(
+  payment: number,
+  ratePerPeriod: number,
+  periods: number,
+  due = false,
+): number {
+  if (periods <= 0) return 0;
+  const fv =
+    ratePerPeriod === 0
+      ? payment * periods
+      : payment * ((Math.pow(1 + ratePerPeriod, periods) - 1) / ratePerPeriod);
+  return due ? fv * (1 + ratePerPeriod) : fv;
+}
+
+/**
+ * Inflation-adjusted ("real") return from a nominal return and inflation rate,
+ * via the Fisher relation: (1 + nominal) / (1 + inflation) − 1. All fractions.
+ */
+export function realReturn(nominalRate: number, inflationRate: number): number {
+  return (1 + nominalRate) / (1 + inflationRate) - 1;
+}

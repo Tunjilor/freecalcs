@@ -28,8 +28,12 @@ const calcs = [
   { slug: "self-employment-tax", label: "Self-Employment Tax", icon: "🧑‍💼", desc: "SE tax on 1099 income" },
   { slug: "capital-gains-tax", label: "Capital Gains Tax", icon: "📊", desc: "Short vs long-term gains" },
   { slug: "salary", label: "Salary & Take-Home", icon: "💵", desc: "Net pay after federal & state taxes" },
-  { slug: "compound-interest", label: "Compound Interest", icon: "📈", desc: "Growth chart & contribution impact" },
   { slug: "percentage", label: "Percentage Calculator", icon: "﹪", desc: "7 percentage tools in one" },
+  { slug: "compound-interest", label: "Compound Interest", icon: "📈", desc: "Growth chart & contribution impact" },
+  { slug: "retirement", label: "Retirement Calculator", icon: "🏖️", desc: "Projection, real value & on-track" },
+  { slug: "401k", label: "401(k) Calculator", icon: "🏢", desc: "Employer match & contribution limit" },
+  { slug: "roth-vs-traditional", label: "Roth vs Traditional", icon: "⚖️", desc: "After-tax winner by tax rate" },
+  { slug: "savings-goal", label: "Savings Goal", icon: "🎯", desc: "Monthly amount to hit a target" },
   { slug: "bmi", label: "BMI Calculator", icon: "⚖️", desc: "BMI, body fat & health analysis" },
   { slug: "tdee", label: "TDEE & Calories", icon: "🔥", desc: "Daily calories, BMR & macro split" },
   { slug: "age", label: "Age Calculator", icon: "🎂", desc: "Exact age, zodiac & milestones" },
@@ -41,8 +45,9 @@ const categories = [
   { label: "🏠 Real estate & mortgage", start: 0, end: 8 },
   { label: "🏦 Loans & debt", start: 8, end: 13 },
   { label: "🧾 Taxes", start: 13, end: 18 },
-  { label: "💰 Income & finance", start: 18, end: 21 },
-  { label: "❤️ Health & everyday", start: 21, end: 26 },
+  { label: "💰 Income & finance", start: 18, end: 20 },
+  { label: "📈 Investing & retirement", start: 20, end: 25 },
+  { label: "❤️ Health & everyday", start: 25, end: 30 },
 ];
 
 const blogPosts = [
