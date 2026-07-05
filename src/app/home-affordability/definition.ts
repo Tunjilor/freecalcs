@@ -133,6 +133,7 @@ export const affordabilityDef: CalculatorDefinition<AffordabilityInputs, Afforda
   relatedArticles: [
     { slug: "blog/28-36-rule-mortgage", label: "The 28/36 rule: how much house you can afford" },
     { slug: "blog/how-to-calculate-mortgage-payment", label: "How to calculate your mortgage payment" },
+    { slug: "blog/can-i-buy-a-house-with-640-credit-score", label: "Can I buy a house with a 640 credit score?" },
   ],
 
   faqs: [

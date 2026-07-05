@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'can-i-buy-a-house-with-640-credit-score',
+    title:'My Credit Score Is 640. Can I Buy a House?',
+    excerpt:'Yes — 640 is above the FHA floor and works for many conventional loans. The real question isn’t whether you can qualify, but what a fair score costs you in rate, and whether waiting to raise it is worth it.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'8 min',
+    date:'Jul 5, 2026',
+    related:'/home-affordability',
+    relatedLabel:'Home Affordability Calculator',
+  },
+  {
     slug:'pay-off-low-rate-mortgage-early',
     title:'Should I Pay Off My 3% Mortgage Early?',
     excerpt:'A low-rate mortgage is often worth keeping, not rushing to kill. The real trade-off is a guaranteed ~3% and peace of mind vs a higher-but-uncertain return — with real numbers.',

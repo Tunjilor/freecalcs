@@ -47,6 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/blog/heloc-to-pay-off-credit-card-debt`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
     { url: `${base}/blog/roth-vs-traditional-95k-income`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
     { url: `${base}/blog/pay-off-low-rate-mortgage-early`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
+    { url: `${base}/blog/can-i-buy-a-house-with-640-credit-score`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
     { url: `${base}/blog/compound-interest-explained`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
     { url: `${base}/blog/2026-tax-brackets-guide`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-28' },
     { url: `${base}/blog/how-to-calculate-mortgage-payment`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
