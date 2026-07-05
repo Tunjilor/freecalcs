@@ -5,6 +5,15 @@
 // (price − trade-in), which most US states apply. Down payment and trade-in
 // reduce the financed amount; taxes and dealer fees are rolled into the loan.
 
+import {
+  monthlyPayment,
+  amortizeSchedule,
+  round2,
+  type AmortRow,
+} from "../../lib/calculator/finance.ts";
+
+export { monthlyPayment }; // re-exported so the test suite's import is unchanged
+
 export type AutoLoanInputs = {
   vehiclePrice: number;
   downPayment: number;
@@ -14,14 +23,6 @@ export type AutoLoanInputs = {
   termMonths: number;
   apr: number; // %
   extraPayment: number; // extra principal per month
-};
-
-export type AmortRow = {
-  month: number;
-  interest: number;
-  principal: number;
-  balance: number;
-  cumulativeInterest: number;
 };
 
 export type AutoLoanResults = {
@@ -44,45 +45,6 @@ export type AutoLoanResults = {
   schedule: AmortRow[];
 };
 
-const round2 = (n: number) => Math.round(n * 100) / 100;
-
-export function monthlyPayment(principal: number, monthlyRate: number, n: number): number {
-  if (n <= 0) return 0;
-  if (monthlyRate <= 0) return principal / n;
-  const f = Math.pow(1 + monthlyRate, n);
-  return (principal * (monthlyRate * f)) / (f - 1);
-}
-
-function amortize(
-  principal: number,
-  monthlyRate: number,
-  scheduledN: number,
-  basePayment: number,
-  extra: number,
-): { schedule: AmortRow[]; totalInterest: number; payoffMonths: number } {
-  const schedule: AmortRow[] = [];
-  let balance = principal;
-  let cumulativeInterest = 0;
-  const pay = basePayment + Math.max(0, extra);
-  for (let m = 1; m <= scheduledN && balance > 0.005; m++) {
-    const interest = balance * monthlyRate;
-    let principalPaid = pay - interest;
-    if (principalPaid > balance) principalPaid = balance;
-    if (principalPaid < 0) principalPaid = 0; // guard: payment below interest
-    balance -= principalPaid;
-    cumulativeInterest += interest;
-    schedule.push({
-      month: m,
-      interest: round2(interest),
-      principal: round2(principalPaid),
-      balance: round2(Math.max(0, balance)),
-      cumulativeInterest: round2(cumulativeInterest),
-    });
-    if (principalPaid === 0) break; // never amortizes
-  }
-  return { schedule, totalInterest: cumulativeInterest, payoffMonths: schedule.length };
-}
-
 export function computeAutoLoan(v: AutoLoanInputs): AutoLoanResults {
   const price = Math.max(0, v.vehiclePrice);
   const down = Math.max(0, v.downPayment);
@@ -97,13 +59,13 @@ export function computeAutoLoan(v: AutoLoanInputs): AutoLoanResults {
   const scheduledN = Math.max(1, Math.round(v.termMonths));
   const pmt = monthlyPayment(amountFinanced, monthlyRate, scheduledN);
 
-  const withExtra = amortize(amountFinanced, monthlyRate, scheduledN, pmt, v.extraPayment);
+  const withExtra = amortizeSchedule(amountFinanced, monthlyRate, scheduledN, pmt, v.extraPayment);
   const noExtra =
-    v.extraPayment > 0 ? amortize(amountFinanced, monthlyRate, scheduledN, pmt, 0) : withExtra;
+    v.extraPayment > 0 ? amortizeSchedule(amountFinanced, monthlyRate, scheduledN, pmt, 0) : withExtra;
 
   const LEVER = 100;
-  const lever = amortize(amountFinanced, monthlyRate, scheduledN, pmt, LEVER);
-  const leverBaseInterest = amortize(amountFinanced, monthlyRate, scheduledN, pmt, 0).totalInterest;
+  const lever = amortizeSchedule(amountFinanced, monthlyRate, scheduledN, pmt, LEVER);
+  const leverBaseInterest = amortizeSchedule(amountFinanced, monthlyRate, scheduledN, pmt, 0).totalInterest;
 
   const totalInterest = withExtra.totalInterest;
 

@@ -12,6 +12,17 @@
 //   Exempt (service-connected disability comp, Purple Heart, eligible
 //   surviving spouse) = 0%.
 
+import {
+  monthlyPayment,
+  amortizeSchedule,
+  round2,
+  type AmortRow,
+} from "../../lib/calculator/finance.ts";
+
+// Re-exported so existing imports (and the test suite) keep working unchanged.
+export { monthlyPayment };
+export type { AmortRow };
+
 export type VaLoanInputs = {
   homePrice: number;
   downPayment: number; // dollars; VA allows $0
@@ -24,14 +35,6 @@ export type VaLoanInputs = {
   propTaxAnnual: number;
   insuranceAnnual: number;
   hoaMonthly: number;
-};
-
-export type AmortRow = {
-  month: number;
-  interest: number;
-  principal: number;
-  balance: number;
-  cumulativeInterest: number;
 };
 
 export type VaLoanResults = {
@@ -66,8 +69,6 @@ export type VaLoanResults = {
   schedule: AmortRow[];
 };
 
-const round2 = (n: number) => Math.round(n * 100) / 100;
-
 /** VA purchase funding-fee rate as a fraction (e.g. 0.0215). */
 export function fundingFeeRate(
   usage: VaLoanInputs["usage"],
@@ -78,51 +79,6 @@ export function fundingFeeRate(
   if (downPaymentPct >= 10) return 0.0125;
   if (downPaymentPct >= 5) return 0.015;
   return usage === "subsequent" ? 0.033 : 0.0215;
-}
-
-/** Standard amortization payment for a principal at a monthly rate over n months. */
-export function monthlyPayment(principal: number, monthlyRate: number, n: number): number {
-  if (n <= 0) return 0;
-  if (monthlyRate <= 0) return principal / n;
-  const f = Math.pow(1 + monthlyRate, n);
-  return (principal * (monthlyRate * f)) / (f - 1);
-}
-
-/**
- * Amortize a loan, optionally with a fixed extra principal payment each month.
- * Returns the full schedule plus totals. Caps iterations at the scheduled term
- * (extra payment only shortens it).
- */
-function amortize(
-  principal: number,
-  monthlyRate: number,
-  scheduledN: number,
-  basePayment: number,
-  extra: number,
-): { schedule: AmortRow[]; totalInterest: number; payoffMonths: number } {
-  const schedule: AmortRow[] = [];
-  let balance = principal;
-  let cumulativeInterest = 0;
-  const pay = basePayment + Math.max(0, extra);
-  for (let m = 1; m <= scheduledN && balance > 0.005; m++) {
-    const interest = balance * monthlyRate;
-    let principalPaid = pay - interest;
-    if (principalPaid > balance) principalPaid = balance;
-    balance = balance - principalPaid;
-    cumulativeInterest += interest;
-    schedule.push({
-      month: m,
-      interest: round2(interest),
-      principal: round2(principalPaid),
-      balance: round2(Math.max(0, balance)),
-      cumulativeInterest: round2(cumulativeInterest),
-    });
-  }
-  return {
-    schedule,
-    totalInterest: cumulativeInterest,
-    payoffMonths: schedule.length,
-  };
 }
 
 /**
@@ -167,11 +123,11 @@ export function computeVaLoan(v: VaLoanInputs): VaLoanResults {
   const monthlyPI = monthlyPayment(loanAmount, monthlyRate, scheduledN);
 
   // With extra payment (actual payoff).
-  const withExtra = amortize(loanAmount, monthlyRate, scheduledN, monthlyPI, v.extraPayment);
+  const withExtra = amortizeSchedule(loanAmount, monthlyRate, scheduledN, monthlyPI, v.extraPayment);
   // Baseline without extra (for savings comparison).
   const noExtra =
     v.extraPayment > 0
-      ? amortize(loanAmount, monthlyRate, scheduledN, monthlyPI, 0)
+      ? amortizeSchedule(loanAmount, monthlyRate, scheduledN, monthlyPI, 0)
       : withExtra;
 
   const monthlyTax = Math.max(0, v.propTaxAnnual) / 12;
@@ -185,7 +141,7 @@ export function computeVaLoan(v: VaLoanInputs): VaLoanResults {
   // Extra-payment lever ($250/mo) computed from the scheduled payment, so the
   // "adding $X would save…" insight always has real numbers to show.
   const LEVER = 250;
-  const lever = amortize(loanAmount, monthlyRate, scheduledN, monthlyPI, LEVER);
+  const lever = amortizeSchedule(loanAmount, monthlyRate, scheduledN, monthlyPI, LEVER);
 
   return {
     baseLoan: round2(baseLoan),
@@ -210,7 +166,7 @@ export function computeVaLoan(v: VaLoanInputs): VaLoanResults {
     leverExtra: LEVER,
     leverMonthsSaved: scheduledN - lever.payoffMonths,
     leverInterestSaved: round2(
-      amortize(loanAmount, monthlyRate, scheduledN, monthlyPI, 0).totalInterest -
+      amortizeSchedule(loanAmount, monthlyRate, scheduledN, monthlyPI, 0).totalInterest -
         lever.totalInterest,
     ),
     conventionalPmiMonthly: round2(conv.monthly),
