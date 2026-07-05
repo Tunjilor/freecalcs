@@ -1,5 +1,10 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
+
+// Google AdSense publisher ID. This is ONLY the loader / site-verification
+// script (for review) — no ad units or Auto Ads are configured yet.
+const ADSENSE_CLIENT = 'ca-pub-4733406265730984';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.freecalcs.io'),
@@ -54,6 +59,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif', background: '#f8fafc' }}>
+
+        {/* Google AdSense loader (site-wide) — verification/review only, no ad units */}
+        <Script
+          id="google-adsense"
+          async
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+        />
 
         {/* Global Nav */}
         <nav style={{ background: '#1e3a5f', borderBottom: '1px solid rgba(255,255,255,.1)', position: 'sticky', top: 0, zIndex: 100 }}>
