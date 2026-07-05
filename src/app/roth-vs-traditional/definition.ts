@@ -124,6 +124,9 @@ export const rothDef: CalculatorDefinition<RothInputs, RothResults> = {
     relatedLink("savings-goal"),
     relatedLink("compound-interest"),
   ],
+  relatedArticles: [
+    { slug: "blog/roth-vs-traditional-95k-income", label: "I make $95,000 — should I choose Roth or Traditional?" },
+  ],
 
   faqs: [
     { q: "Should I choose Roth or Traditional?", a: "It depends on whether your tax rate will be higher or lower in retirement than it is now. If you expect a lower rate later (common for high earners near peak income), Traditional's upfront deduction wins. If you expect a higher rate later (common for younger savers early in their careers), Roth's tax-free withdrawals win. When the rates are equal, they're identical." },

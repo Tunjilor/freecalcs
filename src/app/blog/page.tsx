@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'roth-vs-traditional-95k-income',
+    title:'I Make $95,000 a Year. Should I Choose Roth or Traditional?',
+    excerpt:'At $95k you’re in the 22% bracket, so the choice comes down to one question: will your tax rate in retirement be higher or lower than today? Real 2026 numbers, plainly explained.',
+    category:'Investing & Retirement',
+    categoryColor:'#7c3aed',
+    readTime:'8 min',
+    date:'Jul 5, 2026',
+    related:'/roth-vs-traditional',
+    relatedLabel:'Roth vs Traditional',
+  },
+  {
     slug:'heloc-to-pay-off-credit-card-debt',
     title:'Should I Use a HELOC to Pay Off Credit Card Debt?',
     excerpt:'Trading 22% card debt for a 9% HELOC can save thousands — or leave you owing on both. The math, the risks, and how to tell which it will be for you.',
