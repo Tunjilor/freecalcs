@@ -18,8 +18,12 @@ const calcs = [
   { slug: "personal-loan", label: "Personal Loan Calculator", icon: "💳", desc: "Payment & true APR after fees" },
   { slug: "debt-payoff", label: "Debt Payoff Calculator", icon: "❄️", desc: "Snowball vs avalanche across debts" },
   { slug: "loan-payoff", label: "Loan Payoff Calculator", icon: "⏩", desc: "Extra-payment savings & payoff date" },
+  { slug: "tax", label: "Income Tax 2026", icon: "🧾", desc: "Federal tax, deductions & bracket breakdown" },
+  { slug: "tax-refund", label: "Tax Refund Estimator", icon: "💸", desc: "Refund or amount you'll owe" },
+  { slug: "paycheck", label: "Paycheck Calculator", icon: "💰", desc: "Take-home pay per check" },
+  { slug: "self-employment-tax", label: "Self-Employment Tax", icon: "🧑‍💼", desc: "SE tax on 1099 income" },
+  { slug: "capital-gains-tax", label: "Capital Gains Tax", icon: "📊", desc: "Short vs long-term gains" },
   { slug: "salary", label: "Salary & Take-Home", icon: "💵", desc: "Net pay after federal & state taxes" },
-  { slug: "tax", label: "Income Tax 2026", icon: "🧾", desc: "Federal tax, refund & bracket breakdown" },
   { slug: "compound-interest", label: "Compound Interest", icon: "📈", desc: "Growth chart & contribution impact" },
   { slug: "percentage", label: "Percentage Calculator", icon: "﹪", desc: "7 percentage tools in one" },
   { slug: "bmi", label: "BMI Calculator", icon: "⚖️", desc: "BMI, body fat & health analysis" },
@@ -32,8 +36,9 @@ const calcs = [
 const categories = [
   { label: "🏠 Real estate & mortgage", start: 0, end: 4 },
   { label: "🏦 Loans & debt", start: 4, end: 9 },
-  { label: "💰 Income & finance", start: 9, end: 13 },
-  { label: "❤️ Health & everyday", start: 13, end: 18 },
+  { label: "🧾 Taxes", start: 9, end: 14 },
+  { label: "💰 Income & finance", start: 14, end: 17 },
+  { label: "❤️ Health & everyday", start: 17, end: 22 },
 ];
 
 const blogPosts = [

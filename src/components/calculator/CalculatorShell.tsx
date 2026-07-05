@@ -7,6 +7,7 @@ import InputField from "./InputField";
 import ResultCard from "./ResultCard";
 import ExplainMyResult from "./ExplainMyResult";
 import ResultChart from "./ResultChart";
+import BreakdownTable from "./BreakdownTable";
 import ScenarioRow from "./ScenarioRow";
 import RelatedCalculators from "./RelatedCalculators";
 import TeachBlock from "./TeachBlock";
@@ -134,6 +135,13 @@ export default function CalculatorShell<Inputs extends Record<string, number | s
                 <ResultChart spec={def.chart} results={results} />
               </section>
             )}
+
+            {/* 6b. Tabular breakdowns (additive — rendered alongside the chart) */}
+            {def.breakdowns?.map((spec, i) => (
+              <section key={i} className="fc-card">
+                <BreakdownTable spec={spec} results={results} />
+              </section>
+            ))}
 
             {/* 7. Scenario / what-if */}
             {def.scenarios && def.scenarios.length > 0 && (

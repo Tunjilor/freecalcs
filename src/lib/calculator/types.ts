@@ -55,6 +55,28 @@ export type ChartSpec<Results> = {
   yFormat?: "currency" | "number";
 };
 
+/**
+ * A tabular breakdown (BUILD-STANDARD §1.6). Renders a real table — e.g. a
+ * bracket-by-bracket tax breakdown, or a per-debt payoff schedule — for data
+ * that's a variable-length list of rows rather than a single result field.
+ * Purely additive: a definition without `breakdowns` renders exactly as before.
+ */
+export type BreakdownColumn = {
+  key: string;
+  label: string;
+  format: "currency" | "currency2" | "percent" | "number" | "text";
+  align?: "left" | "right";
+};
+
+export type BreakdownSpec<Results> = {
+  title: string;
+  columns: BreakdownColumn[];
+  /** Pull the rows out of the computed Results; each row is keyed by column key. */
+  rows: (r: Results) => Record<string, number | string>[];
+  /** Optional caption under the table (e.g. a note about what's shown). */
+  note?: string;
+};
+
 /** A what-if preset: a labeled override of one or more inputs. */
 export type ScenarioSpec<Inputs> = {
   id: string;
@@ -96,6 +118,7 @@ export type CalculatorDefinition<Inputs, Results> = {
   results: ResultSpec<Results>[];
 
   chart?: ChartSpec<Results>;
+  breakdowns?: BreakdownSpec<Results>[]; // optional tabular breakdowns (§1.6)
   scenarios?: ScenarioSpec<Inputs>[];
 
   insights: InsightRule<Inputs, Results>[];
