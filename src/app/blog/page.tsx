@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'rent-or-buy-a-home',
+    title:'Rent or Buy a Home? The Honest Math.',
+    excerpt:'“Renting is throwing money away” is the wrong starting point. Once you count closing costs, maintenance, and the down payment’s opportunity cost, buying often loses short-term and wins mainly over the long haul.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'9 min',
+    date:'Jul 5, 2026',
+    related:'/rent-vs-buy',
+    relatedLabel:'Rent vs Buy Calculator',
+  },
+  {
     slug:'how-big-should-emergency-fund-be',
     title:'How Big Should My Emergency Fund Actually Be?',
     excerpt:'“Three to six months” is a $12k-vs-$24k spread. The right size depends on your income stability and dependents — and it covers essential expenses, not your whole lifestyle.',
