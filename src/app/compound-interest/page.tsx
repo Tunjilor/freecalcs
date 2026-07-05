@@ -88,6 +88,10 @@ export default function Page() {
           <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>Credit card debt compounds at 20–30% annually. A $5,000 balance at 24% APR grows to $25,795 in 10 years if you make no payments. The same math that makes investing powerful makes high-interest debt catastrophic. Paying off 20%+ interest debt before investing (except for employer 401k matches) is almost always the mathematically correct decision.</p>
 
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <a href="/retirement" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Retirement calculator →</a>
+            <a href="/401k" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>401(k) calculator →</a>
+            <a href="/savings-goal" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Savings goal planner →</a>
+            <a href="/roth-vs-traditional" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Roth vs Traditional →</a>
             <a href="/loan" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Loan & interest calculator →</a>
             <a href="/blog/compound-interest-explained" style={{ background: '#f0fdf4', color: '#15803d', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Deep dive: compound interest →</a>
           </div>
