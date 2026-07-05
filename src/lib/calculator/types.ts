@@ -9,6 +9,7 @@ export type HubId =
   | "loans"
   | "tax"
   | "investing"
+  | "insurance"
   | "health"
   | "everyday";
 
