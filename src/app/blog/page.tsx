@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'15-year-vs-30-year-mortgage',
+    title:'15-Year vs 30-Year Mortgage: Which Should You Actually Choose?',
+    excerpt:'The 15-year has a lower rate and far less interest — but its higher payment is both its strength and its risk. And a 30-year paid like a 15 captures most of the savings while keeping your flexibility.',
+    category:'Mortgage',
+    categoryColor:'#2563eb',
+    readTime:'9 min',
+    date:'Jul 5, 2026',
+    related:'/mortgage',
+    relatedLabel:'Mortgage Calculator',
+  },
+  {
     slug:'starting-retirement-savings-at-42',
     title:'I’m 42 and Just Started Saving for Retirement. Is It Too Late?',
     excerpt:'No — 42 leaves you 20-25 working years, and compounding still does real work over two decades. But the honest truth is you’ll need to save more aggressively than someone who started at 25.',

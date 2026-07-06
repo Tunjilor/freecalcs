@@ -52,6 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/blog/how-big-should-emergency-fund-be`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
     { url: `${base}/blog/rent-or-buy-a-home`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
     { url: `${base}/blog/starting-retirement-savings-at-42`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
+    { url: `${base}/blog/15-year-vs-30-year-mortgage`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
     { url: `${base}/blog/compound-interest-explained`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
     { url: `${base}/blog/2026-tax-brackets-guide`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-28' },
     { url: `${base}/blog/how-to-calculate-mortgage-payment`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },

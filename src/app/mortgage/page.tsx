@@ -91,7 +91,7 @@ export default function Page() {
           <h2 style={{ fontSize: 20, fontWeight: 800, color: '#111', marginBottom: 12, marginTop: 32 }}>How to Get the Lowest Mortgage Rate</h2>
           <p style={{ fontSize: 15, color: '#374151', lineHeight: 1.8, marginBottom: 24 }}>Your credit score is the single biggest lever. Moving from 680 to 740 can reduce your rate by 0.5%, which saves $65,000 in interest on a $400,000 loan over 30 years. Beyond that: put 20% down to eliminate PMI, compare at least 3 lenders (rates vary by 0.5%+ between lenders), consider a shorter loan term for a lower rate, and lock your rate quickly once you find a home since rates move daily.</p>
 
-          <RelatedTools heading="Keep reading" tools={[{href:'/blog/how-to-calculate-mortgage-payment',label:'How to calculate your mortgage payment'},{href:'/blog/28-36-rule-mortgage',label:'The 28/36 rule: how much house you can afford'}]} />
+          <RelatedTools heading="Keep reading" tools={[{href:'/blog/15-year-vs-30-year-mortgage',label:'15-year vs 30-year mortgage: which should you choose?'},{href:'/blog/how-to-calculate-mortgage-payment',label:'How to calculate your mortgage payment'},{href:'/blog/28-36-rule-mortgage',label:'The 28/36 rule: how much house you can afford'}]} />
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 16 }}>
             <a href="/qualify" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Do I qualify for a mortgage? →</a>
             <a href="/rent-vs-buy" style={{ background: '#eff6ff', color: '#2563eb', fontSize: 13, fontWeight: 700, padding: '10px 18px', borderRadius: 10, textDecoration: 'none' }}>Rent vs Buy calculator →</a>
