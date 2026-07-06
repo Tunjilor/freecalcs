@@ -126,6 +126,7 @@ export const retirementDef: CalculatorDefinition<RetirementInputs, RetirementRes
   ],
   relatedArticles: [
     { slug: "blog/compound-interest-explained", label: "Compound interest explained" },
+    { slug: "blog/starting-retirement-savings-at-42", label: "Starting retirement savings at 42 — is it too late?" },
   ],
 
   faqs: [

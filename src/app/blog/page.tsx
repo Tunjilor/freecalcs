@@ -13,6 +13,17 @@ const card: React.CSSProperties = { background:C.white, borderRadius:16, boxShad
 
 const POSTS = [
   {
+    slug:'starting-retirement-savings-at-42',
+    title:'I’m 42 and Just Started Saving for Retirement. Is It Too Late?',
+    excerpt:'No — 42 leaves you 20-25 working years, and compounding still does real work over two decades. But the honest truth is you’ll need to save more aggressively than someone who started at 25.',
+    category:'Investing & Retirement',
+    categoryColor:'#7c3aed',
+    readTime:'9 min',
+    date:'Jul 5, 2026',
+    related:'/retirement',
+    relatedLabel:'Retirement Calculator',
+  },
+  {
     slug:'rent-or-buy-a-home',
     title:'Rent or Buy a Home? The Honest Math.',
     excerpt:'“Renting is throwing money away” is the wrong starting point. Once you count closing costs, maintenance, and the down payment’s opportunity cost, buying often loses short-term and wins mainly over the long haul.',
