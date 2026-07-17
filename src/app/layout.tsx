@@ -5,6 +5,16 @@ import './globals.css';
 // script (for review) — no ad units or Auto Ads are configured yet.
 const ADSENSE_CLIENT = 'ca-pub-4733406265730984';
 
+// Impact.com site-verification tag. Impact issues this with a non-standard
+// `value` attribute instead of `content`, so React's <meta> types reject it as
+// a literal JSX attribute. React renders it correctly at runtime — the gap is
+// only in the typings — so it's spread in as props. Do not "fix" this to
+// `content`: Impact's crawler matches on `value` and would fail verification.
+const IMPACT_VERIFICATION = {
+  name: 'impact-site-verification',
+  value: '8f4f74b5-feb3-41fb-bca1-1ef420685622',
+} as React.MetaHTMLAttributes<HTMLMetaElement>;
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.freecalcs.io'),
   title: { default: 'Free Calculators -- freecalcs.io', template: '%s' },
@@ -61,6 +71,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        {/* Impact.com site verification (site-wide, in <head>) — verification only,
+            no affiliate links or tracking. Written as a literal <meta> rather than
+            via the Metadata API's verification.other, because Impact's tag uses a
+            non-standard `value` attribute and the Metadata API only ever emits
+            `content` — which Impact's crawler would not match. Kept here so the
+            literal tag is present in the RAW HTML head for a no-JS crawl. */}
+        <meta {...IMPACT_VERIFICATION} />
         {/* Google AdSense loader (site-wide, in <head>) — verification/review only,
             no ad units. Rendered as a plain <script> so the literal tag is present
             in the RAW HTML head for AdSense's no-JS site review. (next/script in the
