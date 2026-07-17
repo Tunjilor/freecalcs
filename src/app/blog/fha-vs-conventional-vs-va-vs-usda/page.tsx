@@ -4,6 +4,7 @@ import ComparisonTable from './comparison-table';
 import Author, { AUTHORS } from '@/components/Author';
 import ArticleJsonLd from '@/components/ArticleJsonLd';
 import RelatedTools from '@/components/blog/RelatedTools';
+import { tokens as t } from '@/lib/calculator/tokens';
 
 export const metadata: Metadata = {
   title: 'FHA vs Conventional vs VA vs USDA: Which Loan is Right for You | freecalcs.io',
@@ -47,6 +48,7 @@ const faqSchema = {
 
 const h2Style: React.CSSProperties = { fontSize: 22, fontWeight: 800, color: '#0f172a', margin: '0 0 14px', lineHeight: 1.3 };
 const pStyle: React.CSSProperties = { fontSize: 15, color: '#374151', lineHeight: 1.8, margin: '0 0 16px' };
+const linkStyle: React.CSSProperties = { color: t.color.brand, fontWeight: 600, textDecoration: 'none' };
 
 export default function Article() {
   return (
@@ -118,6 +120,15 @@ export default function Article() {
             exchange for a one-time funding fee, which is why they&apos;re often the cheapest option over time for those who
             qualify. USDA sits in between: low fees that never fully disappear. So the &ldquo;cheapest&rdquo; loan depends
             less on the down payment and more on how long you&apos;ll keep the loan and how fast you&apos;ll build equity.
+          </p>
+          <p style={pStyle}>
+            If your real choice is between the two most common programs, that insurance difference is worth going deeper
+            on — it decides more of the cost than anything else, and the answer swings on your credit score, your down
+            payment, and how long you&apos;ll stay. Our{' '}
+            <a href="/blog/fha-vs-conventional-which-is-cheaper" style={linkStyle}>
+              detailed FHA vs. conventional cost comparison
+            </a>{' '}
+            works the same buyer through both loans and shows where the crossover actually lands.
           </p>
         </section>
 
