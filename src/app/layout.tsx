@@ -78,6 +78,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `content` — which Impact's crawler would not match. Kept here so the
             literal tag is present in the RAW HTML head for a no-JS crawl. */}
         <meta {...IMPACT_VERIFICATION} />
+        {/* Awin site verification (site-wide, in <head>) — verification only, no
+            affiliate links or tracking. Awin's tag uses the generic name="verification"
+            with the standard `content` attribute, so it's a plain literal <meta> (no
+            typing workaround needed, unlike Impact's non-standard `value`). Kept as a
+            literal tag so it's present in the RAW HTML head for a no-JS crawl. Do NOT
+            normalize the two providers' attributes to match — each crawler matches on
+            the exact attribute it issued (`value` for Impact, `content` for Awin). */}
+        <meta name="verification" content="06de1a74130867843f1972e9c3002820" />
         {/* Google AdSense loader (site-wide, in <head>) — verification/review only,
             no ad units. Rendered as a plain <script> so the literal tag is present
             in the RAW HTML head for AdSense's no-JS site review. (next/script in the
