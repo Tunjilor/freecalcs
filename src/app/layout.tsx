@@ -86,6 +86,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             normalize the two providers' attributes to match — each crawler matches on
             the exact attribute it issued (`value` for Impact, `content` for Awin). */}
         <meta name="verification" content="06de1a74130867843f1972e9c3002820" />
+        {/* FlexOffers site verification (site-wide, in <head>) — verification only, no
+            affiliate links or tracking. Standard `content` attribute, so a plain literal
+            <meta>, like Awin. Kept literal so it's present in the RAW HTML head for a
+            no-JS crawl. */}
+        <meta name="fo-verify" content="7514003e-0fd6-4dd1-b413-d89a6e5aa9e6" />
         {/* Google AdSense loader (site-wide, in <head>) — verification/review only,
             no ad units. Rendered as a plain <script> so the literal tag is present
             in the RAW HTML head for AdSense's no-JS site review. (next/script in the
