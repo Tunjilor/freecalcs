@@ -1,0 +1,22 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>FreeCalcs icon</title>
+  <desc>Rounded square mark with a checkmark and a 2x2 calculator button grid</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="100%" stop-color="#0F766E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="url(#bg)"/>
+
+  <!-- checkmark, upper-left -->
+  <polyline points="120,262 206,340 372,150"
+    fill="none" stroke="#FFFFFF" stroke-width="46"
+    stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- calculator button grid, lower-right -->
+  <rect x="272" y="330" width="80" height="80" rx="18" fill="#FFFFFF"/>
+  <rect x="368" y="330" width="80" height="80" rx="18" fill="#FFFFFF"/>
+</svg>
