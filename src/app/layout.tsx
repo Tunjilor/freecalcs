@@ -91,6 +91,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <meta>, like Awin. Kept literal so it's present in the RAW HTML head for a
             no-JS crawl. */}
         <meta name="fo-verify" content="7514003e-0fd6-4dd1-b413-d89a6e5aa9e6" />
+        {/* Apple / iOS PWA meta (site-wide, in <head>) — metadata only, no service
+            worker or install handling. `app/manifest.ts` (auto-linked by Next as
+            <link rel="manifest">) covers the standard Web App Manifest; iOS Safari
+            ignores that manifest for home-screen installs, so it needs these literal
+            tags plus its own apple-touch-icon link. Kept here as literal tags (same
+            pattern as the verification tags above) so they're in the RAW HTML head. */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="FreeCalcs" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
         {/* Google AdSense loader (site-wide, in <head>) — verification/review only,
             no ad units. Rendered as a plain <script> so the literal tag is present
             in the RAW HTML head for AdSense's no-JS site review. (next/script in the
