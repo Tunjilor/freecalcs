@@ -121,14 +121,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
               {/* The wordmark PNG carries its own blue "free" pill — do not add any
                   background or padding around it or the pill will double up.
-                  `width`/`height` only declare the aspect ratio (source is 840x163);
+                  Both words are solid white pixels, so this renders identically on
+                  any background; don't "restore" the grid icon that used to sit to
+                  the right of calcs.io — it was slate-on-navy at 2:1 and read as a
+                  stray fragment. The favicon/PWA icon set covers that mark instead.
+                  `width`/`height` only declare the aspect ratio (source is 763x163);
                   the rendered size comes from `style`. `loading="eager"` because the
                   logo is above the fold in a sticky nav — note `priority` is
                   deprecated as of Next 16. */}
               <Image
                 src="/freecalcs-logo.png"
                 alt="FreeCalcs"
-                width={144}
+                width={131}
                 height={28}
                 loading="eager"
                 style={{ height: 28, width: 'auto' }}
@@ -160,7 +164,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <Image
                     src="/freecalcs-logo.png"
                     alt="FreeCalcs"
-                    width={103}
+                    width={94}
                     height={20}
                     style={{ height: 20, width: 'auto' }}
                   />
