@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import './globals.css';
 
 // Google AdSense publisher ID. This is ONLY the loader / site-verification
@@ -118,8 +119,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <nav style={{ background: '#1e3a5f', borderBottom: '1px solid rgba(255,255,255,.1)', position: 'sticky', top: 0, zIndex: 100 }}>
           <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 52 }}>
             <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ background: '#2563eb', color: '#fff', fontWeight: 800, fontSize: 15, padding: '3px 8px', borderRadius: 6, letterSpacing: '-0.3px' }}>free</span>
-              <span style={{ color: '#fff', fontWeight: 700, fontSize: 15, letterSpacing: '-0.3px' }}>calcs.io</span>
+              {/* The wordmark PNG carries its own blue "free" pill — do not add any
+                  background or padding around it or the pill will double up.
+                  `width`/`height` only declare the aspect ratio (source is 840x163);
+                  the rendered size comes from `style`. `loading="eager"` because the
+                  logo is above the fold in a sticky nav — note `priority` is
+                  deprecated as of Next 16. */}
+              <Image
+                src="/freecalcs-logo.png"
+                alt="FreeCalcs"
+                width={144}
+                height={28}
+                loading="eager"
+                style={{ height: 28, width: 'auto' }}
+              />
             </a>
             <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               <a href="/blog" className="nav-link">Blog</a>
@@ -142,8 +155,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {/* Brand */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                  <span style={{ background: '#2563eb', color: '#fff', fontWeight: 800, fontSize: 14, padding: '2px 7px', borderRadius: 5 }}>free</span>
-                  <span style={{ color: '#fff', fontWeight: 700, fontSize: 14 }}>calcs.io</span>
+                  {/* Same asset as the nav, rendered smaller to match the previous
+                      footer wordmark. Lazy by default here — it's below the fold. */}
+                  <Image
+                    src="/freecalcs-logo.png"
+                    alt="FreeCalcs"
+                    width={103}
+                    height={20}
+                    style={{ height: 20, width: 'auto' }}
+                  />
                 </div>
                 <p style={{ fontSize: 12, lineHeight: 1.6, margin: '0 0 16px', color: '#64748b' }}>Free, accurate calculators for money, health, and everyday decisions. No sign-up. No ads blocking results. Always free.</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
