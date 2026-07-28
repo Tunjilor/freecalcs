@@ -31,9 +31,9 @@ export const vaLoanDef: CalculatorDefinition<VaLoanInputs, VaLoanResults> = {
   hub: "mortgage",
   h1: "VA Loan Calculator",
   valueProp: "Estimate your $0-down VA mortgage payment, funding fee, and lifetime cost.",
-  title: "VA Loan Calculator | freecalcs.io",
+  title: "VA Loan Payment & Funding Fee Calculator | freecalcs.io",
   metaDescription:
-    "Free VA loan calculator: estimate your $0-down monthly payment, VA funding fee by tier, and total cost — with no PMI. See how disability exemption and extra payments change your numbers.",
+    "Free VA loan and funding fee calculator: your $0-down monthly payment, your exact funding fee tier (or $0 if exempt), and total cost — with no PMI.",
   primaryKeyword: "VA Loan Calculator",
   secondaryKeywords: [
     "VA funding fee",
