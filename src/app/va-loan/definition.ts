@@ -37,6 +37,7 @@ export const vaLoanDef: CalculatorDefinition<VaLoanInputs, VaLoanResults> = {
   primaryKeyword: "VA Loan Calculator",
   secondaryKeywords: [
     "VA funding fee",
+    "VA funding fee calculator",
     "VA loan payment",
     "VA loan no down payment",
     "VA loan vs conventional",
