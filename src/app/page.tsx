@@ -3,8 +3,15 @@ import type { Metadata } from "next";
 import HomeSearch from "@/components/home/HomeSearch";
 
 export const metadata: Metadata = {
-  title: "Free Online Calculators | Mortgage, Tax, Salary, BMI & More | freecalcs.io",
-  description: "Free online calculators for mortgage payments, income tax, salary, compound interest, BMI, TDEE, and more. No sign-up required. Fast, accurate, and mobile-friendly.",
+  // Title/description are length-capped on purpose: 61 and 150 chars. The
+  // BUILD-STANDARD rule is `{Keyword} | freecalcs.io` at ~55-60 / ~150, and
+  // `layout.tsx` uses the bare `%s` title template — so whatever is written
+  // here is the FULL <title>, with no site suffix appended. Keep the single
+  // pipe; the old two-pipe title ran 74 chars and got truncated in results.
+  // BMI/TDEE are deliberately dropped from the title (the /bmi and /tdee
+  // pages own those queries) but kept in the description.
+  title: "Free Online Calculators: Mortgage, Tax, Salary | freecalcs.io",
+  description: "Free calculators for mortgage payments, income tax, paycheck and salary, compound interest, BMI and TDEE. Fast, accurate, mobile-friendly. No sign-up.",
   alternates: { canonical: "https://www.freecalcs.io" },
   openGraph: { title: "Free Online Calculators | freecalcs.io", description: "Fast, accurate tools for money, health, and everyday decisions.", url: "https://www.freecalcs.io", siteName: "freecalcs.io", type: "website" },
 };
