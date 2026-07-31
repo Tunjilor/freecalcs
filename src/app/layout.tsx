@@ -71,7 +71,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        {/* No literal <link rel="icon"> here on purpose. `src/app/favicon.ico` is an
+            App Router special file, so Next already emits its own hashed icon link
+            (/favicon.ico?favicon.<hash>.ico). A manual /favicon.ico tag alongside it
+            is a SECOND, different URL for the same 25KB file — two cache entries and
+            two downloads per page load. Unlike the verification tags below, this one
+            has no crawler reason to be literal, so it's left to Next. */}
         {/* Impact.com site verification (site-wide, in <head>) — verification only,
             no affiliate links or tracking. Written as a literal <meta> rather than
             via the Metadata API's verification.other, because Impact's tag uses a
