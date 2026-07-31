@@ -16,7 +16,7 @@ const SITE = "https://www.freecalcs.io";
 
 // Stable @id anchors so other pages can reference these nodes instead of
 // duplicating them. Keep them stable — they are the entity's identity.
-const ORG_ID = `${SITE}/#organization`;
+export const ORG_ID = `${SITE}/#organization`;
 const WEBSITE_ID = `${SITE}/#website`;
 
 // The wordmark actually rendered in the nav and footer (layout.tsx). Dimensions
@@ -24,6 +24,39 @@ const WEBSITE_ID = `${SITE}/#website`;
 // clear Google's 112x112 minimum for an Organization logo. If the asset is ever
 // re-exported at a different size, update these to match.
 const LOGO = { url: `${SITE}/freecalcs-logo.png`, width: 763, height: 163 };
+
+// The Organization node itself, exported so other emitters (ArticleJsonLd's
+// publisher) embed THIS object rather than restating the entity by hand. That
+// is what keeps every page's idea of the publisher byte-identical and sharing
+// one @id — the whole point of the anchor above.
+//
+// It is exported as a full node, not just the @id, on purpose. Google evaluates
+// structured data per page, so an Article whose publisher is a lone
+// { "@id": ... } points at a node that is not in that page's graph — a dangling
+// reference Google may simply drop. Embedding the node keeps it resolvable
+// locally while the shared @id still unifies the entity across pages for
+// consumers that do resolve globally (knowledge graph, LLM retrieval).
+export const ORGANIZATION = {
+  "@type": "Organization",
+  "@id": ORG_ID,
+  name: "FreeCalcs",
+  // Reconciles the two names already published for this one entity:
+  // manifest.ts uses "FreeCalcs", the title suffix uses "freecalcs.io".
+  // Declaring the alternate keeps them resolving to a single entity rather
+  // than competing.
+  alternateName: "freecalcs.io",
+  url: SITE,
+  logo: { "@type": "ImageObject", ...LOGO },
+  description:
+    "Free online calculators for mortgage, tax, salary, retirement, and health decisions. No sign-up required.",
+  // No sameAs yet. The @freecalcsio handle in layout.tsx's twitter metadata is
+  // the obvious candidate, but https://x.com/freecalcsio currently 404s -- and
+  // X returns 200 even for handles that don't exist (it serves its SPA shell
+  // and reports the miss client-side), so a 404 there is anomalous rather than
+  // routine bot-blocking. Pending manual verification. A sameAs pointing at a
+  // URL that does not resolve weakens entity confidence instead of
+  // strengthening it, so add one only once the profile is confirmed to load.
+} as const;
 
 // No SearchAction on purpose. The homepage search (components/home/HomeSearch)
 // is a client-side DOM filter over already-rendered cards — there is no
@@ -35,28 +68,7 @@ export default function SiteJsonLd() {
   const graph = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Organization",
-        "@id": ORG_ID,
-        name: "FreeCalcs",
-        // Reconciles the two names already published for this one entity:
-        // manifest.ts uses "FreeCalcs", ArticleJsonLd's publisher and the title
-        // suffix use "freecalcs.io". Declaring the alternate keeps them
-        // resolving to a single entity rather than competing.
-        alternateName: "freecalcs.io",
-        url: SITE,
-        logo: { "@type": "ImageObject", ...LOGO },
-        description:
-          "Free online calculators for mortgage, tax, salary, retirement, and health decisions. No sign-up required.",
-        // No sameAs yet. The @freecalcsio handle in layout.tsx's twitter
-        // metadata is the obvious candidate, but https://x.com/freecalcsio
-        // currently 404s -- and X returns 200 even for handles that don't
-        // exist (it serves its SPA shell and reports the miss client-side),
-        // so a 404 there is anomalous rather than routine bot-blocking.
-        // Pending manual verification. A sameAs pointing at a URL that does
-        // not resolve weakens entity confidence instead of strengthening it,
-        // so add one only once the profile is confirmed to load.
-      },
+      ORGANIZATION,
       {
         "@type": "WebSite",
         "@id": WEBSITE_ID,
