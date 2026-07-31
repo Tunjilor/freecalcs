@@ -48,9 +48,14 @@ export default function SiteJsonLd() {
         logo: { "@type": "ImageObject", ...LOGO },
         description:
           "Free online calculators for mortgage, tax, salary, retirement, and health decisions. No sign-up required.",
-        // Confirmed live account. A sameAs pointing at a dead profile actively
-        // weakens entity confidence, so only add URLs verified to resolve.
-        sameAs: ["https://x.com/freecalcsio"],
+        // No sameAs yet. The @freecalcsio handle in layout.tsx's twitter
+        // metadata is the obvious candidate, but https://x.com/freecalcsio
+        // currently 404s -- and X returns 200 even for handles that don't
+        // exist (it serves its SPA shell and reports the miss client-side),
+        // so a 404 there is anomalous rather than routine bot-blocking.
+        // Pending manual verification. A sameAs pointing at a URL that does
+        // not resolve weakens entity confidence instead of strengthening it,
+        // so add one only once the profile is confirmed to load.
       },
       {
         "@type": "WebSite",
