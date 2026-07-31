@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import HomeSearch from "@/components/home/HomeSearch";
+import SiteJsonLd from "@/components/SiteJsonLd";
 
 export const metadata: Metadata = {
   // Title/description are length-capped on purpose: 61 and 150 chars. The
@@ -74,6 +75,11 @@ const blogPosts = [
 export default function Home() {
   return (
     <main style={{ minHeight: "100vh", background: "linear-gradient(180deg,#f8fafc 0%,#eef2ff 40%,#f0fdf4 100%)", fontFamily: "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Inter,sans-serif" }}>
+      {/* Site-level WebSite + Organization graph. Homepage only — these are
+          site-wide entity nodes, so emitting them on every page would just
+          duplicate the same two nodes across the crawl. Placed first, matching
+          how calculator pages lead with <JsonLd def={...} />. */}
+      <SiteJsonLd />
       <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         .calc-grid {
