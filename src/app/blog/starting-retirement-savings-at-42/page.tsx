@@ -3,6 +3,8 @@ import CalcCTA from "@/components/blog/CalcCTA";
 import RelatedTools from "@/components/blog/RelatedTools";
 import { tokens as t } from "@/lib/calculator/tokens";
 import FaqJsonLd from "@/components/FaqJsonLd";
+import ArticleJsonLd from "@/components/ArticleJsonLd";
+import { ORGANIZATION } from "@/components/SiteJsonLd";
 
 const URL = "https://www.freecalcs.io/blog/starting-retirement-savings-at-42";
 const TITLE = "I'm 42 and Just Started Saving for Retirement. Is It Too Late?";
@@ -61,6 +63,14 @@ const faqBox: React.CSSProperties = {
 export default function Article() {
   return (
     <div style={{ fontFamily: t.font.family, background: t.gradient.page, minHeight: "100vh" }}>
+      <ArticleJsonLd
+        headline={TITLE}
+        description={DESCRIPTION}
+        url={URL}
+        author={ORGANIZATION}
+        datePublished="2026-07-05"
+        section="Investing & Retirement"
+      />
       <FaqJsonLd faqs={faqs} />
 
       {/* Hero */}

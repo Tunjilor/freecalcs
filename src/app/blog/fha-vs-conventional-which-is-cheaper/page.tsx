@@ -3,6 +3,8 @@ import CalcCTA from "@/components/blog/CalcCTA";
 import RelatedTools from "@/components/blog/RelatedTools";
 import { tokens as t } from "@/lib/calculator/tokens";
 import FaqJsonLd from "@/components/FaqJsonLd";
+import ArticleJsonLd from "@/components/ArticleJsonLd";
+import { ORGANIZATION } from "@/components/SiteJsonLd";
 
 const URL = "https://www.freecalcs.io/blog/fha-vs-conventional-which-is-cheaper";
 const TITLE = "FHA vs Conventional: Which Loan Is Actually Cheaper for You?";
@@ -70,6 +72,17 @@ const rowLabel: React.CSSProperties = { fontSize: 14, color: t.color.body, lineH
 export default function Article() {
   return (
     <div style={{ fontFamily: t.font.family, background: t.gradient.page, minHeight: "100vh" }}>
+      {/* datePublished is the date this page displays in its hero. The blog
+          index card said Jun 10 while the post said Jul 16; the post's own
+          date won and the card was corrected to match, so all three agree. */}
+      <ArticleJsonLd
+        headline={TITLE}
+        description={DESCRIPTION}
+        url={URL}
+        author={ORGANIZATION}
+        datePublished="2026-07-16"
+        section="Mortgage"
+      />
       <FaqJsonLd faqs={faqs} />
 
       {/* Hero */}

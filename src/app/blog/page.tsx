@@ -162,7 +162,10 @@ const POSTS = [
     category:'Mortgage',
     categoryColor:'#2563eb',
     readTime:'7 min',
-    date:'Jun 10, 2026',
+    // Corrected Jun 10 -> Jul 16 to match the date the post itself displays.
+    // The card and the post disagreed; the post's own date is authoritative,
+    // and its Article schema now emits this same value.
+    date:'Jul 16, 2026',
     related:'/mortgage',
     relatedLabel:'Mortgage Calculator',
   },
