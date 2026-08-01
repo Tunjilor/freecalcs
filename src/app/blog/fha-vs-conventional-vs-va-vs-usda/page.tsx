@@ -5,6 +5,7 @@ import Author, { AUTHORS } from '@/components/Author';
 import ArticleJsonLd from '@/components/ArticleJsonLd';
 import RelatedTools from '@/components/blog/RelatedTools';
 import { tokens as t } from '@/lib/calculator/tokens';
+import FaqJsonLd from '@/components/FaqJsonLd';
 
 export const metadata: Metadata = {
   title: 'FHA vs Conventional vs VA vs USDA: Which Loan is Right for You | freecalcs.io',
@@ -36,16 +37,6 @@ const faqs = [
   },
 ];
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
-
 const h2Style: React.CSSProperties = { fontSize: 22, fontWeight: 800, color: '#0f172a', margin: '0 0 14px', lineHeight: 1.3 };
 const pStyle: React.CSSProperties = { fontSize: 15, color: '#374151', lineHeight: 1.8, margin: '0 0 16px' };
 const linkStyle: React.CSSProperties = { color: t.color.brand, fontWeight: 600, textDecoration: 'none' };
@@ -62,7 +53,7 @@ export default function Article() {
         dateModified="2026-06-10"
         section="Mortgage"
       />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <FaqJsonLd faqs={faqs} />
 
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)', color: '#fff', padding: '40px 16px 48px' }}>
