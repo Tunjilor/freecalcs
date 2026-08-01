@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import './globals.css';
+// No stylesheet import on purpose. Every rule this site needs now lives in the
+// inline <style> at the bottom of <body>, so the app ships zero CSS files and
+// the browser has no render-blocking stylesheet to fetch before first paint.
 
 // Google AdSense publisher ID. This is ONLY the loader / site-verification
 // script (for review) — no ad units or Auto Ads are configured yet.
@@ -71,6 +73,43 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Base reset, replacing Tailwind's preflight (which arrived via
+            @import "tailwindcss" in globals.css, now deleted). That import also
+            shipped a utilities layer this site never used: not one Tailwind
+            class appears in any of the 205 source files — the 34 utilities it
+            emitted were extractor false positives, picked up from bare words in
+            inline style VALUES (display:'flex' produced a .flex rule). Preflight
+            itself WAS load-bearing: only 4 of 65 pages ship their own reset.
+            Inlined rather than imported so there is no render-blocking
+            stylesheet request at all, rather than a smaller one.
+
+            IT MUST STAY IN <head>, ABOVE THE PAGE CONTENT. Several pages define
+            element-level rules of their own (mortgage/calculator.tsx has a
+            `select { font-size:15px; color:#111; background-image:<chevron> }`).
+            Those have the SAME specificity as the resets here, so the winner is
+            whichever comes later in the document. Preflight was a <head>
+            stylesheet, so page rules beat it — correct. Moving this block to the
+            end of <body> silently inverts that and strips those pages' styling;
+            it did exactly that to the mortgage date selects during this change. */}
+        <style>{`
+          /* line-height:1.5 is preflight's, and it is load-bearing: most text
+             sets its own, but what doesn't falls back to the browser's ~1.2 and
+             every block shrinks a few px. Omitting it cost ~40px of page height
+             on the homepage before this was caught. */
+          html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;}
+          *,::before,::after{box-sizing:border-box;margin:0;padding:0;border:0 solid;}
+          ul,ol,menu{list-style:none;}
+          button,input,select,textarea,optgroup{font:inherit;color:inherit;background:transparent;}
+          button,[type=button],[type=submit],[type=reset]{-webkit-appearance:button;appearance:button;cursor:pointer;}
+          a{color:inherit;text-decoration:inherit;}
+          img,svg,video,canvas{display:block;vertical-align:middle;max-width:100%;}
+          table{border-collapse:collapse;}
+          /* Carried over from globals.css: body colour came from --foreground
+             there and is NOT set by the inline body style, so dropping it would
+             have changed default text colour and broken dark mode. */
+          body{-webkit-font-smoothing:antialiased;color:#171717;}
+          @media(prefers-color-scheme:dark){body{color:#ededed;}}
+        `}</style>
         {/* No literal <link rel="icon"> here on purpose. `src/app/favicon.ico` is an
             App Router special file, so Next already emits its own hashed icon link
             (/favicon.ico?favicon.<hash>.ico). A manual /favicon.ico tag alongside it
@@ -212,10 +251,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </footer>
 
         <style>{`
-          *{box-sizing:border-box;}
-          body{-webkit-font-smoothing:antialiased;}
           a:hover{opacity:.85;}
-          input,select,textarea{font-family:inherit;}
           .nav-link{color:#cbd5e1;font-size:13px;font-weight:500;text-decoration:none;padding:6px 12px;border-radius:8px;transition:background .15s;}
           .nav-link:hover{background:rgba(255,255,255,.1);opacity:1;}
           @media(max-width:680px){
