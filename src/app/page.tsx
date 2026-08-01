@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import HomeSearch from "@/components/home/HomeSearch";
 import SiteJsonLd from "@/components/SiteJsonLd";
+import ItemListJsonLd from "@/components/ItemListJsonLd";
 
 export const metadata: Metadata = {
   // Title/description are length-capped on purpose: 61 and 150 chars. The
@@ -80,6 +81,11 @@ export default function Home() {
           duplicate the same two nodes across the crawl. Placed first, matching
           how calculator pages lead with <JsonLd def={...} />. */}
       <SiteJsonLd />
+      {/* The grid below renders `calcs` in this exact order — the category
+          slices are contiguous across the whole array — so ListItem positions
+          match what a visitor sees. Feeding the same array is what keeps that
+          true; do not reorder the grid without this following along. */}
+      <ItemListJsonLd items={calcs} name="Free online calculators" />
       <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         .calc-grid {
