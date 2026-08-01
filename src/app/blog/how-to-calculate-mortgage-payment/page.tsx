@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import CalcCTA from '@/components/blog/CalcCTA';
 import RelatedTools from '@/components/blog/RelatedTools';
+import ArticleJsonLd from '@/components/ArticleJsonLd';
+import { ORGANIZATION } from '@/components/SiteJsonLd';
 const URL = 'https://www.freecalcs.io/blog/how-to-calculate-mortgage-payment';
 const TITLE = 'How to Calculate Your Mortgage Payment Step by Step';
 const DESCRIPTION = 'Learn exactly how mortgage payments are calculated including principal, interest, PMI, taxes, and insurance with real examples.';
@@ -14,6 +16,14 @@ export const metadata: Metadata = {
 export default function Article() {
   return (
     <div style={{fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif',background:'linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)',minHeight:'100vh'}}>
+      <ArticleJsonLd
+        headline={TITLE}
+        description={DESCRIPTION}
+        url={URL}
+        author={ORGANIZATION}
+        datePublished="2026-05-01"
+        section="Mortgage"
+      />
       <div style={{background:'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)',color:'#fff',padding:'40px 16px 48px'}}>
         <div style={{maxWidth:720,margin:'0 auto'}}>
           <a href="/blog" style={{color:'#93c5fd',fontSize:13,textDecoration:'none'}}>← Back to Blog</a>
