@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CalcCTA from "@/components/blog/CalcCTA";
 import RelatedTools from "@/components/blog/RelatedTools";
 import { tokens as t } from "@/lib/calculator/tokens";
+import FaqJsonLd from "@/components/FaqJsonLd";
 
 const URL = "https://www.freecalcs.io/blog/how-big-should-emergency-fund-be";
 const TITLE = "How Big Should My Emergency Fund Actually Be?";
@@ -39,12 +40,6 @@ const faqs = [
   },
 ];
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-};
-
 const read = t.layout.readWidth;
 const heroChip: React.CSSProperties = {
   fontSize: 11, fontWeight: 700, color: t.color.onBrand, background: t.color.onBrandPanel,
@@ -66,7 +61,7 @@ const faqBox: React.CSSProperties = {
 export default function Article() {
   return (
     <div style={{ fontFamily: t.font.family, background: t.gradient.page, minHeight: "100vh" }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <FaqJsonLd faqs={faqs} />
 
       {/* Hero */}
       <div style={{ background: t.gradient.hero, color: t.color.onBrand, padding: "40px 16px 48px" }}>

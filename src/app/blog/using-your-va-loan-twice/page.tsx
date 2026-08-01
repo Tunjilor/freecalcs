@@ -4,6 +4,7 @@ import Author, { AUTHORS } from '@/components/Author';
 import ArticleJsonLd from '@/components/ArticleJsonLd';
 import CalcCTA from '@/components/blog/CalcCTA';
 import RelatedTools from '@/components/blog/RelatedTools';
+import FaqJsonLd from '@/components/FaqJsonLd';
 
 const URL = 'https://www.freecalcs.io/blog/using-your-va-loan-twice';
 const PUBLISHED = '2026-06-17';
@@ -51,18 +52,6 @@ const faqs = [
   },
 ];
 
-// FAQ structured data is generated from the visible faqs array so the JSON-LD
-// always matches what users see on the page, per Google's requirements.
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
-
 const h2Style: React.CSSProperties = { fontSize: 22, fontWeight: 800, color: '#0f172a', margin: '0 0 14px', lineHeight: 1.3 };
 const h3Style: React.CSSProperties = { fontSize: 18, fontWeight: 800, color: '#0f172a', margin: '24px 0 12px', lineHeight: 1.35 };
 const pStyle: React.CSSProperties = { fontSize: 15, color: '#374151', lineHeight: 1.8, margin: '0 0 16px' };
@@ -80,7 +69,7 @@ export default function Article() {
         dateModified={MODIFIED}
         section="Mortgage"
       />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <FaqJsonLd faqs={faqs} />
 
       {/* Hero */}
       <div style={{ background: 'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)', color: '#fff', padding: '40px 16px 48px' }}>
