@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import LoanCalculator from './calculator';
+import JsonLd from '@/components/calculator/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Loan & EMI Calculator 2026 | Payments & Amortization',
@@ -8,27 +9,6 @@ export const metadata: Metadata = {
   openGraph: { title: 'Loan & EMI Calculator 2026 | freecalcs.io', description: 'Monthly payments, total interest, and amortization for any loan type.', url: 'https://www.freecalcs.io/loan', siteName: 'freecalcs.io', type: 'website' },
   twitter: { card: 'summary_large_image', title: 'Loan & EMI Calculator 2026 | freecalcs.io', description: 'Monthly payments and amortization for personal, auto, student, and mortgage loans.' },
 };
-
-// FAQ structured data is generated from the visible faqs array so the JSON-LD
-// always matches what users see on the page, per Google's requirements.
-const jsonLd = () => ({
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebApplication',
-      name: 'Loan & EMI Calculator',
-      url: 'https://www.freecalcs.io/loan',
-      description: 'Calculate monthly loan payments, total interest, and full amortization for personal, auto, student, or mortgage loans.',
-      applicationCategory: 'FinanceApplication',
-      operatingSystem: 'Any',
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-    },
-  ],
-});
 
 const faqs = [
   { q: 'What is EMI and how is it calculated?', a: "EMI (Equated Monthly Installment) is the fixed monthly payment on a loan. It's calculated with: P × [r(1+r)^n] / [(1+r)^n - 1], where P is the principal, r is the monthly interest rate, and n is the number of months. Each payment covers both interest and principal, with the interest share declining over time." },
@@ -40,10 +20,21 @@ const faqs = [
   { q: 'What is the difference between a personal loan, auto loan, and mortgage?', a: "All three use the same amortization math, but differ in collateral, rates, and terms. Mortgages are secured by the home (lowest rates, 10–30 year terms). Auto loans are secured by the vehicle (moderate rates, 3–7 years). Personal loans are unsecured (highest rates, 1–7 years). This calculator works for all three — just enter the correct amount, rate, and term." },
 ];
 
+// The serializable slice <JsonLd> needs. Declared after `faqs` because it
+// references it. `h1` is the WebApplication name and the last breadcrumb
+// crumb, so it must match the heading the page actually renders.
+const def = {
+  slug: 'loan',
+  h1: 'Loan & EMI Calculator',
+  metaDescription: 'Calculate monthly loan payments, total interest, and full amortization for personal, auto, student, or mortgage loans.',
+  faqs,
+  hub: 'loans',
+} as const;
+
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }} />
+      <JsonLd def={def} />
       <LoanCalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>

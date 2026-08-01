@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import TipCalculator from './calculator';
+import JsonLd from '@/components/calculator/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Tip Calculator | Bill Splitter & Service Presets',
@@ -8,27 +9,6 @@ export const metadata: Metadata = {
   openGraph: { title: 'Tip Calculator | freecalcs.io', description: 'Calculate tips and split bills with service presets for restaurants, bars, salons, and rideshare.', url: 'https://www.freecalcs.io/tip', siteName: 'freecalcs.io', type: 'website' },
   twitter: { card: 'summary_large_image', title: 'Tip Calculator | freecalcs.io', description: 'Calculate tips and split bills. Service presets for restaurants, bars, and salons.' },
 };
-
-// FAQ structured data is generated from the visible faqs array so the JSON-LD
-// always matches what users see on the page, per Google's requirements.
-const jsonLd = () => ({
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebApplication',
-      name: 'Tip Calculator',
-      url: 'https://www.freecalcs.io/tip',
-      description: 'Calculate tips and split bills with custom percentages and service presets for restaurants, bars, salons, and rideshare.',
-      applicationCategory: 'UtilityApplication',
-      operatingSystem: 'Any',
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-    },
-  ],
-});
 
 const faqs = [
   { q: 'What is the standard tip percentage at a restaurant?', a: "The standard restaurant tip in the US is 15–20% for satisfactory service, 20–25% for excellent service, and 10–15% for poor service. Fast casual counter service doesn't require a tip, though it's appreciated." },
@@ -40,10 +20,21 @@ const faqs = [
   { q: 'Is 20% now the standard tip, or is 15% still acceptable?', a: "Tipping norms have shifted. In 2026, 20% of the pre-tax bill is widely considered the new baseline for good sit-down restaurant service — not exceptional, just satisfactory. 15% now signals below-average service. 25%+ is appropriate for excellent service or when servers go significantly above expectations. This shift reflects rising costs and stagnant tipped-minimum wages in many states." },
 ];
 
+// The serializable slice <JsonLd> needs. Declared after `faqs` because it
+// references it. `h1` is the WebApplication name and the last breadcrumb
+// crumb, so it must match the heading the page actually renders.
+const def = {
+  slug: 'tip',
+  h1: 'Tip Calculator',
+  metaDescription: 'Calculate tips and split bills with custom percentages and service presets for restaurants, bars, salons, and rideshare.',
+  faqs,
+  hub: 'everyday',
+} as const;
+
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }} />
+      <JsonLd def={def} applicationCategory="UtilityApplication" />
       <TipCalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>

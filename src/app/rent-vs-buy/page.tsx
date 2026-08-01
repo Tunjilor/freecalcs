@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import RentVsBuy from './calculator';
+import JsonLd from '@/components/calculator/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Rent vs Buy Calculator 2026 | Should You Buy a Home?',
@@ -8,27 +9,6 @@ export const metadata: Metadata = {
   openGraph: { title: 'Rent vs Buy Calculator 2026 | freecalcs.io', description: 'Compare the true cost of renting vs buying a home over time.', url: 'https://www.freecalcs.io/rent-vs-buy', siteName: 'freecalcs.io', type: 'website' },
   twitter: { card: 'summary_large_image', title: 'Rent vs Buy Calculator 2026 | freecalcs.io', description: 'Find out whether renting or buying makes more financial sense with break-even analysis.' },
 };
-
-// FAQ structured data is generated from the visible faqs array so the JSON-LD
-// always matches what users see on the page, per Google's requirements.
-const jsonLd = () => ({
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebApplication',
-      name: 'Rent vs Buy Calculator',
-      url: 'https://www.freecalcs.io/rent-vs-buy',
-      description: 'Find out whether buying or renting makes more financial sense with appreciation, property tax, rent increases, and break-even analysis.',
-      applicationCategory: 'FinanceApplication',
-      operatingSystem: 'Any',
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-    },
-  ],
-});
 
 const faqs = [
   { q: 'When does buying a home make more financial sense than renting?', a: "Buying makes sense when you plan to stay past the break-even point (typically 3–7 years), local price-to-rent ratios are reasonable, you can afford a 10–20% down payment, and you're financially stable. If you might move within 2–3 years, renting is usually cheaper once transaction costs are factored in." },
@@ -40,10 +20,21 @@ const faqs = [
   { q: 'How much do I need saved before buying a home?', a: "Beyond the down payment (3–20% of purchase price), you need: closing costs (2–5% of purchase price, typically $8,000–$20,000 on a $400,000 home), 2–6 months of mortgage payments in reserve (most lenders require this), and an emergency fund for repairs. Rule of thumb: have at least 25–30% of the home's purchase price saved total before buying." },
 ];
 
+// The serializable slice <JsonLd> needs. Declared after `faqs` because it
+// references it. `h1` is the WebApplication name and the last breadcrumb
+// crumb, so it must match the heading the page actually renders.
+const def = {
+  slug: 'rent-vs-buy',
+  h1: 'Rent vs Buy Calculator',
+  metaDescription: 'Find out whether buying or renting makes more financial sense with appreciation, property tax, rent increases, and break-even analysis.',
+  faqs,
+  hub: 'mortgage',
+} as const;
+
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }} />
+      <JsonLd def={def} />
       <RentVsBuy />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>
