@@ -1,4 +1,5 @@
 import type { AuthorInfo } from './Author';
+import { ORGANIZATION } from './SiteJsonLd';
 
 // Reusable Article structured data for blog posts. Renders an Article schema
 // with a Person author and datePublished/dateModified. Drop one of these into
@@ -22,11 +23,13 @@ export default function ArticleJsonLd({ headline, description, url, author, date
     description,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     author: { '@type': 'Person', name: author.name, ...(author.url ? { url: author.url } : {}) },
-    publisher: {
-      '@type': 'Organization',
-      name: 'freecalcs.io',
-      url: 'https://www.freecalcs.io',
-    },
+    // The shared site Organization node, not a restated copy. Embedding it (a)
+    // gives the publisher a logo it never had here, and (b) carries the same
+    // @id as the homepage's node, so Article, WebSite and Organization all
+    // resolve to one entity instead of three lookalikes. Do not swap this for
+    // a bare { '@id': ... }: Google reads structured data per page, so the
+    // reference would dangle with the node itself defined only on the homepage.
+    publisher: ORGANIZATION,
     datePublished,
     dateModified: dateModified ?? datePublished,
     ...(section ? { articleSection: section } : {}),
