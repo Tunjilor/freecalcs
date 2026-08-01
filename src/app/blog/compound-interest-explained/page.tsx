@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
 import CalcCTA from '@/components/blog/CalcCTA';
 import RelatedTools from '@/components/blog/RelatedTools';
+const URL = 'https://www.freecalcs.io/blog/compound-interest-explained';
+const TITLE = 'Compound Interest Explained: Why Einstein Called It the 8th Wonder';
+const DESCRIPTION = 'Learn how compound interest works, why starting early matters, the Rule of 72, and how to calculate your future wealth.';
+
 export const metadata: Metadata = {
-  title: 'Compound Interest Explained: Why Einstein Called It the 8th Wonder | freecalcs.io',
-  description: 'Learn how compound interest works, why starting early matters, the Rule of 72, and how to calculate your future wealth.',
-  alternates: { canonical: 'https://www.freecalcs.io/blog/compound-interest-explained' },
-  openGraph: { title: 'Compound Interest Explained: Why Einstein Called It the 8th Wonder', description: 'Learn how compound interest works, why starting early matters, the Rule of 72, and how to calculate your future wealth.', url: 'https://www.freecalcs.io/blog/compound-interest-explained', siteName: 'freecalcs.io', type: 'article' },
+  title: `${TITLE} | freecalcs.io`,
+  description: DESCRIPTION,
+  alternates: { canonical: URL },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'freecalcs.io', type: 'article' },
 };
 export default function Article() {
   return (

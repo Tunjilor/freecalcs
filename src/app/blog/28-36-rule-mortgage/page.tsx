@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
 import CalcCTA from '@/components/blog/CalcCTA';
 import RelatedTools from '@/components/blog/RelatedTools';
+const URL = 'https://www.freecalcs.io/blog/28-36-rule-mortgage';
+const TITLE = 'The 28/36 Rule: How Much House Can You Actually Afford';
+const DESCRIPTION = 'Banks use the 28/36 rule to decide your mortgage qualification. Learn how to apply it to your income and debt, and when it makes sense to bend the rules.';
+
 export const metadata: Metadata = {
-  title: 'The 28/36 Rule: How Much House Can You Actually Afford | freecalcs.io',
-  description: 'Banks use the 28/36 rule to decide your mortgage qualification. Learn how to apply it to your income and debt, and when it makes sense to bend the rules.',
-  alternates: { canonical: 'https://www.freecalcs.io/blog/28-36-rule-mortgage' },
-  openGraph: { title: 'The 28/36 Rule: How Much House Can You Actually Afford', description: 'Banks use the 28/36 rule to decide your mortgage qualification. Learn how to apply it to your income and debt, and when it makes sense to bend the rules.', url: 'https://www.freecalcs.io/blog/28-36-rule-mortgage', siteName: 'freecalcs.io', type: 'article' },
+  title: `${TITLE} | freecalcs.io`,
+  description: DESCRIPTION,
+  alternates: { canonical: URL },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'freecalcs.io', type: 'article' },
 };
 export default function Article() {
   return (

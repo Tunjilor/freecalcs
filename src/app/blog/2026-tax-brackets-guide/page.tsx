@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
 import CalcCTA from '@/components/blog/CalcCTA';
 import RelatedTools from '@/components/blog/RelatedTools';
+const URL = 'https://www.freecalcs.io/blog/2026-tax-brackets-guide';
+const TITLE = '2026 Federal Tax Brackets: Complete Guide';
+const DESCRIPTION = 'The 2026 federal tax brackets explained clearly. Find your bracket, understand marginal vs effective rates, and learn strategies to lower your tax bill.';
+
 export const metadata: Metadata = {
-  title: '2026 Federal Tax Brackets: Complete Guide | freecalcs.io',
-  description: 'The 2026 federal tax brackets explained clearly. Find your bracket, understand marginal vs effective rates, and learn strategies to lower your tax bill.',
-  alternates: { canonical: 'https://www.freecalcs.io/blog/2026-tax-brackets-guide' },
-  openGraph: { title: '2026 Federal Tax Brackets: Complete Guide', description: 'The 2026 federal tax brackets explained clearly. Find your bracket, understand marginal vs effective rates, and learn strategies to lower your tax bill.', url: 'https://www.freecalcs.io/blog/2026-tax-brackets-guide', siteName: 'freecalcs.io', type: 'article' },
+  title: `${TITLE} | freecalcs.io`,
+  description: DESCRIPTION,
+  alternates: { canonical: URL },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'freecalcs.io', type: 'article' },
 };
 export default function Article() {
   return (

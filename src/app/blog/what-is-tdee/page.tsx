@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
+const URL = 'https://www.freecalcs.io/blog/what-is-tdee';
+const TITLE = 'What is TDEE and How Many Calories Should You Eat';
+const DESCRIPTION = 'TDEE explained simply. Learn how to calculate your Total Daily Energy Expenditure, choose the right calorie target, and understand BMR and macros.';
+
 export const metadata: Metadata = {
-  title: 'What is TDEE and How Many Calories Should You Eat | freecalcs.io',
-  description: 'TDEE explained simply. Learn how to calculate your Total Daily Energy Expenditure, choose the right calorie target, and understand BMR and macros.',
-  alternates: { canonical: 'https://www.freecalcs.io/blog/what-is-tdee' },
-  openGraph: { title: 'What is TDEE and How Many Calories Should You Eat', description: 'TDEE explained simply. Learn how to calculate your Total Daily Energy Expenditure, choose the right calorie target, and understand BMR and macros.', url: 'https://www.freecalcs.io/blog/what-is-tdee', siteName: 'freecalcs.io', type: 'article' },
+  title: `${TITLE} | freecalcs.io`,
+  description: DESCRIPTION,
+  alternates: { canonical: URL },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'freecalcs.io', type: 'article' },
 };
 export default function Article() {
   return (

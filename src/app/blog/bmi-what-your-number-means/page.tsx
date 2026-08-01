@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
+const URL = 'https://www.freecalcs.io/blog/bmi-what-your-number-means';
+const TITLE = 'BMI Calculator: What Your Number Really Means';
+const DESCRIPTION = 'Understand what your BMI tells you, its limitations, how it compares to body fat percentage, and when to use other health metrics.';
+
 export const metadata: Metadata = {
-  title: 'BMI Calculator: What Your Number Really Means | freecalcs.io',
-  description: 'Understand what your BMI tells you, its limitations, how it compares to body fat percentage, and when to use other health metrics.',
-  alternates: { canonical: 'https://www.freecalcs.io/blog/bmi-what-your-number-means' },
-  openGraph: { title: 'BMI Calculator: What Your Number Really Means', description: 'Understand what your BMI tells you, its limitations, how it compares to body fat percentage, and when to use other health metrics.', url: 'https://www.freecalcs.io/blog/bmi-what-your-number-means', siteName: 'freecalcs.io', type: 'article' },
+  title: `${TITLE} | freecalcs.io`,
+  description: DESCRIPTION,
+  alternates: { canonical: URL },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'freecalcs.io', type: 'article' },
 };
 export default function Article() {
   return (

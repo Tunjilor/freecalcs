@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
 import CalcCTA from '@/components/blog/CalcCTA';
 import RelatedTools from '@/components/blog/RelatedTools';
+const URL = 'https://www.freecalcs.io/blog/how-to-calculate-mortgage-payment';
+const TITLE = 'How to Calculate Your Mortgage Payment Step by Step';
+const DESCRIPTION = 'Learn exactly how mortgage payments are calculated including principal, interest, PMI, taxes, and insurance with real examples.';
+
 export const metadata: Metadata = {
-  title: 'How to Calculate Your Mortgage Payment Step by Step | freecalcs.io',
-  description: 'Learn exactly how mortgage payments are calculated including principal, interest, PMI, taxes, and insurance with real examples.',
-  alternates: { canonical: 'https://www.freecalcs.io/blog/how-to-calculate-mortgage-payment' },
-  openGraph: { title: 'How to Calculate Your Mortgage Payment Step by Step', description: 'Learn exactly how mortgage payments are calculated including principal, interest, PMI, taxes, and insurance with real examples.', url: 'https://www.freecalcs.io/blog/how-to-calculate-mortgage-payment', siteName: 'freecalcs.io', type: 'article' },
+  title: `${TITLE} | freecalcs.io`,
+  description: DESCRIPTION,
+  alternates: { canonical: URL },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'freecalcs.io', type: 'article' },
 };
 export default function Article() {
   return (

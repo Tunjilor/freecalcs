@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
 import CalcCTA from '@/components/blog/CalcCTA';
 import RelatedTools from '@/components/blog/RelatedTools';
+const URL = 'https://www.freecalcs.io/blog/pay-off-mortgage-early';
+const TITLE = 'How to Pay Off Your Mortgage 10 Years Early';
+const DESCRIPTION = 'Small extra payments on your mortgage can save tens of thousands of dollars. Learn the best strategies to pay off your mortgage early and build wealth faster.';
+
 export const metadata: Metadata = {
-  title: 'How to Pay Off Your Mortgage 10 Years Early | freecalcs.io',
-  description: 'Small extra payments on your mortgage can save tens of thousands of dollars. Learn the best strategies to pay off your mortgage early and build wealth faster.',
-  alternates: { canonical: 'https://www.freecalcs.io/blog/pay-off-mortgage-early' },
-  openGraph: { title: 'How to Pay Off Your Mortgage 10 Years Early', description: 'Small extra payments on your mortgage can save tens of thousands of dollars. Learn the best strategies to pay off your mortgage early and build wealth faster.', url: 'https://www.freecalcs.io/blog/pay-off-mortgage-early', siteName: 'freecalcs.io', type: 'article' },
+  title: `${TITLE} | freecalcs.io`,
+  description: DESCRIPTION,
+  alternates: { canonical: URL },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'freecalcs.io', type: 'article' },
 };
 export default function Article() {
   return (
