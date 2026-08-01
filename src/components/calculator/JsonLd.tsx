@@ -14,21 +14,42 @@ type Props = {
     CalculatorDefinition<unknown, unknown>,
     "slug" | "h1" | "metaDescription" | "faqs" | "hub"
   >;
+  // schema.org applicationCategory. Defaults to FinanceApplication because
+  // most calculators here are financial — but /age, /percentage, /scientific
+  // and /tip are not, and saying otherwise misdescribes them. Override for any
+  // calculator that isn't about money.
+  applicationCategory?: "FinanceApplication" | "UtilityApplication" | "HealthApplication";
 };
 
+// Home -> Hub -> Calculator, except the hub crumb is dropped when it would not
+// name a distinct level: the `everyday` hub points at "/" (the home crumb
+// already there), and `loans` points at /loan, which IS the loan calculator.
+// Emitting those would give two crumbs the same URL — not a hierarchy, and a
+// breadcrumb Google may discard whole. An honest two-level Home -> Calculator
+// is better than a padded three. If a hub ever gets its own real landing page,
+// its members pick the third crumb back up automatically.
 function breadcrumb(hub: HubId, slug: string, h1: string) {
   const hubInfo = HUBS[hub];
+  const pageUrl = `${SITE}/${slug}`;
+  const hubUrl = `${SITE}${hubInfo.href}`;
+  const hubIsDistinct = hubInfo.href !== "/" && hubUrl !== pageUrl;
+
+  const crumbs = [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+    ...(hubIsDistinct
+      ? [{ "@type": "ListItem", position: 2, name: hubInfo.label, item: hubUrl }]
+      : []),
+  ];
   return {
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-      { "@type": "ListItem", position: 2, name: hubInfo.label, item: `${SITE}${hubInfo.href}` },
-      { "@type": "ListItem", position: 3, name: h1, item: `${SITE}/${slug}` },
+      ...crumbs,
+      { "@type": "ListItem", position: crumbs.length + 1, name: h1, item: pageUrl },
     ],
   };
 }
 
-export default function JsonLd({ def }: Props) {
+export default function JsonLd({ def, applicationCategory = "FinanceApplication" }: Props) {
   const url = `${SITE}/${def.slug}`;
   const graph = {
     "@context": "https://schema.org",
@@ -38,7 +59,7 @@ export default function JsonLd({ def }: Props) {
         name: def.h1,
         url,
         description: def.metaDescription,
-        applicationCategory: "FinanceApplication",
+        applicationCategory,
         operatingSystem: "Any",
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       },

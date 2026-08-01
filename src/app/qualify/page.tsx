@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import MortgageQualifier from './calculator';
 import RelatedTools from '@/components/blog/RelatedTools';
+import JsonLd from '@/components/calculator/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Mortgage Qualifier Calculator 2026 | Do I Qualify?',
@@ -10,27 +11,6 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title: 'Mortgage Qualifier 2026 | freecalcs.io', description: 'Instant mortgage qualification for Conventional, FHA, VA, USDA, and Jumbo loans.' },
 };
 
-// FAQ structured data is generated from the visible faqs array so the JSON-LD
-// always matches what users see on the page, per Google's requirements.
-const jsonLd = () => ({
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebApplication',
-      name: 'Mortgage Qualifier Calculator',
-      url: 'https://www.freecalcs.io/qualify',
-      description: 'Find out if you qualify for a mortgage. Checks Conventional, FHA, VA, USDA, and Jumbo loans with DTI analysis and credit score impact.',
-      applicationCategory: 'FinanceApplication',
-      operatingSystem: 'Any',
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-    },
-  ],
-});
-
 const faqs = [
   { q: 'What credit score do I need to qualify for a mortgage?', a: 'Conventional loans require a minimum 620 FICO score; FHA accepts 580 for 3.5% down (or 500 with 10% down); VA loans require 580+ at most lenders; USDA requires 640; Jumbo loans typically need 700+. Scores above 720 unlock the best rates, and every 20-point improvement can reduce your rate by 0.125–0.25%.' },
   { q: 'What is debt-to-income ratio and what is the maximum allowed?', a: 'DTI is monthly debt payments divided by gross monthly income. Front-end DTI (housing costs only) should be ≤28%; back-end DTI (all debts) should be ≤43% for conventional loans. FHA allows back-end DTI up to 57% in some cases. This calculator checks both ratios against every loan program.' },
@@ -39,10 +19,21 @@ const faqs = [
   { q: 'What documents do lenders require for mortgage approval?', a: 'Lenders typically require: 2 years of W-2s or tax returns, recent pay stubs (last 30 days), 2 months of bank statements, a photo ID, and proof of assets for the down payment. Self-employed borrowers must document 2 years of net income after deductions.' },
 ];
 
+// The serializable slice <JsonLd> needs. Declared after `faqs` because it
+// references it. `h1` is the WebApplication name and the last breadcrumb
+// crumb, so it must match the heading the page actually renders.
+const def = {
+  slug: 'qualify',
+  h1: 'Mortgage Qualification Calculator',
+  metaDescription: 'Find out if you qualify for a mortgage. Checks Conventional, FHA, VA, USDA, and Jumbo loans with DTI analysis and credit score impact.',
+  faqs,
+  hub: 'mortgage',
+} as const;
+
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }} />
+      <JsonLd def={def} />
       <MortgageQualifier />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>

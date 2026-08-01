@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import AgeCalculator from './calculator';
+import JsonLd from '@/components/calculator/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Age Calculator | Exact Age, Zodiac & Birthday Countdown',
@@ -9,27 +10,6 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title: 'Age Calculator | freecalcs.io', description: 'Exact age with zodiac sign, Chinese zodiac, generation, and birthday countdown.' },
 };
 
-// FAQ structured data is generated from the visible faqs array so the JSON-LD
-// always matches what users see on the page, per Google's requirements.
-const jsonLd = () => ({
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebApplication',
-      name: 'Age Calculator',
-      url: 'https://www.freecalcs.io/age',
-      description: 'Calculate exact age in years, months, days, hours and seconds, with zodiac sign, Chinese zodiac, generation, and birthday countdown.',
-      applicationCategory: 'UtilityApplication',
-      operatingSystem: 'Any',
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-    },
-  ],
-});
-
 const faqs = [
   { q: 'How is exact age calculated in years, months, and days?', a: "Exact age subtracts the birth date from today's date, handling month-length variations and leap years. For example, born March 15, 1990 and today is May 28, 2026: 36 years, then counting forward from March 15, 2026 gives 2 months and 13 days. Total: 36 years, 2 months, 13 days." },
   { q: 'How do leap years affect age calculation?', a: 'Leap years add an extra day (February 29) every 4 years, with exceptions for century years not divisible by 400. For someone born on Feb 29, most systems count their birthday as March 1 in non-leap years. This calculator correctly accounts for leap years when computing exact days between dates.' },
@@ -38,10 +18,21 @@ const faqs = [
   { q: 'How is the Chinese zodiac year determined?', a: "The Chinese zodiac follows a 12-year cycle with 12 animals: Rat, Ox, Tiger, Rabbit, Dragon, Snake, Horse, Goat, Monkey, Rooster, Dog, and Pig. The Chinese New Year falls in late January or February, so if you were born before that date in a given year, your zodiac animal is from the previous calendar year." },
 ];
 
+// The serializable slice <JsonLd> needs. Declared after `faqs` because it
+// references it. `h1` is the WebApplication name and the last breadcrumb
+// crumb, so it must match the heading the page actually renders.
+const def = {
+  slug: 'age',
+  h1: 'Age Calculator',
+  metaDescription: 'Calculate exact age in years, months, days, hours and seconds, with zodiac sign, Chinese zodiac, generation, and birthday countdown.',
+  faqs,
+  hub: 'everyday',
+} as const;
+
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }} />
+      <JsonLd def={def} applicationCategory="UtilityApplication" />
       <AgeCalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>

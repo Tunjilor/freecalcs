@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PercentageCalculator from './calculator';
+import JsonLd from '@/components/calculator/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Percentage Calculator | 7 Tools in One | freecalcs.io',
@@ -9,27 +10,6 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title: 'Percentage Calculator | freecalcs.io', description: 'Seven percentage tools: percent of, change, discount, tip, difference, increase and decrease.' },
 };
 
-// FAQ structured data is generated from the visible faqs array so the JSON-LD
-// always matches what users see on the page, per Google's requirements.
-const jsonLd = () => ({
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebApplication',
-      name: 'Percentage Calculator',
-      url: 'https://www.freecalcs.io/percentage',
-      description: 'Seven percentage calculators in one: percent of a number, percentage change, discount, tip, difference, increase and decrease.',
-      applicationCategory: 'UtilityApplication',
-      operatingSystem: 'Any',
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-    },
-  ],
-});
-
 const faqs = [
   { q: 'How do I calculate what percentage one number is of another?', a: 'Divide the part by the whole, then multiply by 100. Example: what percent is 30 of 150? 30 ÷ 150 × 100 = 20%. This works for market share, test grades, tip amounts, and countless everyday situations.' },
   { q: 'What is the difference between percentage change and percentage difference?', a: 'Percentage change measures how much a value changed relative to its starting point: (New − Old) ÷ Old × 100. Percentage difference measures the gap between two values without a clear starting point: |A − B| ÷ ((A + B) ÷ 2) × 100. Use change for before/after; use difference for two equal alternatives.' },
@@ -38,10 +18,21 @@ const faqs = [
   { q: 'How do I find the original price before a percentage increase?', a: "Divide the new value by (1 + percentage ÷ 100). If a price increased 20% to reach $120, the original was $120 ÷ 1.20 = $100. Useful for finding pre-tax prices, original prices before markup, or starting values before a salary raise." },
 ];
 
+// The serializable slice <JsonLd> needs. Declared after `faqs` because it
+// references it. `h1` is the WebApplication name and the last breadcrumb
+// crumb, so it must match the heading the page actually renders.
+const def = {
+  slug: 'percentage',
+  h1: 'Percentage Calculator',
+  metaDescription: 'Seven percentage calculators in one: percent of a number, percentage change, discount, tip, difference, increase and decrease.',
+  faqs,
+  hub: 'everyday',
+} as const;
+
 export default function Page() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }} />
+      <JsonLd def={def} applicationCategory="UtilityApplication" />
       <PercentageCalculator />
       <section style={{ maxWidth: 720, margin: '0 auto', padding: '0 20px 80px' }}>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: '#111', marginBottom: 20 }}>Frequently Asked Questions</h2>
