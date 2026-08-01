@@ -1,15 +1,29 @@
 import type { Metadata } from 'next';
 import CalcCTA from '@/components/blog/CalcCTA';
 import RelatedTools from '@/components/blog/RelatedTools';
+import ArticleJsonLd from '@/components/ArticleJsonLd';
+import { ORGANIZATION } from '@/components/SiteJsonLd';
+const URL = 'https://www.freecalcs.io/blog/pay-off-mortgage-early';
+const TITLE = 'How to Pay Off Your Mortgage 10 Years Early';
+const DESCRIPTION = 'Small extra payments on your mortgage can save tens of thousands of dollars. Learn the best strategies to pay off your mortgage early and build wealth faster.';
+
 export const metadata: Metadata = {
-  title: 'How to Pay Off Your Mortgage 10 Years Early | freecalcs.io',
-  description: 'Small extra payments on your mortgage can save tens of thousands of dollars. Learn the best strategies to pay off your mortgage early and build wealth faster.',
-  alternates: { canonical: 'https://www.freecalcs.io/blog/pay-off-mortgage-early' },
-  openGraph: { title: 'How to Pay Off Your Mortgage 10 Years Early', description: 'Small extra payments on your mortgage can save tens of thousands of dollars. Learn the best strategies to pay off your mortgage early and build wealth faster.', url: 'https://www.freecalcs.io/blog/pay-off-mortgage-early', siteName: 'freecalcs.io', type: 'article' },
+  title: `${TITLE} | freecalcs.io`,
+  description: DESCRIPTION,
+  alternates: { canonical: URL },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'freecalcs.io', type: 'article' },
 };
 export default function Article() {
   return (
     <div style={{fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif',background:'linear-gradient(180deg,#f8fafc 0%,#eef2ff 50%,#f0fdf4 100%)',minHeight:'100vh'}}>
+      <ArticleJsonLd
+        headline={TITLE}
+        description={DESCRIPTION}
+        url={URL}
+        author={ORGANIZATION}
+        datePublished="2026-04-10"
+        section="Mortgage"
+      />
       <div style={{background:'linear-gradient(135deg,#0f172a 0%,#1e3a5f 40%,#2563eb 100%)',color:'#fff',padding:'40px 16px 48px'}}>
         <div style={{maxWidth:720,margin:'0 auto'}}>
           <a href="/blog" style={{color:'#93c5fd',fontSize:13,textDecoration:'none'}}>← Back to Blog</a>
