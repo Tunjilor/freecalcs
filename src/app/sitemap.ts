@@ -1,83 +1,136 @@
 import type { MetadataRoute } from 'next';
+import { execFileSync } from 'node:child_process';
+
+const base = 'https://www.freecalcs.io';
+
+type ChangeFreq = 'weekly' | 'monthly' | 'yearly';
+
+// `src` is the file or route directory whose git history decides the page's
+// lastmod. A route directory covers its page, client component, definition,
+// compute module, and so on.
+const pages: { path: string; src: string; priority: number; changeFreq: ChangeFreq }[] = [
+  { path: '', src: 'src/app/page.tsx', priority: 1.0, changeFreq: 'weekly' },
+  { path: '/mortgage', src: 'src/app/mortgage', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/va-loan', src: 'src/app/va-loan', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/refinance', src: 'src/app/refinance', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/heloc', src: 'src/app/heloc', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/home-affordability', src: 'src/app/home-affordability', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/down-payment', src: 'src/app/down-payment', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/auto-loan', src: 'src/app/auto-loan', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/personal-loan', src: 'src/app/personal-loan', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/debt-payoff', src: 'src/app/debt-payoff', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/loan-payoff', src: 'src/app/loan-payoff', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/credit-card-payoff', src: 'src/app/credit-card-payoff', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/debt-consolidation', src: 'src/app/debt-consolidation', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/tax-refund', src: 'src/app/tax-refund', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/paycheck', src: 'src/app/paycheck', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/self-employment-tax', src: 'src/app/self-employment-tax', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/capital-gains-tax', src: 'src/app/capital-gains-tax', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/qualify', src: 'src/app/qualify', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/salary', src: 'src/app/salary', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/tax', src: 'src/app/tax', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/bmi', src: 'src/app/bmi', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/tdee', src: 'src/app/tdee', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/compound-interest', src: 'src/app/compound-interest', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/retirement', src: 'src/app/retirement', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/401k', src: 'src/app/401k', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/roth-vs-traditional', src: 'src/app/roth-vs-traditional', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/savings-goal', src: 'src/app/savings-goal', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/life-insurance', src: 'src/app/life-insurance', priority: 0.9, changeFreq: 'monthly' },
+  { path: '/term-life', src: 'src/app/term-life', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/auto-insurance-estimator', src: 'src/app/auto-insurance-estimator', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/loan', src: 'src/app/loan', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/rent-vs-buy', src: 'src/app/rent-vs-buy', priority: 0.8, changeFreq: 'monthly' },
+  { path: '/age', src: 'src/app/age', priority: 0.7, changeFreq: 'monthly' },
+  { path: '/percentage', src: 'src/app/percentage', priority: 0.7, changeFreq: 'monthly' },
+  { path: '/tip', src: 'src/app/tip', priority: 0.7, changeFreq: 'monthly' },
+  { path: '/blog', src: 'src/app/blog/page.tsx', priority: 0.8, changeFreq: 'weekly' },
+  ...[
+    'using-your-va-loan-twice',
+    'heloc-to-pay-off-credit-card-debt',
+    'roth-vs-traditional-95k-income',
+    'pay-off-low-rate-mortgage-early',
+    'can-i-buy-a-house-with-640-credit-score',
+    'should-i-refinance-to-save-200-a-month',
+    'how-big-should-emergency-fund-be',
+    'rent-or-buy-a-home',
+    'starting-retirement-savings-at-42',
+    '15-year-vs-30-year-mortgage',
+    'compound-interest-explained',
+    '2026-tax-brackets-guide',
+    'how-to-calculate-mortgage-payment',
+    'what-is-tdee',
+    'bmi-what-your-number-means',
+    'fha-vs-conventional-vs-va-vs-usda',
+    'usda-loan-eligibility',
+    'fha-vs-conventional-which-is-cheaper',
+    'mortgage-refinance-requirements',
+    'va-loan-eligibility',
+    'fha-loan-requirements',
+    '28-36-rule-mortgage',
+    'pay-off-mortgage-early',
+  ].map((slug) => ({
+    path: `/blog/${slug}`,
+    src: `src/app/blog/${slug}`,
+    priority: 0.7,
+    changeFreq: 'monthly' as const,
+  })),
+  { path: '/scientific', src: 'src/app/scientific', priority: 0.7, changeFreq: 'monthly' },
+  { path: '/privacy', src: 'src/app/privacy', priority: 0.3, changeFreq: 'yearly' },
+  { path: '/about', src: 'src/app/about', priority: 0.5, changeFreq: 'yearly' },
+  { path: '/contact', src: 'src/app/contact', priority: 0.4, changeFreq: 'yearly' },
+  { path: '/terms', src: 'src/app/terms', priority: 0.3, changeFreq: 'yearly' },
+  { path: '/affiliate-disclosure', src: 'src/app/affiliate-disclosure', priority: 0.3, changeFreq: 'yearly' },
+];
+
+// Last commit date for every file under src/app, newest first, from one
+// `git log` call at build time. Returns an empty map if git or the history is
+// unavailable, in which case every page falls back to the build date.
+//
+// On a shallow clone the oldest commit in the clone appears to add every file,
+// so a page untouched within the clone's depth gets that commit's date. That
+// date is later than the real one but never later than the build, so it is
+// still the better guess.
+function gitLastModified(): Map<string, Date> {
+  const dates = new Map<string, Date>();
+  try {
+    const out = execFileSync(
+      'git',
+      ['log', '--format=@%cI', '--name-only', '--no-renames', '--', 'src/app'],
+      { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore'] },
+    );
+    let current: Date | null = null;
+    for (const line of out.split('\n')) {
+      const l = line.trim();
+      if (!l) continue;
+      if (l.startsWith('@')) {
+        current = new Date(l.slice(1));
+      } else if (current && !dates.has(l)) {
+        dates.set(l, current);
+      }
+    }
+  } catch {
+    // No git binary or no repository: use the build-date fallback.
+  }
+  return dates;
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://www.freecalcs.io';
+  const buildDate = new Date();
+  const fileDates = gitLastModified();
 
-  // Per-page last-modified dates, derived from git history (last commit that
-  // touched each route). Pages updated in the SEO cleanup carry that date.
-  // Update the relevant entry when a page's content materially changes.
-  const pages = [
-    { url: base, priority: 1.0, changeFreq: 'weekly', lastMod: '2026-05-09' },
-    { url: `${base}/mortgage`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/va-loan`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-04' },
-    { url: `${base}/refinance`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/heloc`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/home-affordability`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/down-payment`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/auto-loan`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/personal-loan`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/debt-payoff`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/loan-payoff`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/credit-card-payoff`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/debt-consolidation`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/tax-refund`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/paycheck`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/self-employment-tax`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/capital-gains-tax`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/qualify`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-16' },
-    { url: `${base}/salary`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/tax`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/bmi`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/tdee`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/compound-interest`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/retirement`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/401k`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/roth-vs-traditional`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/savings-goal`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/life-insurance`, priority: 0.9, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/term-life`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/auto-insurance-estimator`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/loan`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/rent-vs-buy`, priority: 0.8, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/age`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/percentage`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-28' },
-    { url: `${base}/tip`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/blog`, priority: 0.8, changeFreq: 'weekly', lastMod: '2026-07-05' },
-    { url: `${base}/blog/using-your-va-loan-twice`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-17' },
-    { url: `${base}/blog/heloc-to-pay-off-credit-card-debt`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/blog/roth-vs-traditional-95k-income`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/blog/pay-off-low-rate-mortgage-early`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/blog/can-i-buy-a-house-with-640-credit-score`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/blog/should-i-refinance-to-save-200-a-month`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/blog/how-big-should-emergency-fund-be`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/blog/rent-or-buy-a-home`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/blog/starting-retirement-savings-at-42`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/blog/15-year-vs-30-year-mortgage`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-05' },
-    { url: `${base}/blog/compound-interest-explained`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
-    { url: `${base}/blog/2026-tax-brackets-guide`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-28' },
-    { url: `${base}/blog/how-to-calculate-mortgage-payment`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
-    { url: `${base}/blog/what-is-tdee`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
-    { url: `${base}/blog/bmi-what-your-number-means`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
-    { url: `${base}/blog/fha-vs-conventional-vs-va-vs-usda`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-16' },
-    { url: `${base}/blog/usda-loan-eligibility`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/blog/fha-vs-conventional-which-is-cheaper`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-07-16' },
-    { url: `${base}/blog/mortgage-refinance-requirements`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/blog/va-loan-eligibility`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/blog/fha-loan-requirements`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/blog/28-36-rule-mortgage`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
-    { url: `${base}/blog/pay-off-mortgage-early`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-05-09' },
-    { url: `${base}/scientific`, priority: 0.7, changeFreq: 'monthly', lastMod: '2026-06-10' },
-    { url: `${base}/privacy`, priority: 0.3, changeFreq: 'yearly', lastMod: '2026-05-08' },
-    { url: `${base}/about`, priority: 0.5, changeFreq: 'yearly', lastMod: '2026-05-07' },
-    { url: `${base}/contact`, priority: 0.4, changeFreq: 'yearly', lastMod: '2026-06-17' },
-    { url: `${base}/terms`, priority: 0.3, changeFreq: 'yearly', lastMod: '2026-06-17' },
-    { url: `${base}/affiliate-disclosure`, priority: 0.3, changeFreq: 'yearly', lastMod: '2026-06-17' },
-  ];
+  const lastModifiedFor = (src: string): Date => {
+    let latest: Date | null = null;
+    for (const [file, date] of fileDates) {
+      if ((file === src || file.startsWith(`${src}/`)) && (!latest || date > latest)) latest = date;
+    }
+    return latest ?? buildDate;
+  };
 
-  return pages.map(p => ({
-    url: p.url,
-    lastModified: p.lastMod,
-    changeFrequency: p.changeFreq as 'weekly' | 'monthly' | 'yearly',
+  return pages.map((p) => ({
+    url: `${base}${p.path}`,
+    lastModified: lastModifiedFor(p.src),
+    changeFrequency: p.changeFreq,
     priority: p.priority,
   }));
 }
