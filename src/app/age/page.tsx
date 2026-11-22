@@ -3,11 +3,11 @@ import AgeCalculator from './calculator';
 import JsonLd from '@/components/calculator/JsonLd';
 
 export const metadata: Metadata = {
-  title: 'Age Calculator | Exact Age, Zodiac & Birthday Countdown',
-  description: 'Find your exact age in years, months, days, hours and seconds. Zodiac sign, Chinese zodiac, generation, planetary age, and milestone countdown.',
+  title: 'Free Age Calculator – Exact Age in Years, Months, Days & Seconds',
+  description: 'Free age calculator: find your exact age in years, months, days, hours & seconds, plus the weekday you were born, your zodiac sign & next birthday.',
   alternates: { canonical: 'https://www.freecalcs.io/age' },
-  openGraph: { title: 'Age Calculator | freecalcs.io', description: 'Exact age in years, months, days, hours. Zodiac sign, Chinese zodiac, generation, and birthday countdown.', url: 'https://www.freecalcs.io/age', siteName: 'freecalcs.io', type: 'website' },
-  twitter: { card: 'summary_large_image', title: 'Age Calculator | freecalcs.io', description: 'Exact age with zodiac sign, Chinese zodiac, generation, and birthday countdown.' },
+  openGraph: { title: 'Free Age Calculator – Exact Age in Years, Months, Days & Seconds', description: 'Free age calculator: find your exact age in years, months, days, hours & seconds, plus the weekday you were born, your zodiac sign & next birthday.', url: 'https://www.freecalcs.io/age', siteName: 'freecalcs.io', type: 'website' },
+  twitter: { card: 'summary_large_image', title: 'Free Age Calculator – Exact Age in Years, Months, Days & Seconds', description: 'Free age calculator: find your exact age in years, months, days, hours & seconds, plus the weekday you were born, your zodiac sign & next birthday.' },
 };
 
 const faqs = [
@@ -24,7 +24,7 @@ const faqs = [
 const def = {
   slug: 'age',
   h1: 'Age Calculator',
-  metaDescription: 'Calculate exact age in years, months, days, hours and seconds, with zodiac sign, Chinese zodiac, generation, and birthday countdown.',
+  metaDescription: 'Free age calculator: find your exact age in years, months, days, hours & seconds, plus the weekday you were born, your zodiac sign & next birthday.',
   faqs,
   hub: 'everyday',
 } as const;
