@@ -25,6 +25,10 @@ const WEBSITE_ID = `${SITE}/#website`;
 // re-exported at a different size, update these to match.
 const LOGO = { url: `${SITE}/freecalcs-logo.png`, width: 763, height: 163 };
 
+// Other names people use for the site, shared by the Organization and WebSite
+// nodes so search engines resolve them all to the one "FreeCalcs" entity.
+const ALTERNATE_NAMES = ["Free Calcs", "FreeCalcs.io", "Free Calculators"];
+
 // The Organization node itself, exported so other emitters (ArticleJsonLd's
 // publisher) embed THIS object rather than restating the entity by hand. That
 // is what keeps every page's idea of the publisher byte-identical and sharing
@@ -40,22 +44,21 @@ export const ORGANIZATION = {
   "@type": "Organization",
   "@id": ORG_ID,
   name: "FreeCalcs",
-  // Reconciles the two names already published for this one entity:
-  // manifest.ts uses "FreeCalcs", the title suffix uses "freecalcs.io".
-  // Declaring the alternate keeps them resolving to a single entity rather
-  // than competing.
-  alternateName: "freecalcs.io",
+  // "FreeCalcs" is the brand (nav, footer, manifest); the alternates keep the
+  // domain-style and spaced spellings resolving to the same entity.
+  alternateName: ALTERNATE_NAMES,
   url: SITE,
   logo: { "@type": "ImageObject", ...LOGO },
   description:
     "Free online calculators for mortgage, tax, salary, retirement, and health decisions. No sign-up required.",
-  // No sameAs yet. The @freecalcsio handle in layout.tsx's twitter metadata is
+  // Deliberately empty until the social profiles are confirmed. The @freecalcsio handle in layout.tsx's twitter metadata is
   // the obvious candidate, but https://x.com/freecalcsio currently 404s -- and
   // X returns 200 even for handles that don't exist (it serves its SPA shell
   // and reports the miss client-side), so a 404 there is anomalous rather than
   // routine bot-blocking. Pending manual verification. A sameAs pointing at a
   // URL that does not resolve weakens entity confidence instead of
   // strengthening it, so add one only once the profile is confirmed to load.
+  sameAs: [] as string[],
 } as const;
 
 // No SearchAction on purpose. The homepage search (components/home/HomeSearch)
@@ -73,7 +76,7 @@ export default function SiteJsonLd() {
         "@type": "WebSite",
         "@id": WEBSITE_ID,
         name: "FreeCalcs",
-        alternateName: "freecalcs.io",
+        alternateName: ALTERNATE_NAMES,
         url: SITE,
         publisher: { "@id": ORG_ID },
         inLanguage: "en-US",
