@@ -24,9 +24,9 @@ export const incomeTaxDef: CalculatorDefinition<IncomeTaxInputs, IncomeTaxResult
   hub: "tax",
   h1: "Federal Income Tax Calculator",
   valueProp: "Estimate your federal income tax, effective and marginal rate, and take-home for 2025 or 2026.",
-  title: "Federal Income Tax Calculator 2025 & 2026 | freecalcs.io",
+  title: "2025 & 2026 Tax Brackets + Federal Income Tax Calculator",
   metaDescription:
-    "Free federal income tax calculator for the 2025 & 2026 tax years. Enter income, filing status, and deductions to see your taxable income, tax owed, effective vs marginal rate, and a bracket-by-bracket breakdown.",
+    "Free calculator built on the 2025 & 2026 federal income tax brackets. See which bracket you are in, your tax owed, effective rate & tax in each bracket.",
   primaryKeyword: "Federal Income Tax Calculator",
   secondaryKeywords: ["income tax calculator 2026", "federal tax brackets", "effective tax rate", "taxable income calculator"],
   intro:
