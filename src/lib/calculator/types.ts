@@ -78,6 +78,27 @@ export type BreakdownSpec<Results> = {
   note?: string;
 };
 
+/**
+ * Static reference content shown below the calculator (BUILD-STANDARD §1.8b),
+ * e.g. the full published tax-bracket tables. Unlike `breakdowns`, the rows do
+ * not depend on the user's inputs, so they're identical in every render and in
+ * the prerendered HTML. Build rows from the same data module the compute uses
+ * so the reference and the math can't disagree. Purely additive.
+ */
+export type ReferenceTableSpec = {
+  title: string; // rendered as an H3
+  columns: BreakdownColumn[];
+  rows: Record<string, number | string>[];
+  note?: string;
+};
+
+export type ReferenceSection = {
+  heading: string; // rendered as an H2
+  /** Short plain-text explanation; paragraphs separated by a blank line. */
+  body?: string;
+  tables: ReferenceTableSpec[];
+};
+
 /** A what-if preset: a labeled override of one or more inputs. */
 export type ScenarioSpec<Inputs> = {
   id: string;
@@ -121,6 +142,7 @@ export type CalculatorDefinition<Inputs, Results> = {
   chart?: ChartSpec<Results>;
   breakdowns?: BreakdownSpec<Results>[]; // optional tabular breakdowns (§1.6)
   scenarios?: ScenarioSpec<Inputs>[];
+  reference?: ReferenceSection; // optional static reference tables (§1.8b)
 
   insights: InsightRule<Inputs, Results>[];
 
