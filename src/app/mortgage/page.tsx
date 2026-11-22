@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: 'Mortgage Calculator 2026 | freecalcs.io',
     description: 'Full mortgage payment breakdown with amortization, extra payments, and loan comparison.',
     url: 'https://www.freecalcs.io/mortgage',
-    siteName: 'freecalcs.io',
+    siteName: 'FreeCalcs',
     type: 'website',
   },
   twitter: {

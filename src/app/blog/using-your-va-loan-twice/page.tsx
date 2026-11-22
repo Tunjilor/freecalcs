@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: URL,
-    siteName: 'freecalcs.io',
+    siteName: 'FreeCalcs',
     type: 'article',
   },
   twitter: { card: 'summary_large_image' },

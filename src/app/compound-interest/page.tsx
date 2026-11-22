@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'Compound Interest Calculator | freecalcs.io',
     description: 'Compound interest with growth chart, contributions, inflation, and Rule of 72.',
     url: 'https://www.freecalcs.io/compound-interest',
-    siteName: 'freecalcs.io',
+    siteName: 'FreeCalcs',
     type: 'website',
   },
   twitter: {

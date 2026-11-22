@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Contact | freecalcs.io',
   description: 'Get in touch with freecalcs.io — questions, corrections, feedback, partnership and advertising inquiries.',
   alternates: { canonical: 'https://www.freecalcs.io/contact' },
-  openGraph: { title: 'Contact | freecalcs.io', description: 'Get in touch with freecalcs.io — questions, corrections, feedback, partnership and advertising inquiries.', url: 'https://www.freecalcs.io/contact', siteName: 'freecalcs.io', type: 'website' },
+  openGraph: { title: 'Contact | freecalcs.io', description: 'Get in touch with freecalcs.io — questions, corrections, feedback, partnership and advertising inquiries.', url: 'https://www.freecalcs.io/contact', siteName: 'FreeCalcs', type: 'website' },
 };
 
 const C = { blue:'#2563eb', darkBlue:'#1e3a5f', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc' };

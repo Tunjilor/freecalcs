@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'USDA Loan Eligibility 2026: Do You Qualify? | freecalcs.io',
   description: 'See if you qualify for a USDA loan in 2026 — income limits, eligible areas, credit score, and the zero-down requirements, explained simply.',
   alternates: { canonical: 'https://www.freecalcs.io/blog/usda-loan-eligibility' },
-  openGraph: { title: 'USDA Loan Eligibility 2026: Do You Qualify?', description: 'See if you qualify for a USDA loan in 2026 — income limits, eligible areas, credit score, and the zero-down requirements, explained simply.', url: 'https://www.freecalcs.io/blog/usda-loan-eligibility', siteName: 'freecalcs.io', type: 'article' },
+  openGraph: { title: 'USDA Loan Eligibility 2026: Do You Qualify?', description: 'See if you qualify for a USDA loan in 2026 — income limits, eligible areas, credit score, and the zero-down requirements, explained simply.', url: 'https://www.freecalcs.io/blog/usda-loan-eligibility', siteName: 'FreeCalcs', type: 'article' },
 };
 
 const faqs = [

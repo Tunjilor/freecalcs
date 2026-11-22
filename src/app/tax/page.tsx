@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: incomeTaxDef.title,
     description: incomeTaxDef.metaDescription,
     url: URL,
-    siteName: "freecalcs.io",
+    siteName: "FreeCalcs",
     type: "website",
   },
   twitter: {

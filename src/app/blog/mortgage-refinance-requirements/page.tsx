@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Refinance Requirements 2026: Conventional, FHA, VA, USDA | freecalcs.io',
   description: 'Mortgage refinance qualification requirements for 2026 — credit, equity, and DTI for conventional, FHA, VA, and USDA loans, plus streamline options.',
   alternates: { canonical: 'https://www.freecalcs.io/blog/mortgage-refinance-requirements' },
-  openGraph: { title: 'Refinance Requirements 2026: Conventional, FHA, VA, USDA', description: 'Mortgage refinance qualification requirements for 2026 — credit, equity, and DTI for conventional, FHA, VA, and USDA loans, plus streamline options.', url: 'https://www.freecalcs.io/blog/mortgage-refinance-requirements', siteName: 'freecalcs.io', type: 'article' },
+  openGraph: { title: 'Refinance Requirements 2026: Conventional, FHA, VA, USDA', description: 'Mortgage refinance qualification requirements for 2026 — credit, equity, and DTI for conventional, FHA, VA, and USDA loans, plus streamline options.', url: 'https://www.freecalcs.io/blog/mortgage-refinance-requirements', siteName: 'FreeCalcs', type: 'article' },
 };
 
 const faqs = [

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'BMI Calculator 2026 | Body Mass Index & Healthy Weight',
   description: 'Free BMI calculator with visual gauge, body fat estimate, BMI prime, healthy weight range, and health risk analysis. WHO/CDC standards. Adults and children.',
   alternates: { canonical: 'https://www.freecalcs.io/bmi' },
-  openGraph: { title: 'BMI Calculator 2026 | freecalcs.io', description: 'BMI with body fat, BMI prime, healthy weight range, health risks.', url: 'https://www.freecalcs.io/bmi', siteName: 'freecalcs.io', type: 'website' },
+  openGraph: { title: 'BMI Calculator 2026 | freecalcs.io', description: 'BMI with body fat, BMI prime, healthy weight range, health risks.', url: 'https://www.freecalcs.io/bmi', siteName: 'FreeCalcs', type: 'website' },
   twitter: { card: 'summary_large_image', title: 'BMI Calculator 2026 | freecalcs.io', description: 'BMI with body fat, BMI prime, and health risk analysis.' },
 };
 // FAQ structured data is generated from the visible faqUi array (below) so the

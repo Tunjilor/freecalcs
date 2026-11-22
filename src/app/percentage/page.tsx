@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Percentage Calculator | 7 Tools in One | freecalcs.io',
   description: 'Seven percentage calculators: percent of a number, percentage change, discount calculator, tip calculator, percentage difference, increase and decrease.',
   alternates: { canonical: 'https://www.freecalcs.io/percentage' },
-  openGraph: { title: 'Percentage Calculator | 7 Tools in One | freecalcs.io', description: 'Percent of, change, discount, difference, increase, and decrease — all in one.', url: 'https://www.freecalcs.io/percentage', siteName: 'freecalcs.io', type: 'website' },
+  openGraph: { title: 'Percentage Calculator | 7 Tools in One | freecalcs.io', description: 'Percent of, change, discount, difference, increase, and decrease — all in one.', url: 'https://www.freecalcs.io/percentage', siteName: 'FreeCalcs', type: 'website' },
   twitter: { card: 'summary_large_image', title: 'Percentage Calculator | freecalcs.io', description: 'Seven percentage tools: percent of, change, discount, tip, difference, increase and decrease.' },
 };
 

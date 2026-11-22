@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Free Age Calculator – Exact Age in Years, Months & Days',
   description: 'Free age calculator: find your exact age in years, months, days, hours & seconds, plus the weekday you were born, your zodiac sign & next birthday.',
   alternates: { canonical: 'https://www.freecalcs.io/age' },
-  openGraph: { title: 'Free Age Calculator – Exact Age in Years, Months & Days', description: 'Free age calculator: find your exact age in years, months, days, hours & seconds, plus the weekday you were born, your zodiac sign & next birthday.', url: 'https://www.freecalcs.io/age', siteName: 'freecalcs.io', type: 'website' },
+  openGraph: { title: 'Free Age Calculator – Exact Age in Years, Months & Days', description: 'Free age calculator: find your exact age in years, months, days, hours & seconds, plus the weekday you were born, your zodiac sign & next birthday.', url: 'https://www.freecalcs.io/age', siteName: 'FreeCalcs', type: 'website' },
   twitter: { card: 'summary_large_image', title: 'Free Age Calculator – Exact Age in Years, Months & Days', description: 'Free age calculator: find your exact age in years, months, days, hours & seconds, plus the weekday you were born, your zodiac sign & next birthday.' },
 };
 

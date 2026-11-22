@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: creditCardDef.title,
     description: creditCardDef.metaDescription,
     url: URL,
-    siteName: "freecalcs.io",
+    siteName: "FreeCalcs",
     type: "website",
   },
   twitter: {

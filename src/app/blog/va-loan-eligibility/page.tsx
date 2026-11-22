@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'VA Loan Eligibility 2026: Do You Qualify? | freecalcs.io',
   description: 'See if you qualify for a VA loan in 2026 — service requirements, credit, the funding fee, and the zero-down, no-PMI benefits explained.',
   alternates: { canonical: 'https://www.freecalcs.io/blog/va-loan-eligibility' },
-  openGraph: { title: 'VA Loan Eligibility 2026: Do You Qualify?', description: 'See if you qualify for a VA loan in 2026 — service requirements, credit, the funding fee, and the zero-down, no-PMI benefits explained.', url: 'https://www.freecalcs.io/blog/va-loan-eligibility', siteName: 'freecalcs.io', type: 'article' },
+  openGraph: { title: 'VA Loan Eligibility 2026: Do You Qualify?', description: 'See if you qualify for a VA loan in 2026 — service requirements, credit, the funding fee, and the zero-down, no-PMI benefits explained.', url: 'https://www.freecalcs.io/blog/va-loan-eligibility', siteName: 'FreeCalcs', type: 'article' },
 };
 
 const faqs = [

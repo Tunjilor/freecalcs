@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: taxRefundDef.title,
     description: taxRefundDef.metaDescription,
     url: URL,
-    siteName: "freecalcs.io",
+    siteName: "FreeCalcs",
     type: "website",
   },
   twitter: {

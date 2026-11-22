@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: capitalGainsDef.title,
     description: capitalGainsDef.metaDescription,
     url: URL,
-    siteName: "freecalcs.io",
+    siteName: "FreeCalcs",
     type: "website",
   },
   twitter: {

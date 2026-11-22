@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'FHA Loan Requirements 2026: Do You Qualify? | freecalcs.io',
   description: 'The full FHA loan requirements for 2026 — credit score, down payment, DTI, mortgage insurance, and income rules — explained in plain English.',
   alternates: { canonical: 'https://www.freecalcs.io/blog/fha-loan-requirements' },
-  openGraph: { title: 'FHA Loan Requirements 2026: Do You Qualify?', description: 'The full FHA loan requirements for 2026 — credit score, down payment, DTI, mortgage insurance, and income rules — explained in plain English.', url: 'https://www.freecalcs.io/blog/fha-loan-requirements', siteName: 'freecalcs.io', type: 'article' },
+  openGraph: { title: 'FHA Loan Requirements 2026: Do You Qualify?', description: 'The full FHA loan requirements for 2026 — credit score, down payment, DTI, mortgage insurance, and income rules — explained in plain English.', url: 'https://www.freecalcs.io/blog/fha-loan-requirements', siteName: 'FreeCalcs', type: 'article' },
 };
 
 const faqs = [
