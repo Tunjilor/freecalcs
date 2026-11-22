@@ -1,21 +1,24 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import HomeSearch from "@/components/home/HomeSearch";
+import QuickCalculators from "@/components/home/QuickCalculators";
 import SiteJsonLd from "@/components/SiteJsonLd";
 import ItemListJsonLd from "@/components/ItemListJsonLd";
 
+// `layout.tsx` uses the bare `%s` title template, so this is the FULL <title>.
+// Title 52 chars, description 109, both inside the ~60 / ~155 limits.
+const TITLE = "Free Online Calculators – Tax, Mortgage, Loan & More";
+const DESCRIPTION =
+  "Free online calculators for tax, mortgage, loans, debt payoff and everyday math. Instant results, no sign-up.";
+
 export const metadata: Metadata = {
-  // Title/description are length-capped on purpose: 61 and 150 chars. The
-  // BUILD-STANDARD rule is `{Keyword} | freecalcs.io` at ~55-60 / ~150, and
-  // `layout.tsx` uses the bare `%s` title template — so whatever is written
-  // here is the FULL <title>, with no site suffix appended. Keep the single
-  // pipe; the old two-pipe title ran 74 chars and got truncated in results.
-  // BMI/TDEE are deliberately dropped from the title (the /bmi and /tdee
-  // pages own those queries) but kept in the description.
-  title: "Free Online Calculators: Mortgage, Tax, Salary | freecalcs.io",
-  description: "Free calculators for mortgage payments, income tax, paycheck and salary, compound interest, BMI and TDEE. Fast, accurate, mobile-friendly. No sign-up.",
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: "https://www.freecalcs.io" },
-  openGraph: { title: "Free Online Calculators | freecalcs.io", description: "Fast, accurate tools for money, health, and everyday decisions.", url: "https://www.freecalcs.io", siteName: "freecalcs.io", type: "website" },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: "https://www.freecalcs.io", siteName: "FreeCalcs", type: "website" },
+  // Restates the layout's card + site: a page-level `twitter` replaces the
+  // layout's object rather than merging with it.
+  twitter: { card: "summary_large_image", site: "@freecalcsio", title: TITLE, description: DESCRIPTION },
 };
 
 const calcs = [
@@ -161,12 +164,12 @@ export default function Home() {
             <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#22c55e", animation: "pulse 2s infinite", flexShrink: 0 }}></span>
             <span style={{ fontSize: 13, color: "#93c5fd", fontWeight: 500 }}>35 free calculators — no sign-up</span>
           </div>
-          <h1 style={{ fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 800, lineHeight: 1.08, color: "#fff", marginBottom: 16, letterSpacing: "-0.02em" }}>
-            The calculators<br />
-            <span style={{ background: "linear-gradient(90deg,#60a5fa,#34d399)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>people actually use.</span>
+          <h1 style={{ fontSize: "clamp(34px, 5vw, 52px)", fontWeight: 800, lineHeight: 1.08, color: "#fff", marginBottom: 14, letterSpacing: "-0.02em" }}>
+            Free Online{" "}
+            <span style={{ background: "linear-gradient(90deg,#60a5fa,#34d399)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Calculators</span>
           </h1>
-          <p style={{ fontSize: 17, color: "#93c5fd", maxWidth: 480, lineHeight: 1.65, marginBottom: 28 }}>
-            Fast, accurate tools for money, health, and everyday decisions. Built to compete with the best — completely free.
+          <p style={{ fontSize: 17, color: "#93c5fd", maxWidth: 560, lineHeight: 1.65, marginBottom: 24 }}>
+            Tax, mortgage, loan and everyday math calculators with instant results. No sign-up, always free.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             {[["Mortgage","mortgage"],["Salary","salary"],["Tax 2026","tax"],["Compound Interest","compound-interest"]].map(([label, slug]) => (
@@ -176,8 +179,15 @@ export default function Home() {
         </section>
       </div>
 
+      {/* Quick tools: basic calculator + percentage calculator */}
+      <QuickCalculators />
+
       {/* Calculator grid */}
       <section className="grid-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 24px 48px" }}>
+        <h2 style={{ fontSize: 26, fontWeight: 800, color: "#111827", marginBottom: 6, letterSpacing: "-0.01em" }}>Free financial calculators</h2>
+        <p style={{ fontSize: 14, color: "#64748b", marginBottom: 20 }}>
+          Mortgage, loans, debt, taxes, retirement and insurance, plus health and everyday tools.
+        </p>
         <HomeSearch />
         {categories.map((cat) => (
           <div key={cat.label} data-cat-block>
