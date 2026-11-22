@@ -1,7 +1,14 @@
 import type { CalculatorDefinition } from "@/lib/calculator/types";
 import { relatedLink } from "@/lib/calculator/hubs";
 import { money } from "@/lib/calculator/format";
-import { FILING_OPTIONS, YEAR_OPTIONS } from "@/lib/calculator/tax-data";
+import {
+  FILING_OPTIONS,
+  YEAR_OPTIONS,
+  TAX_DATA,
+  calcFederalTax,
+  type FilingStatus,
+  type TaxYear,
+} from "@/lib/calculator/tax-data";
 import { computeIncomeTax, type IncomeTaxInputs, type IncomeTaxResults } from "./compute";
 
 const defaults: IncomeTaxInputs = {
@@ -18,6 +25,52 @@ const defaults: IncomeTaxInputs = {
   studentLoanInterest: 0,
   children: 0,
 };
+
+// ---- Reference tables: the full published brackets, built from TAX_DATA so
+// the tables and the calculator can never show different numbers. ----------
+
+const STATUSES: FilingStatus[] = ["single", "married", "married_sep", "hoh"];
+const statusLabel = (s: FilingStatus) => FILING_OPTIONS.find((o) => o.value === s)!.label;
+
+function bracketRange(lo: number, hi: number): string {
+  if (hi === Infinity) return `Over ${money(lo)}`;
+  return `${money(lo === 0 ? 0 : lo + 1)} – ${money(hi)}`;
+}
+
+function bracketRows(year: TaxYear): Record<string, string>[] {
+  const table = TAX_DATA[year].brackets;
+  return table.single.map(([, , rate], i) => {
+    const row: Record<string, string> = { rate: `${Math.round(rate * 100)}%` };
+    for (const s of STATUSES) row[s] = bracketRange(table[s][i][0], table[s][i][1]);
+    return row;
+  });
+}
+
+function stdDedNote(year: TaxYear): string {
+  const d = TAX_DATA[year].stdDed;
+  return `${year} standard deduction: ${money(d.single)} single or married filing separately, ${money(d.married)} married filing jointly, ${money(d.hoh)} head of household.`;
+}
+
+// Worked example for the explanation, computed from the 2026 single brackets.
+const EXAMPLE_TAXABLE = 60000;
+const exampleBrackets = TAX_DATA["2026"].brackets.single;
+const exampleSlices = exampleBrackets
+  .filter(([lo]) => lo < EXAMPLE_TAXABLE)
+  .map(([lo, hi, rate]) => {
+    const amount = Math.min(EXAMPLE_TAXABLE, hi) - lo;
+    return { rate: Math.round(rate * 100), amount, tax: amount * rate };
+  });
+const exampleTax = calcFederalTax(EXAMPLE_TAXABLE, exampleBrackets);
+const exampleParts = exampleSlices.map(
+  (sl, i) =>
+    `${sl.rate}% on the ${i === 0 ? "first" : i === exampleSlices.length - 1 ? "last" : "next"} ${money(sl.amount)} (${money(sl.tax)})`,
+);
+const exampleText = `${exampleParts.slice(0, -1).join(", ")}, and ${exampleParts[exampleParts.length - 1]}`;
+
+const bracketColumns = [
+  { key: "rate", label: "Rate", format: "text" as const },
+  ...STATUSES.map((s) => ({ key: s, label: statusLabel(s), format: "text" as const })),
+];
 
 export const incomeTaxDef: CalculatorDefinition<IncomeTaxInputs, IncomeTaxResults> = {
   slug: "tax",
@@ -108,6 +161,28 @@ export const incomeTaxDef: CalculatorDefinition<IncomeTaxInputs, IncomeTaxResult
     { id: "y2025", label: "2025 tax year", patch: { year: "2025" } },
     { id: "kids", label: "2 kids", patch: { children: 2 } },
   ],
+
+  reference: {
+    heading: "2025 and 2026 federal income tax brackets",
+    body:
+      "Tax brackets apply to taxable income: what's left after you subtract the standard deduction (or your itemized deductions) and pre-tax contributions, not your gross pay. Income is taxed in layers. The first slice is taxed at 10%, the next at 12%, and so on up to 37%. Moving into a higher bracket only raises the rate on the dollars inside that bracket, never on the income below it.\n\n" +
+      `For example, a single filer with ${money(EXAMPLE_TAXABLE)} of taxable income in 2026 pays ${exampleText}. That's ${money(exampleTax)} in total. The top bracket is ${exampleSlices[exampleSlices.length - 1].rate}%, but the tax is only ${((exampleTax / EXAMPLE_TAXABLE) * 100).toFixed(1)}% of taxable income.\n\n` +
+      "Use the 2025 table for the return you file in early 2026. Use the 2026 table to plan this year and for the return you file in early 2027.",
+    tables: [
+      {
+        title: "2026 federal income tax brackets (taxable income)",
+        columns: bracketColumns,
+        rows: bracketRows("2026"),
+        note: `${stdDedNote("2026")} Married filing jointly also applies to qualifying surviving spouses. Source: IRS Rev. Proc. 2025-32.`,
+      },
+      {
+        title: "2025 federal income tax brackets (taxable income)",
+        columns: bracketColumns,
+        rows: bracketRows("2025"),
+        note: `${stdDedNote("2025")} The 2025 standard deduction reflects the increase in the One Big Beautiful Bill Act. Married filing jointly also applies to qualifying surviving spouses. Source: IRS Rev. Proc. 2024-40.`,
+      },
+    ],
+  },
 
   insights: [
     {
