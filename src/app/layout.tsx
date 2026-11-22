@@ -241,7 +241,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* Bottom bar */}
             <div style={{ borderTop: '1px solid #1e293b', paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
               <p style={{ fontSize: 12, margin: 0, color: '#475569' }}>
-                &copy; 2026 freecalcs.io &mdash; Free tools, always.
+                &copy; 2026 FreeCalcs &mdash; Free tools, always.
               </p>
               <p style={{ fontSize: 11, margin: 0, color: '#334155' }}>
                 Not financial, tax, or medical advice. For informational purposes only.
