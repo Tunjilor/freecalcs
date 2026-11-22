@@ -225,7 +225,8 @@ export const vaLoanDef: CalculatorDefinition<VaLoanInputs, VaLoanResults> = {
     relatedLink("mortgage"),
     relatedLink("qualify"),
     relatedLink("rent-vs-buy"),
-    relatedLink("loan"),
+    relatedLink("fha-loan"),
+    relatedLink("usda-loan"),
   ],
   relatedArticles: [
     { slug: "blog/using-your-va-loan-twice", label: "Using your VA loan twice (entitlement & the fee waiver)" },

@@ -163,10 +163,10 @@ export default function Article() {
               I&apos;m there? Parking it in a high-yield savings account earning around 4–5% helps a little along the way.
             </p>
             <CalcCTA
-              href="/savings-goal"
-              label="Turn your target into a monthly plan"
-              blurb="Enter your emergency-fund target, what you've saved so far, and a timeline to see exactly how much to set aside each month — and automate it so the fund actually gets built."
-              cta="Open the savings goal calculator"
+              href="/emergency-fund"
+              label="Size your fund and see when you'll hit it"
+              blurb="Enter your essential monthly bills, how stable your income is, and what you can save each month to get your personal target, how many months you're covered today, and how long the rest will take."
+              cta="Open the emergency fund calculator"
             />
           </div>
 
@@ -275,6 +275,7 @@ export default function Article() {
         <RelatedTools
           heading="Continue planning"
           tools={[
+            { href: "/emergency-fund", label: "Emergency Fund Calculator" },
             { href: "/savings-goal", label: "Savings Goal Calculator" },
             { href: "/compound-interest", label: "Compound Interest Calculator" },
             { href: "/debt-payoff", label: "Debt Payoff Calculator" },

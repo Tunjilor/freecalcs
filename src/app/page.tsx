@@ -29,6 +29,11 @@ const calcs = [
   { slug: "heloc", label: "HELOC Calculator", icon: "🏧", desc: "Home equity line & CLTV headroom" },
   { slug: "home-affordability", label: "Home Affordability", icon: "📐", desc: "How much house you can afford" },
   { slug: "down-payment", label: "Down Payment", icon: "🪙", desc: "Down payment goal & PMI at 20%" },
+  { slug: "fha-loan", label: "FHA Loan Calculator", icon: "🏛️", desc: "3.5% down payment with 2026 MIP" },
+  { slug: "usda-loan", label: "USDA Loan Calculator", icon: "🌾", desc: "$0-down rural loan & guarantee fees" },
+  { slug: "mortgage-payoff", label: "Mortgage Payoff", icon: "🏁", desc: "Extra payments & mortgage-free date" },
+  { slug: "15-vs-30-year-mortgage", label: "15 vs 30 Year Mortgage", icon: "⏳", desc: "Payment, interest & invest the difference" },
+  { slug: "debt-to-income", label: "Debt-to-Income (DTI)", icon: "📏", desc: "Front/back-end DTI & loan limits" },
   { slug: "rent-vs-buy", label: "Rent vs Buy", icon: "🏡", desc: "True cost comparison over time" },
   { slug: "loan", label: "Loan & EMI", icon: "🏦", desc: "Monthly payments for any loan type" },
   { slug: "auto-loan", label: "Auto Loan Calculator", icon: "🚗", desc: "Car payment with tax, trade-in & fees" },
@@ -49,6 +54,7 @@ const calcs = [
   { slug: "401k", label: "401(k) Calculator", icon: "🏢", desc: "Employer match & contribution limit" },
   { slug: "roth-vs-traditional", label: "Roth vs Traditional", icon: "⚖️", desc: "After-tax winner by tax rate" },
   { slug: "savings-goal", label: "Savings Goal", icon: "🎯", desc: "Monthly amount to hit a target" },
+  { slug: "emergency-fund", label: "Emergency Fund", icon: "🛟", desc: "How much you need & time to build it" },
   { slug: "life-insurance", label: "Life Insurance", icon: "🛡️", desc: "Coverage-need estimate (DIME method)" },
   { slug: "term-life", label: "Term Life Insurance", icon: "📆", desc: "Coverage amount & term length" },
   { slug: "auto-insurance-estimator", label: "Auto Insurance Estimator", icon: "🚘", desc: "Rough premium range (not a quote)" },
@@ -60,13 +66,13 @@ const calcs = [
 ];
 
 const categories = [
-  { label: "🏠 Real estate & mortgage", start: 0, end: 8 },
-  { label: "🏦 Loans & debt", start: 8, end: 15 },
-  { label: "🧾 Taxes", start: 15, end: 20 },
-  { label: "💰 Income & finance", start: 20, end: 22 },
-  { label: "📈 Investing & retirement", start: 22, end: 27 },
-  { label: "🛡️ Insurance", start: 27, end: 30 },
-  { label: "❤️ Health & everyday", start: 30, end: 35 },
+  { label: "🏠 Real estate & mortgage", start: 0, end: 13 },
+  { label: "🏦 Loans & debt", start: 13, end: 20 },
+  { label: "🧾 Taxes", start: 20, end: 25 },
+  { label: "💰 Income & finance", start: 25, end: 27 },
+  { label: "📈 Investing & retirement", start: 27, end: 33 },
+  { label: "🛡️ Insurance", start: 33, end: 36 },
+  { label: "❤️ Health & everyday", start: 36, end: 41 },
 ];
 
 const blogPosts = [

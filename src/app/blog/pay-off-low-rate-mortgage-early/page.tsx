@@ -136,10 +136,10 @@ export default function Article() {
               $34,000 is certain, and being mortgage-free six years sooner is worth something real.
             </p>
             <CalcCTA
-              href="/loan-payoff"
+              href="/mortgage-payoff"
               label="See your exact payoff savings"
-              blurb="Enter your real balance, rate, and a monthly extra to see how many years you'd cut and how much interest you'd save — the same math as the example above, with your numbers."
-              cta="Open the loan payoff calculator"
+              blurb="Enter your original loan, rate, and how long you've been paying, then add a monthly extra or a lump sum to see how many years you'd cut and how much interest you'd save — the same math as the example above, with your numbers."
+              cta="Open the mortgage payoff calculator"
             />
             <p style={p}>
               Now the other side. That same <span style={strong}>$200 a month invested at 7%</span> could grow to about
@@ -261,6 +261,7 @@ export default function Article() {
         <RelatedTools
           heading="Continue planning"
           tools={[
+            { href: "/mortgage-payoff", label: "Mortgage Payoff Calculator" },
             { href: "/loan-payoff", label: "Loan Payoff Calculator" },
             { href: "/refinance", label: "Refinance Calculator" },
             { href: "/compound-interest", label: "Compound Interest Calculator" },

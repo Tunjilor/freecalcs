@@ -121,6 +121,7 @@ export const downPaymentDef: CalculatorDefinition<DownPaymentInputs, DownPayment
     relatedLink("qualify"),
     relatedLink("rent-vs-buy"),
     relatedLink("va-loan"),
+    relatedLink("fha-loan"),
   ],
   relatedArticles: [
     { slug: "blog/fha-loan-requirements", label: "FHA loan requirements 2026" },

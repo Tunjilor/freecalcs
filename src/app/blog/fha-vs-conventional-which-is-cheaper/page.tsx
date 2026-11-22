@@ -438,6 +438,7 @@ export default function Article() {
         <RelatedTools
           heading="Continue planning"
           tools={[
+            { href: "/fha-loan", label: "FHA Loan Calculator" },
             { href: "/qualify", label: "Mortgage Qualifier" },
             { href: "/mortgage", label: "Mortgage Calculator" },
             { href: "/down-payment", label: "Down Payment Calculator" },

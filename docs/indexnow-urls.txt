@@ -34,6 +34,12 @@ https://www.freecalcs.io/tdee
 https://www.freecalcs.io/age
 https://www.freecalcs.io/tip
 https://www.freecalcs.io/scientific
+https://www.freecalcs.io/fha-loan
+https://www.freecalcs.io/usda-loan
+https://www.freecalcs.io/mortgage-payoff
+https://www.freecalcs.io/15-vs-30-year-mortgage
+https://www.freecalcs.io/debt-to-income
+https://www.freecalcs.io/emergency-fund
 https://www.freecalcs.io/blog/15-year-vs-30-year-mortgage
 https://www.freecalcs.io/blog/starting-retirement-savings-at-42
 https://www.freecalcs.io/blog/rent-or-buy-a-home
