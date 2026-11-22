@@ -17,6 +17,26 @@ const ALL_CALCS = [
 const MONTH_DAYS = [31,28,31,30,31,30,31,31,30,31,30,31];
 function isLeap(y:number){return (y%4===0&&y%100!==0)||(y%400===0);}
 
+// <input type="date"> values are "YYYY-MM-DD". `new Date("YYYY-MM-DD")` parses
+// that as midnight UTC, which is the previous evening anywhere west of UTC, so
+// every date here is built from local calendar parts instead.
+function parseLocalDate(s:string): Date {
+  const m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(s||'');
+  if(!m) return new Date(NaN);
+  const y=+m[1], mo=+m[2], d=+m[3];
+  const dt = new Date(y, mo-1, d);
+  dt.setFullYear(y); // years 0-99 would otherwise map to 1900-1999
+  return (dt.getMonth()===mo-1&&dt.getDate()===d) ? dt : new Date(NaN);
+}
+function localDateStr(dt:Date): string {
+  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+}
+// Whole calendar days between two local midnights. Rounds so a DST shift
+// (23h or 25h day) doesn't push the count off by one.
+function dayDiff(a:Date, b:Date): number { return Math.round((b.getTime()-a.getTime())/86400000); }
+function addDays(dt:Date, n:number): Date { return new Date(dt.getFullYear(), dt.getMonth(), dt.getDate()+n); }
+const longDate = (dt:Date) => dt.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
 interface AgeResult {
   years:number; months:number; days:number;
   totalDays:number; totalWeeks:number; totalMonths:number;
@@ -36,8 +56,7 @@ function calcAge(dob:Date, ref:Date): AgeResult {
   if(days<0){ months--; const pm=(ref.getMonth()-1+12)%12; days+=MONTH_DAYS[pm]+(pm===1&&isLeap(ref.getFullYear())?1:0); }
   if(months<0){ years--; months+=12; }
 
-  const ms = ref.getTime()-dob.getTime();
-  const totalDays = Math.floor(ms/86400000);
+  const totalDays = dayDiff(dob, ref);
   const totalWeeks = Math.floor(totalDays/7);
   const totalMonths = years*12+months;
   const totalHours = totalDays*24;
@@ -48,8 +67,8 @@ function calcAge(dob:Date, ref:Date): AgeResult {
   // Next birthday
   const nextBD = new Date(ref.getFullYear(), dob.getMonth(), dob.getDate());
   if(nextBD<=ref) nextBD.setFullYear(nextBD.getFullYear()+1);
-  const nextBirthdayDays = Math.ceil((nextBD.getTime()-ref.getTime())/86400000);
-  const nextBirthdayDate = nextBD.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  const nextBirthdayDays = dayDiff(ref, nextBD);
+  const nextBirthdayDate = longDate(nextBD);
 
   // Day of week born
   const dayOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][dob.getDay()];
@@ -57,17 +76,12 @@ function calcAge(dob:Date, ref:Date): AgeResult {
   // Zodiac
   const m=dob.getMonth()+1, d=dob.getDate();
   const zodiacRanges:[number,number,string][] = [[1,20,'Aquarius'],[2,19,'Pisces'],[3,21,'Aries'],[4,20,'Taurus'],[5,21,'Gemini'],[6,21,'Cancer'],[7,23,'Leo'],[8,23,'Virgo'],[9,23,'Libra'],[10,23,'Scorpio'],[11,22,'Sagittarius'],[12,22,'Capricorn']];
-  let zodiac='Capricorn';
-  for(let zi=0;zi<zodiacRanges.length;zi++){
-    const [zmo,zdy,zsign]=zodiacRanges[zi];
-    if(m<zmo){ zodiac=zi>0?zodiacRanges[zi-1][2]:'Capricorn'; break; }
-    if(m===zmo&&d>=zdy){ zodiac=zsign; break; }
-    if(zi===zodiacRanges.length-1){ zodiac=zsign; }
-  }
+  // Each entry is the sign that starts on that day of month m; earlier in the month is the previous sign.
+  const zodiac = d>=zodiacRanges[m-1][1] ? zodiacRanges[m-1][2] : zodiacRanges[(m+10)%12][2];
 
   // Chinese zodiac
   const animals=['Rat','Ox','Tiger','Rabbit','Dragon','Snake','Horse','Goat','Monkey','Rooster','Dog','Pig'];
-  const chineseZodiac = animals[(dob.getFullYear()-1900)%12];
+  const chineseZodiac = animals[(((dob.getFullYear()-1900)%12)+12)%12];
 
   // Generation
   const yr = dob.getFullYear();
@@ -75,7 +89,7 @@ function calcAge(dob:Date, ref:Date): AgeResult {
 
   // Retirement (age 65)
   const retire = new Date(dob.getFullYear()+65, dob.getMonth(), dob.getDate());
-  const daysToRetire = Math.max(0, Math.ceil((retire.getTime()-ref.getTime())/86400000));
+  const daysToRetire = Math.max(0, dayDiff(ref, retire));
 
   // Age on other planets (Earth days per year: Mars 687, Jupiter 4333, Saturn 10759)
   const onMars = (totalDays/687).toFixed(1)+' Mars years';
@@ -83,11 +97,12 @@ function calcAge(dob:Date, ref:Date): AgeResult {
   const onSaturn = (totalDays/10759).toFixed(1)+' Saturn years';
 
   // 1 billion seconds milestone
-  const billionSecondsDate = new Date(dob.getTime()+1000000000*1000).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  // 1e9 s is not a whole number of days, so add real elapsed time from local midnight of the birth date.
+  const billionSecondsDate = longDate(new Date(dob.getTime()+1000000000*1000));
   const billionSecondsReached = totalSeconds >= 1000000000;
 
   // 10,000 days milestone
-  const tenThousandDaysDate = new Date(dob.getTime()+10000*86400000).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  const tenThousandDaysDate = longDate(addDays(dob, 10000));
   const tenThousandDaysReached = totalDays >= 10000;
 
   return {years,months,days,totalDays,totalWeeks,totalMonths,totalHours,totalMinutes,totalSeconds,
@@ -97,7 +112,7 @@ function calcAge(dob:Date, ref:Date): AgeResult {
 }
 
 export default function AgeCalculator(){
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = localDateStr(new Date());
   const [dob, setDob]       = useState('1990-06-15');
   const [refDate, setRef]   = useState(todayStr);
   const [sex, setSex]       = useState('male');
@@ -118,7 +133,7 @@ export default function AgeCalculator(){
   };
 
   useEffect(()=>{
-    const d = new Date(dob); const r = new Date(refDate||todayStr);
+    const d = parseLocalDate(dob); const r = parseLocalDate(refDate||todayStr);
     if(!isNaN(d.getTime())&&!isNaN(r.getTime())&&d<r) setRes(calcAge(d,r));
     else setRes(null);
   },[dob,refDate,todayStr]);
@@ -213,8 +228,8 @@ export default function AgeCalculator(){
                   <p style={{fontSize:12,fontWeight:700,color:'#111827',textTransform:'uppercase',letterSpacing:'.05em',margin:'0 0 12px'}}>Life Milestones</p>
                   <MilestoneRow label="10,000 Days Old" date={res.tenThousandDaysDate} reached={res.tenThousandDaysReached} daysLeft={Math.max(0,10000-res.totalDays)}/>
                   <MilestoneRow label="1 Billion Seconds Old" date={res.billionSecondsDate} reached={res.billionSecondsReached} daysLeft={Math.max(0,Math.round((1000000000-res.totalSeconds)/86400))}/>
-                  <MilestoneRow label="Retirement Age (65)" date={new Date(new Date(dob).getTime()+(65*365.25*86400000)).toLocaleDateString('en-US',{month:'long',year:'numeric'})} reached={res.daysToRetire===0} daysLeft={res.daysToRetire}/>
-                  <MilestoneRow label="100 Years Old" date={new Date(new Date(dob).getTime()+(100*365.25*86400000)).toLocaleDateString('en-US',{month:'long',year:'numeric'})} reached={res.years>=100} daysLeft={Math.max(0,(100-res.years)*365-res.days)}/>
+                  <MilestoneRow label="Retirement Age (65)" date={(()=>{const b=parseLocalDate(dob);return new Date(b.getFullYear()+65,b.getMonth(),b.getDate()).toLocaleDateString('en-US',{month:'long',year:'numeric'});})()} reached={res.daysToRetire===0} daysLeft={res.daysToRetire}/>
+                  <MilestoneRow label="100 Years Old" date={(()=>{const b=parseLocalDate(dob);return new Date(b.getFullYear()+100,b.getMonth(),b.getDate()).toLocaleDateString('en-US',{month:'long',year:'numeric'});})()} reached={res.years>=100} daysLeft={Math.max(0,(100-res.years)*365-res.days)}/>
                 </div>
               </>
             )}
