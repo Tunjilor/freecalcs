@@ -102,3 +102,42 @@ test("total income aggregates all income lines", () => {
   const r = computeIncomeTax({ ...base, interest: 1000, dividends: 2000, otherIncome: 500 });
   approx(r.totalIncome, 85000 + 1000 + 2000 + 500, 0.5);
 });
+
+// Upper bound of each bracket below 37%, copied from the IRS tables: Rev. Proc.
+// 2024-40 §3.01 (2025) and Rev. Proc. 2025-32 §4.01 (2026). If tax-data.ts
+// drifts from the published figures, this fails.
+const IRS_BREAKPOINTS = {
+  "2025": {
+    single: [11925, 48475, 103350, 197300, 250525, 626350],
+    married: [23850, 96950, 206700, 394600, 501050, 751600],
+    married_sep: [11925, 48475, 103350, 197300, 250525, 375800],
+    hoh: [17000, 64850, 103350, 197300, 250500, 626350],
+  },
+  "2026": {
+    single: [12400, 50400, 105700, 201775, 256225, 640600],
+    married: [24800, 100800, 211400, 403550, 512450, 768700],
+    married_sep: [12400, 50400, 105700, 201775, 256225, 384350],
+    hoh: [17700, 67450, 105700, 201750, 256200, 640600],
+  },
+} as const;
+
+test("bracket tables match the IRS Rev. Proc. breakpoints and rates", () => {
+  for (const year of ["2025", "2026"] as const) {
+    for (const status of ["single", "married", "married_sep", "hoh"] as const) {
+      const b = TAX_DATA[year].brackets[status];
+      assert.deepEqual(b.map((x) => x[2]), [0.1, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37], `${year} ${status} rates`);
+      assert.deepEqual(b.slice(0, -1).map((x) => x[1]), [...IRS_BREAKPOINTS[year][status]], `${year} ${status}`);
+      assert.equal(b[b.length - 1][1], Infinity);
+      b.slice(1).forEach((x, i) => assert.equal(x[0], b[i][1], `${year} ${status} brackets are contiguous`));
+    }
+  }
+});
+
+test("2026 head-of-household tax matches the IRS table's running totals", () => {
+  // "The Tax Is" column of Rev. Proc. 2025-32 Table 2.
+  const hoh = TAX_DATA["2026"].brackets.hoh;
+  approx(calcFederalTax(105700, hoh), 16155, 0.01);
+  approx(calcFederalTax(201750, hoh), 39207, 0.01);
+  approx(calcFederalTax(256200, hoh), 56631, 0.01);
+  approx(calcFederalTax(640600, hoh), 191171, 0.01);
+});

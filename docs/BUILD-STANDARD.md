@@ -36,6 +36,9 @@ never be omitted; *(conditional)* render only when the definition supplies data.
 6. **Visualization** *(conditional)* — chart/table when the calc has time series or breakdowns.
 7. **Scenario / what-if row** *(conditional)* — 2–3 preset "what if you changed X" comparisons.
 8. **Monetization slot A** *(conditional)* — a *relevant* affiliate/lead-gen CTA. See §6.
+8b. **Reference tables** *(conditional)* — full-width static reference data that doesn't depend on
+   the user's inputs, e.g. the full published tax brackets. Supplied via `reference`; rows must be
+   built from the same data module the `compute` uses, never retyped.
 9. **Related calculators** *(required)* — 3–6 links, same hub first. See §5 internal linking.
 10. **Educational content** *(required)* — "What is this / Why it matters / What to do next"
     (the three-question teach block). 300–800 words of genuinely useful prose.
@@ -66,6 +69,7 @@ type CalculatorDefinition = {
 
   chart?: ChartSpec;            // optional time series / breakdown
   scenarios?: ScenarioSpec[];   // optional what-if presets
+  reference?: ReferenceSection; // optional static reference tables (§1.8b)
 
   insights: InsightRule[];      // powers "Explain My Result" (§4)
 

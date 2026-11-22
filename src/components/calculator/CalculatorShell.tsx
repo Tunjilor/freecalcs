@@ -9,6 +9,7 @@ import ExplainMyResult from "./ExplainMyResult";
 import ResultChart from "./ResultChart";
 import BreakdownTable from "./BreakdownTable";
 import ScenarioRow from "./ScenarioRow";
+import ReferenceSection from "./ReferenceSection";
 import RelatedCalculators from "./RelatedCalculators";
 import TeachBlock from "./TeachBlock";
 import FaqAccordion from "./FaqAccordion";
@@ -163,6 +164,13 @@ export default function CalculatorShell<Inputs extends Record<string, number | s
             )}
           </div>
         </div>
+
+        {/* 8b. Static reference tables, full width below the calculator */}
+        {def.reference && (
+          <section className="fc-card" style={{ marginTop: 32 }}>
+            <ReferenceSection section={def.reference} />
+          </section>
+        )}
 
         {/* 9. Related calculators */}
         <div style={{ marginTop: 40 }}>
