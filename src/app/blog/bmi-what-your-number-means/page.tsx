@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: `${TITLE} | freecalcs.io`,
   description: DESCRIPTION,
   alternates: { canonical: URL },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'freecalcs.io', type: 'article' },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'FreeCalcs', type: 'article' },
 };
 export default function Article() {
   return (

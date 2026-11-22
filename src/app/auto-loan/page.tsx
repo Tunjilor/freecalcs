@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: autoLoanDef.title,
     description: autoLoanDef.metaDescription,
     url: URL,
-    siteName: "freecalcs.io",
+    siteName: "FreeCalcs",
     type: "website",
   },
   twitter: {

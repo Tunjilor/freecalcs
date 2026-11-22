@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Terms of Service | freecalcs.io',
   description: 'The terms governing use of freecalcs.io — informational use only, no warranties, no professional advice, and limitation of liability.',
   alternates: { canonical: 'https://www.freecalcs.io/terms' },
-  openGraph: { title: 'Terms of Service | freecalcs.io', description: 'The terms governing use of freecalcs.io — informational use only, no warranties, no professional advice, and limitation of liability.', url: 'https://www.freecalcs.io/terms', siteName: 'freecalcs.io', type: 'website' },
+  openGraph: { title: 'Terms of Service | freecalcs.io', description: 'The terms governing use of freecalcs.io — informational use only, no warranties, no professional advice, and limitation of liability.', url: 'https://www.freecalcs.io/terms', siteName: 'FreeCalcs', type: 'website' },
 };
 
 const C = { blue:'#2563eb', darkBlue:'#1e3a5f', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc' };

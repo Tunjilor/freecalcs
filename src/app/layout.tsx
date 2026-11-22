@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   creator: 'freecalcs.io',
   publisher: 'freecalcs.io',
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
-  openGraph: { type: 'website', locale: 'en_US', url: 'https://www.freecalcs.io', siteName: 'freecalcs.io' },
+  openGraph: { type: 'website', locale: 'en_US', url: 'https://www.freecalcs.io', siteName: 'FreeCalcs' },
   twitter: { card: 'summary_large_image', site: '@freecalcsio' },
 };
 

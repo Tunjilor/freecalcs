@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Tip Calculator | Bill Splitter & Service Presets',
   description: 'Calculate tips and split bills. Custom tip percentage, service presets for restaurants, bars, salons, and rideshare. Free, instant, no sign-up.',
   alternates: { canonical: 'https://www.freecalcs.io/tip' },
-  openGraph: { title: 'Tip Calculator | freecalcs.io', description: 'Calculate tips and split bills with service presets for restaurants, bars, salons, and rideshare.', url: 'https://www.freecalcs.io/tip', siteName: 'freecalcs.io', type: 'website' },
+  openGraph: { title: 'Tip Calculator | freecalcs.io', description: 'Calculate tips and split bills with service presets for restaurants, bars, salons, and rideshare.', url: 'https://www.freecalcs.io/tip', siteName: 'FreeCalcs', type: 'website' },
   twitter: { card: 'summary_large_image', title: 'Tip Calculator | freecalcs.io', description: 'Calculate tips and split bills. Service presets for restaurants, bars, and salons.' },
 };
 

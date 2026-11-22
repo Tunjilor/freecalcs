@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Affiliate Disclosure | freecalcs.io',
   description: 'How freecalcs.io makes money: affiliate relationships, what they mean for you, and our commitment to keeping recommendations honest.',
   alternates: { canonical: 'https://www.freecalcs.io/affiliate-disclosure' },
-  openGraph: { title: 'Affiliate Disclosure | freecalcs.io', description: 'How freecalcs.io makes money: affiliate relationships, what they mean for you, and our commitment to keeping recommendations honest.', url: 'https://www.freecalcs.io/affiliate-disclosure', siteName: 'freecalcs.io', type: 'website' },
+  openGraph: { title: 'Affiliate Disclosure | freecalcs.io', description: 'How freecalcs.io makes money: affiliate relationships, what they mean for you, and our commitment to keeping recommendations honest.', url: 'https://www.freecalcs.io/affiliate-disclosure', siteName: 'FreeCalcs', type: 'website' },
 };
 
 const C = { blue:'#2563eb', darkBlue:'#1e3a5f', border:'#e5e7eb', white:'#ffffff', light:'#f8fafc' };
