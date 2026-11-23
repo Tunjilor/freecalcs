@@ -140,6 +140,7 @@ export const capitalGainsDef: CalculatorDefinition<CapitalGainsInputs, CapitalGa
     relatedLink("tax-refund"),
     relatedLink("self-employment-tax"),
     relatedLink("compound-interest"),
+    relatedLink("investment-return"),
   ],
 
   faqs: [

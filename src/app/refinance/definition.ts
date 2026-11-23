@@ -137,6 +137,7 @@ export const refinanceDef: CalculatorDefinition<RefinanceInputs, RefinanceResult
     relatedLink("heloc"),
     relatedLink("loan-payoff"),
     relatedLink("qualify"),
+    relatedLink("mortgage-payoff"),
   ],
   relatedArticles: [
     { slug: "blog/mortgage-refinance-requirements", label: "Refinance requirements 2026" },

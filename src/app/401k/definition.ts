@@ -154,6 +154,7 @@ export const fourOhOneKDef: CalculatorDefinition<FourOhOneKInputs, FourOhOneKRes
     relatedLink("roth-vs-traditional"),
     relatedLink("savings-goal"),
     relatedLink("compound-interest"),
+    relatedLink("investment-return"),
   ],
 
   faqs: [

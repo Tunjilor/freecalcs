@@ -49,7 +49,7 @@ export default function Article() {
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>Here is what extra payments do to a $320,000 mortgage at 6.5% for 30 years (regular payment: $2,023):</p>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>Extra $100 per month: saves $46,000 in interest, pays off 4 years and 8 months early. Extra $200 per month: saves $79,000 in interest, pays off 8 years early. Extra $300 per month: saves $103,000 in interest, pays off 10 years and 4 months early. Extra $500 per month: saves $137,000 in interest, pays off 13 years and 6 months early.</p>
             <p style={{fontSize:15,color:'#374151',lineHeight:1.8,margin:'0 0 16px'}}>Notice how the first $100 has the biggest impact per dollar. Each additional $100 saves less because there is less remaining interest to avoid. This means even a small extra payment is worth making.</p>
-            <CalcCTA href="/loan-payoff" label="See your exact payoff savings" blurb="Plug in your real balance, rate, and a monthly extra to see how many months you'd cut and how much interest you'd save — the same math as the examples above, with your numbers." cta="Open the loan payoff calculator" />
+            <CalcCTA href="/mortgage-payoff" label="See your exact payoff savings" blurb="Plug in your original loan, rate, and years paid, then add a monthly extra or a lump sum to see how many months you'd cut and how much interest you'd save — the same math as the examples above, with your numbers." cta="Open the mortgage payoff calculator" />
           </div>
           <div style={{marginBottom:32}}>
             <h2 style={{fontSize:20,fontWeight:700,color:'#111827',margin:'0 0 14px'}}>Biweekly Payment Strategy</h2>
@@ -93,7 +93,7 @@ export default function Article() {
 
           </div>
         </div>
-        <RelatedTools tools={[{href:'/loan-payoff',label:'Loan Payoff Calculator'},{href:'/refinance',label:'Refinance Calculator'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
+        <RelatedTools tools={[{href:'/mortgage-payoff',label:'Mortgage Payoff Calculator'},{href:'/15-vs-30-year-mortgage',label:'15 vs 30 Year Mortgage'},{href:'/loan-payoff',label:'Loan Payoff Calculator'},{href:'/refinance',label:'Refinance Calculator'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
         <div style={{display:'flex',gap:12,flexWrap:'wrap',marginTop:20}}>
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
         </div>

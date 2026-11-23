@@ -129,6 +129,7 @@ export const autoLoanDef: CalculatorDefinition<AutoLoanInputs, AutoLoanResults> 
     relatedLink("personal-loan"),
     relatedLink("loan-payoff"),
     relatedLink("debt-payoff"),
+    relatedLink("amortization"),
   ],
 
   faqs: [

@@ -115,6 +115,8 @@ export const savingsGoalDef: CalculatorDefinition<SavingsGoalInputs, SavingsGoal
     relatedLink("retirement"),
     relatedLink("down-payment"),
     relatedLink("401k"),
+    relatedLink("emergency-fund"),
+    relatedLink("budget"),
   ],
   relatedArticles: [
     { slug: "blog/compound-interest-explained", label: "Compound interest explained" },

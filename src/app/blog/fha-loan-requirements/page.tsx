@@ -213,7 +213,7 @@ export default function Article() {
           FHA-approved lender before making decisions.
         </p>
 
-        <RelatedTools tools={[{href:'/qualify',label:'Mortgage Qualifier'},{href:'/down-payment',label:'Down Payment Calculator'},{href:'/home-affordability',label:'Home Affordability Calculator'}]} />
+        <RelatedTools tools={[{href:'/fha-loan',label:'FHA Loan Calculator'},{href:'/debt-to-income',label:'Debt-to-Income Calculator'},{href:'/qualify',label:'Mortgage Qualifier'},{href:'/down-payment',label:'Down Payment Calculator'},{href:'/home-affordability',label:'Home Affordability Calculator'}]} />
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 20 }}>
           <a href="/blog" style={{ background: '#fff', color: '#2563eb', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, border: '1px solid #bfdbfe', textDecoration: 'none' }}>← All Articles</a>
           <a href="/qualify" style={{ background: '#2563eb', color: '#fff', fontSize: 13, fontWeight: 600, padding: '10px 20px', borderRadius: 10, textDecoration: 'none' }}>Mortgage Qualifier</a>

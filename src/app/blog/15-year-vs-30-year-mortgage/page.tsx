@@ -139,10 +139,10 @@ export default function Article() {
               comfortably carry that extra $600 every single month for 15 years, no matter what life does.
             </p>
             <CalcCTA
-              href="/mortgage"
+              href="/15-vs-30-year-mortgage"
               label="Compare both loans side by side"
-              blurb="Enter your loan amount and both rates and terms to see the two payments and total-interest figures next to each other — the comparison that makes the trade-off concrete for your numbers."
-              cta="Open the mortgage calculator"
+              blurb="Enter your loan amount and both rates to see the two payments and total-interest figures next to each other, plus whether investing the difference would beat the 15-year — the comparison that makes the trade-off concrete for your numbers."
+              cta="Open the 15 vs 30 year mortgage calculator"
             />
           </div>
 
@@ -280,6 +280,7 @@ export default function Article() {
         <RelatedTools
           heading="Continue planning"
           tools={[
+            { href: "/mortgage-payoff", label: "Mortgage Payoff Calculator" },
             { href: "/mortgage", label: "Mortgage Calculator" },
             { href: "/loan-payoff", label: "Loan Payoff Calculator" },
             { href: "/refinance", label: "Refinance Calculator" },

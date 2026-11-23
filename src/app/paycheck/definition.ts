@@ -116,6 +116,8 @@ export const paycheckDef: CalculatorDefinition<PaycheckInputs, PaycheckResults> 
     relatedLink("tax-refund"),
     relatedLink("salary"),
     relatedLink("self-employment-tax"),
+    relatedLink("hourly-to-salary"),
+    relatedLink("budget"),
   ],
   relatedArticles: [
     { slug: "blog/2026-tax-brackets-guide", label: "2026 federal tax brackets guide" },

@@ -95,7 +95,7 @@ export default function Article() {
 
           </div>
         </div>
-        <RelatedTools tools={[{href:'/home-affordability',label:'Home Affordability Calculator'},{href:'/qualify',label:'Mortgage Qualifier'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
+        <RelatedTools tools={[{href:'/debt-to-income',label:'Debt-to-Income Calculator'},{href:'/home-affordability',label:'Home Affordability Calculator'},{href:'/qualify',label:'Mortgage Qualifier'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
         <div style={{display:'flex',gap:12,flexWrap:'wrap',marginTop:20}}>
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
           <a href="/qualify" style={{background:'#2563eb',color:'#fff',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,textDecoration:'none'}}>Mortgage Qualifier</a>

@@ -129,6 +129,7 @@ export const affordabilityDef: CalculatorDefinition<AffordabilityInputs, Afforda
     relatedLink("down-payment"),
     relatedLink("rent-vs-buy"),
     relatedLink("va-loan"),
+    relatedLink("debt-to-income"),
   ],
   relatedArticles: [
     { slug: "blog/28-36-rule-mortgage", label: "The 28/36 rule: how much house you can afford" },

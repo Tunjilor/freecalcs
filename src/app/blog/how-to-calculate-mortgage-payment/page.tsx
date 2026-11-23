@@ -89,7 +89,7 @@ export default function Article() {
 
           </div>
         </div>
-        <RelatedTools tools={[{href:'/home-affordability',label:'Home Affordability Calculator'},{href:'/loan-payoff',label:'Loan Payoff Calculator'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
+        <RelatedTools tools={[{href:'/amortization',label:'Amortization Calculator'},{href:'/closing-costs',label:'Closing Costs Calculator'},{href:'/home-affordability',label:'Home Affordability Calculator'},{href:'/loan-payoff',label:'Loan Payoff Calculator'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
         <div style={{display:'flex',gap:12,flexWrap:'wrap',marginTop:20}}>
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
           <a href="/mortgage" style={{background:'#2563eb',color:'#fff',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,textDecoration:'none'}}>Mortgage Calculator</a>
