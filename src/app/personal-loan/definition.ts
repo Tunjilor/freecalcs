@@ -152,6 +152,7 @@ export const personalLoanDef: CalculatorDefinition<PersonalLoanInputs, PersonalL
   ],
 
   teach: {
+    heading: "What is a personal loan?",
     whatIsIt:
       "A personal loan is an unsecured, fixed-rate installment loan: no collateral, a set number of equal monthly payments, and a fixed payoff date. People use them to consolidate credit-card debt, cover a large expense, or finance something a specialized loan won't.\n\nBecause they're unsecured, rates are higher than a mortgage or auto loan, and most lenders charge an origination fee that comes out of the amount you receive. The interest math is ordinary amortization — the fee is the part borrowers most often overlook.",
     whyItMatters:

@@ -102,6 +102,7 @@ export const bodyFatDef: CalculatorDefinition<BodyFatInputs, BodyFatResults> = {
   ],
 
   teach: {
+    heading: "What is body fat percentage?",
     whatIsIt:
       "Body fat percentage is the share of your total weight that is fat. The rest is lean mass: muscle, bone, organs and water. The U.S. Navy method estimates it from height and a few circumference measurements, using equations developed by researchers at the Naval Health Research Center.",
     whyItMatters:

@@ -113,6 +113,7 @@ export const investmentReturnDef: CalculatorDefinition<InvestmentReturnInputs, I
   ],
 
   teach: {
+    heading: "What is an annualized return (CAGR)?",
     whatIsIt:
       "An annualized return converts any gain or loss over any length of time into an equivalent yearly rate. It makes a 3-year investment comparable with a 10-year one, or a stock with a savings account.",
     whyItMatters:

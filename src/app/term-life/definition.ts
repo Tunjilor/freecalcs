@@ -122,6 +122,7 @@ export const termLifeDef: CalculatorDefinition<TermLifeInputs, TermLifeResults> 
   ],
 
   teach: {
+    heading: "What is term life insurance?",
     whatIsIt:
       "Term life insurance pays out if you die within a set period — the 'term.' It's the simplest, cheapest form of life insurance because it covers a temporary need and builds no cash value. This calculator estimates two things: how much coverage to carry (an income-multiple rule plus your mortgage) and how long the term should run.\n\nThe term-length logic is straightforward: your coverage should last until your family no longer depends on your income — the longest of paying off the mortgage, your kids reaching independence, or your own retirement. Like all the insurance tools here, this is a planning estimate, not a quote.",
     whyItMatters:

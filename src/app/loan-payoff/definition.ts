@@ -142,6 +142,7 @@ export const loanPayoffDef: CalculatorDefinition<LoanPayoffInputs, LoanPayoffRes
   ],
 
   teach: {
+    heading: "How does paying off a loan early work?",
     whatIsIt:
       "A loan payoff calculator answers one focused question: if I pay a bit more than required each month, how much sooner am I free and how much interest do I keep? It takes your current balance, rate, and payment, then re-amortizes the loan with the extra principal added.\n\nThe key idea is that your scheduled payment is split between interest (the lender's fee for the balance you still owe) and principal (which actually reduces the debt). Extra money bypasses the interest split entirely and goes straight to principal.",
     whyItMatters:

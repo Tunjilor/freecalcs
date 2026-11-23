@@ -225,6 +225,7 @@ export const fhaLoanDef: CalculatorDefinition<FhaInputs, FhaResults> = {
   ],
 
   teach: {
+    heading: "What is an FHA loan?",
     whatIsIt:
       "An FHA loan is a mortgage insured by the Federal Housing Administration, part of HUD. The FHA doesn't lend you money; it insures the lender against loss, which lets lenders approve buyers with smaller down payments and lower credit scores than conventional loans usually allow.\n\nThe cost of that insurance is passed to you as a mortgage insurance premium, or MIP, in two parts: a one-time upfront premium of 1.75% of the loan, and an annual premium that's split into monthly payments. The annual rate depends on your loan size, your down payment and your loan term.",
     whyItMatters:

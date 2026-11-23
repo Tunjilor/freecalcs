@@ -153,6 +153,7 @@ export const capitalGainsDef: CalculatorDefinition<CapitalGainsInputs, CapitalGa
   ],
 
   teach: {
+    heading: "What is capital gains tax?",
     whatIsIt:
       "A capital gain is the profit when you sell an asset — stocks, a fund, crypto, real estate — for more than your cost basis. The federal tax on that profit depends on two things: how long you owned the asset and how much other income you have.\n\nHold for one year or less and the gain is 'short-term,' taxed like a paycheck at your ordinary rates. Hold for more than a year and it becomes 'long-term,' taxed at the lower 0/15/20% rates. The gain is stacked on top of your ordinary income to decide which of those rates apply.",
     whyItMatters:

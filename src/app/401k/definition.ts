@@ -167,6 +167,7 @@ export const fourOhOneKDef: CalculatorDefinition<FourOhOneKInputs, FourOhOneKRes
   ],
 
   teach: {
+    heading: "What is a 401(k)?",
     whatIsIt:
       "A 401(k) is an employer-sponsored retirement account that lets you invest a slice of each paycheck before (traditional) or after (Roth) tax, where it grows tax-advantaged until retirement. Two features make it powerful: the employer match, which is extra compensation, and the high annual contribution limit set by the IRS.\n\nThis calculator ties those together — projecting your balance from your contribution rate, the match formula, and your expected return, while checking your deferral against the age-appropriate IRS limit.",
     whyItMatters:

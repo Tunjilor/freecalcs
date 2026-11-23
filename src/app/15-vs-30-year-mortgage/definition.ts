@@ -197,6 +197,7 @@ export const fifteenThirtyDef: CalculatorDefinition<FifteenThirtyInputs, Fifteen
   ],
 
   teach: {
+    heading: "How do 15- and 30-year mortgages differ?",
     whatIsIt:
       "The term of a mortgage is how long you take to repay it. A 15-year and a 30-year loan for the same amount differ in three ways: the 15-year has a higher monthly payment, a lower interest rate, and far less total interest because the balance shrinks twice as fast.\n\nThis calculator compares both at their own rates and adds a third option: the 30-year loan with the monthly difference invested, measured at the 15-year mark when the shorter loan would be paid off.",
     whyItMatters:

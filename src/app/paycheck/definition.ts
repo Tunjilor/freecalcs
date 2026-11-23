@@ -133,6 +133,7 @@ export const paycheckDef: CalculatorDefinition<PaycheckInputs, PaycheckResults> 
   ],
 
   teach: {
+    heading: "How is take-home pay calculated?",
     whatIsIt:
       "A paycheck calculator turns your gross pay into an estimate of what actually reaches your bank account. Between the two sit federal income tax withholding, Social Security and Medicare (FICA), and any pre-tax deductions you've elected, like retirement or health savings contributions.\n\nWithholding is an estimate your employer makes each pay period based on your W-4 and the IRS tables. FICA is a flat payroll tax. Pre-tax deductions come out before income tax is figured, which is why they lower the tax bite.",
     whyItMatters:

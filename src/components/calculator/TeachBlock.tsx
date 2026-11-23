@@ -7,13 +7,13 @@ import { article, teachSubject } from "@/lib/calculator/teach";
 
 type Props = {
   h1: string;
-  teach: { whatIsIt: string; whyItMatters: string; whatToDoNext: string };
+  teach: { heading?: string; whatIsIt: string; whyItMatters: string; whatToDoNext: string };
 };
 
 export default function TeachBlock({ h1, teach }: Props) {
   const subject = teachSubject(h1);
   const blocks: { heading: string; body: string }[] = [
-    { heading: `What is ${article(subject)} ${subject}?`, body: teach.whatIsIt },
+    { heading: teach.heading ?? `What is ${article(subject)} ${subject}?`, body: teach.whatIsIt },
     { heading: "Why it matters", body: teach.whyItMatters },
     { heading: "What to do next", body: teach.whatToDoNext },
   ];

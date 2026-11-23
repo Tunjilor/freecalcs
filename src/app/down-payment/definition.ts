@@ -138,6 +138,7 @@ export const downPaymentDef: CalculatorDefinition<DownPaymentInputs, DownPayment
   ],
 
   teach: {
+    heading: "What is a down payment?",
     whatIsIt:
       "Your down payment is the cash you pay upfront, with the mortgage covering the rest. It's expressed as a percentage of the price: 20% down on a $400,000 home is $80,000. The percentage you choose drives two things — the size of your loan and whether you'll pay private mortgage insurance.\n\nThis calculator turns a target percentage and timeline into a concrete monthly savings number, and shows the gap between your target and the 20% that removes PMI.",
     whyItMatters:

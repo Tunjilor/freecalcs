@@ -147,6 +147,7 @@ export const affordabilityDef: CalculatorDefinition<AffordabilityInputs, Afforda
   ],
 
   teach: {
+    heading: "How is home affordability calculated?",
     whatIsIt:
       "A home affordability calculator works backward from your finances to a price. It takes your income and existing debts, applies debt-to-income limits, and figures out the largest monthly payment — and therefore the largest loan and price — those limits allow, then adds your down payment.\n\nBecause lenders allow a range of DTI (from a comfortable 36% up to about 50% in some cases), there isn't one 'affordable' price. This tool shows three, so you can see the spread between cautious and stretched.",
     whyItMatters:

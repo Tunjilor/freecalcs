@@ -149,7 +149,15 @@ export type CalculatorDefinition<Inputs, Results> = {
   related: RelatedLink[];
   relatedArticles?: RelatedLink[];
   faqs: { q: string; a: string }[];
-  teach: { whatIsIt: string; whyItMatters: string; whatToDoNext: string };
+  teach: {
+    // First teach-block heading, written for this calculator so it reads
+    // naturally: "What is an FHA loan?", "What are closing costs?",
+    // "What is inflation?". Falls back to "What is a/an <h1 subject>?".
+    heading?: string;
+    whatIsIt: string;
+    whyItMatters: string;
+    whatToDoNext: string;
+  };
   method: { label: string; sourceUrl?: string; year?: number };
   monetization?: MonetizationSlot[];
 };

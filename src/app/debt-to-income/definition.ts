@@ -223,6 +223,7 @@ export const dtiDef: CalculatorDefinition<DtiInputs, DtiResults> = {
   ],
 
   teach: {
+    heading: "What is a debt-to-income ratio?",
     whatIsIt:
       "Your debt-to-income ratio, or DTI, is the share of your gross monthly income that goes to debt payments. A lender divides your monthly debts by your monthly income before taxes and expresses it as a percentage.\n\nThere are two versions. The front-end ratio includes only your housing payment. The back-end ratio includes housing plus every other recurring debt, like car loans, student loans and credit card minimums.",
     whyItMatters:

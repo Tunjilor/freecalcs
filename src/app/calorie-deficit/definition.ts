@@ -155,6 +155,7 @@ export const calorieDeficitDef: CalculatorDefinition<CalorieDeficitInputs, Calor
   ],
 
   teach: {
+    heading: "What is a calorie deficit?",
     whatIsIt:
       "A calorie deficit means taking in fewer calories than your body burns. Your total daily energy expenditure, or TDEE, is the calories you burn at rest (BMR) plus activity. Eating below it makes your body draw on stored energy.",
     whyItMatters:

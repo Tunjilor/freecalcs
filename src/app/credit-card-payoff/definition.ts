@@ -129,6 +129,7 @@ export const creditCardDef: CalculatorDefinition<CreditCardInputs, CreditCardRes
   ],
 
   teach: {
+    heading: "How does credit card payoff work?",
     whatIsIt:
       "A credit card payoff calculator shows two futures for the same balance: one where you pay only the minimum, and one where you commit to a fixed monthly payment. It computes how long each takes and how much interest each costs.\n\nThe key mechanic is the minimum payment itself. Because it's calculated as a small percentage of your balance plus interest, it falls as the balance falls — so the closer you get to zero, the slower you go. A fixed payment breaks that trap by keeping your dollars against the principal constant.",
     whyItMatters:

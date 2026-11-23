@@ -130,6 +130,7 @@ export const netWorthDef: CalculatorDefinition<NetWorthInputs, NetWorthResults> 
   ],
 
   teach: {
+    heading: "What is net worth?",
     whatIsIt:
       "Net worth is assets minus liabilities. Assets are things with value you own; liabilities are debts you owe. It's the personal version of a company's balance sheet.",
     whyItMatters:

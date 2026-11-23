@@ -262,6 +262,7 @@ export const vaLoanDef: CalculatorDefinition<VaLoanInputs, VaLoanResults> = {
   ],
 
   teach: {
+    heading: "What is a VA loan?",
     whatIsIt:
       "A VA loan is a mortgage guaranteed by the U.S. Department of Veterans Affairs and available to eligible veterans, active-duty service members, National Guard and Reserve members, and some surviving spouses. The VA doesn't lend the money — private lenders do — but its guarantee lets them offer terms no other loan matches: no down payment, no private mortgage insurance, and competitive rates.\n\nThe main cost unique to the program is the VA funding fee, a one-time charge that helps keep the program running at no cost to taxpayers. Its size depends on your down payment, whether this is your first VA loan, and whether you qualify for an exemption.",
     whyItMatters:

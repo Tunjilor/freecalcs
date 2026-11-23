@@ -119,6 +119,7 @@ export const selfEmploymentDef: CalculatorDefinition<SelfEmploymentInputs, SelfE
   ],
 
   teach: {
+    heading: "What is self-employment tax?",
     whatIsIt:
       "Self-employment tax is how independent workers — freelancers, contractors, gig workers, sole proprietors, and single-member LLC owners — fund Social Security and Medicare. Employees have 7.65% withheld and their employer quietly pays a matching 7.65%. When you're self-employed, there's no employer, so you pay the whole 15.3% yourself.\n\nIt's charged on your net profit (income minus business expenses) times 92.35%, not on your gross revenue, and it's completely separate from the federal income tax you also owe on that profit.",
     whyItMatters:

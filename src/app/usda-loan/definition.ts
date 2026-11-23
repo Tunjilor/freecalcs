@@ -201,6 +201,7 @@ export const usdaLoanDef: CalculatorDefinition<UsdaInputs, UsdaResults> = {
   ],
 
   teach: {
+    heading: "What is a USDA loan?",
     whatIsIt:
       "A USDA loan, formally the Section 502 Guaranteed Loan, is a mortgage backed by the U.S. Department of Agriculture's Rural Development program. Private lenders make the loan and USDA guarantees it, which lets them offer 100% financing to moderate-income buyers in eligible areas.\n\nInstead of private mortgage insurance, USDA charges a guarantee fee in two parts: 1% of the loan upfront, and 0.35% of the remaining balance each year, collected monthly.",
     whyItMatters:

@@ -228,6 +228,7 @@ export const emergencyFundDef: CalculatorDefinition<EmergencyFundInputs, Emergen
   ],
 
   teach: {
+    heading: "What is an emergency fund?",
     whatIsIt:
       "An emergency fund is cash set aside for expenses you can't plan for: losing your job, a medical bill, a major car or home repair. It's sized in months of essential expenses because its main job is to keep the bills paid while your income is interrupted.\n\nThis calculator counts only essential spending, because in a real emergency you'd cut back on everything else. That's why your target is usually smaller than three to six months of your full budget.",
     whyItMatters:

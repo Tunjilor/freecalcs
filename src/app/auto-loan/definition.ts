@@ -142,6 +142,7 @@ export const autoLoanDef: CalculatorDefinition<AutoLoanInputs, AutoLoanResults> 
   ],
 
   teach: {
+    heading: "What is an auto loan?",
     whatIsIt:
       "An auto loan is a secured, amortizing loan: the car is the collateral, and you repay a fixed amount each month that covers interest plus a shrinking slice of the principal. The amount you actually finance isn't just the sticker price — it's the price plus sales tax and dealer fees, minus your down payment and trade-in.\n\nThat 'amount financed' is what interest is charged on, which is why rolling taxes and fees into the loan quietly raises your total cost: you pay interest on them for the life of the loan.",
     whyItMatters:

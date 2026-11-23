@@ -138,6 +138,7 @@ export const rothDef: CalculatorDefinition<RothInputs, RothResults> = {
   ],
 
   teach: {
+    heading: "What's the difference between Roth and Traditional?",
     whatIsIt:
       "Roth and Traditional are two tax treatments for the same retirement accounts (IRAs and 401(k)s). Traditional contributions are deducted from your taxable income now, grow tax-deferred, and are taxed as ordinary income when you withdraw. Roth contributions get no deduction now, but grow and are withdrawn completely tax-free.\n\nBecause the money grows identically in both, the choice isn't about returns — it's about when you'd rather pay the tax: at today's rate or at your rate in retirement.",
     whyItMatters:

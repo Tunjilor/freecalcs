@@ -132,6 +132,7 @@ export const taxRefundDef: CalculatorDefinition<TaxRefundInputs, TaxRefundResult
   ],
 
   teach: {
+    heading: "How is a tax refund calculated?",
     whatIsIt:
       "A tax refund estimator projects whether you'll get money back or owe when you file. The logic is simple: your refund equals the tax withheld from your paychecks minus the tax you actually owe for the year.\n\nThe 'tax you owe' part comes from your taxable income — total income minus pre-tax and standard deductions — run through the brackets, then reduced by credits like the Child Tax Credit. Comparing that to your withholding tells you which way the balance tips.",
     whyItMatters:
