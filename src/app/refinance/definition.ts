@@ -20,7 +20,7 @@ export const refinanceDef: CalculatorDefinition<RefinanceInputs, RefinanceResult
   valueProp: "Compare your current loan to a new one — monthly savings, break-even, and lifetime cost.",
   title: "Mortgage Refinance Calculator (Break-Even) | freecalcs.io",
   metaDescription:
-    "Free mortgage refinance calculator: compare your current loan to a new rate and term. See your new payment, monthly savings, break-even point, and whether it saves interest over the life of the loan.",
+    "Free refinance calculator: compare your mortgage with a new rate and term. See your new payment, monthly savings, break-even point and lifetime interest.",
   primaryKeyword: "Mortgage Refinance Calculator",
   secondaryKeywords: ["refinance break even calculator", "refinance savings", "should I refinance", "mortgage refinance"],
   intro:

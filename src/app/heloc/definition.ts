@@ -20,7 +20,7 @@ export const helocDef: CalculatorDefinition<HelocInputs, HelocResults> = {
   valueProp: "See your available home-equity credit line and interest-only vs repayment payments.",
   title: "HELOC Calculator (Home Equity Line of Credit) | freecalcs.io",
   metaDescription:
-    "Free HELOC calculator: estimate your available home equity line of credit from your home value, mortgage balance, and CLTV limit — plus interest-only draw-period and repayment payments.",
+    "Free HELOC calculator: estimate your home equity line of credit from home value, mortgage balance and CLTV limit, plus draw-period and repayment payments.",
   primaryKeyword: "HELOC Calculator",
   secondaryKeywords: ["home equity line of credit", "CLTV calculator", "heloc payment", "available home equity"],
   intro:

@@ -25,7 +25,7 @@ export const lifeInsuranceDef: CalculatorDefinition<LifeInsuranceInputs, LifeIns
   valueProp: "Estimate how much life insurance you need with the DIME method — a planning estimate, not a quote.",
   title: "Life Insurance Calculator (DIME Method) | freecalcs.io",
   metaDescription:
-    "Free life insurance needs calculator using the DIME method (Debt, Income, Mortgage, Education). Estimate how much coverage your family would need — a planning estimate, not a quote.",
+    "Free life insurance calculator using the DIME method (debt, income, mortgage, education) to estimate how much coverage your family needs. Not a quote.",
   primaryKeyword: "Life Insurance Calculator",
   secondaryKeywords: ["how much life insurance do I need", "DIME method", "life insurance needs", "term life coverage amount"],
   intro:

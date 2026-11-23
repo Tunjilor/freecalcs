@@ -32,7 +32,7 @@ export const closingCostsDef: CalculatorDefinition<ClosingCostsInputs, ClosingCo
   valueProp: "Estimate your buyer closing costs, line by line, and the total cash you'll need to close.",
   title: "Closing Costs Calculator for Buyers | freecalcs.io",
   metaDescription:
-    "Free closing costs calculator: itemized buyer closing costs (lender fees, title, taxes, prepaids and escrow) and your total cash to close, including down payment.",
+    "Free closing costs calculator: itemized buyer costs (lender fees, title, taxes, prepaids and escrow) plus your total cash to close, down payment included.",
   primaryKeyword: "Closing Costs Calculator",
   secondaryKeywords: [
     "how much are closing costs",

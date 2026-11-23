@@ -17,7 +17,7 @@ export const downPaymentDef: CalculatorDefinition<DownPaymentInputs, DownPayment
   valueProp: "Plan your down payment, avoid PMI at 20%, and find the monthly savings to reach your goal.",
   title: "Down Payment Calculator | freecalcs.io",
   metaDescription:
-    "Free down payment calculator: see the down payment needed for your target percent, how 20% down avoids PMI, and the monthly savings required to reach your goal by a target date.",
+    "Free down payment calculator: see how much you need for your target percent, how 20% down avoids PMI, and how much to save each month to get there.",
   primaryKeyword: "Down Payment Calculator",
   secondaryKeywords: ["down payment on a house", "how much down payment", "avoid PMI 20 percent", "down payment savings goal"],
   intro:

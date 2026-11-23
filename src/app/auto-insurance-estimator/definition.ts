@@ -20,7 +20,7 @@ export const autoInsuranceDef: CalculatorDefinition<AutoInsuranceInputs, AutoIns
   valueProp: "A rough ballpark range for car insurance by age, coverage, and vehicle — not a quote.",
   title: "Auto Insurance Estimator (Ballpark Range) | freecalcs.io",
   metaDescription:
-    "Free auto insurance estimator: a rough ballpark premium RANGE based on your age band, coverage level, and vehicle value. Not a quote — real premiums depend on your record, location, and credit.",
+    "Free auto insurance estimator: a rough premium range based on age, coverage and vehicle value. Not a quote; real prices depend on your record and location.",
   primaryKeyword: "Auto Insurance Estimator",
   secondaryKeywords: ["car insurance cost estimate", "average car insurance premium", "how much is car insurance", "auto insurance range"],
   intro:

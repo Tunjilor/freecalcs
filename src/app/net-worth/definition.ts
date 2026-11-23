@@ -18,7 +18,7 @@ export const netWorthDef: CalculatorDefinition<NetWorthInputs, NetWorthResults> 
   valueProp: "Add up what you own and what you owe to see your net worth, and how it compares for your age and income.",
   title: "Net Worth Calculator: What Are You Worth? | freecalcs.io",
   metaDescription:
-    "Free net worth calculator: total your assets and debts, see your net worth, liquid net worth and home equity, and compare with a benchmark for your age and income.",
+    "Free net worth calculator: total your assets and debts, see your net worth, liquid net worth and home equity, and compare with a benchmark for your age.",
   primaryKeyword: "Net Worth Calculator",
   secondaryKeywords: ["calculate net worth", "personal net worth", "assets minus liabilities", "net worth by age"],
   intro:

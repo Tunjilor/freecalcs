@@ -9,7 +9,7 @@ import { ORGANIZATION } from "@/components/SiteJsonLd";
 const URL = "https://www.freecalcs.io/blog/can-i-buy-a-house-with-640-credit-score";
 const TITLE = "My Credit Score Is 640. Can I Buy a House?";
 const DESCRIPTION =
-  "Yes — 640 is above the FHA floor and works for many conventional loans. The real question isn't whether you can qualify, but what a fair score costs you in rate, and whether waiting to raise it is worth it.";
+  "Yes: 640 clears the FHA minimum and many conventional lenders' too. The real question is what a fair score costs in rate, and if waiting to raise it pays.";
 
 export const metadata: Metadata = {
   title: `${TITLE} | freecalcs.io`,

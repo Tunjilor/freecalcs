@@ -5,10 +5,12 @@ import ArticleJsonLd from '@/components/ArticleJsonLd';
 import { ORGANIZATION } from '@/components/SiteJsonLd';
 const URL = 'https://www.freecalcs.io/blog/28-36-rule-mortgage';
 const TITLE = 'The 28/36 Rule: How Much House Can You Actually Afford';
+// Shorter <title> for search results; TITLE stays the on-page headline.
+const SEO_TITLE = "The 28/36 Rule: How Much House You Can Afford";
 const DESCRIPTION = 'Banks use the 28/36 rule to decide your mortgage qualification. Learn how to apply it to your income and debt, and when it makes sense to bend the rules.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | freecalcs.io`,
+  title: `${SEO_TITLE} | freecalcs.io`,
   description: DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'FreeCalcs', type: 'article' },

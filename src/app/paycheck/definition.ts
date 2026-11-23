@@ -19,7 +19,7 @@ export const paycheckDef: CalculatorDefinition<PaycheckInputs, PaycheckResults> 
   valueProp: "Estimate your take-home pay per check after federal tax and FICA.",
   title: "Paycheck Calculator (Take-Home Pay) | freecalcs.io",
   metaDescription:
-    "Free paycheck calculator for 2025 & 2026. Estimate take-home pay per check from gross, pay frequency, filing status, and pre-tax deductions — federal withholding, Social Security, and Medicare.",
+    "Free paycheck calculator for 2025 and 2026: estimate take-home pay per check after federal withholding, Social Security, Medicare and pre-tax deductions.",
   primaryKeyword: "Paycheck Calculator",
   secondaryKeywords: ["take home pay calculator", "net pay calculator", "paycheck after taxes", "biweekly paycheck"],
   intro:

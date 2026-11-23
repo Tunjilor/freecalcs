@@ -4,7 +4,7 @@ import JsonLd from '@/components/calculator/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Scientific Calculator | Trig, Logs & Square Roots',
-  description: 'Free online scientific calculator with trigonometric functions (sin, cos, tan), logarithms, square roots, exponents, and constants π and e. No download required.',
+  description: 'Free online scientific calculator with sin, cos, tan, logarithms, square roots, exponents and the constants π and e. Runs in your browser, no download.',
   alternates: { canonical: 'https://www.freecalcs.io/scientific' },
   openGraph: { title: 'Scientific Calculator | freecalcs.io', description: 'Trig functions, logarithms, square roots, exponents, and constants — full scientific calculator, free online.', url: 'https://www.freecalcs.io/scientific', siteName: 'FreeCalcs', type: 'website' },
   twitter: { card: 'summary_large_image', title: 'Scientific Calculator | freecalcs.io', description: 'Free online scientific calculator with trig, logs, square roots, and constants.' },

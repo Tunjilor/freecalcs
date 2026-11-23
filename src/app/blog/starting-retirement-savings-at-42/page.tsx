@@ -8,11 +8,13 @@ import { ORGANIZATION } from "@/components/SiteJsonLd";
 
 const URL = "https://www.freecalcs.io/blog/starting-retirement-savings-at-42";
 const TITLE = "I'm 42 and Just Started Saving for Retirement. Is It Too Late?";
+// Shorter <title> for search results; TITLE stays the on-page headline.
+const SEO_TITLE = "Starting Retirement Savings at 42: Too Late?";
 const DESCRIPTION =
-  "No — 42 leaves you 20-25 working years, and compounding still does real work over two decades. But the honest truth is you'll need to save more aggressively than someone who started at 25. Here's what catching up actually takes.";
+  "Starting retirement savings at 42 isn't too late: you have 20–25 years for compounding to work. Here's how much more you'll need to save to catch up.";
 
 export const metadata: Metadata = {
-  title: `${TITLE} | freecalcs.io`,
+  title: `${SEO_TITLE} | freecalcs.io`,
   description: DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: "FreeCalcs", type: "article" },

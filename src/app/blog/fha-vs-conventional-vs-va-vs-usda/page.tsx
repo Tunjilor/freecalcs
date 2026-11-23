@@ -8,7 +8,7 @@ import { tokens as t } from '@/lib/calculator/tokens';
 import FaqJsonLd from '@/components/FaqJsonLd';
 
 export const metadata: Metadata = {
-  title: 'FHA vs Conventional vs VA vs USDA: Which Loan is Right for You | freecalcs.io',
+  title: 'FHA vs Conventional vs VA vs USDA Loans | freecalcs.io',
   description: 'A clear comparison of the four main mortgage loan types. Find out which one you qualify for and which saves you the most money.',
   alternates: { canonical: 'https://www.freecalcs.io/blog/fha-vs-conventional-vs-va-vs-usda' },
   openGraph: { title: 'FHA vs Conventional vs VA vs USDA: Which Loan is Right for You', description: 'A clear comparison of the four main mortgage loan types. Find out which one you qualify for and which saves you the most money.', url: 'https://www.freecalcs.io/blog/fha-vs-conventional-vs-va-vs-usda', siteName: 'FreeCalcs', type: 'article' },

@@ -11,10 +11,12 @@ const PUBLISHED = '2026-06-17';
 const MODIFIED = '2026-06-19';
 
 const TITLE = 'Using My VA Loan Twice — and What Changed After My Disability Rating';
-const DESCRIPTION = 'Buying twice with the VA benefit: entitlement, $0 down, no monthly mortgage insurance, the funding fee waiver, and the Georgia disabled-veteran property tax exemption.';
+// Shorter <title> for search results; TITLE stays the on-page headline.
+const SEO_TITLE = "Using a VA Loan Twice: Entitlement & Disability";
+const DESCRIPTION = 'Buying twice with a VA loan: remaining entitlement, $0 down, no mortgage insurance, the funding fee waiver and Georgia\'s disabled-veteran tax exemption.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | freecalcs.io`,
+  title: `${SEO_TITLE} | freecalcs.io`,
   description: DESCRIPTION,
   keywords: ['VA loan second time', 'reuse VA loan', 'VA entitlement restoration', 'VA funding fee disabled veteran', 'Georgia disabled veteran property tax', 'VA loan no down payment'],
   authors: [{ name: 'Jamie' }],

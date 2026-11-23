@@ -9,7 +9,7 @@ import { ORGANIZATION } from "@/components/SiteJsonLd";
 const URL = "https://www.freecalcs.io/blog/how-big-should-emergency-fund-be";
 const TITLE = "How Big Should My Emergency Fund Actually Be?";
 const DESCRIPTION =
-  "\"Three to six months of expenses\" is a huge range and nearly useless without tailoring. The right size depends on your income stability, dependents, and — crucially — essential expenses, not your whole lifestyle.";
+  "Three to six months of expenses is a huge range. The right emergency fund depends on income stability, dependents and essential costs, not your full budget.";
 
 export const metadata: Metadata = {
   title: `${TITLE} | freecalcs.io`,

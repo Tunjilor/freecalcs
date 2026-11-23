@@ -17,7 +17,7 @@ export const savingsGoalDef: CalculatorDefinition<SavingsGoalInputs, SavingsGoal
   valueProp: "Find the monthly amount to save to hit a target by your deadline — with growth doing part of the work.",
   title: "Savings Goal Calculator | freecalcs.io",
   metaDescription:
-    "Free savings goal calculator: enter a target, timeframe, current savings, and return to find the monthly contribution needed to get there — or see your projected surplus if you're already on track.",
+    "Free savings goal calculator: enter a target, timeframe, current savings and return to find the monthly amount you need to save, or your projected surplus.",
   primaryKeyword: "Savings Goal Calculator",
   secondaryKeywords: ["how much to save per month", "savings target calculator", "save for a goal", "monthly savings needed"],
   intro:

@@ -22,7 +22,7 @@ export const amortizationDef: CalculatorDefinition<AmortizationInputs, Amortizat
   hub: "loans",
   h1: "Amortization Calculator",
   valueProp: "See your full amortization schedule: how every payment splits between principal and interest.",
-  title: "Amortization Calculator & Schedule (Yearly + Monthly) | freecalcs.io",
+  title: "Amortization Calculator & Schedule | freecalcs.io",
   metaDescription:
     "Free amortization calculator: your monthly payment and a full year-by-year amortization schedule showing principal, interest and balance, with extra payments.",
   primaryKeyword: "Amortization Calculator",

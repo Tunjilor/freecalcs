@@ -9,7 +9,7 @@ import { ORGANIZATION } from "@/components/SiteJsonLd";
 const URL = "https://www.freecalcs.io/blog/pay-off-low-rate-mortgage-early";
 const TITLE = "Should I Pay Off My 3% Mortgage Early?";
 const DESCRIPTION =
-  "A 3% mortgage is often worth keeping, not rushing to pay off. The real trade-off is a guaranteed ~3% and peace of mind versus a higher-but-uncertain return — with real numbers to help you judge your own case.";
+  "A 3% mortgage is often worth keeping. The trade-off is a guaranteed 3% and peace of mind versus higher but uncertain returns, with real numbers to compare.";
 
 export const metadata: Metadata = {
   title: `${TITLE} | freecalcs.io`,

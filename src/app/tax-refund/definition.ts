@@ -21,7 +21,7 @@ export const taxRefundDef: CalculatorDefinition<TaxRefundInputs, TaxRefundResult
   valueProp: "Estimate your federal refund or balance due from income, withholding, and credits.",
   title: "Tax Refund Estimator (2025 & 2026) | freecalcs.io",
   metaDescription:
-    "Free tax refund estimator for the 2025 & 2026 tax years. Enter income, withholding, pre-tax deductions, and children to estimate your federal refund or the amount you'll owe.",
+    "Free tax refund estimator for 2025 and 2026: enter income, withholding, deductions and children to estimate your federal refund or the amount you'll owe.",
   primaryKeyword: "Tax Refund Estimator",
   secondaryKeywords: ["tax refund calculator", "how big will my refund be", "federal refund estimate", "will I owe taxes"],
   intro:

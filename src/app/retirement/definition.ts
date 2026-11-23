@@ -21,7 +21,7 @@ export const retirementDef: CalculatorDefinition<RetirementInputs, RetirementRes
   valueProp: "Project your retirement balance, its real value after inflation, and whether you're on track.",
   title: "Retirement Calculator | freecalcs.io",
   metaDescription:
-    "Free retirement calculator: project your savings balance at retirement from your contributions, employer match, and expected return — plus its inflation-adjusted value and whether you're on track for your goal.",
+    "Free retirement calculator: project your savings at retirement from contributions, employer match and returns, in today's dollars, and see if you're on track.",
   primaryKeyword: "Retirement Calculator",
   secondaryKeywords: ["retirement savings calculator", "retirement projection", "am I on track for retirement", "nest egg calculator"],
   intro:

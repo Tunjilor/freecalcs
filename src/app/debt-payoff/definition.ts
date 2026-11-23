@@ -40,7 +40,7 @@ export const debtPayoffDef: CalculatorDefinition<DebtPayoffInputs, DebtPayoffRes
   valueProp: "Snowball vs avalanche: see which method clears your debts fastest and cheapest.",
   title: "Debt Payoff Calculator (Snowball vs Avalanche) | freecalcs.io",
   metaDescription:
-    "Free debt payoff calculator: compare the snowball and avalanche methods across all your debts. See your debt-free date, total interest, payoff order, and how an extra payment helps.",
+    "Free debt payoff calculator: compare snowball and avalanche methods across all your debts and see your debt-free date, total interest and payoff order.",
   primaryKeyword: "Debt Payoff Calculator",
   secondaryKeywords: ["debt snowball calculator", "debt avalanche", "debt free date", "credit card payoff"],
   intro:

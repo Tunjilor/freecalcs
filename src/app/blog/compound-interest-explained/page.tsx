@@ -5,10 +5,12 @@ import ArticleJsonLd from '@/components/ArticleJsonLd';
 import { ORGANIZATION } from '@/components/SiteJsonLd';
 const URL = 'https://www.freecalcs.io/blog/compound-interest-explained';
 const TITLE = 'Compound Interest Explained: Why Einstein Called It the 8th Wonder';
+// Shorter <title> for search results; TITLE stays the on-page headline.
+const SEO_TITLE = "Compound Interest Explained (with Examples)";
 const DESCRIPTION = 'Learn how compound interest works, why starting early matters, the Rule of 72, and how to calculate your future wealth.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | freecalcs.io`,
+  title: `${SEO_TITLE} | freecalcs.io`,
   description: DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'FreeCalcs', type: 'article' },

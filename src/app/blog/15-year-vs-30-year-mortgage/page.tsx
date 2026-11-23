@@ -8,11 +8,13 @@ import { ORGANIZATION } from "@/components/SiteJsonLd";
 
 const URL = "https://www.freecalcs.io/blog/15-year-vs-30-year-mortgage";
 const TITLE = "15-Year vs 30-Year Mortgage: Which Should You Actually Choose?";
+// Shorter <title> for search results; TITLE stays the on-page headline.
+const SEO_TITLE = "15-Year vs 30-Year Mortgage: Which to Choose?";
 const DESCRIPTION =
-  "The 15-year has a lower rate and far less total interest — but its higher payment is both its strength and its risk. And a 30-year paid like a 15 captures most of the savings while keeping your flexibility.";
+  "A 15-year mortgage has a lower rate and far less interest, but a much higher payment. Here's how it compares with a 30-year loan paid off early.";
 
 export const metadata: Metadata = {
-  title: `${TITLE} | freecalcs.io`,
+  title: `${SEO_TITLE} | freecalcs.io`,
   description: DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: "FreeCalcs", type: "article" },
