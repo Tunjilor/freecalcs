@@ -27,7 +27,7 @@ export type CdResults = {
 export function computeCd(v: CdInputs): CdResults {
   const P = Math.max(0, v.deposit);
   const apy = Math.max(0, v.apy) / 100;
-  const months = Math.max(1, Math.round(v.termMonths));
+  const months = Math.min(600, Math.max(1, Math.round(Number(v.termMonths) || 0))); // ≤ 50 years
   const t = months / 12;
   const end = P * Math.pow(1 + apy, t);
   const interest = end - P;

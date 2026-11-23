@@ -105,3 +105,9 @@ test("realReturn applies the Fisher relation", () => {
   approx(realReturn(0.07, 0.03), 0.038835, 0.0005);
   approx(realReturn(0.05, 0.05), 0, 0.0001); // equal -> zero real return
 });
+
+test("amortizeSchedule never exceeds 1,200 months", async () => {
+  const { amortizeSchedule, MAX_SCHEDULE_MONTHS } = await import("./finance.ts");
+  const r = amortizeSchedule(100000, 0, 99999999, 0.0001, 0);
+  assert.equal(r.schedule.length, MAX_SCHEDULE_MONTHS);
+});

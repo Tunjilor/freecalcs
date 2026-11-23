@@ -1,16 +1,17 @@
 "use client";
 import { useState } from "react";
 import { tokens as t } from "@/lib/calculator/tokens";
-import type { InputField as InputFieldSpec } from "@/lib/calculator/types";
+import type { InputField as InputFieldSpec, InputValue, RowValue } from "@/lib/calculator/types";
+import RowsInput from "./RowsInput";
 
 // Renders any InputField spec: currency (with $ mask + thousands separators),
-// percent, number, years/months, or a select. Value is always a number except
-// for selects, which carry string values. Emits the parsed value up.
+// percent, number, years/months, a select, a date (ISO "YYYY-MM-DD" string) or
+// a rows table (RowValue[], see RowsInput). Emits the parsed value up.
 
 type Props<Inputs> = {
   field: InputFieldSpec<Inputs>;
-  value: number | string;
-  onChange: (v: number | string) => void;
+  value: InputValue;
+  onChange: (v: InputValue) => void;
 };
 
 const labelStyle: React.CSSProperties = {
@@ -43,6 +44,29 @@ export default function InputField<Inputs>({ field, value, onChange }: Props<Inp
         : ""
       : String(value),
   );
+
+  if (field.type === "rows") {
+    return <RowsInput field={field} rows={Array.isArray(value) ? (value as RowValue[]) : []} onChange={onChange} />;
+  }
+
+  if (field.type === "date") {
+    return (
+      <div style={{ marginBottom: t.space.md }}>
+        <label style={labelStyle} htmlFor={field.name}>
+          {field.label}
+        </label>
+        <input
+          id={field.name}
+          className="fc-input"
+          type="date"
+          value={typeof value === "string" ? value : ""}
+          onChange={(e) => e.target.value && onChange(e.target.value)}
+          style={{ ...fieldBase, padding: "10px 14px" }}
+        />
+        {field.helpText && <p style={hintStyle}>{field.helpText}</p>}
+      </div>
+    );
+  }
 
   if (field.type === "select") {
     return (

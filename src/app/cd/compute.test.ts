@@ -31,3 +31,8 @@ test("edge: zero deposit / zero APY", () => {
   assert.equal(z.interestEarned, 0);
   assert.ok(z.realApy < 0);
 });
+
+test("extreme term is capped", () => {
+  const r = computeCd({ deposit: 1000, apy: 4, termMonths: 99999999, taxRate: 0, inflation: 0 });
+  assert.equal(r.rows[r.rows.length - 1].month, "Month 600");
+});

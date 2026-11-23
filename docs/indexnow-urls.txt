@@ -69,6 +69,12 @@ https://www.freecalcs.io/break-even
 https://www.freecalcs.io/pace
 https://www.freecalcs.io/ideal-weight
 https://www.freecalcs.io/water-intake
+https://www.freecalcs.io/date-calculator
+https://www.freecalcs.io/days-until
+https://www.freecalcs.io/pregnancy-due-date
+https://www.freecalcs.io/split-expenses
+https://www.freecalcs.io/gpa
+https://www.freecalcs.io/weighted-grade
 https://www.freecalcs.io/fuel-cost
 https://www.freecalcs.io/electricity-cost
 https://www.freecalcs.io/final-grade

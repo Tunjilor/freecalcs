@@ -1,5 +1,5 @@
 import { tokens as t } from "@/lib/calculator/tokens";
-import { money, money2, num } from "@/lib/calculator/format";
+import { money, money2, numFlex } from "@/lib/calculator/format";
 import type { BreakdownSpec, BreakdownColumn } from "@/lib/calculator/types";
 
 // Renders a BreakdownSpec as a real table (BUILD-STANDARD §1.6) — for
@@ -18,7 +18,7 @@ function fmt(v: number | string, format: BreakdownColumn["format"]): string {
     case "percent":
       return `${Number.isInteger(n) ? n : n.toFixed(2)}%`;
     case "number":
-      return num(n);
+      return numFlex(n);
     default:
       return String(v);
   }

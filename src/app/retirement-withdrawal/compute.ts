@@ -47,7 +47,7 @@ function simulate(start: number, w0: number, ret: number, inf: number, maxMonths
 export function computeRetirementWithdrawal(v: RetirementWithdrawalInputs): RetirementWithdrawalResults {
   const S = Math.max(0, v.savings);
   const w = Math.max(0, v.monthlyWithdrawal);
-  const horizon = Math.max(1, Math.round(v.yearsNeeded * 12));
+  const horizon = Math.min(1200, Math.max(1, Math.round((Number(v.yearsNeeded) || 0) * 12))); // ≤ 100 years
   const sim = w > 0 ? simulate(S, w, v.annualReturn, v.inflation, 1200) : { months: -1, bal: S, withdrawn: 0, yearly: [S] };
   const atH = simulate(S, w, v.annualReturn, v.inflation, horizon);
 

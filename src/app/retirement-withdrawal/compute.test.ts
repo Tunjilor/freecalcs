@@ -38,3 +38,10 @@ test("edge: zero savings", () => {
   assert.equal(r.withdrawalRatePct, 0);
   assert.equal(r.sustainableMonthly, 0);
 });
+
+test("extreme inputs return quickly instead of hanging", () => {
+  const t0 = Date.now();
+  const r = computeRetirementWithdrawal({ ...base, yearsNeeded: 99999999, savings: 99999999, monthlyWithdrawal: 0 });
+  assert.ok(Date.now() - t0 < 2000, "must finish fast");
+  assert.ok(Number.isFinite(r.sustainableMonthly));
+});

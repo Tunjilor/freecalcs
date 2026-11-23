@@ -83,7 +83,7 @@ export const finalGradeDef: CalculatorDefinition<FinalGradeInputs, FinalGradeRes
     },
   ],
 
-  related: [relatedLink("percentage"), relatedLink("age"), relatedLink("student-loan"), relatedLink("discount")],
+  related: [relatedLink("percentage"), relatedLink("age"), relatedLink("student-loan"), relatedLink("discount"), relatedLink("gpa"), relatedLink("weighted-grade")],
   relatedArticles: [],
 
   faqs: [

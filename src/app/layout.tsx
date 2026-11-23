@@ -99,11 +99,17 @@ const CALCS = [
   { name: 'Running Pace', href: '/pace', icon: '»' },
   { name: 'Ideal Weight', href: '/ideal-weight', icon: '◇' },
   { name: 'Water Intake', href: '/water-intake', icon: '≈' },
+  { name: 'Pregnancy Due Date', href: '/pregnancy-due-date', icon: '♡' },
   { name: 'Age Calculator', href: '/age', icon: 'A' },
+  { name: 'Date Calculator', href: '/date-calculator', icon: '▦' },
+  { name: 'Days Until', href: '/days-until', icon: '◷' },
   { name: 'Tip Calculator', href: '/tip', icon: 'P' },
+  { name: 'Split Expenses', href: '/split-expenses', icon: '⇄' },
   { name: 'Gas Cost', href: '/fuel-cost', icon: '⛽' },
   { name: 'Electricity Cost', href: '/electricity-cost', icon: '⚡' },
   { name: 'Final Grade', href: '/final-grade', icon: '✐' },
+  { name: 'GPA Calculator', href: '/gpa', icon: 'Ⓖ' },
+  { name: 'Weighted Grade', href: '/weighted-grade', icon: '⚖' },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
