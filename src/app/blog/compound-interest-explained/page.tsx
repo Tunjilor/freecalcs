@@ -92,7 +92,7 @@ export default function Article() {
 
           </div>
         </div>
-        <RelatedTools tools={[{href:'/investment-return',label:'Investment Return Calculator'},{href:'/cd',label:'CD Calculator'},{href:'/simple-interest',label:'Simple Interest Calculator'},{href:'/inflation',label:'Inflation Calculator'},{href:'/retirement',label:'Retirement Calculator'},{href:'/savings-goal',label:'Savings Goal Calculator'},{href:'/compound-interest',label:'Compound Interest Calculator'}]} />
+        <RelatedTools tools={[{href:'/investment-return',label:'Investment Return Calculator'},{href:'/cd',label:'CD Calculator'},{href:'/rule-of-72',label:'Rule of 72 Calculator'},{href:'/simple-interest',label:'Simple Interest Calculator'},{href:'/inflation',label:'Inflation Calculator'},{href:'/retirement',label:'Retirement Calculator'},{href:'/savings-goal',label:'Savings Goal Calculator'},{href:'/compound-interest',label:'Compound Interest Calculator'}]} />
         <div style={{display:'flex',gap:12,flexWrap:'wrap',marginTop:20}}>
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
           <a href="/compound-interest" style={{background:'#2563eb',color:'#fff',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,textDecoration:'none'}}>Compound Interest Calculator</a>

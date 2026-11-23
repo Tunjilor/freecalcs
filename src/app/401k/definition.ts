@@ -155,7 +155,7 @@ export const fourOhOneKDef: CalculatorDefinition<FourOhOneKInputs, FourOhOneKRes
     relatedLink("savings-goal"),
     relatedLink("compound-interest"),
     relatedLink("investment-return"),
-  ],
+    relatedLink("retirement-withdrawal"),],
 
   faqs: [
     { q: "What is the 401(k) contribution limit for 2026?", a: "For 2026 the employee elective-deferral limit is $24,500 (up from $23,500 in 2025). If you're 50 or older you can add an $8,000 catch-up, and under SECURE 2.0, those who turn 60–63 during the year get a higher $11,250 catch-up instead. These are IRS figures from Notice 2025-67; the employer match is separate and doesn't count toward this limit." },

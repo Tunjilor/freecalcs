@@ -127,7 +127,7 @@ export const macroDef: CalculatorDefinition<MacroInputs, MacroResults> = {
     },
   ],
 
-  related: [relatedLink("tdee"), relatedLink("calorie-deficit"), relatedLink("bmi"), relatedLink("body-fat")],
+  related: [relatedLink("tdee"), relatedLink("calorie-deficit"), relatedLink("bmi"), relatedLink("body-fat"), relatedLink("water-intake"), relatedLink("pace")],
   relatedArticles: [{ slug: "blog/what-is-tdee", label: "What is TDEE and how many calories should you eat?" }],
 
   faqs: [

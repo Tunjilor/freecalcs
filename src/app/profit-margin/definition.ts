@@ -95,7 +95,7 @@ export const profitMarginDef: CalculatorDefinition<ProfitMarginInputs, ProfitMar
     },
   ],
 
-  related: [relatedLink("discount"), relatedLink("sales-tax"), relatedLink("percentage"), relatedLink("self-employment-tax"), relatedLink("investment-return")],
+  related: [relatedLink("discount"), relatedLink("sales-tax"), relatedLink("percentage"), relatedLink("self-employment-tax"), relatedLink("investment-return"), relatedLink("break-even")],
   relatedArticles: [],
 
   faqs: [

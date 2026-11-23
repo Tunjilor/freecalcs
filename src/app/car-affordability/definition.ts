@@ -112,7 +112,7 @@ export const carAffordabilityDef: CalculatorDefinition<CarAffordabilityInputs, C
     },
   ],
 
-  related: [relatedLink("auto-loan"), relatedLink("car-lease"), relatedLink("auto-insurance-estimator"), relatedLink("debt-to-income"), relatedLink("budget")],
+  related: [relatedLink("auto-loan"), relatedLink("car-lease"), relatedLink("auto-insurance-estimator"), relatedLink("debt-to-income"), relatedLink("budget"), relatedLink("fuel-cost")],
   relatedArticles: [],
 
   faqs: [
