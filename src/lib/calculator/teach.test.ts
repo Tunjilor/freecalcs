@@ -35,8 +35,12 @@ test("every calculator definition sets teach.heading", async () => {
   for (const dir of readdirSync(app)) {
     const f = join(app, dir, "definition.ts");
     if (!existsSync(f)) continue;
-    const src = readFileSync(f, "utf8");
-    const m = /teach:\s*\{\s*heading:\s*"([^"]+)"/.exec(src);
+    let src = readFileSync(f, "utf8");
+    // Pages built by a shared factory (e.g. the "N days from today" pages)
+    // carry their teach block in the factory module.
+    const factory = /from "@\/lib\/calculator\/([\w/-]+\/definition)"/.exec(src);
+    if (factory) src = readFileSync(join(import.meta.dirname, `${factory[1]}.ts`), "utf8");
+    const m = /teach:\s*\{\s*heading:\s*["`]([^"`]+)["`]/.exec(src);
     if (!m || !m[1].endsWith("?") || m[1].length > 60) missing.push(dir);
   }
   assert.deepEqual(missing, []);

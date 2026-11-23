@@ -69,7 +69,7 @@ export const dateCalculatorDef: CalculatorDefinition<DateCalcInputs, DateCalcRes
     },
   ],
 
-  related: [relatedLink("days-until"), relatedLink("age"), relatedLink("pregnancy-due-date"), relatedLink("percentage")],
+  related: [relatedLink("days-until"), relatedLink("30-days-from-today"), relatedLink("90-days-from-today"), relatedLink("180-days-from-today"), relatedLink("age"), relatedLink("pregnancy-due-date")],
   relatedArticles: [],
 
   faqs: [

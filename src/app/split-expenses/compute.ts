@@ -11,6 +11,8 @@ export type SplitExpensesInputs = { people: RowValue[] };
 export type SplitExpensesResults = {
   total: number;
   share: number;
+  leftoverCents: number; // cents the person owed the most covers
+  roundingCoveredBy: string;
   personCount: number;
   paymentCount: number;
   balances: { person: string; paid: number; balance: number }[];
@@ -23,12 +25,20 @@ export function computeSplitExpenses(v: SplitExpensesInputs): SplitExpensesResul
     .map((r, i) => ({ person: String(r.person ?? "").trim() || `Person ${i + 1}`, paid: Math.max(0, Number(r.paid) || 0) }));
   const n = people.length;
   const total = people.reduce((a, p) => a + p.paid, 0);
-  const share = n > 0 ? total / n : 0;
   // Work in cents to avoid rounding drift.
-  const cents = people.map((p) => ({ person: p.person, bal: Math.round(p.paid * 100) - Math.round(share * 100) }));
-  // Fix any rounding remainder on the largest payer so balances sum to zero.
+  // Shares round DOWN to the cent; whoever is owed the most covers the leftover
+  // cent or two, so nobody who owes money pays more than an exact split.
+  const totalCents = people.reduce((a, p) => a + Math.round(p.paid * 100), 0);
+  const shareCents = n > 0 ? Math.floor(totalCents / n) : 0;
+  const cents = people.map((p) => ({ person: p.person, bal: Math.round(p.paid * 100) - shareCents }));
+  // Balances now sum to the leftover cents; take them off the largest creditor.
   const drift = cents.reduce((a, c) => a + c.bal, 0);
-  if (drift !== 0 && cents.length) cents.reduce((m, c) => (c.bal > m.bal ? c : m)).bal -= drift;
+  let roundingCoveredBy = "";
+  if (drift !== 0 && cents.length) {
+    const top = cents.reduce((m, c) => (c.bal > m.bal ? c : m));
+    top.bal -= drift;
+    roundingCoveredBy = top.person;
+  }
 
   const debtors = cents.filter((c) => c.bal < 0).map((c) => ({ ...c, bal: -c.bal })).sort((a, b) => b.bal - a.bal);
   const creditors = cents.filter((c) => c.bal > 0).map((c) => ({ ...c })).sort((a, b) => b.bal - a.bal);
@@ -44,7 +54,9 @@ export function computeSplitExpenses(v: SplitExpensesInputs): SplitExpensesResul
   }
   return {
     total: round2(total),
-    share: round2(share),
+    share: shareCents / 100,
+    leftoverCents: totalCents - shareCents * n,
+    roundingCoveredBy,
     personCount: n,
     paymentCount: settlements.length,
     // Balances use the same cent figures as the settlements, so they always agree.

@@ -41,3 +41,14 @@ test("odd cents: balances match the payments", () => {
   }
   assert.equal(Math.round(r.balances.reduce((a, b) => a + b.balance, 0) * 100), 0);
 });
+
+test("leftover cents are covered by the person owed the most", () => {
+  const r = computeSplitExpenses({ people: [
+    { person: "Alex", paid: 30.06 }, { person: "Sam", paid: 0 }, { person: "Jordan", paid: 0 }, { person: "Taylor", paid: 0 },
+  ] });
+  assert.equal(r.share, 7.51);
+  assert.equal(r.leftoverCents, 2);
+  assert.equal(r.roundingCoveredBy, "Alex");
+  assert.deepEqual(r.settlements.map((s) => s.amount), [7.51, 7.51, 7.51]);
+  assert.equal(r.balances[0].balance, 22.53);
+});

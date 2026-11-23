@@ -79,7 +79,7 @@ export const idealWeightDef: CalculatorDefinition<IdealWeightInputs, IdealWeight
     },
   ],
 
-  related: [relatedLink("bmi"), relatedLink("body-fat"), relatedLink("calorie-deficit"), relatedLink("tdee"), relatedLink("macro")],
+  related: [relatedLink("bmi"), relatedLink("height-calculator"), relatedLink("body-fat"), relatedLink("calorie-deficit"), relatedLink("tdee"), relatedLink("macro")],
   relatedArticles: [{ slug: "blog/bmi-what-your-number-means", label: "BMI: what your number means" }],
 
   faqs: [
