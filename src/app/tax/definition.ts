@@ -242,7 +242,7 @@ export const incomeTaxDef: CalculatorDefinition<IncomeTaxInputs, IncomeTaxResult
     relatedLink("self-employment-tax"),
     relatedLink("capital-gains-tax"),
     relatedLink("salary"),
-  ],
+    relatedLink("sales-tax"),],
   relatedArticles: [{ slug: "blog/2026-tax-brackets-guide", label: "2026 tax brackets explained" }],
 
   faqs: [

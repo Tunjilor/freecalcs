@@ -273,6 +273,7 @@ export default function Article() {
           heading="Continue planning"
           tools={[
             { href: "/rent-vs-buy", label: "Rent vs Buy Calculator" },
+            { href: "/rent-affordability", label: "Rent Affordability Calculator" },
             { href: "/home-affordability", label: "Home Affordability Calculator" },
             { href: "/mortgage", label: "Mortgage Calculator" },
             { href: "/down-payment", label: "Down Payment Calculator" },

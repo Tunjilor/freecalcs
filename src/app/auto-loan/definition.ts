@@ -130,7 +130,7 @@ export const autoLoanDef: CalculatorDefinition<AutoLoanInputs, AutoLoanResults> 
     relatedLink("loan-payoff"),
     relatedLink("debt-payoff"),
     relatedLink("amortization"),
-  ],
+    relatedLink("car-affordability"),],
 
   faqs: [
     { q: "How is a car loan payment calculated?", a: "Your payment uses the standard amortization formula on the amount financed (vehicle price + sales tax + fees − down payment − trade-in): P × [r(1+r)^n] / [(1+r)^n − 1], where r is the monthly APR and n is the number of months. Early payments are mostly interest; later ones are mostly principal." },

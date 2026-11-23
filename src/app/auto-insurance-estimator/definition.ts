@@ -135,7 +135,7 @@ export const autoInsuranceDef: CalculatorDefinition<AutoInsuranceInputs, AutoIns
     relatedLink("term-life"),
     relatedLink("salary"),
     relatedLink("savings-goal"),
-  ],
+    relatedLink("car-affordability"),],
 
   faqs: [
     { q: "How much does car insurance cost?", a: "It varies enormously — from a few hundred dollars a year for a minimum-liability policy on a clean older driver to several thousand for a young driver with full coverage on an expensive car. This tool gives a rough range from the broadest factors, but your real cost depends on details it doesn't collect. Only real quotes tell you your price." },
