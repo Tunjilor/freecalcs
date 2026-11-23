@@ -42,6 +42,10 @@ never be omitted; *(conditional)* render only when the definition supplies data.
 9. **Related calculators** *(required)* — 3–6 links, same hub first. See §5 internal linking.
 10. **Educational content** *(required)* — "What is this / Why it matters / What to do next"
     (the three-question teach block). 300–800 words of genuinely useful prose.
+    Set `teach.heading` to a natural first heading for the subject — "What is an FHA loan?",
+    "What are closing costs?", "What is inflation?" — rather than relying on the generic
+    "What is a/an <name>?" fallback, which reads badly for plural and uncountable subjects.
+    Sentence case, ends with "?", under ~60 characters.
 11. **FAQ** *(required)* — 4–8 Q&As, each emitted as `FAQPage` JSON-LD (§7).
 12. **Trust / method note** *(required)* — one line naming the formula or data source and its year,
     e.g. "Based on 2026 IRS federal brackets" or "Uses the standard amortization formula."
@@ -75,7 +79,8 @@ type CalculatorDefinition = {
 
   related: string[];            // slugs of related calculators (same hub first)
   faqs: { q: string; a: string }[];   // 4-8, human-written
-  teach: { whatIsIt: string; whyItMatters: string; whatToDoNext: string };
+  teach: { heading?: string;   // e.g. "What are closing costs?" — set it (§1.10)
+           whatIsIt: string; whyItMatters: string; whatToDoNext: string };
   method: { label: string; sourceUrl?: string; year?: number }; // trust note
   monetization?: MonetizationSlot[]; // §6
 };

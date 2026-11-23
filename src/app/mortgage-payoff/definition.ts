@@ -222,6 +222,7 @@ export const mortgagePayoffDef: CalculatorDefinition<MortgagePayoffInputs, Mortg
   ],
 
   teach: {
+    heading: "What is a mortgage payoff plan?",
     whatIsIt:
       "A mortgage payoff plan is any strategy that pays principal faster than the schedule requires: a fixed extra amount each month, one extra payment a year, or occasional lump sums. Because mortgage interest is charged on the remaining balance, every dollar of principal you pay early stops costing you interest for the rest of the loan.\n\nThis calculator works out your current balance from the original loan and how long you've been paying, so you don't need to dig up a statement. It then compares paying on schedule with your plan.",
     whyItMatters:

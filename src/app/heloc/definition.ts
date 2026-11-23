@@ -134,6 +134,7 @@ export const helocDef: CalculatorDefinition<HelocInputs, HelocResults> = {
   ],
 
   teach: {
+    heading: "What is a HELOC?",
     whatIsIt:
       "A HELOC is a revolving credit line secured by your home's equity — the difference between what it's worth and what you still owe. Instead of a lump sum, you get a limit you can draw from as needed, like a credit card backed by your house.\n\nIt works in two phases. During the draw period you borrow and repay flexibly, usually paying only interest. After that, the repayment period begins: the line closes to new draws and you pay off the balance with principal-and-interest payments.",
     whyItMatters:

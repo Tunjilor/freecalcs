@@ -163,6 +163,7 @@ export const debtPayoffDef: CalculatorDefinition<DebtPayoffInputs, DebtPayoffRes
   ],
 
   teach: {
+    heading: "What is a debt payoff plan?",
     whatIsIt:
       "A debt payoff plan is simply an ordering rule plus a fixed monthly budget. You pay the minimum on every debt so nothing goes delinquent, then direct every spare dollar at one target debt until it's gone — and when it is, you roll its payment onto the next target.\n\nThe two famous orderings are the avalanche (highest interest rate first) and the snowball (smallest balance first). Everything else — which debt clears when, how much interest you pay, your debt-free date — falls out of that one choice plus how much extra you can add.",
     whyItMatters:

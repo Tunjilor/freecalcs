@@ -191,6 +191,7 @@ export const amortizationDef: CalculatorDefinition<AmortizationInputs, Amortizat
   ],
 
   teach: {
+    heading: "What is amortization?",
     whatIsIt:
       "Amortization is the process of paying off a loan with equal, regular payments. Each payment first covers the interest that built up since the last one, and the rest reduces the principal.\n\nThe schedule above lays that out year by year and, for the first year, payment by payment.",
     whyItMatters:

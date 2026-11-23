@@ -255,6 +255,7 @@ export const incomeTaxDef: CalculatorDefinition<IncomeTaxInputs, IncomeTaxResult
   ],
 
   teach: {
+    heading: "What is federal income tax?",
     whatIsIt:
       "Federal income tax is what you owe the IRS on your taxable income — your total income minus adjustments (like 401(k) and HSA contributions) and either the standard deduction or your itemized deductions. The U.S. uses a progressive system: income is taxed in layers, each at its own rate, from 10% up to 37%.\n\nYour 'tax bracket' is just the rate on your highest layer. Credits like the Child Tax Credit then reduce the tax itself, dollar for dollar, after the brackets have done their work.",
     whyItMatters:

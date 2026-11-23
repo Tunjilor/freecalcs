@@ -153,6 +153,7 @@ export const budgetDef: CalculatorDefinition<BudgetInputs, BudgetResults> = {
   ],
 
   teach: {
+    heading: "What is the 50/30/20 budget?",
     whatIsIt:
       "The 50/30/20 budget divides take-home pay into three buckets instead of dozens of categories. Needs get 50%, wants get 30%, and savings and extra debt payments get 20%. You only have to track three numbers.",
     whyItMatters:

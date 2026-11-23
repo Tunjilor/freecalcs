@@ -156,6 +156,7 @@ export const refinanceDef: CalculatorDefinition<RefinanceInputs, RefinanceResult
   ],
 
   teach: {
+    heading: "What is a mortgage refinance?",
     whatIsIt:
       "Refinancing replaces your existing mortgage with a new one, ideally at a lower rate. You pay closing costs to do it, so the core question isn't just 'is the new rate lower' but 'do the monthly savings earn back those costs before I move or refinance again.'\n\nThat's the break-even point, and it's the number that decides whether a refinance is smart. Alongside it sits a subtler trade-off: a new loan resets the clock, so a lower payment can still mean more total interest if the term stretches out.",
     whyItMatters:

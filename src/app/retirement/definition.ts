@@ -141,6 +141,7 @@ export const retirementDef: CalculatorDefinition<RetirementInputs, RetirementRes
   ],
 
   teach: {
+    heading: "How does retirement saving grow?",
     whatIsIt:
       "A retirement calculator projects how your savings grow between now and the day you stop working. It compounds your current balance and ongoing contributions — yours and any employer match — at an assumed rate of return, then shows the result both in future dollars and, crucially, in today's dollars after inflation.\n\nThe gap between those two numbers is why retirement planning trips people up: a seven-figure future balance can have far less buying power than it appears once decades of inflation are accounted for.",
     whyItMatters:

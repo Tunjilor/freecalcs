@@ -147,6 +147,7 @@ export const autoInsuranceDef: CalculatorDefinition<AutoInsuranceInputs, AutoIns
   ],
 
   teach: {
+    heading: "What does this auto insurance estimate cover?",
     whatIsIt:
       "This is an auto insurance ballpark estimator. It takes the three broadest premium factors — your age band, the coverage level you want, and roughly how much your vehicle is worth — multiplies national-average base premiums by simple factors, and then widens the result into a low–high range.\n\nThe range is the point. Auto insurance is priced individually, and the factors that matter most — your driving record, exact location, credit, and claims history — aren't in this tool. So rather than a falsely precise number, it gives a band wide enough to acknowledge that uncertainty.",
     whyItMatters:

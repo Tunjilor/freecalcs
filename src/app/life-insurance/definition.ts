@@ -158,6 +158,7 @@ export const lifeInsuranceDef: CalculatorDefinition<LifeInsuranceInputs, LifeIns
   ],
 
   teach: {
+    heading: "How much life insurance do you need?",
     whatIsIt:
       "This is a life insurance NEEDS estimator. It doesn't sell or price a policy — it helps you answer 'how much coverage would my family need?' using the DIME method: Debt + Income replacement + Mortgage + Education.\n\nDIME is one of several accepted rules of thumb. Others include the 10× income rule (simple but crude) and the human-life-value method (which projects your lifetime earnings). None is a precise formula, and reasonable people using different methods arrive at different numbers — which is exactly why the result here is an estimate, not an answer.",
     whyItMatters:

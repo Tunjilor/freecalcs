@@ -196,6 +196,7 @@ export const closingCostsDef: CalculatorDefinition<ClosingCostsInputs, ClosingCo
   ],
 
   teach: {
+    heading: "What are closing costs?",
     whatIsIt:
       "Closing costs are the fees and upfront payments due when a home purchase is finalized, on top of the down payment. They fall into four groups: lender charges for making the loan, third-party services like the appraisal and title insurance, government recording and transfer taxes, and prepaids, which are future costs like insurance and interest collected in advance.",
     whyItMatters:

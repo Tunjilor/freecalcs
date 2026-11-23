@@ -161,6 +161,7 @@ export const debtConsolidationDef: CalculatorDefinition<DebtConsolidationInputs,
   ],
 
   teach: {
+    heading: "What is debt consolidation?",
     whatIsIt:
       "Debt consolidation replaces several debts with a single new loan — ideally at a lower interest rate — so you make one payment instead of many. This calculator compares two paths: keeping your current debts (paid at their minimums) versus rolling the total into one consolidation loan at a rate, term, and fee you specify.\n\nIt reports the new monthly payment, whether you'd save or add total interest once the fee is counted, and how long it takes for the monthly savings to recoup that fee.",
     whyItMatters:

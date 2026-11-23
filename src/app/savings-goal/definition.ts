@@ -133,6 +133,7 @@ export const savingsGoalDef: CalculatorDefinition<SavingsGoalInputs, SavingsGoal
   ],
 
   teach: {
+    heading: "How does a savings goal plan work?",
     whatIsIt:
       "A savings goal calculator works backward from a target to a monthly habit. Instead of asking 'how much will I have,' it asks 'how much must I save each month to end up with exactly this amount by this date' — accounting for both your existing savings and the growth your money earns along the way.\n\nThat reframing turns a vague intention ('save for a house') into a single, automatable number you can set and forget.",
     whyItMatters:

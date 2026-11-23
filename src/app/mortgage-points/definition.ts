@@ -179,6 +179,7 @@ export const mortgagePointsDef: CalculatorDefinition<MortgagePointsInputs, Mortg
   ],
 
   teach: {
+    heading: "What are mortgage points?",
     whatIsIt:
       "Mortgage points, or discount points, are prepaid interest. You pay a percentage of the loan at closing, and the lender gives you a lower rate for the life of the loan. One point equals 1% of the loan amount.",
     whyItMatters:

@@ -140,6 +140,7 @@ export const hourlyToSalaryDef: CalculatorDefinition<HourlyInputs, HourlyResults
   ],
 
   teach: {
+    heading: "How do you convert hourly pay to salary?",
     whatIsIt:
       "Hourly-to-salary conversion turns an hourly wage into the equivalent yearly, monthly and weekly pay. The standard full-time year is 2,080 hours: 40 hours a week for 52 weeks.",
     whyItMatters:

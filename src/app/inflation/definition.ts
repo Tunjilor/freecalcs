@@ -147,6 +147,7 @@ export const inflationDef: CalculatorDefinition<InflationInputs, InflationResult
   ],
 
   teach: {
+    heading: "What is inflation?",
     whatIsIt:
       "Inflation is the general rise in prices over time, which means each dollar buys a little less. In the U.S., it's measured mainly by the Consumer Price Index, which tracks the cost of a typical basket of goods and services for urban households.",
     whyItMatters:
