@@ -100,3 +100,16 @@ export function formatDate(d: Date | null, withWeekday = true): string {
 export function weekdayName(d: Date | null): string {
   return d ? DAYS[d.getUTCDay()] : "—";
 }
+
+/** Add N business days (Mon–Fri), skipping weekends. N may be negative. */
+export function addBusinessDays(d: Date, n: number): Date {
+  const step = n < 0 ? -1 : 1;
+  let left = Math.abs(Math.round(n));
+  let cur = d;
+  while (left > 0) {
+    cur = addDays(cur, step);
+    const wd = cur.getUTCDay();
+    if (wd !== 0 && wd !== 6) left--;
+  }
+  return cur;
+}

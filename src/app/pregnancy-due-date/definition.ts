@@ -99,7 +99,7 @@ export const pregnancyDueDateDef: CalculatorDefinition<PregnancyInputs, Pregnanc
     },
   ],
 
-  related: [relatedLink("days-until"), relatedLink("date-calculator"), relatedLink("water-intake"), relatedLink("budget")],
+  related: [relatedLink("ovulation-calculator"), relatedLink("days-until"), relatedLink("date-calculator"), relatedLink("water-intake"), relatedLink("budget")],
   relatedArticles: [],
 
   faqs: [

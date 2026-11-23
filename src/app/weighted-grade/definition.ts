@@ -17,15 +17,15 @@ const defaults: WeightedGradeInputs = {
 export const weightedGradeDef: CalculatorDefinition<WeightedGradeInputs, WeightedGradeResults> = {
   slug: "weighted-grade",
   hub: "everyday",
-  h1: "Weighted Grade Calculator",
-  valueProp: "Find your course grade from weighted categories like homework, quizzes and exams.",
-  title: "Weighted Grade Calculator | freecalcs.io",
+  h1: "Grade Calculator",
+  valueProp: "Find your class grade from your scores and how much each category counts.",
+  title: "Grade Calculator: Weighted Class Grade | freecalcs.io",
   metaDescription:
-    "Free weighted grade calculator: enter each category's weight and your score to get your overall course grade and letter, even before all grades are in.",
-  primaryKeyword: "Weighted Grade Calculator",
-  secondaryKeywords: ["grade calculator", "weighted average calculator", "class grade calculator", "course grade calculator"],
+    "Free grade calculator: enter your scores and each category's weight to get your class grade and letter, even before every assignment is graded.",
+  primaryKeyword: "Grade Calculator",
+  secondaryKeywords: ["weighted grade calculator", "class grade calculator", "course grade calculator", "what is my grade", "weighted average calculator"],
   intro:
-    "Most classes weight categories differently: homework might be 20% and the final 35%. This weighted grade calculator multiplies each score by its weight to find your overall grade and letter, and works mid-semester too, averaging only the categories you've completed so far.",
+    "Most classes weight categories differently: homework might be 20% and the final 35%. This grade calculator multiplies each score by its weight to find your overall grade and letter, and works mid-semester too, averaging only the categories you've completed so far.",
   commercialIntent: 1,
 
   defaults,
@@ -112,7 +112,7 @@ export const weightedGradeDef: CalculatorDefinition<WeightedGradeInputs, Weighte
   ],
 
   teach: {
-    heading: "How are weighted grades calculated?",
+    heading: "How is your class grade calculated?",
     whatIsIt:
       "A weighted grade gives each part of a course a set share of the final grade. A 35% final exam counts more than seven times as much as a 5% quiz category, regardless of how many points each is out of.",
     whyItMatters:

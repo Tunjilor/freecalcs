@@ -68,7 +68,7 @@ export const daysUntilDef: CalculatorDefinition<DaysUntilInputs, DaysUntilResult
     },
   ],
 
-  related: [relatedLink("date-calculator"), relatedLink("age"), relatedLink("pregnancy-due-date"), relatedLink("savings-goal")],
+  related: [relatedLink("date-calculator"), relatedLink("45-days-from-today"), relatedLink("60-days-from-today"), relatedLink("28-days-from-today"), relatedLink("age"), relatedLink("ovulation-calculator")],
   relatedArticles: [],
 
   faqs: [

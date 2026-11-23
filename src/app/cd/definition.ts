@@ -89,7 +89,7 @@ export const cdDef: CalculatorDefinition<CdInputs, CdResults> = {
     },
   ],
 
-  related: [relatedLink("compound-interest"), relatedLink("savings-goal"), relatedLink("emergency-fund"), relatedLink("inflation"), relatedLink("simple-interest"), relatedLink("future-value")],
+  related: [relatedLink("apy-calculator"), relatedLink("compound-interest"), relatedLink("savings-goal"), relatedLink("emergency-fund"), relatedLink("inflation"), relatedLink("simple-interest")],
   relatedArticles: [{ slug: "blog/compound-interest-explained", label: "Compound interest explained" }],
 
   faqs: [
