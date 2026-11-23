@@ -35,6 +35,12 @@ export function ratioPct(v: number, digits = 1): string {
 }
 
 /** Plain number with thousands separators, e.g. 1,234. */
+/** Up to `max` decimals, only when the value has them: 14 → "14", 14.4 → "14.4". */
+export function numFlex(v: number, max = 2): string {
+  if (!isFinite(v) || isNaN(v)) return "0";
+  return v.toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: max });
+}
+
 export function num(v: number, digits = 0): string {
   if (!isFinite(v) || isNaN(v)) return "0";
   return v.toLocaleString("en-US", {

@@ -13,12 +13,45 @@ export type HubId =
   | "health"
   | "everyday";
 
+/** One row of a `type: "rows"` input, keyed by column name. */
+export type RowValue = Record<string, number | string>;
+
+/** Any input's value: numbers, strings (selects, ISO dates) or a list of rows. */
+export type InputValue = number | string | RowValue[];
+
+/** A column in a `type: "rows"` input (e.g. Course / Credits / Grade). */
+export type RowColumn = {
+  name: string;
+  label: string;
+  type: "text" | "number" | "currency" | "percent" | "select";
+  options?: { label: string; value: string }[];
+  min?: number;
+  max?: number;
+  step?: number;
+  placeholder?: string;
+  /** Relative column width (flex-grow). Default 1. */
+  grow?: number;
+};
+
 /** A single user input. `name` must be a key of the calculator's Inputs type. */
 export type InputField<Inputs> = {
   name: keyof Inputs & string;
   label: string;
-  type: "currency" | "percent" | "number" | "years" | "months" | "select";
-  default: number | string;
+  /**
+   * "date": value is an ISO "YYYY-MM-DD" string. `default` may be a date or a
+   *   relative token — "today", "today+30", "today-56", "next:12-25" — resolved
+   *   against the visitor's date (see lib/calculator/dates.ts).
+   * "rows": value is RowValue[]; declare `columns`, and optionally
+   *   `minRows` / `maxRows` / `addLabel` / `newRow`.
+   */
+  type: "currency" | "percent" | "number" | "years" | "months" | "select" | "date" | "rows";
+  default: InputValue;
+  columns?: RowColumn[];
+  minRows?: number;
+  maxRows?: number;
+  addLabel?: string;
+  /** Values for a newly added row. Defaults to blank / zero per column type. */
+  newRow?: RowValue;
   min?: number;
   max?: number;
   step?: number;

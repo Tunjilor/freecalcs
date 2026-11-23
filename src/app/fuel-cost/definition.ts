@@ -78,7 +78,7 @@ export const fuelCostDef: CalculatorDefinition<FuelCostInputs, FuelCostResults> 
     },
   ],
 
-  related: [relatedLink("car-affordability"), relatedLink("auto-loan"), relatedLink("electricity-cost"), relatedLink("budget"), relatedLink("tip")],
+  related: [relatedLink("car-affordability"), relatedLink("auto-loan"), relatedLink("electricity-cost"), relatedLink("budget"), relatedLink("tip"), relatedLink("split-expenses")],
   relatedArticles: [],
 
   faqs: [

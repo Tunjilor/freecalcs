@@ -73,11 +73,17 @@ const calcs = [
   { slug: "pace", label: "Running Pace", icon: "🏃", desc: "Pace per mile/km & race times" },
   { slug: "ideal-weight", label: "Ideal Weight", icon: "🎚️", desc: "Ideal weight by height" },
   { slug: "water-intake", label: "Water Intake", icon: "💧", desc: "Daily water target" },
+  { slug: "pregnancy-due-date", label: "Pregnancy Due Date", icon: "🤰", desc: "Due date, week & milestones" },
   { slug: "age", label: "Age Calculator", icon: "🎂", desc: "Exact age, zodiac & milestones" },
+  { slug: "date-calculator", label: "Date Calculator", icon: "📅", desc: "Days between dates & add days" },
+  { slug: "days-until", label: "Days Until", icon: "⏰", desc: "Countdown to any date" },
   { slug: "tip", label: "Tip Calculator", icon: "🍽️", desc: "Split bills & service presets" },
+  { slug: "split-expenses", label: "Split Expenses", icon: "🤝", desc: "Who owes whom, fewest payments" },
   { slug: "fuel-cost", label: "Gas Cost", icon: "⛽", desc: "Trip & commute fuel cost" },
   { slug: "electricity-cost", label: "Electricity Cost", icon: "🔌", desc: "What appliances cost to run" },
   { slug: "final-grade", label: "Final Grade", icon: "📝", desc: "Score needed on your final" },
+  { slug: "gpa", label: "GPA Calculator", icon: "🎓", desc: "Semester & cumulative GPA" },
+  { slug: "weighted-grade", label: "Weighted Grade", icon: "🧮", desc: "Course grade from weighted categories" },
   { slug: "scientific", label: "Scientific Calculator", icon: "🔬", desc: "Trig, log, exponents & memory" },
 ];
 
@@ -104,7 +110,7 @@ const categories = [
   { label: "💰 Income & finance", start: 34, end: 44 },
   { label: "📈 Investing & retirement", start: 44, end: 56 },
   { label: "🛡️ Insurance", start: 56, end: 59 },
-  { label: "❤️ Health & everyday", start: 59, end: 73 },
+  { label: "❤️ Health & everyday", start: 59, end: 79 },
 ];
 
 const blogPosts = [

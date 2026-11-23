@@ -41,7 +41,9 @@ export type FourOhOneKResults = {
 };
 
 export function computeFourOhOneK(v: FourOhOneKInputs): FourOhOneKResults {
-  const years = Math.max(0, Math.round(v.retirementAge) - Math.round(v.currentAge));
+  // Ages are clamped to 0–120 so a typed extreme can't drive a 100-million-year loop.
+  const clampAge = (a: number) => Math.min(120, Math.max(0, Math.round(Number(a) || 0)));
+  const years = Math.max(0, clampAge(v.retirementAge) - clampAge(v.currentAge));
   const months = years * 12;
   const monthlyRate = v.annualReturn / 100 / 12;
   const salary = Math.max(0, v.salary);

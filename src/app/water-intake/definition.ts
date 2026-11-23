@@ -73,7 +73,7 @@ export const waterIntakeDef: CalculatorDefinition<WaterIntakeInputs, WaterIntake
     },
   ],
 
-  related: [relatedLink("calorie-deficit"), relatedLink("tdee"), relatedLink("macro"), relatedLink("pace"), relatedLink("bmi")],
+  related: [relatedLink("calorie-deficit"), relatedLink("tdee"), relatedLink("macro"), relatedLink("pace"), relatedLink("bmi"), relatedLink("pregnancy-due-date")],
   relatedArticles: [],
 
   faqs: [

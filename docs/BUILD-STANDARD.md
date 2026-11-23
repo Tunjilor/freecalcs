@@ -87,13 +87,31 @@ type CalculatorDefinition = {
 
 type InputField = {
   name: string; label: string;
-  type: "currency" | "percent" | "number" | "years" | "months" | "date" | "select";
-  default: number | string;
+  type: "currency" | "percent" | "number" | "years" | "months" | "date" | "select" | "rows";
+  default: number | string | RowValue[];
   min?: number; max?: number; step?: number;
   options?: { label: string; value: string }[];
   helpText?: string;
+  // rows only:
+  columns?: RowColumn[]; minRows?: number; maxRows?: number; addLabel?: string; newRow?: RowValue;
 };
+type RowValue = Record<string, number | string>;
+type RowColumn = { name: string; label: string; type: "text" | "number" | "currency" | "percent" | "select";
+                   options?: { label: string; value: string }[]; min?: number; max?: number; step?: number;
+                   placeholder?: string; grow?: number };
 ```
+
+**Date inputs.** Values are ISO strings (`"YYYY-MM-DD"`). `default` may be a fixed date or a relative
+token — `"today"`, `"today+30"`, `"today-56"`, `"next:12-25"` (next Dec 25 on or after today). The shell
+resolves tokens against the build date for prerendering (`FC_BUILD_DATE` in `next.config.ts`), then
+against the visitor's own date after hydration. Tokens also work in scenario `patch`es. Do date math with
+`src/lib/calculator/dates.ts` (UTC, so day counts never shift with time zones or DST). Because "today"
+must be an input, a calculator that needs it declares an "as of" / "from" date input defaulting to
+`"today"` — `compute` stays pure.
+
+**Rows inputs.** For repeating entries (GPA courses, people splitting a bill). The value is an array of
+rows keyed by column name; `<RowsInput>` renders add/remove controls within `minRows`–`maxRows`.
+`compute` must tolerate empty or partly filled rows (skip blank rows rather than producing NaN).
 
 The `compute` function is a **pure function** so it can be unit-tested in isolation and reused by
 articles that pre-fill the calculator (the article→calculator flywheel). No DOM, no fetch, no dates
@@ -108,6 +126,7 @@ propose it as a library addition rather than inlining a bespoke one.
 
 - `<CalculatorShell>` — the page template that lays out §1's anatomy from a `CalculatorDefinition`.
 - `<InputField>` — renders any `InputField` type with validation + formatting (currency masks etc).
+- `<RowsInput>` — the editable table behind `type: "rows"` inputs (used by `<InputField>`; not imported directly).
 - `<ResultCard variant="primary|secondary">` — the headline number card.
 - `<ExplainMyResult>` — runs the insight engine (§4) and renders sentences.
 - `<ResultChart>` — wraps Recharts; accepts a `ChartSpec`. Line, area, stacked-bar, donut.

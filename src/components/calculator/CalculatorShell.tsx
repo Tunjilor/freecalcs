@@ -1,8 +1,9 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { tokens as t } from "@/lib/calculator/tokens";
-import { money, money2, pct, num } from "@/lib/calculator/format";
-import type { CalculatorDefinition, ResultSpec } from "@/lib/calculator/types";
+import { money, money2, pct, numFlex } from "@/lib/calculator/format";
+import type { CalculatorDefinition, InputValue, ResultSpec } from "@/lib/calculator/types";
+import { localISODate, resolveDateToken } from "@/lib/calculator/dates";
 import InputField from "./InputField";
 import ResultCard from "./ResultCard";
 import ExplainMyResult from "./ExplainMyResult";
@@ -36,23 +37,54 @@ function formatValue<Results>(spec: ResultSpec<Results>, results: Results): stri
     case "percent":
       return pct(n);
     case "number":
-      return num(n);
+      return numFlex(n);
     default:
       return String(v);
   }
 }
 
-export default function CalculatorShell<Inputs extends Record<string, number | string>, Results>({
+// The build date, inlined into server and browser bundles by next.config.ts, so
+// the prerendered HTML and the first client render agree. After mount, date
+// tokens ("today", "today+30", "next:12-25") are re-resolved against the
+// visitor's own date.
+const BUILD_DATE = process.env.FC_BUILD_DATE ?? "2026-01-01";
+
+/** Resolve relative date tokens in any `type: "date"` fields of a values object. */
+function resolveDates<V extends Partial<Record<string, InputValue>>>(
+  inputs: { name: string; type: string }[],
+  values: V,
+  today: string,
+): V {
+  const out: Record<string, InputValue | undefined> = { ...values };
+  for (const f of inputs) {
+    const v = out[f.name];
+    if (f.type === "date" && typeof v === "string") out[f.name] = resolveDateToken(v, today);
+  }
+  return out as V;
+}
+
+// "Today" as an external store: the server and hydration render use the build
+// date (getServerSnapshot), then React re-renders with the visitor's own date.
+const subscribeToday = () => () => {};
+const getToday = () => localISODate(new Date());
+const getBuildToday = () => BUILD_DATE;
+
+export default function CalculatorShell<Inputs extends Record<string, InputValue>, Results>({
   def,
 }: {
   def: CalculatorDefinition<Inputs, Results>;
 }) {
-  const [values, setValues] = useState<Inputs>(def.defaults);
+  const today = useSyncExternalStore(subscribeToday, getToday, getBuildToday);
+  // State keeps date tokens ("today+30") as typed by the definition/scenarios;
+  // they're resolved at render, so they follow the visitor's date. Dates the
+  // user picks are already ISO strings and pass through unchanged.
+  const [raw, setRaw] = useState<Inputs>(def.defaults);
+  const values = useMemo(() => resolveDates(def.inputs, raw, today), [def, raw, today]);
   const results = useMemo(() => def.compute(values), [def, values]);
 
-  const setValue = (name: string, v: number | string) =>
-    setValues((prev) => ({ ...prev, [name]: v }) as Inputs);
-  const applyPatch = (patch: Partial<Inputs>) => setValues((prev) => ({ ...prev, ...patch }));
+  const setValue = (name: string, v: InputValue) =>
+    setRaw((prev) => ({ ...prev, [name]: v }) as Inputs);
+  const applyPatch = (patch: Partial<Inputs>) => setRaw((prev) => ({ ...prev, ...patch }));
 
   const primary = def.results.find((r) => r.variant === "primary");
   const secondary = def.results.filter((r) => r.variant === "secondary");

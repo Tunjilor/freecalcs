@@ -31,6 +31,9 @@ export function monthlyPayment(principal: number, monthlyRate: number, n: number
  * payment each month. Term-capped: extra payment only shortens it. This is the
  * shared version of the VA / auto / personal `amortize()` helper.
  */
+/** Longest schedule any calculator builds: 100 years. Guards against typed extremes. */
+export const MAX_SCHEDULE_MONTHS = 1200;
+
 export function amortizeSchedule(
   principal: number,
   monthlyRate: number,
@@ -38,6 +41,8 @@ export function amortizeSchedule(
   payment: number,
   extra = 0,
 ): { schedule: AmortRow[]; totalInterest: number; payoffMonths: number } {
+  // Hard cap: a typed "99999999" term must never loop for millions of months.
+  months = Math.min(Math.max(0, Math.round(months)), MAX_SCHEDULE_MONTHS);
   const schedule: AmortRow[] = [];
   let balance = principal;
   let cumulativeInterest = 0;
