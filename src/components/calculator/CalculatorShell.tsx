@@ -246,6 +246,11 @@ export default function CalculatorShell<Inputs extends Record<string, InputValue
 const scoped = `
   .fc-input:focus, .fc-select:focus { border-color: ${t.color.brand} !important; box-shadow: 0 0 0 3px rgba(37,99,235,0.1) !important; }
   .fc-select { width: 100%; padding: 11px 32px 11px 14px; border-radius: ${t.radius.md - 1}px; border: 1.5px solid ${t.color.line}; font-size: ${t.font.lead}px; font-weight: 600; color: ${t.color.ink}; background: ${t.color.surface}; outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; cursor: pointer; }
+  .fc-row-time::-webkit-calendar-picker-indicator { width: 11px; height: 11px; margin: 0 0 0 1px; padding: 0; opacity: 0.55; }
+  .fc-row-time::-webkit-datetime-edit-fields-wrapper { padding: 0; }
+  @media (max-width: 480px) { .fc-row-time::-webkit-calendar-picker-indicator { display: none; } }
+  .fc-row-num::-webkit-inner-spin-button, .fc-row-num::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .fc-row-num { -moz-appearance: textfield; }
   .fc-card { background: ${t.color.surface}; border-radius: ${t.radius.lg}px; border: 1px solid ${t.color.line}; padding: 22px; }
   .fc-section-title { font-size: 11px; font-weight: 700; color: ${t.color.faint}; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 16px; }
   .fc-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid ${t.color.lineSoft}; font-size: 14px; }

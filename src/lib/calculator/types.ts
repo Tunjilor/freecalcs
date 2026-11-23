@@ -23,7 +23,8 @@ export type InputValue = number | string | RowValue[];
 export type RowColumn = {
   name: string;
   label: string;
-  type: "text" | "number" | "currency" | "percent" | "select";
+  /** "time": a clock time, stored as a 24-hour "HH:MM" string ("" when blank). */
+  type: "text" | "number" | "currency" | "percent" | "select" | "time";
   options?: { label: string; value: string }[];
   min?: number;
   max?: number;
@@ -43,8 +44,12 @@ export type InputField<Inputs> = {
    *   against the visitor's date (see lib/calculator/dates.ts).
    * "rows": value is RowValue[]; declare `columns`, and optionally
    *   `minRows` / `maxRows` / `addLabel` / `newRow`.
+   * "time": a clock time, stored as a 24-hour "HH:MM" string ("" when blank).
+   *   Shown in the visitor's own 12/24-hour format by the browser.
+   * "fraction": free text holding a fraction, mixed number, whole number or
+   *   decimal ("3/4", "1 1/2", "-2", "0.5"); parse with lib/calculator/fractions.ts.
    */
-  type: "currency" | "percent" | "number" | "years" | "months" | "select" | "date" | "rows";
+  type: "currency" | "percent" | "number" | "years" | "months" | "select" | "date" | "rows" | "time" | "fraction";
   default: InputValue;
   columns?: RowColumn[];
   minRows?: number;

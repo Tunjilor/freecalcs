@@ -114,3 +114,7 @@ https://www.freecalcs.io/45-days-from-today
 https://www.freecalcs.io/60-days-from-today
 https://www.freecalcs.io/90-days-from-today
 https://www.freecalcs.io/180-days-from-today
+https://www.freecalcs.io/time-calculator
+https://www.freecalcs.io/hours-calculator
+https://www.freecalcs.io/time-card-calculator
+https://www.freecalcs.io/fraction-calculator
