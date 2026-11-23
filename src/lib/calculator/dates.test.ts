@@ -38,5 +38,9 @@ test("tokens", () => {
   assert.equal(resolveDateToken("next:12-25", "2026-11-23"), "2026-12-25");
   assert.equal(resolveDateToken("next:01-01", "2026-11-23"), "2027-01-01");
   assert.equal(resolveDateToken("next:11-23", "2026-11-23"), "2026-11-23");
+  // After the date has passed this year, it rolls to next year.
+  assert.equal(resolveDateToken("next:12-25", "2026-12-26"), "2027-12-25");
+  assert.equal(resolveDateToken("next:01-01", "2027-01-01"), "2027-01-01");
+  assert.equal(resolveDateToken("next:01-01", "2027-01-02"), "2028-01-01");
   assert.equal(resolveDateToken("2025-07-04", "2026-11-23"), "2025-07-04");
 });

@@ -60,6 +60,7 @@ export default function RowsInput<Inputs>({ field, rows, onChange }: Props<Input
           value={String(r[c.name] ?? "")} onChange={(e) => setCell(i, c.name, e.target.value)} style={cellBase} />
       );
     }
+    // A cleared number cell stays "" (not 0) so calculators can tell blank from zero.
     const v = r[c.name];
     return (
       <div style={{ position: "relative" }}>
@@ -67,7 +68,7 @@ export default function RowsInput<Inputs>({ field, rows, onChange }: Props<Input
         <input id={id} aria-label={label} className="fc-input" type="number" inputMode="decimal"
           min={c.min} max={c.max} step={c.step ?? (c.type === "currency" ? 0.01 : 1)} placeholder={c.placeholder}
           value={typeof v === "number" ? (v === 0 && c.placeholder ? "" : v) : ""}
-          onChange={(e) => setCell(i, c.name, parseFloat(e.target.value) || 0)}
+          onChange={(e) => setCell(i, c.name, e.target.value === "" ? "" : parseFloat(e.target.value) || 0)}
           style={{ ...cellBase, paddingLeft: c.type === "currency" ? 20 : 10, paddingRight: c.type === "percent" ? 22 : 10 }} />
         {c.type === "percent" && <span style={{ position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", color: t.color.faint, fontSize: 12, fontWeight: 700 }}>%</span>}
       </div>

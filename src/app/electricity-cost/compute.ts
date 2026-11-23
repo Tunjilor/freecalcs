@@ -15,6 +15,7 @@ export type ElectricityCostResults = {
   kwhPerMonth: number;
   kwhPerYear: number;
   costPerHour: number;
+  costPerHourLabel: string; // "$0.255": sub-dollar amounts keep a third decimal
   costPerDay: number;
   costPerMonth: number;
   costPerYear: number;
@@ -32,6 +33,10 @@ export function computeElectricityCost(v: ElectricityCostInputs): ElectricityCos
     kwhPerMonth: round2(kwhMonth),
     kwhPerYear: round2(kwhMonth * 12),
     costPerHour: Math.round(kw * price * 10000) / 10000,
+    costPerHourLabel: (() => {
+      const c = kw * price;
+      return c < 1 ? `$${c.toFixed(3)}` : `$${c.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    })(),
     costPerDay: round2(kwhDay * price),
     costPerMonth: round2(kwhMonth * price),
     costPerYear: round2(kwhMonth * 12 * price),

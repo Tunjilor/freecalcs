@@ -23,3 +23,14 @@ test("edge: zero weight", () => {
   assert.equal(r.possible, false);
   assert.equal(r.gradeIfPerfect, 85);
 });
+
+test("labels for out-of-range targets", () => {
+  const hi = computeFinalGrade({ currentGrade: 60, finalWeight: 20, desiredGrade: 90 });
+  assert.equal(hi.requiredLabel, "Not reachable");
+  const lo = computeFinalGrade({ currentGrade: 95, finalWeight: 20, desiredGrade: 70 });
+  assert.equal(lo.requiredLabel, "Already secured");
+  assert.equal(lo.rows[3].neededLabel, "Already secured");
+  const ok = computeFinalGrade({ currentGrade: 88, finalWeight: 25, desiredGrade: 90 });
+  assert.equal(ok.requiredLabel, "96.0%");
+  assert.equal(computeFinalGrade({ currentGrade: 88, finalWeight: 0, desiredGrade: 90 }).requiredLabel, "—");
+});

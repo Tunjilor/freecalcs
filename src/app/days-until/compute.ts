@@ -8,6 +8,7 @@ export type DaysUntilInputs = { targetDate: string; fromDate: string };
 export type DaysUntilResults = {
   valid: boolean;
   days: number; // negative if the date has passed
+  daysLabel: string; // "32", "Today", "12 ago" or "—"
   weeksLabel: string;
   monthsLabel: string;
   weekdays: number;
@@ -24,7 +25,7 @@ export function computeDaysUntil(v: DaysUntilInputs): DaysUntilResults {
   const t = parseISODate(v.targetDate);
   const f = parseISODate(v.fromDate);
   if (!t || !f)
-    return { valid: false, days: 0, weeksLabel: "—", monthsLabel: "—", weekdays: 0, hours: 0, targetLabel: formatDate(t), targetWeekday: weekdayName(t), isPast: false, isToday: false };
+    return { valid: false, days: 0, daysLabel: "—", weeksLabel: "—", monthsLabel: "—", weekdays: 0, hours: 0, targetLabel: formatDate(t), targetWeekday: weekdayName(t), isPast: false, isToday: false };
   const days = daysBetween(f, t);
   const abs = Math.abs(days);
   const md = monthsAndDays(f, t);
@@ -32,6 +33,7 @@ export function computeDaysUntil(v: DaysUntilInputs): DaysUntilResults {
   return {
     valid: true,
     days,
+    daysLabel: days === 0 ? "Today" : days > 0 ? abs.toLocaleString("en-US") : `${abs.toLocaleString("en-US")} ago`,
     weeksLabel: `${plural(Math.floor(abs / 7), "week")}, ${plural(abs % 7, "day")}`,
     monthsLabel: mParts.join(", "),
     weekdays: Math.abs(weekdaysBetween(f, t)),

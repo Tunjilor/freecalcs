@@ -21,6 +21,7 @@ export type GpaResults = {
   cumulativeGpa: number;
   totalCredits: number;
   hasPrior: boolean;
+  priorCapped: boolean; // previous GPA entered above 4.0 and treated as 4.0
   courseCount: number;
   rows: { course: string; credits: number; grade: string; points: number }[];
 };
@@ -51,6 +52,7 @@ export function computeGpa(v: GpaInputs): GpaResults {
     cumulativeGpa: cum,
     totalCredits: total,
     hasPrior,
+    priorCapped: hasPrior && v.priorGpa > 4.0,
     courseCount: rows.length,
     rows,
   };

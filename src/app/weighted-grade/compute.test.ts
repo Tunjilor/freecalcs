@@ -27,3 +27,24 @@ test("letters and empty", () => {
   assert.equal(letterFor(59.9), "F");
   assert.equal(computeWeightedGrade({ items: [] }).letter, "—");
 });
+
+test("blank score is ungraded, not zero", () => {
+  const r = computeWeightedGrade({
+    items: [
+      { item: "Homework", weight: 20, score: 95 },
+      { item: "Quizzes", weight: 20, score: 85 },
+      { item: "Midterm", weight: 25, score: 78 },
+      { item: "Final exam", weight: 35, score: "" },
+    ],
+  });
+  // (19 + 17 + 19.5) / 65 = 85.38
+  assert.equal(r.grade, 85.38);
+  assert.equal(r.totalWeight, 65);
+  assert.equal(r.remainingWeight, 35);
+  assert.equal(r.ungradedCount, 1);
+  assert.equal(r.letter, "B");
+  // An explicit 0 still counts.
+  const z = computeWeightedGrade({ items: [{ item: "A", weight: 50, score: 100 }, { item: "B", weight: 50, score: 0 }] });
+  assert.equal(z.grade, 50);
+  assert.equal(z.ungradedCount, 0);
+});

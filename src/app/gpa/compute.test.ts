@@ -34,3 +34,9 @@ test("blank and zero-credit rows are skipped", () => {
   assert.equal(e.termGpa, 0);
   assert.equal(e.termGpaLabel, "—");
 });
+
+test("previous GPA above 4.0 is capped and flagged", () => {
+  const r = computeGpa({ courses: [{ course: "A", credits: 3, grade: "A" }], priorGpa: 5, priorCredits: 30 });
+  assert.equal(r.priorCapped, true);
+  assert.equal(r.cumulativeGpaLabel, "4.00");
+});

@@ -18,3 +18,8 @@ test("edge: clamps hours and days", () => {
   assert.equal(r.kwhPerMonth, 74.4);
   assert.equal(computeElectricityCost({ watts: 0, hoursPerDay: 5, daysPerMonth: 30, centsPerKwh: 15 }).costPerYear, 0);
 });
+
+test("cost per hour label has a dollar sign", () => {
+  const r = computeElectricityCost({ watts: 1500, hoursPerDay: 1, daysPerMonth: 30, centsPerKwh: 17 });
+  assert.equal(r.costPerHourLabel, "$0.255");
+});

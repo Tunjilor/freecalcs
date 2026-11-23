@@ -36,3 +36,9 @@ test("huge add-days is clamped instead of crashing", () => {
   const r = computeDateCalc({ startDate: "2026-01-01", endDate: "2026-01-02", includeEnd: "no", addDaysN: 99999999 });
   assert.equal(r.addedDate, "2125-12-08");
 });
+
+test("cleared end date shows a dash", () => {
+  const r = computeDateCalc({ startDate: "2026-11-23", endDate: "", includeEnd: "no", addDaysN: 30 });
+  assert.equal(r.valid, false);
+  assert.equal(r.absDaysLabel, "—");
+});
