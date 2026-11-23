@@ -12,7 +12,7 @@ export const creditCardDef: CalculatorDefinition<CreditCardInputs, CreditCardRes
   valueProp: "See how fast a fixed payment clears your card — and how much the minimum-only trap really costs.",
   title: "Credit Card Payoff Calculator | freecalcs.io",
   metaDescription:
-    "Free credit card payoff calculator: enter your balance, APR, and monthly payment to see your payoff date, total interest, and how much a fixed payment saves versus paying only the minimum.",
+    "Free credit card payoff calculator: enter your balance, APR and payment to see your payoff date, total interest and how much a fixed payment saves.",
   primaryKeyword: "Credit Card Payoff Calculator",
   secondaryKeywords: ["credit card interest calculator", "minimum payment trap", "pay off credit card", "credit card payoff time"],
   intro:

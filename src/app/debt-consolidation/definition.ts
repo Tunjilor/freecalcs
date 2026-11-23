@@ -36,7 +36,7 @@ export const debtConsolidationDef: CalculatorDefinition<DebtConsolidationInputs,
   valueProp: "Compare keeping your current debts against one consolidation loan — payment, total interest, and break-even.",
   title: "Debt Consolidation Calculator | freecalcs.io",
   metaDescription:
-    "Free debt consolidation calculator: compare your current debts against a single consolidation loan. See the new payment, total interest saved or added, and whether the fee is worth it.",
+    "Free debt consolidation calculator: compare your debts with one consolidation loan. See the new payment, interest saved or added, and if the fee pays off.",
   primaryKeyword: "Debt Consolidation Calculator",
   secondaryKeywords: ["consolidate debt calculator", "debt consolidation loan", "should I consolidate my debt", "consolidation vs minimum payments"],
   intro:

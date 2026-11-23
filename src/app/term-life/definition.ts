@@ -20,7 +20,7 @@ export const termLifeDef: CalculatorDefinition<TermLifeInputs, TermLifeResults> 
   valueProp: "Estimate how much term coverage you need and how long the term should run — a planning estimate, not a quote.",
   title: "Term Life Insurance Calculator | freecalcs.io",
   metaDescription:
-    "Free term life insurance calculator: estimate your coverage need and the right term length to outlast your mortgage, income-earning years, and kids' dependence. A planning estimate, not a quote.",
+    "Free term life insurance calculator: estimate how much coverage you need and a term that outlasts your mortgage and your kids' dependence. Not a quote.",
   primaryKeyword: "Term Life Insurance Calculator",
   secondaryKeywords: ["term life coverage amount", "how long a term should be", "term length calculator", "term vs whole life"],
   intro:

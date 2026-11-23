@@ -18,7 +18,7 @@ export const rothDef: CalculatorDefinition<RothInputs, RothResults> = {
   valueProp: "See which account leaves you more after tax — the answer is all about your tax rate now vs later.",
   title: "Roth vs Traditional Calculator (IRA & 401k) | freecalcs.io",
   metaDescription:
-    "Free Roth vs Traditional calculator: compare the after-tax value of Roth and Traditional retirement contributions. See which wins based on your current vs retirement tax rate, and the break-even.",
+    "Free Roth vs Traditional calculator: compare the after-tax value of each based on your tax rate now and in retirement, and see the break-even rate.",
   primaryKeyword: "Roth vs Traditional Calculator",
   secondaryKeywords: ["roth vs traditional ira", "roth vs traditional 401k", "roth conversion break even", "pre-tax vs roth"],
   intro:

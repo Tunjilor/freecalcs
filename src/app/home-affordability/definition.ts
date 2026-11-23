@@ -22,7 +22,7 @@ export const affordabilityDef: CalculatorDefinition<AffordabilityInputs, Afforda
   valueProp: "See the max home price you can afford across conservative, moderate, and aggressive DTI.",
   title: "Home Affordability Calculator (How Much House) | freecalcs.io",
   metaDescription:
-    "Free home affordability calculator: from your income, debts, and down payment, see the maximum home price you can afford at conservative, moderate, and aggressive debt-to-income levels.",
+    "Free home affordability calculator: see the most house your income, debts and down payment support at conservative, moderate and aggressive DTI levels.",
   primaryKeyword: "Home Affordability Calculator",
   secondaryKeywords: ["how much house can I afford", "mortgage affordability", "DTI calculator", "max home price"],
   intro:

@@ -22,7 +22,7 @@ export const personalLoanDef: CalculatorDefinition<PersonalLoanInputs, PersonalL
   valueProp: "See your monthly payment, total interest, and the true APR once fees are counted.",
   title: "Personal Loan Calculator | freecalcs.io",
   metaDescription:
-    "Free personal loan calculator: monthly payment, total interest, and the true APR after the origination fee. Compare terms and see how extra payments cut your cost.",
+    "Free personal loan calculator: monthly payment, total interest and the true APR after origination fees. Compare terms and see what extra payments save.",
   primaryKeyword: "Personal Loan Calculator",
   secondaryKeywords: ["personal loan payment", "true APR calculator", "origination fee", "loan interest calculator"],
   intro:

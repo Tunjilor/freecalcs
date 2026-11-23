@@ -17,7 +17,7 @@ export const selfEmploymentDef: CalculatorDefinition<SelfEmploymentInputs, SelfE
   valueProp: "Estimate your SE tax (Social Security + Medicare) and the deductible half.",
   title: "Self-Employment Tax Calculator | freecalcs.io",
   metaDescription:
-    "Free self-employment tax calculator for the 2025 & 2026 tax years. Estimate your SE tax (Social Security + Medicare) on net profit, the deductible half, and your quarterly set-aside.",
+    "Free self-employment tax calculator for 2025 and 2026: estimate SE tax on net profit, the deductible half and how much to set aside each quarter.",
   primaryKeyword: "Self-Employment Tax Calculator",
   secondaryKeywords: ["SE tax", "self employment tax rate", "1099 tax calculator", "quarterly estimated taxes"],
   intro:

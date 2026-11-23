@@ -5,10 +5,12 @@ import ArticleJsonLd from '@/components/ArticleJsonLd';
 import { ORGANIZATION } from '@/components/SiteJsonLd';
 const URL = 'https://www.freecalcs.io/blog/how-to-calculate-mortgage-payment';
 const TITLE = 'How to Calculate Your Mortgage Payment Step by Step';
+// Shorter <title> for search results; TITLE stays the on-page headline.
+const SEO_TITLE = "How to Calculate a Mortgage Payment";
 const DESCRIPTION = 'Learn exactly how mortgage payments are calculated including principal, interest, PMI, taxes, and insurance with real examples.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | freecalcs.io`,
+  title: `${SEO_TITLE} | freecalcs.io`,
   description: DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: 'FreeCalcs', type: 'article' },

@@ -8,11 +8,13 @@ import { ORGANIZATION } from "@/components/SiteJsonLd";
 
 const URL = "https://www.freecalcs.io/blog/roth-vs-traditional-95k-income";
 const TITLE = "I Make $95,000 a Year. Should I Choose Roth or Traditional?";
+// Shorter <title> for search results; TITLE stays the on-page headline.
+const SEO_TITLE = "Roth or Traditional on a $95,000 Income?";
 const DESCRIPTION =
-  "At $95,000 you're in the 22% bracket, so the choice comes down to one question: will your tax rate in retirement be higher or lower than today? A plain-English walkthrough with real 2026 numbers.";
+  "At $95,000 you're in the 22% bracket, so Roth vs Traditional comes down to your tax rate in retirement. A plain-English walkthrough with 2026 numbers.";
 
 export const metadata: Metadata = {
-  title: `${TITLE} | freecalcs.io`,
+  title: `${SEO_TITLE} | freecalcs.io`,
   description: DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: "FreeCalcs", type: "article" },

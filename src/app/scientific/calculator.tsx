@@ -18,6 +18,9 @@ export default function ScientificCalculator() {
         e=e.replace(/sin\(/g,"Math.sin(").replace(/cos\(/g,"Math.cos(").replace(/tan\(/g,"Math.tan(");
         e=e.replace(/√\(/g,"Math.sqrt(").replace(/log\(/g,"Math.log10(").replace(/ln\(/g,"Math.log(");
         const result = Function('"use strict";return ('+e+')')();
+        // Division by zero (±Infinity) and invalid math like √(−1) (NaN) show
+        // "Error", matching the homepage calculator.
+        if(typeof result!=="number"||!Number.isFinite(result)){setDisplay("Error");setExpr("");setNewNum(true);return;}
         setDisplay(String(parseFloat(result.toFixed(10))));
         setExpr("");setNewNum(true);
       }catch{setDisplay("Error");setNewNum(true);}

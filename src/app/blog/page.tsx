@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Blog | Financial Tips, Tax Guides & Calculator Tutorials | freecalcs.io',
+  title: 'Blog: Money, Tax & Mortgage Guides | freecalcs.io',
   description: 'Expert guides on mortgages, taxes, BMI, investing, and everyday financial decisions. Free articles to help you understand and use our calculators.',
   alternates: { canonical: 'https://www.freecalcs.io/blog' },
   openGraph: { title: 'Blog | freecalcs.io', description: 'Financial tips, tax guides, health explainers, and calculator tutorials.', url: 'https://www.freecalcs.io/blog', siteName: 'FreeCalcs', type: 'website' },

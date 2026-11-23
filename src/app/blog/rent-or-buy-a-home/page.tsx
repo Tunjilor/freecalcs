@@ -9,7 +9,7 @@ import { ORGANIZATION } from "@/components/SiteJsonLd";
 const URL = "https://www.freecalcs.io/blog/rent-or-buy-a-home";
 const TITLE = "Rent or Buy a Home? The Honest Math.";
 const DESCRIPTION =
-  "\"Renting is throwing money away\" is the wrong starting point. Once you count closing costs, maintenance, and the down payment's opportunity cost, buying often loses short-term and wins mainly over the long haul.";
+  "Is renting throwing money away? Count closing costs, upkeep and the down payment's lost returns, and buying often loses short term but wins long term.";
 
 export const metadata: Metadata = {
   title: `${TITLE} | freecalcs.io`,

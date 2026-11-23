@@ -8,11 +8,13 @@ import { ORGANIZATION } from "@/components/SiteJsonLd";
 
 const URL = "https://www.freecalcs.io/blog/fha-vs-conventional-which-is-cheaper";
 const TITLE = "FHA vs Conventional: Which Loan Is Actually Cheaper for You?";
+// Shorter <title> for search results; TITLE stays the on-page headline.
+const SEO_TITLE = "FHA vs Conventional: Which Is Cheaper?";
 const DESCRIPTION =
-  "FHA is cheaper upfront and forgiving of fair credit. Conventional costs more at first but its mortgage insurance cancels — FHA's usually never does. Which wins depends on your score, your down payment, and how long you'll stay.";
+  "FHA costs less upfront and accepts fair credit, but its mortgage insurance rarely cancels. Which is cheaper depends on your score, down payment and plans.";
 
 export const metadata: Metadata = {
-  title: `${TITLE} | freecalcs.io`,
+  title: `${SEO_TITLE} | freecalcs.io`,
   description: DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: "FreeCalcs", type: "article" },

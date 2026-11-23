@@ -24,7 +24,7 @@ export const capitalGainsDef: CalculatorDefinition<CapitalGainsInputs, CapitalGa
   valueProp: "Short-term vs long-term: see the rate applied and what holding a year saves.",
   title: "Capital Gains Tax Calculator | freecalcs.io",
   metaDescription:
-    "Free capital gains tax calculator for 2025 & 2026. Enter proceeds, basis, and holding period to see your gain, the rate applied (0/15/20% long-term or ordinary short-term), and tax owed.",
+    "Free capital gains tax calculator for 2025 and 2026: enter proceeds, cost basis and holding period to see your gain, the rate that applies and tax owed.",
   primaryKeyword: "Capital Gains Tax Calculator",
   secondaryKeywords: ["long term capital gains tax", "short term capital gains", "capital gains rate 2026", "investment tax calculator"],
   intro:

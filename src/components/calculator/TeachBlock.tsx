@@ -1,4 +1,5 @@
 import { tokens as t } from "@/lib/calculator/tokens";
+import { article, teachSubject } from "@/lib/calculator/teach";
 
 // The three-question educational section (BUILD-STANDARD §1.10): What is it /
 // Why it matters / What to do next. Genuinely useful prose, server-rendered
@@ -10,8 +11,9 @@ type Props = {
 };
 
 export default function TeachBlock({ h1, teach }: Props) {
+  const subject = teachSubject(h1);
   const blocks: { heading: string; body: string }[] = [
-    { heading: `What is a ${h1.replace(/ Calculator$/, "")}?`, body: teach.whatIsIt },
+    { heading: `What is ${article(subject)} ${subject}?`, body: teach.whatIsIt },
     { heading: "Why it matters", body: teach.whyItMatters },
     { heading: "What to do next", body: teach.whatToDoNext },
   ];

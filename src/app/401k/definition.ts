@@ -23,7 +23,7 @@ export const fourOhOneKDef: CalculatorDefinition<FourOhOneKInputs, FourOhOneKRes
   valueProp: "Project your 401(k) balance, capture the full employer match, and stay within the annual limit.",
   title: "401(k) Calculator (Employer Match & Growth) | freecalcs.io",
   metaDescription:
-    "Free 401(k) calculator: project your balance at retirement, see how much employer match you're capturing (or leaving on the table), and check your contribution against the 2025/2026 IRS limit.",
+    "Free 401(k) calculator: project your balance at retirement, see how much employer match you're getting, and check contributions against 2025/2026 limits.",
   primaryKeyword: "401(k) Calculator",
   secondaryKeywords: ["401k employer match calculator", "401k contribution limit 2026", "401k growth", "employer match"],
   intro:

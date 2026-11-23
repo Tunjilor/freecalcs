@@ -21,7 +21,7 @@ export const autoLoanDef: CalculatorDefinition<AutoLoanInputs, AutoLoanResults> 
   valueProp: "Estimate your car payment with trade-in, sales tax, fees, and extra payments.",
   title: "Auto Loan Calculator | freecalcs.io",
   metaDescription:
-    "Free auto loan calculator: estimate your monthly car payment including down payment, trade-in, sales tax, and dealer fees. See total interest, total cost, and how extra payments help.",
+    "Free auto loan calculator: your monthly car payment with down payment, trade-in, sales tax and fees, plus total interest, total cost and extra payments.",
   primaryKeyword: "Auto Loan Calculator",
   secondaryKeywords: ["car payment calculator", "auto loan interest", "car loan APR", "vehicle finance calculator"],
   intro:

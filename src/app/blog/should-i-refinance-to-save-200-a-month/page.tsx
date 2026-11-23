@@ -9,7 +9,7 @@ import { ORGANIZATION } from "@/components/SiteJsonLd";
 const URL = "https://www.freecalcs.io/blog/should-i-refinance-to-save-200-a-month";
 const TITLE = "Should I Refinance to Save $200 a Month?";
 const DESCRIPTION =
-  "A lower monthly payment sounds like free money — but closing costs create a break-even, and a fresh 30-year term can quietly raise your total interest even at a lower rate. Here's how to tell if it's really a win.";
+  "Saving $200 a month by refinancing sounds great, but closing costs and a fresh 30-year term can erase it. How to check the break-even and total interest.";
 
 export const metadata: Metadata = {
   title: `${TITLE} | freecalcs.io`,

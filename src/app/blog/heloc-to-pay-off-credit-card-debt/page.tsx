@@ -9,7 +9,7 @@ import { ORGANIZATION } from "@/components/SiteJsonLd";
 const URL = "https://www.freecalcs.io/blog/heloc-to-pay-off-credit-card-debt";
 const TITLE = "Should I Use a HELOC to Pay Off Credit Card Debt?";
 const DESCRIPTION =
-  "Trading 22% card debt for a 9% HELOC can save thousands — or leave you owing on both. A plain-English walkthrough of the math, the risks, and how to tell which it'll be for you.";
+  "Trading 22% card debt for a 9% HELOC can save thousands or leave you owing on both. A plain-English look at the math, the risks and which applies to you.";
 
 export const metadata: Metadata = {
   title: `${TITLE} | freecalcs.io`,
