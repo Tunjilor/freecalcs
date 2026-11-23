@@ -5,22 +5,6 @@ import QuickCalculators from "@/components/home/QuickCalculators";
 import SiteJsonLd from "@/components/SiteJsonLd";
 import ItemListJsonLd from "@/components/ItemListJsonLd";
 
-// `layout.tsx` uses the bare `%s` title template, so this is the FULL <title>.
-// Title 52 chars, description 109, both inside the ~60 / ~155 limits.
-const TITLE = "Free Online Calculators – Tax, Mortgage, Loan & More";
-const DESCRIPTION =
-  "Free online calculators for tax, mortgage, loans, debt payoff and everyday math. Instant results, no sign-up.";
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: "https://www.freecalcs.io" },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: "https://www.freecalcs.io", siteName: "FreeCalcs", type: "website" },
-  // Restates the layout's card + site: a page-level `twitter` replaces the
-  // layout's object rather than merging with it.
-  twitter: { card: "summary_large_image", site: "@freecalcsio", title: TITLE, description: DESCRIPTION },
-};
-
 const calcs = [
   { slug: "mortgage", label: "Mortgage Calculator", icon: "🏠", desc: "Payments, amortization & loan comparison" },
   { slug: "qualify", label: "Mortgage Qualifier", icon: "✅", desc: "Check all 5 loan programs instantly" },
@@ -74,6 +58,22 @@ const calcs = [
   { slug: "tip", label: "Tip Calculator", icon: "🍽️", desc: "Split bills & service presets" },
   { slug: "scientific", label: "Scientific Calculator", icon: "🔬", desc: "Trig, log, exponents & memory" },
 ];
+
+// `layout.tsx` uses the bare `%s` title template, so this is the FULL <title>.
+// Title 58 chars, description ~131 (with a two-digit count), both inside the
+// ~60 / ~155 limits. The count comes from `calcs` so it never goes stale.
+const TITLE = "FreeCalcs – Free Mortgage, Tax, Money & Health Calculators";
+const DESCRIPTION = `${calcs.length} free calculators for mortgages, taxes, loans, budgeting, investing and health. Instant results, no sign-up, works on any device.`;
+
+export const metadata: Metadata = {
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: "https://www.freecalcs.io" },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: "https://www.freecalcs.io", siteName: "FreeCalcs", type: "website" },
+  // Restates the layout's card + site: a page-level `twitter` replaces the
+  // layout's object rather than merging with it.
+  twitter: { card: "summary_large_image", site: "@freecalcsio", title: TITLE, description: DESCRIPTION },
+};
 
 const categories = [
   { label: "🏠 Real estate & mortgage", start: 0, end: 16 },
@@ -178,17 +178,17 @@ export default function Home() {
         <section className="hero-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "48px 24px 0" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.1)", padding: "6px 16px", borderRadius: 24, marginBottom: 24 }}>
             <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#22c55e", animation: "pulse 2s infinite", flexShrink: 0 }}></span>
-            <span style={{ fontSize: 13, color: "#93c5fd", fontWeight: 500 }}>35 free calculators — no sign-up</span>
+            <span style={{ fontSize: 13, color: "#93c5fd", fontWeight: 500 }}>{calcs.length} free calculators — no sign-up</span>
           </div>
           <h1 style={{ fontSize: "clamp(34px, 5vw, 52px)", fontWeight: 800, lineHeight: 1.08, color: "#fff", marginBottom: 14, letterSpacing: "-0.02em" }}>
-            Free Online{" "}
+            FreeCalcs: Free Online{" "}
             <span style={{ background: "linear-gradient(90deg,#60a5fa,#34d399)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Calculators</span>
           </h1>
           <p style={{ fontSize: 17, color: "#93c5fd", maxWidth: 560, lineHeight: 1.65, marginBottom: 24 }}>
-            Tax, mortgage, loan and everyday math calculators with instant results. No sign-up, always free.
+            Mortgage, tax, budgeting, investing and health calculators with instant, private results. No sign-up, always free.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            {[["Mortgage","mortgage"],["Salary","salary"],["Tax 2026","tax"],["Compound Interest","compound-interest"]].map(([label, slug]) => (
+            {[["Mortgage","mortgage"],["Salary","salary"],["Tax 2026","tax"],["Amortization","amortization"]].map(([label, slug]) => (
               <Link key={slug} href={"/"+slug} style={{ background: "rgba(255,255,255,0.15)", color: "#fff", fontSize: 13, fontWeight: 600, padding: "10px 20px", borderRadius: 12, textDecoration: "none", transition: "background 0.15s", backdropFilter: "blur(8px)" }}>{label}</Link>
             ))}
           </div>
