@@ -123,6 +123,8 @@ export const retirementDef: CalculatorDefinition<RetirementInputs, RetirementRes
     relatedLink("roth-vs-traditional"),
     relatedLink("savings-goal"),
     relatedLink("compound-interest"),
+    relatedLink("inflation"),
+    relatedLink("investment-return"),
   ],
   relatedArticles: [
     { slug: "blog/compound-interest-explained", label: "Compound interest explained" },

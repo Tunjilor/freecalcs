@@ -150,6 +150,7 @@ export const debtPayoffDef: CalculatorDefinition<DebtPayoffInputs, DebtPayoffRes
     relatedLink("personal-loan"),
     relatedLink("loan"),
     relatedLink("auto-loan"),
+    relatedLink("budget"),
   ],
 
   faqs: [

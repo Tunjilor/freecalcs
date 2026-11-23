@@ -166,6 +166,7 @@ export const fifteenThirtyDef: CalculatorDefinition<FifteenThirtyInputs, Fifteen
     relatedLink("refinance"),
     relatedLink("home-affordability"),
     relatedLink("compound-interest"),
+    relatedLink("amortization"),
   ],
   relatedArticles: [
     { slug: "blog/15-year-vs-30-year-mortgage", label: "15-year vs 30-year mortgage: which is right for you?" },

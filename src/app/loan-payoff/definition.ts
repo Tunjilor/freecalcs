@@ -125,6 +125,7 @@ export const loanPayoffDef: CalculatorDefinition<LoanPayoffInputs, LoanPayoffRes
     relatedLink("auto-loan"),
     relatedLink("personal-loan"),
     relatedLink("mortgage-payoff"),
+    relatedLink("amortization"),
   ],
   relatedArticles: [
     { slug: "blog/pay-off-mortgage-early", label: "How to pay off your mortgage 10 years early" },
