@@ -277,6 +277,7 @@ export default function Article() {
           heading="Continue planning"
           tools={[
             { href: "/retirement", label: "Retirement Calculator" },
+            { href: "/retirement-withdrawal", label: "Retirement Withdrawal Calculator" },
             { href: "/401k", label: "401(k) Calculator" },
             { href: "/compound-interest", label: "Compound Interest Calculator" },
             { href: "/savings-goal", label: "Savings Goal Calculator" },

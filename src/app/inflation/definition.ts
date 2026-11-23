@@ -135,7 +135,7 @@ export const inflationDef: CalculatorDefinition<InflationInputs, InflationResult
     },
   ],
 
-  related: [relatedLink("compound-interest"), relatedLink("retirement"), relatedLink("savings-goal"), relatedLink("investment-return"), relatedLink("salary")],
+  related: [relatedLink("compound-interest"), relatedLink("retirement"), relatedLink("savings-goal"), relatedLink("investment-return"), relatedLink("salary"), relatedLink("rule-of-72")],
   relatedArticles: [{ slug: "blog/compound-interest-explained", label: "Compound interest explained" }],
 
   faqs: [

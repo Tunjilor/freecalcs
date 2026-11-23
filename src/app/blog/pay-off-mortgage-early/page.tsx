@@ -93,7 +93,7 @@ export default function Article() {
 
           </div>
         </div>
-        <RelatedTools tools={[{href:'/mortgage-payoff',label:'Mortgage Payoff Calculator'},{href:'/15-vs-30-year-mortgage',label:'15 vs 30 Year Mortgage'},{href:'/loan-payoff',label:'Loan Payoff Calculator'},{href:'/refinance',label:'Refinance Calculator'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
+        <RelatedTools tools={[{href:'/mortgage-payoff',label:'Mortgage Payoff Calculator'},{href:'/mortgage-recast',label:'Mortgage Recast Calculator'},{href:'/15-vs-30-year-mortgage',label:'15 vs 30 Year Mortgage'},{href:'/loan-payoff',label:'Loan Payoff Calculator'},{href:'/refinance',label:'Refinance Calculator'},{href:'/mortgage',label:'Mortgage Calculator'}]} />
         <div style={{display:'flex',gap:12,flexWrap:'wrap',marginTop:20}}>
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
         </div>

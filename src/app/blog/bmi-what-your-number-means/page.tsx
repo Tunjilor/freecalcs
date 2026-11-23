@@ -92,6 +92,7 @@ export default function Article() {
         <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
           <a href="/bmi" style={{background:'#2563eb',color:'#fff',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,textDecoration:'none'}}>BMI Calculator</a>
+          <a href="/ideal-weight" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>Ideal Weight Calculator</a>
         </div>
       </div>
     </div>

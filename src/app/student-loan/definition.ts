@@ -103,7 +103,7 @@ export const studentLoanDef: CalculatorDefinition<StudentLoanInputs, StudentLoan
     },
   ],
 
-  related: [relatedLink("loan-payoff"), relatedLink("debt-payoff"), relatedLink("debt-to-income"), relatedLink("personal-loan"), relatedLink("budget")],
+  related: [relatedLink("loan-payoff"), relatedLink("debt-payoff"), relatedLink("debt-to-income"), relatedLink("personal-loan"), relatedLink("budget"), relatedLink("final-grade")],
   relatedArticles: [],
 
   faqs: [

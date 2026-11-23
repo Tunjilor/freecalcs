@@ -78,7 +78,7 @@ export const simpleInterestDef: CalculatorDefinition<SimpleInterestInputs, Simpl
     },
   ],
 
-  related: [relatedLink("compound-interest"), relatedLink("cd"), relatedLink("loan"), relatedLink("investment-return"), relatedLink("percentage")],
+  related: [relatedLink("compound-interest"), relatedLink("cd"), relatedLink("loan"), relatedLink("investment-return"), relatedLink("percentage"), relatedLink("future-value")],
   relatedArticles: [{ slug: "blog/compound-interest-explained", label: "Compound interest explained" }],
 
   faqs: [

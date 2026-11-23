@@ -143,7 +143,7 @@ export const calorieDeficitDef: CalculatorDefinition<CalorieDeficitInputs, Calor
     },
   ],
 
-  related: [relatedLink("tdee"), relatedLink("bmi"), relatedLink("body-fat"), relatedLink("age"), relatedLink("macro")],
+  related: [relatedLink("tdee"), relatedLink("bmi"), relatedLink("body-fat"), relatedLink("age"), relatedLink("macro"), relatedLink("ideal-weight")],
   relatedArticles: [],
 
   faqs: [

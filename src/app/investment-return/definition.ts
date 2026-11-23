@@ -101,7 +101,7 @@ export const investmentReturnDef: CalculatorDefinition<InvestmentReturnInputs, I
     },
   ],
 
-  related: [relatedLink("compound-interest"), relatedLink("inflation"), relatedLink("retirement"), relatedLink("401k"), relatedLink("capital-gains-tax")],
+  related: [relatedLink("compound-interest"), relatedLink("inflation"), relatedLink("retirement"), relatedLink("401k"), relatedLink("capital-gains-tax"), relatedLink("rule-of-72")],
   relatedArticles: [{ slug: "blog/compound-interest-explained", label: "Compound interest explained" }],
 
   faqs: [
