@@ -140,7 +140,7 @@ export const personalLoanDef: CalculatorDefinition<PersonalLoanInputs, PersonalL
     relatedLink("debt-payoff"),
     relatedLink("loan-payoff"),
     relatedLink("amortization"),
-  ],
+    relatedLink("student-loan"),],
 
   faqs: [
     { q: "What is an origination fee and how does it work?", a: "An origination fee is a one-time charge (commonly 1–8% of the loan) that most personal-loan lenders deduct from the money you receive. If you borrow $20,000 with a 5% fee, $1,000 is taken off the top — you get $19,000 but still repay $20,000 plus interest. That's why it raises your true APR." },

@@ -93,6 +93,7 @@ export default function Article() {
           <a href="/blog" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>← All Articles</a>
           <a href="/tdee" style={{background:'#2563eb',color:'#fff',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,textDecoration:'none'}}>TDEE Calculator</a>
           <a href="/calorie-deficit" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>Calorie Deficit Calculator</a>
+          <a href="/macro" style={{background:'#fff',color:'#2563eb',fontSize:13,fontWeight:600,padding:'10px 20px',borderRadius:10,border:'1px solid #bfdbfe',textDecoration:'none'}}>Macro Calculator</a>
         </div>
       </div>
     </div>

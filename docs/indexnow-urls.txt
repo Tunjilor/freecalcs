@@ -50,6 +50,16 @@ https://www.freecalcs.io/investment-return
 https://www.freecalcs.io/net-worth
 https://www.freecalcs.io/calorie-deficit
 https://www.freecalcs.io/body-fat
+https://www.freecalcs.io/rent-affordability
+https://www.freecalcs.io/car-affordability
+https://www.freecalcs.io/car-lease
+https://www.freecalcs.io/student-loan
+https://www.freecalcs.io/sales-tax
+https://www.freecalcs.io/discount
+https://www.freecalcs.io/profit-margin
+https://www.freecalcs.io/cd
+https://www.freecalcs.io/simple-interest
+https://www.freecalcs.io/macro
 https://www.freecalcs.io/blog/15-year-vs-30-year-mortgage
 https://www.freecalcs.io/blog/starting-retirement-savings-at-42
 https://www.freecalcs.io/blog/rent-or-buy-a-home

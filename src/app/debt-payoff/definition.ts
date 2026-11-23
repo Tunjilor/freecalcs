@@ -151,7 +151,7 @@ export const debtPayoffDef: CalculatorDefinition<DebtPayoffInputs, DebtPayoffRes
     relatedLink("loan"),
     relatedLink("auto-loan"),
     relatedLink("budget"),
-  ],
+    relatedLink("student-loan"),],
 
   faqs: [
     { q: "What's the difference between the debt snowball and debt avalanche?", a: "Both pay minimums on every debt and throw all extra money at one target. The avalanche targets the highest-APR debt first, minimizing total interest. The snowball targets the smallest balance first, giving you a quick, motivating win. Avalanche is usually cheaper; snowball is often easier to stick with." },

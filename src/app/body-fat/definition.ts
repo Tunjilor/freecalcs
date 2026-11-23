@@ -91,7 +91,7 @@ export const bodyFatDef: CalculatorDefinition<BodyFatInputs, BodyFatResults> = {
     },
   ],
 
-  related: [relatedLink("bmi"), relatedLink("tdee"), relatedLink("calorie-deficit"), relatedLink("age")],
+  related: [relatedLink("bmi"), relatedLink("tdee"), relatedLink("calorie-deficit"), relatedLink("age"), relatedLink("macro")],
   relatedArticles: [],
 
   faqs: [
