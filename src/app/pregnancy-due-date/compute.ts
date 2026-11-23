@@ -21,6 +21,7 @@ export type PregnancyResults = {
   pctComplete: number;
   notPregnantYet: boolean; // as-of before LMP
   pastDue: boolean;
+  implausible: boolean; // beyond 42w6d: almost certainly a wrong date
   milestones: { milestone: string; week: string; date: string }[];
 };
 
@@ -38,7 +39,7 @@ export function computePregnancy(v: PregnancyInputs): PregnancyResults {
   const lmp = parseISODate(v.lmpDate);
   const asOf = parseISODate(v.asOfDate);
   const cycle = Math.min(45, Math.max(20, Math.round(Number(v.cycleLength) || 28)));
-  const empty = { valid: false, dueDate: "", dueLabel: "—", conceptionLabel: "—", weeks: 0, days: 0, gestationLabel: "—", trimester: "—", daysToGo: 0, pctComplete: 0, notPregnantYet: false, pastDue: false, milestones: [] };
+  const empty = { valid: false, dueDate: "", dueLabel: "—", conceptionLabel: "—", weeks: 0, days: 0, gestationLabel: "—", trimester: "—", daysToGo: 0, pctComplete: 0, notPregnantYet: false, pastDue: false, implausible: false, milestones: [] };
   if (!lmp || !asOf) return empty;
   const adj = cycle - 28;
   const start = addDays(lmp, adj); // adjusted LMP
@@ -46,7 +47,7 @@ export function computePregnancy(v: PregnancyInputs): PregnancyResults {
   const ga = daysBetween(start, asOf);
   const w = Math.floor(Math.max(0, ga) / 7);
   const d = Math.max(0, ga) % 7;
-  const trimester = ga < 0 ? "—" : ga < 14 * 7 ? "First" : ga < 28 * 7 ? "Second" : "Third";
+  const trimester = ga < 0 || ga > 42 * 7 + 6 ? "—" : ga < 14 * 7 ? "First" : ga < 28 * 7 ? "Second" : "Third";
   return {
     valid: true,
     dueDate: toISODate(due),
@@ -54,12 +55,13 @@ export function computePregnancy(v: PregnancyInputs): PregnancyResults {
     conceptionLabel: formatDate(addDays(lmp, cycle - 14), false),
     weeks: w,
     days: d,
-    gestationLabel: ga < 0 ? "—" : `${w} week${w === 1 ? "" : "s"}, ${d} day${d === 1 ? "" : "s"}`,
+    gestationLabel: ga < 0 || ga > 42 * 7 + 6 ? "—" : `${w} week${w === 1 ? "" : "s"}, ${d} day${d === 1 ? "" : "s"}`,
     trimester,
-    daysToGo: daysBetween(asOf, due),
+    daysToGo: Math.max(0, daysBetween(asOf, due)),
     pctComplete: Math.min(100, Math.max(0, Math.round((ga / 280) * 1000) / 10)),
     notPregnantYet: ga < 0,
     pastDue: ga > 280,
+    implausible: ga > 42 * 7 + 6,
     milestones: MILESTONES.map(([m, n]) => ({ milestone: m, week: `${Math.floor(n / 7)}w ${n % 7}d`, date: formatDate(addDays(start, n), false) })),
   };
 }

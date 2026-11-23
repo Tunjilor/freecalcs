@@ -22,3 +22,10 @@ test("past and today", () => {
 test("invalid", () => {
   assert.equal(computeDaysUntil({ targetDate: "", fromDate: "2026-11-23" }).valid, false);
 });
+
+test("labels: today, past, cleared", () => {
+  assert.equal(computeDaysUntil({ targetDate: "2026-12-25", fromDate: "2026-11-23" }).daysLabel, "32");
+  assert.equal(computeDaysUntil({ targetDate: "2026-11-23", fromDate: "2026-11-23" }).daysLabel, "Today");
+  assert.equal(computeDaysUntil({ targetDate: "2026-11-13", fromDate: "2026-11-23" }).daysLabel, "10 ago");
+  assert.equal(computeDaysUntil({ targetDate: "", fromDate: "2026-11-23" }).daysLabel, "—");
+});

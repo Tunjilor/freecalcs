@@ -17,6 +17,7 @@ export type DateCalcResults = {
   valid: boolean;
   days: number; // signed, includes end day if chosen
   absDays: number;
+  absDaysLabel: string; // "90" or "—"
   weeksLabel: string; // "12 weeks, 3 days"
   ymdLabel: string; // "1 year, 2 months, 5 days"
   weekdays: number; // Mon–Fri
@@ -38,7 +39,7 @@ export function computeDateCalc(v: DateCalcInputs): DateCalcResults {
   const addN = Math.min(36500, Math.max(-36500, Math.round(Number(v.addDaysN) || 0)));
   const add = a ? addDays(a, addN) : null;
   if (!a || !b) {
-    return { valid: false, days: 0, absDays: 0, weeksLabel: "—", ymdLabel: "—", weekdays: 0, weekendDays: 0,
+    return { valid: false, days: 0, absDays: 0, absDaysLabel: "—", weeksLabel: "—", ymdLabel: "—", weekdays: 0, weekendDays: 0,
       startLabel: formatDate(a), endLabel: formatDate(b), addedDate: add ? toISODate(add) : "", addedLabel: formatDate(add), daysAdded: addN, endBeforeStart: false };
   }
   const inc = v.includeEnd === "yes" ? 1 : 0;
@@ -53,6 +54,7 @@ export function computeDateCalc(v: DateCalcInputs): DateCalcResults {
     valid: true,
     days: sign * absDays,
     absDays,
+    absDaysLabel: absDays.toLocaleString("en-US"),
     weeksLabel: `${plural(Math.floor(absDays / 7), "week")}, ${plural(absDays % 7, "day")}`,
     ymdLabel: parts.join(", "),
     weekdays: wd,

@@ -83,9 +83,15 @@ export const splitExpensesDef: CalculatorDefinition<SplitExpensesInputs, SplitEx
       priority: 95,
       when: (r) => r.total > 0 && !r.allEven,
       say: (r) =>
-        `The total is ${money2(r.total)}, so each of the ${r.personCount} people owes ${money2(r.share)}. ${r.paymentCount} payment${r.paymentCount === 1 ? "" : "s"} settle everyone up: ${r.settlements
+        `The total is ${money2(r.total)}, so each of the ${r.personCount} people owes ${money2(r.share)}. ${r.paymentCount} payment${r.paymentCount === 1 ? " settles" : "s settle"} everyone up: ${r.settlements
           .map((s) => `${s.from} pays ${s.to} ${money2(s.amount)}`)
           .join("; ")}.`,
+    },
+    {
+      id: "cents",
+      priority: 55,
+      when: (r) => r.total > 0 && Math.round(r.total * 100) % r.personCount !== 0,
+      say: () => `The total doesn't divide evenly to the cent, so payments are rounded and one person's share may differ from the others by a cent or two.`,
     },
     { id: "even", priority: 95, tone: "success", when: (r) => r.total > 0 && r.allEven, say: () => `Everyone paid exactly their share, so nobody owes anything.` },
     { id: "empty", priority: 95, when: (r) => r.total === 0, say: () => `Enter what each person paid to see the split.` },

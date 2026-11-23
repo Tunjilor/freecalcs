@@ -47,7 +47,8 @@ export function computeSplitExpenses(v: SplitExpensesInputs): SplitExpensesResul
     share: round2(share),
     personCount: n,
     paymentCount: settlements.length,
-    balances: people.map((p) => ({ person: p.person, paid: round2(p.paid), balance: round2(p.paid - share) })),
+    // Balances use the same cent figures as the settlements, so they always agree.
+    balances: people.map((p, k) => ({ person: p.person, paid: round2(p.paid), balance: cents[k].bal / 100 })),
     settlements,
     allEven: settlements.length === 0,
   };

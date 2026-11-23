@@ -31,7 +31,7 @@ export const finalGradeDef: CalculatorDefinition<FinalGradeInputs, FinalGradeRes
   compute: computeFinalGrade,
 
   results: [
-    { key: "requiredScore", label: "Score needed on the final", format: "percent", variant: "primary", hint: "Out of 100%." },
+    { key: "requiredLabel", label: "Score needed on the final", format: "text", variant: "primary", hint: "Out of 100%." },
     { key: "gradeIfPerfect", label: "Course grade with 100% on the final", format: "percent", variant: "secondary" },
     { key: "gradeIfZero", label: "Course grade if you skip the final", format: "percent", variant: "secondary" },
   ],
@@ -41,10 +41,10 @@ export const finalGradeDef: CalculatorDefinition<FinalGradeInputs, FinalGradeRes
       title: "Score needed for each letter grade",
       columns: [
         { key: "target", label: "Course grade", format: "text", align: "left" },
-        { key: "needed", label: "Final exam score needed", format: "percent", align: "right" },
+        { key: "neededLabel", label: "Final exam score needed", format: "text", align: "right" },
       ],
       rows: (r) => r.rows,
-      note: "Scores above 100% mean that grade is out of reach; 0% or below means you've already secured it.",
+      note: "\"Not reachable\" means even 100% on the final falls short; \"Already secured\" means you'd keep that grade with a 0.",
     },
   ],
 

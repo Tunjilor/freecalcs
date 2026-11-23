@@ -68,7 +68,8 @@ export const idealWeightDef: CalculatorDefinition<IdealWeightInputs, IdealWeight
       priority: 90,
       tone: "success",
       when: (r) => r.inHealthyRange,
-      say: (r) => `Your current weight puts your BMI at ${num(r.currentBmi, 1)}, inside the healthy range.`,
+      // Show two decimals near 25 so 24.96 doesn't read as "25.0, inside the range".
+      say: (r) => `Your current weight puts your BMI at ${num(r.currentBmi, r.currentBmi >= 24.95 ? 2 : 1)}, inside the healthy range.`,
     },
     {
       id: "range-note",

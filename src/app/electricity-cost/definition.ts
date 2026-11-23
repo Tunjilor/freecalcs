@@ -35,7 +35,7 @@ export const electricityCostDef: CalculatorDefinition<ElectricityCostInputs, Ele
     { key: "costPerMonth", label: "Cost per month", format: "currency2", variant: "primary", hint: "At your usage and rate." },
     { key: "costPerYear", label: "Cost per year", format: "currency2", variant: "secondary" },
     { key: "costPerDay", label: "Cost per day", format: "currency2", variant: "secondary" },
-    { key: "costPerHour", label: "Cost per hour", format: "text", variant: "secondary" },
+    { key: "costPerHourLabel", label: "Cost per hour", format: "text", variant: "secondary" },
     { key: "kwhPerMonth", label: "Energy per month (kWh)", format: "number", variant: "secondary" },
   ],
 

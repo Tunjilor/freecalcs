@@ -75,13 +75,14 @@ export const weightedGradeDef: CalculatorDefinition<WeightedGradeInputs, Weighte
       id: "headline",
       priority: 95,
       when: (r) => r.totalWeight > 0,
-      say: (r) => `Your weighted grade is ${pct(r.grade, 1)}, a ${r.letter} on a standard scale.`,
+      say: (r) => `Your weighted grade is ${pct(r.grade, 1)}, ${/^[AF]/.test(r.letter) ? "an" : "a"} ${r.letter} on a standard scale.`,
     },
     {
       id: "partial",
       priority: 90,
       when: (r) => r.totalWeight > 0 && r.remainingWeight > 0.01,
-      say: (r) => `Your weights add up to ${pct(r.totalWeight, 0)}, so this is your average on the work graded so far. The remaining ${pct(r.remainingWeight, 0)} can still change it.`,
+      say: (r) =>
+        `${r.ungradedCount > 0 ? `${r.ungradedCount} categor${r.ungradedCount === 1 ? "y has" : "ies have"} no score yet, so the` : "Your"} graded weights add up to ${pct(r.totalWeight, 0)}. This is your average on the work graded so far; the remaining ${pct(r.remainingWeight, 0)} can still change it.`,
     },
     {
       id: "over",
@@ -95,7 +96,7 @@ export const weightedGradeDef: CalculatorDefinition<WeightedGradeInputs, Weighte
       priority: 95,
       tone: "warn",
       when: (r) => r.totalWeight === 0,
-      say: () => `Add at least one category with a weight above 0% to see your grade.`,
+      say: () => `Add at least one category with a weight above 0% and a score to see your grade.`,
     },
   ],
 
@@ -105,6 +106,7 @@ export const weightedGradeDef: CalculatorDefinition<WeightedGradeInputs, Weighte
   faqs: [
     { q: "How do I calculate a weighted grade?", a: "Multiply each category's score by its weight, add the results, and divide by the total weight. Homework 95% × 20% + Midterm 78% × 25% + … gives your overall grade." },
     { q: "What if my weights don't add up to 100%?", a: "Mid-semester, that's normal: the calculator divides by the weight entered so far, giving your current average. Once every category is in, the weights should total 100%." },
+    { q: "What if a category isn't graded yet?", a: "Leave its score blank. The calculator leaves that weight out of your current grade and shows it as weight still to come. A score of 0 counts as a zero." },
     { q: "Can I enter individual assignments instead of categories?", a: "Yes, as long as each row's weight is that assignment's share of your final grade." },
     { q: "What letter grade scale is used?", a: "A common U.S. scale: 93+ A, 90 A−, 87 B+, 83 B, 80 B−, and so on down to below 60 for an F. Your instructor's scale may differ." },
   ],

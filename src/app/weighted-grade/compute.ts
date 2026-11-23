@@ -1,7 +1,8 @@
 // PURE compute for the Weighted Grade Calculator. See BUILD-STANDARD §2.
 // Grade = Σ(score × weight) ÷ Σ weight, over rows with a weight > 0. If the
 // weights entered don't add to 100%, the result is the average so far
-// (normalized), and the remaining weight is reported.
+// (normalized), and the remaining weight is reported. A row with a weight but a
+// blank score is "not graded yet": its weight counts as still to come.
 
 import { round2 } from "../../lib/calculator/finance.ts";
 import type { RowValue } from "../../lib/calculator/types.ts";
@@ -14,6 +15,7 @@ export type WeightedGradeResults = {
   totalWeight: number;
   remainingWeight: number;
   itemCount: number;
+  ungradedCount: number;
   rows: { item: string; weight: number; score: number; contribution: number }[];
 };
 
@@ -24,13 +26,14 @@ export function letterFor(pct: number): string {
 }
 
 export function computeWeightedGrade(v: WeightedGradeInputs): WeightedGradeResults {
-  const rows = (v.items ?? [])
-    .map((r, i) => ({
-      item: String(r.item ?? "").trim() || `Item ${i + 1}`,
-      weight: Math.max(0, Number(r.weight) || 0),
-      score: Math.max(0, Number(r.score) || 0),
-    }))
-    .filter((r) => r.weight > 0);
+  const all = (v.items ?? []).map((r, i) => ({
+    item: String(r.item ?? "").trim() || `Item ${i + 1}`,
+    weight: Math.max(0, Number(r.weight) || 0),
+    graded: r.score !== "" && r.score !== undefined && r.score !== null,
+    score: Math.max(0, Number(r.score) || 0),
+  })).filter((r) => r.weight > 0);
+  const rows = all.filter((r) => r.graded).map(({ item, weight, score }) => ({ item, weight, score }));
+  const ungradedCount = all.length - rows.length;
   const tw = rows.reduce((a, r) => a + r.weight, 0);
   const sum = rows.reduce((a, r) => a + r.weight * r.score, 0);
   const grade = tw > 0 ? sum / tw : 0;
@@ -40,6 +43,7 @@ export function computeWeightedGrade(v: WeightedGradeInputs): WeightedGradeResul
     totalWeight: round2(tw),
     remainingWeight: round2(Math.max(0, 100 - tw)),
     itemCount: rows.length,
+    ungradedCount,
     rows: rows.map((r) => ({ ...r, contribution: round2((r.weight * r.score) / 100) })),
   };
 }

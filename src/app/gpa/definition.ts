@@ -92,6 +92,13 @@ export const gpaDef: CalculatorDefinition<GpaInputs, GpaResults> = {
       say: (r) => `Combined with your earlier credits, your cumulative GPA comes to ${r.cumulativeGpa.toFixed(2)} over ${num(r.totalCredits, 1)} credits.`,
     },
     {
+      id: "prior-capped",
+      priority: 92,
+      tone: "warn",
+      when: (r) => r.priorCapped,
+      say: (_r, v) => `Your previous GPA of ${v.priorGpa} is above 4.0, so it's counted as 4.0. This calculator uses the unweighted 4.0 scale; if your school weights honors or AP classes, use your unweighted GPA here.`,
+    },
+    {
       id: "weight",
       priority: 70,
       when: (r) => r.courseCount > 1,

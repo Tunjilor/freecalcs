@@ -32,7 +32,7 @@ export const dateCalculatorDef: CalculatorDefinition<DateCalcInputs, DateCalcRes
   compute: computeDateCalc,
 
   results: [
-    { key: "absDays", label: "Days between", format: "number", variant: "primary", hint: "Calendar days." },
+    { key: "absDaysLabel", label: "Days between", format: "text", variant: "primary", hint: "Calendar days." },
     { key: "weeksLabel", label: "In weeks", format: "text", variant: "secondary" },
     { key: "ymdLabel", label: "In years, months & days", format: "text", variant: "secondary" },
     { key: "weekdays", label: "Weekdays (Mon–Fri)", format: "number", variant: "secondary" },
@@ -60,10 +60,11 @@ export const dateCalculatorDef: CalculatorDefinition<DateCalcInputs, DateCalcRes
       when: (r) => r.valid && r.absDays > 6,
       say: (r) => `${num(r.weekdays)} of those days fall on weekdays. Public holidays aren't excluded, so subtract any that apply for working days.`,
     },
+    { id: "invalid", priority: 95, when: (r) => !r.valid, say: () => `Pick both a start date and an end date to count the days between them.` },
     {
       id: "added",
       priority: 80,
-      when: (r) => r.valid && r.daysAdded !== 0,
+      when: (r) => r.addedLabel !== "—" && r.daysAdded !== 0,
       say: (r) => `${num(Math.abs(r.daysAdded))} days ${r.daysAdded > 0 ? "after" : "before"} ${r.startLabel} is ${r.addedLabel}.`,
     },
   ],

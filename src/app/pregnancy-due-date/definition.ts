@@ -67,16 +67,24 @@ export const pregnancyDueDateDef: CalculatorDefinition<PregnancyInputs, Pregnanc
     {
       id: "range",
       priority: 85,
-      when: (r) => r.valid && !r.notPregnantYet,
+      when: (r) => r.valid && !r.notPregnantYet && !r.implausible,
       say: () => `Only about 1 in 20 babies arrives on the due date itself. Most births happen within two weeks either side of it.`,
     },
     {
       id: "past-due",
       priority: 95,
       tone: "warn",
-      when: (r) => r.valid && r.pastDue,
+      when: (r) => r.valid && r.pastDue && !r.implausible,
       say: (r) => `By these dates you're ${r.gestationLabel} along, past the estimated due date of ${r.dueLabel}. Stay in close touch with your provider about next steps.`,
     },
+    {
+      id: "check-date",
+      priority: 96,
+      tone: "warn",
+      when: (r) => r.valid && r.implausible,
+      say: () => `That date is more than 43 weeks before the 'as of' date, longer than a pregnancy lasts. Check the first day of your last period, which should be within the past 10 months.`,
+    },
+    { id: "invalid", priority: 95, when: (r) => !r.valid, say: () => `Enter the first day of your last period to see your due date.` },
     {
       id: "before",
       priority: 95,

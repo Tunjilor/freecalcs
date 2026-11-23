@@ -60,7 +60,7 @@ export default function InputField<Inputs>({ field, value, onChange }: Props<Inp
           className="fc-input"
           type="date"
           value={typeof value === "string" ? value : ""}
-          onChange={(e) => e.target.value && onChange(e.target.value)}
+          onChange={(e) => onChange(e.target.value)}
           style={{ ...fieldBase, padding: "10px 14px" }}
         />
         {field.helpText && <p style={hintStyle}>{field.helpText}</p>}

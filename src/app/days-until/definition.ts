@@ -30,7 +30,7 @@ export const daysUntilDef: CalculatorDefinition<DaysUntilInputs, DaysUntilResult
   compute: computeDaysUntil,
 
   results: [
-    { key: "days", label: "Days to go", format: "number", variant: "primary", hint: "Calendar days, not counting today." },
+    { key: "daysLabel", label: "Days to go", format: "text", variant: "primary", hint: "Calendar days, not counting today." },
     { key: "weeksLabel", label: "In weeks", format: "text", variant: "secondary" },
     { key: "monthsLabel", label: "In months", format: "text", variant: "secondary" },
     { key: "weekdays", label: "Weekdays left", format: "number", variant: "secondary" },
@@ -39,10 +39,10 @@ export const daysUntilDef: CalculatorDefinition<DaysUntilInputs, DaysUntilResult
   ],
 
   scenarios: [
-    { id: "xmas", label: "Christmas", patch: { targetDate: "next:12-25", fromDate: "today" } },
-    { id: "ny", label: "New Year's Day", patch: { targetDate: "next:01-01", fromDate: "today" } },
-    { id: "j4", label: "July 4th", patch: { targetDate: "next:07-04", fromDate: "today" } },
-    { id: "hw", label: "Halloween", patch: { targetDate: "next:10-31", fromDate: "today" } },
+    { id: "xmas", label: "Christmas", patch: { targetDate: "next:12-25" } },
+    { id: "ny", label: "New Year's Day", patch: { targetDate: "next:01-01" } },
+    { id: "j4", label: "July 4th", patch: { targetDate: "next:07-04" } },
+    { id: "hw", label: "Halloween", patch: { targetDate: "next:10-31" } },
   ],
 
   insights: [
@@ -52,6 +52,7 @@ export const daysUntilDef: CalculatorDefinition<DaysUntilInputs, DaysUntilResult
       when: (r) => r.valid && r.days > 0,
       say: (r) => `${r.targetLabel} is ${num(r.days)} day${r.days === 1 ? "" : "s"} away: ${r.weeksLabel}, falling on a ${r.targetWeekday}.`,
     },
+    { id: "invalid", priority: 95, when: (r) => !r.valid, say: () => `Pick a date to count down to, and a starting date, to see the countdown.` },
     { id: "today", priority: 95, tone: "success", when: (r) => r.valid && r.isToday, say: () => `That's today!` },
     {
       id: "past",

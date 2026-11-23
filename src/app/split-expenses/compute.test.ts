@@ -28,3 +28,16 @@ test("even split and blanks", () => {
   assert.equal(b.balances[0].person, "Person 1");
   assert.equal(computeSplitExpenses({ people: [] }).share, 0);
 });
+
+test("odd cents: balances match the payments", () => {
+  const r = computeSplitExpenses({ people: [
+    { person: "Alex", paid: 30.06 }, { person: "Sam", paid: 0 }, { person: "Jordan", paid: 0 }, { person: "Taylor", paid: 0 },
+  ] });
+  const owedTo = r.settlements.reduce((a, s) => a + s.amount, 0);
+  assert.equal(Math.round(owedTo * 100), Math.round(r.balances[0].balance * 100));
+  for (const b of r.balances.slice(1)) {
+    const paid = r.settlements.filter((s) => s.from === b.person).reduce((a, s) => a + s.amount, 0);
+    assert.equal(Math.round(paid * 100), Math.round(-b.balance * 100));
+  }
+  assert.equal(Math.round(r.balances.reduce((a, b) => a + b.balance, 0) * 100), 0);
+});
