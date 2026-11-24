@@ -111,7 +111,7 @@ export const decimalToFractionDef: CalculatorDefinition<DecimalToFractionInputs,
     { id: "invalid", priority: 95, when: (r) => !r.valid, say: () => `Enter a decimal between −1,000,000,000 and 1,000,000,000.` },
   ],
 
-  related: [relatedLink("percentage"), relatedLink("percent-change"), relatedLink("scientific"), relatedLink("square-footage"), relatedLink("discount")],
+  related: [relatedLink("percentage"), relatedLink("percent-change"), relatedLink("scientific"), relatedLink("fraction-calculator"), relatedLink("discount")],
   relatedArticles: [],
 
   faqs: [

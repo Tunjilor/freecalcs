@@ -4,7 +4,8 @@ import type { InputField as InputFieldSpec, RowColumn, RowValue } from "@/lib/ca
 
 // Renders a `type: "rows"` input: a compact, editable list of rows (e.g. GPA
 // courses or people splitting a bill) with add/remove controls. Each column is
-// a text, number, currency, percent or select cell. Emits the full row array.
+// a text, number, currency, percent, select or time ("HH:MM") cell. Emits the
+// full row array.
 
 type Props<Inputs> = {
   field: InputFieldSpec<Inputs>;
@@ -15,7 +16,7 @@ type Props<Inputs> = {
 function blankRow(columns: RowColumn[], template?: RowValue): RowValue {
   if (template) return { ...template };
   const r: RowValue = {};
-  for (const c of columns) r[c.name] = c.type === "text" ? "" : c.type === "select" ? (c.options?.[0]?.value ?? "") : 0;
+  for (const c of columns) r[c.name] = c.type === "text" || c.type === "time" ? "" : c.type === "select" ? (c.options?.[0]?.value ?? "") : 0;
   return r;
 }
 
@@ -54,10 +55,16 @@ export default function RowsInput<Inputs>({ field, rows, onChange }: Props<Input
         </select>
       );
     }
+    if (c.type === "time") {
+      return (
+        <input id={id} aria-label={label} className="fc-input fc-row-time" type="time"
+          value={String(r[c.name] ?? "")} onChange={(e) => setCell(i, c.name, e.target.value)} style={{ ...cellBase, padding: "9px 5px", fontSize: 13 }} />
+      );
+    }
     if (c.type === "text") {
       return (
         <input id={id} aria-label={label} className="fc-input" type="text" placeholder={c.placeholder}
-          value={String(r[c.name] ?? "")} onChange={(e) => setCell(i, c.name, e.target.value)} style={cellBase} />
+          value={String(r[c.name] ?? "")} onChange={(e) => setCell(i, c.name, e.target.value)} style={{ ...cellBase, padding: "9px 8px" }} />
       );
     }
     // A cleared number cell stays "" (not 0) so calculators can tell blank from zero.
@@ -65,7 +72,7 @@ export default function RowsInput<Inputs>({ field, rows, onChange }: Props<Input
     return (
       <div style={{ position: "relative" }}>
         {c.type === "currency" && <span style={{ position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)", color: t.color.faint, fontSize: 13, fontWeight: 700 }}>$</span>}
-        <input id={id} aria-label={label} className="fc-input" type="number" inputMode="decimal"
+        <input id={id} aria-label={label} className="fc-input fc-row-num" type="number" inputMode="decimal"
           min={c.min} max={c.max} step={c.step ?? (c.type === "currency" ? 0.01 : 1)} placeholder={c.placeholder}
           value={typeof v === "number" ? (v === 0 && c.placeholder ? "" : v) : ""}
           onChange={(e) => setCell(i, c.name, e.target.value === "" ? "" : parseFloat(e.target.value) || 0)}

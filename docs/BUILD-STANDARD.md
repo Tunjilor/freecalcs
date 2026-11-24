@@ -87,7 +87,7 @@ type CalculatorDefinition = {
 
 type InputField = {
   name: string; label: string;
-  type: "currency" | "percent" | "number" | "years" | "months" | "date" | "select" | "rows";
+  type: "currency" | "percent" | "number" | "years" | "months" | "date" | "select" | "rows" | "time" | "fraction";
   default: number | string | RowValue[];
   min?: number; max?: number; step?: number;
   options?: { label: string; value: string }[];
@@ -96,7 +96,7 @@ type InputField = {
   columns?: RowColumn[]; minRows?: number; maxRows?: number; addLabel?: string; newRow?: RowValue;
 };
 type RowValue = Record<string, number | string>;
-type RowColumn = { name: string; label: string; type: "text" | "number" | "currency" | "percent" | "select";
+type RowColumn = { name: string; label: string; type: "text" | "number" | "currency" | "percent" | "select" | "time";
                    options?: { label: string; value: string }[]; min?: number; max?: number; step?: number;
                    placeholder?: string; grow?: number };
 ```
@@ -112,6 +112,17 @@ must be an input, a calculator that needs it declares an "as of" / "from" date i
 **Rows inputs.** For repeating entries (GPA courses, people splitting a bill). The value is an array of
 rows keyed by column name; `<RowsInput>` renders add/remove controls within `minRows`–`maxRows`.
 `compute` must tolerate empty or partly filled rows (skip blank rows rather than producing NaN).
+A cleared number cell arrives as `""`, not 0, so a calculator can treat "blank" differently from zero.
+
+**Time inputs.** `type: "time"` (and the `"time"` row-column type) is a clock time stored as a 24-hour
+`"HH:MM"` string, `""` when blank; the browser shows it in the visitor's own 12/24-hour format. Parse
+and format with `src/lib/calculator/times.ts` (`parseTime`, `formatClock`, `spanMinutes` for
+overnight spans). `compute` must handle a blank time without producing NaN.
+
+**Fraction inputs.** `type: "fraction"` is free text holding a fraction, mixed number, whole number or
+decimal (`"3/4"`, `"1 1/2"`, `"-2"`, `"0.5"`). Parse with `parseFraction` from
+`src/lib/calculator/fractions.ts`, which returns an exact reduced `{ n, d }` or `null` for blank or
+invalid text; `compute` reports invalid input through an insight rather than throwing.
 
 The `compute` function is a **pure function** so it can be unit-tested in isolation and reused by
 articles that pre-fill the calculator (the article→calculator flywheel). No DOM, no fetch, no dates

@@ -128,7 +128,7 @@ export const hourlyToSalaryDef: CalculatorDefinition<HourlyInputs, HourlyResults
     },
   ],
 
-  related: [relatedLink("salary"), relatedLink("paycheck"), relatedLink("tax"), relatedLink("budget"), relatedLink("self-employment-tax"), relatedLink("raise")],
+  related: [relatedLink("time-card-calculator"), relatedLink("salary"), relatedLink("paycheck"), relatedLink("tax"), relatedLink("self-employment-tax"), relatedLink("raise")],
   relatedArticles: [],
 
   faqs: [

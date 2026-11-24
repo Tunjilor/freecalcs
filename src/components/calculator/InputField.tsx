@@ -5,8 +5,9 @@ import type { InputField as InputFieldSpec, InputValue, RowValue } from "@/lib/c
 import RowsInput from "./RowsInput";
 
 // Renders any InputField spec: currency (with $ mask + thousands separators),
-// percent, number, years/months, a select, a date (ISO "YYYY-MM-DD" string) or
-// a rows table (RowValue[], see RowsInput). Emits the parsed value up.
+// percent, number, years/months, a select, a date (ISO "YYYY-MM-DD" string), a
+// clock time ("HH:MM"), a fraction (free text like "1 1/2") or a rows table
+// (RowValue[], see RowsInput). Emits the parsed value up.
 
 type Props<Inputs> = {
   field: InputFieldSpec<Inputs>;
@@ -62,6 +63,48 @@ export default function InputField<Inputs>({ field, value, onChange }: Props<Inp
           value={typeof value === "string" ? value : ""}
           onChange={(e) => onChange(e.target.value)}
           style={{ ...fieldBase, padding: "10px 14px" }}
+        />
+        {field.helpText && <p style={hintStyle}>{field.helpText}</p>}
+      </div>
+    );
+  }
+
+  if (field.type === "time") {
+    return (
+      <div style={{ marginBottom: t.space.md }}>
+        <label style={labelStyle} htmlFor={field.name}>
+          {field.label}
+        </label>
+        <input
+          id={field.name}
+          className="fc-input"
+          type="time"
+          value={typeof value === "string" ? value : ""}
+          onChange={(e) => onChange(e.target.value)}
+          style={{ ...fieldBase, padding: "10px 14px" }}
+        />
+        {field.helpText && <p style={hintStyle}>{field.helpText}</p>}
+      </div>
+    );
+  }
+
+  if (field.type === "fraction") {
+    return (
+      <div style={{ marginBottom: t.space.md }}>
+        <label style={labelStyle} htmlFor={field.name}>
+          {field.label}
+        </label>
+        <input
+          id={field.name}
+          className="fc-input"
+          type="text"
+          inputMode="text"
+          autoComplete="off"
+          spellCheck={false}
+          placeholder="e.g. 3/4 or 1 1/2"
+          value={typeof value === "string" ? value : String(value ?? "")}
+          onChange={(e) => onChange(e.target.value)}
+          style={{ ...fieldBase, padding: "11px 14px" }}
         />
         {field.helpText && <p style={hintStyle}>{field.helpText}</p>}
       </div>
